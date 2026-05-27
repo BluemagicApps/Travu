@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+build/
+
+# env / secrets
+.env
+.env*.local
+
+# brainstorm + editor artifacts
+.superpowers/
+.claude/
+
+# logs / os
+*.log
+.DS_Store

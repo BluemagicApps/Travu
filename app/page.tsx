@@ -2,6 +2,7 @@ import { Sparkles, Plane, ShieldCheck, Clock } from "lucide-react";
 import type { ComponentType } from "react";
 import { getAirportOptions } from "@/lib/flights/dataset";
 import { SearchForm } from "@/components/search/SearchForm";
+import { AiSearchBar } from "@/components/search/AiSearchBar";
 
 export default async function Home() {
   const airports = await getAirportOptions();
@@ -26,11 +27,14 @@ export default async function Home() {
         </p>
 
         <div className="mx-auto mt-8 max-w-2xl">
+          <AiSearchBar />
+          <div className="my-4 flex items-center gap-3 text-xs text-muted">
+            <span className="h-px flex-1 bg-border" />
+            or search manually
+            <span className="h-px flex-1 bg-border" />
+          </div>
           <SearchForm airports={airports} />
         </div>
-        <p className="mt-2 text-xs text-muted">
-          Conversational AI search arrives in the next milestone.
-        </p>
       </section>
 
       <section className="mx-auto grid max-w-4xl gap-4 px-4 pb-24 sm:grid-cols-3">

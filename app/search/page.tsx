@@ -2,9 +2,12 @@ import { PlaneTakeoff } from "lucide-react";
 import { FlightFilter } from "@/lib/ai/schema";
 import { loadDataset, getAirportOptions } from "@/lib/flights/dataset";
 import { searchFlights, type SearchResult } from "@/lib/flights/engine";
+import { predict } from "@/lib/flights/prediction";
+import { daysFromToday } from "@/lib/utils/dates";
 import { SearchForm } from "@/components/search/SearchForm";
 import { ResultsControls } from "@/components/search/ResultsControls";
 import { FlightCard } from "@/components/flights/FlightCard";
+import { PricePrediction } from "@/components/flights/PricePrediction";
 
 export default async function SearchPage({
   searchParams,
@@ -47,6 +50,13 @@ export default async function SearchPage({
         </h1>
         {result.count > 0 && <ResultsControls />}
       </div>
+
+      {result.count > 0 && filter?.departDate && (
+        <PricePrediction
+          prediction={predict({ daysToDeparture: daysFromToday(filter.departDate) })}
+          className="mt-4"
+        />
+      )}
 
       <div className="mt-4 space-y-3">
         {result.flights.map((f, i) => (

@@ -14,6 +14,10 @@ build/
 .superpowers/
 .claude/
 
+# playwright
+test-results/
+playwright-report/
+
 # logs / os
 *.log
 .DS_Store

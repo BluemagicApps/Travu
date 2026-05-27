@@ -6,6 +6,7 @@ import { Plane, BedDouble, Car, Package, Ticket } from "lucide-react";
 import type { ComponentType } from "react";
 import { cn } from "@/lib/utils/cn";
 import { ThemeToggle } from "./ThemeToggle";
+import { Logo } from "./Logo";
 
 type Tab = {
   href: string;
@@ -30,9 +31,7 @@ export function Navbar() {
     <>
       <header className="glass sticky top-0 z-50">
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-          <Link href="/" className="text-gradient text-xl font-extrabold tracking-tight">
-            TRAVU
-          </Link>
+          <Logo />
 
           <div className="hidden items-center gap-1 md:flex">
             {tabs.map((tab) => (

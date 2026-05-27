@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 import { Plane, BedDouble, Car, Package, Ticket } from "lucide-react";
 import type { ComponentType } from "react";
 import { cn } from "@/lib/utils/cn";
@@ -41,12 +42,7 @@ export function Navbar() {
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <Link
-              href="/login"
-              className="btn-accent rounded-full px-4 py-2 text-sm font-semibold"
-            >
-              Sign in
-            </Link>
+            <AuthButtons />
           </div>
         </nav>
       </header>
@@ -71,6 +67,39 @@ export function Navbar() {
         })}
       </nav>
     </>
+  );
+}
+
+function AuthButtons() {
+  const { data: session, status } = useSession();
+
+  if (status === "loading") return <div className="h-9 w-20" />;
+
+  if (session?.user) {
+    const label = session.user.name || session.user.email || "Account";
+    return (
+      <div className="flex items-center gap-2">
+        <Link
+          href="/dashboard"
+          className="hidden max-w-[10rem] truncate text-sm font-medium text-muted transition hover:text-text sm:block"
+        >
+          {label}
+        </Link>
+        <button
+          type="button"
+          onClick={() => signOut({ callbackUrl: "/" })}
+          className="rounded-full border border-border px-3 py-1.5 text-sm font-medium text-muted transition hover:text-text"
+        >
+          Sign out
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <Link href="/login" className="btn-accent rounded-full px-4 py-2 text-sm font-semibold">
+      Sign in
+    </Link>
   );
 }
 

@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #f4f8fc;
+  --surface: #ffffff;
+  --surface-2: #eef4fa;
+  --text: #0f172a;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --accent-from: #0ea5e9;
+  --accent-to: #818cf8;
+  --price: #0369a1;
+}
+
+.dark {
+  --bg: #020617;
+  --surface: #0f172a;
+  --surface-2: #0c1729;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --border: #1e293b;
+  --accent-from: #38bdf8;
+  --accent-to: #a5b4fc;
+  --price: #38bdf8;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent-from: var(--accent-from);
+  --color-accent-to: var(--accent-to);
+  --color-price: var(--price);
+  --font-sans: var(--font-geist-sans);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+@layer utilities {
+  .btn-accent {
+    background-image: linear-gradient(to right, var(--accent-from), var(--accent-to));
+    color: #ffffff;
+  }
+  .text-gradient {
+    background-image: linear-gradient(to right, var(--accent-from), var(--accent-to));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glass {
+    background-color: color-mix(in srgb, var(--surface) 72%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  }
+}

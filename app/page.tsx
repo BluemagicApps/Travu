@@ -1,7 +1,10 @@
 import { Sparkles, Plane, ShieldCheck, Clock } from "lucide-react";
 import type { ComponentType } from "react";
+import { getAirportOptions } from "@/lib/flights/dataset";
+import { SearchForm } from "@/components/search/SearchForm";
 
-export default function Home() {
+export default async function Home() {
+  const airports = await getAirportOptions();
   return (
     <div className="relative overflow-hidden">
       <div
@@ -22,14 +25,12 @@ export default function Home() {
           {"Tell TRAVU where you want to go, the way you'd tell a friend. We handle the search, the price, and the booking — end to end."}
         </p>
 
-        <div className="glass mx-auto mt-8 flex max-w-2xl items-center gap-3 rounded-2xl p-3 text-left">
-          <Sparkles className="ml-2 h-5 w-5 text-price" />
-          <span className="flex-1 text-muted">
-            {'e.g. "cheap nonstop to Dubai mid-June, land before evening"'}
-          </span>
-          <span className="btn-accent rounded-xl px-5 py-2.5 text-sm font-semibold">Search</span>
+        <div className="mx-auto mt-8 max-w-2xl">
+          <SearchForm airports={airports} />
         </div>
-        <p className="mt-2 text-xs text-muted">Search goes live in the next build step.</p>
+        <p className="mt-2 text-xs text-muted">
+          Conversational AI search arrives in the next milestone.
+        </p>
       </section>
 
       <section className="mx-auto grid max-w-4xl gap-4 px-4 pb-24 sm:grid-cols-3">

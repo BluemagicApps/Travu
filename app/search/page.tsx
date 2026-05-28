@@ -5,7 +5,8 @@ import { searchFlights, type SearchResult } from "@/lib/flights/engine";
 import { predict } from "@/lib/flights/prediction";
 import { daysFromToday, addDays } from "@/lib/utils/dates";
 import { SearchForm } from "@/components/search/SearchForm";
-import { FlightCard, type AirportLite } from "@/components/flights/FlightCard";
+import { type AirportLite } from "@/components/flights/FlightCard";
+import { FlightResultsList } from "@/components/flights/FlightResultsList";
 import { PricePrediction } from "@/components/flights/PricePrediction";
 import { ResultsSidebar, type ResultsFacets } from "@/components/flights/ResultsSidebar";
 import { ResultsSortBar } from "@/components/flights/ResultsSortBar";
@@ -174,17 +175,13 @@ export default async function SearchPage({
             {sections.map((section, idx) => (
               <section key={idx}>
                 <h2 className="mb-3 text-base font-bold">{section.title}</h2>
-                <div className="space-y-3">
-                  {section.result.flights.length === 0 ? (
-                    <div className="rounded-2xl border border-border bg-surface p-6 text-center text-sm text-muted">
-                      No flights for this leg.
-                    </div>
-                  ) : (
-                    section.result.flights.map((f, i) => (
-                      <FlightCard key={f.id} flight={f} index={i} airportMap={airportMap} />
-                    ))
-                  )}
-                </div>
+                {section.result.flights.length === 0 ? (
+                  <div className="rounded-2xl border border-border bg-surface p-6 text-center text-sm text-muted">
+                    No flights for this leg.
+                  </div>
+                ) : (
+                  <FlightResultsList flights={section.result.flights} airportMap={airportMap} />
+                )}
               </section>
             ))}
 

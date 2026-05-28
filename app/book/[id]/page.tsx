@@ -2,11 +2,18 @@ import { redirect, notFound } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { decodeId, generateFlights } from "@/lib/flights/generator";
 import { loadDataset } from "@/lib/flights/dataset";
-import { BookingSummary } from "@/components/flights/BookingSummary";
-import { BookingForm } from "@/components/flights/BookingForm";
+import { fareOptionsFor, findFareOption } from "@/lib/flights/fares";
+import { BookingWizard } from "@/components/booking/BookingWizard";
 
-export default async function BookPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function BookPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
   const { id } = await params;
+  const sp = await searchParams;
   const session = await auth();
   if (!session?.user) redirect(`/login?callbackUrl=/book/${id}`);
 
@@ -20,14 +27,10 @@ export default async function BookPage({ params }: { params: Promise<{ id: strin
   ).find((f) => f.id === id);
   if (!flight) notFound();
 
-  return (
-    <div className="mx-auto max-w-2xl px-4 py-8">
-      <h1 className="text-2xl font-extrabold">Complete your booking</h1>
-      <p className="mt-1 text-sm text-muted">Review your flight, then add traveller and payment details.</p>
-      <div className="mt-5">
-        <BookingSummary flight={flight} />
-        <BookingForm flight={flight} />
-      </div>
-    </div>
-  );
+  const fareParam = typeof sp.fare === "string" ? sp.fare : null;
+  const options = fareOptionsFor(flight);
+  const fareOption =
+    findFareOption(flight, fareParam) ?? options.find((o) => o.badge) ?? options[0];
+
+  return <BookingWizard flight={flight} fareOption={fareOption} />;
 }

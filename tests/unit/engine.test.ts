@@ -13,6 +13,7 @@ const ds: Dataset = {
 };
 
 const base: FlightFilter = {
+  tripType: "one-way",
   origin: "LOS",
   destination: "DXB",
   departDate: "2026-06-12",

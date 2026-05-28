@@ -48,6 +48,10 @@ export function searchFlights(filter: FlightFilter, ds: Dataset): SearchResult {
   if (typeof filter.arriveBefore === "number") {
     flights = flights.filter((f) => hourOf(f.arriveIso) < filter.arriveBefore!);
   }
+  if (filter.airlines && filter.airlines.length > 0) {
+    const set = new Set(filter.airlines.map((a) => a.toUpperCase()));
+    flights = flights.filter((f) => set.has(f.carrierIata));
+  }
 
   flights = sortFlights(flights, filter.sort);
   return { flights, count: flights.length };

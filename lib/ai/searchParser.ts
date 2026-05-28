@@ -70,6 +70,7 @@ export function keywordParse(query: string, airports: AirportOption[]): ParseRes
   return {
     ok: true,
     filter: {
+      tripType: "one-way",
       origin: ordered[0],
       destination: ordered[1],
       departDate: defaultDate(),
@@ -134,6 +135,7 @@ Respond with ONLY a JSON object (no prose, no markdown fences) with these keys:
     return {
       ok: true,
       filter: {
+        tripType: "one-way",
         origin: String(json.origin).toUpperCase(),
         destination: String(json.destination).toUpperCase(),
         departDate: typeof json.departDate === "string" ? json.departDate : defaultDate(),

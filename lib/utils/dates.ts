@@ -31,6 +31,12 @@ export function dayDiff(fromDate: string, toDate: string): number {
   );
 }
 
+/** Add (or subtract) days to a YYYY-MM-DD date, returning YYYY-MM-DD. */
+export function addDays(date: string, days: number): string {
+  const d = new Date(date + "T00:00:00Z");
+  return new Date(d.getTime() + days * 86400000).toISOString().slice(0, 10);
+}
+
 export function todayIso(): string {
   return new Date().toISOString().slice(0, 10);
 }

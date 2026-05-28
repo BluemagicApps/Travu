@@ -41,6 +41,12 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
+            <Link
+              href="/track"
+              className="hidden text-sm font-medium text-muted transition hover:text-text sm:block"
+            >
+              Track booking
+            </Link>
             <ThemeToggle />
             <AuthButtons />
           </div>

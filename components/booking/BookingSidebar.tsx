@@ -19,15 +19,20 @@ export function BookingSidebar({
   currentStep,
   onNext,
   ctaDisabled,
+  passengers = 1,
 }: {
   flight: Flight;
   fare: FareOption;
   currentStep: string;
   onNext?: () => void;
   ctaDisabled?: boolean;
+  passengers?: number;
 }) {
   const from = flight.segments[0];
   const to = flight.segments[flight.segments.length - 1];
+  const total = fare.fare.total * passengers;
+  const totalTaxes = (fare.fare.taxes + fare.fare.fees) * passengers;
+  const totalBase = fare.fare.base * passengers;
 
   return (
     <aside className="space-y-3 lg:sticky lg:top-20 lg:self-start">
@@ -48,22 +53,24 @@ export function BookingSidebar({
       <div className="rounded-2xl border border-border bg-surface p-4">
         <h3 className="text-sm font-semibold">Your price summary</h3>
         <dl className="mt-3 space-y-1.5 text-sm">
-          <div className="flex justify-between">
-            <dt className="text-muted">Traveller 1 · Adult</dt>
-            <dd>{formatUSD(fare.fare.total)}</dd>
-          </div>
-          <div className="flex justify-between">
+          {Array.from({ length: passengers }).map((_, i) => (
+            <div key={i} className="flex justify-between">
+              <dt className="text-muted">Traveller {i + 1} · Adult</dt>
+              <dd>{formatUSD(fare.fare.total)}</dd>
+            </div>
+          ))}
+          <div className="flex justify-between border-t border-border pt-1.5">
             <dt className="text-muted">Base fare</dt>
-            <dd>{formatUSD(fare.fare.base)}</dd>
+            <dd>{formatUSD(totalBase)}</dd>
           </div>
           <div className="flex justify-between">
             <dt className="text-muted">Taxes & fees</dt>
-            <dd>{formatUSD(fare.fare.taxes + fare.fare.fees)}</dd>
+            <dd>{formatUSD(totalTaxes)}</dd>
           </div>
         </dl>
         <div className="mt-3 flex items-baseline justify-between border-t border-border pt-2">
           <span className="font-bold">Total (USD)</span>
-          <span className="text-lg font-extrabold text-price">{formatUSD(fare.fare.total)}</span>
+          <span className="text-lg font-extrabold text-price">{formatUSD(total)}</span>
         </div>
         {onNext && (
           <button

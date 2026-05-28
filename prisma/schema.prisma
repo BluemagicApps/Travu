@@ -44,27 +44,36 @@ model RouteServed {
 }
 
 model Booking {
-  id             String      @id @default(cuid())
-  bookingRef     String      @unique
-  userId         String
-  user           User        @relation(fields: [userId], references: [id])
-  status         String      @default("CONFIRMED")
-  currency       String      @default("USD")
-  totalAmount    Int
-  flightSnapshot Json
-  createdAt      DateTime    @default(now())
-  passengers     Passenger[]
-  payment        Payment?
+  id                       String      @id @default(cuid())
+  bookingRef               String      @unique
+  userId                   String
+  user                     User        @relation(fields: [userId], references: [id])
+  status                   String      @default("CONFIRMED")
+  currency                 String      @default("USD")
+  totalAmount              Int
+  tripType                 String      @default("one-way")
+  fareName                 String?
+  contactEmail             String?
+  contactPhone             String?
+  flightSnapshot           Json
+  returnFlightSnapshot     Json?
+  multiCityFlightSnapshots Json?
+  createdAt                DateTime    @default(now())
+  passengers               Passenger[]
+  payment                  Payment?
 }
 
 model Passenger {
-  id          String   @id @default(cuid())
-  bookingId   String
-  booking     Booking  @relation(fields: [bookingId], references: [id])
-  firstName   String
-  lastName    String
-  dateOfBirth DateTime
-  type        String   @default("ADULT")
+  id              String   @id @default(cuid())
+  bookingId       String
+  booking         Booking  @relation(fields: [bookingId], references: [id])
+  firstName       String
+  middleName      String?
+  lastName        String
+  dateOfBirth     DateTime
+  type            String   @default("ADULT")
+  passportNumber  String?
+  passportCountry String?
 }
 
 model Payment {

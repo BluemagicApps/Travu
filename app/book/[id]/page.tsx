@@ -31,6 +31,10 @@ export default async function BookPage({
   const options = fareOptionsFor(flight);
   const fareOption =
     findFareOption(flight, fareParam) ?? options.find((o) => o.badge) ?? options[0];
+  const passengers = Math.min(
+    9,
+    Math.max(1, Number(typeof sp.passengers === "string" ? sp.passengers : 1) || 1),
+  );
 
-  return <BookingWizard flight={flight} fareOption={fareOption} />;
+  return <BookingWizard flight={flight} fareOption={fareOption} passengers={passengers} />;
 }

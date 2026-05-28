@@ -129,6 +129,7 @@ export function Travellers({
             </span>
             <div className="grid grid-cols-3 gap-3">
               <select
+                aria-label="Date of birth day"
                 className={field}
                 value={t.dobDay}
                 onChange={(e) => onTravellerChange(idx, { ...t, dobDay: e.target.value })}
@@ -141,6 +142,7 @@ export function Travellers({
                 ))}
               </select>
               <select
+                aria-label="Date of birth month"
                 className={field}
                 value={t.dobMonth}
                 onChange={(e) => onTravellerChange(idx, { ...t, dobMonth: e.target.value })}
@@ -153,6 +155,7 @@ export function Travellers({
                 ))}
               </select>
               <select
+                aria-label="Date of birth year"
                 className={field}
                 value={t.dobYear}
                 onChange={(e) => onTravellerChange(idx, { ...t, dobYear: e.target.value })}

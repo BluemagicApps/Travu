@@ -35,6 +35,7 @@ export function FareSelect({
         className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm"
       />
       <motion.div
+        data-testid="fare-modal"
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 50, opacity: 0 }}

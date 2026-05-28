@@ -1,11 +1,19 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader2, RotateCcw, Send, Sparkles, X } from "lucide-react";
+import { Loader2, Mic, MicOff, RotateCcw, Send, Sparkles, X } from "lucide-react";
 import type { ChatFilter } from "@/lib/ai/conversation";
 import { cn } from "@/lib/utils/cn";
+import {
+  cancelSpeech,
+  isVoiceSupported,
+  listen,
+  speak,
+  type Listener,
+} from "@/lib/voice/speech";
+import { VoiceOrb, type VoiceOrbState } from "./VoiceOrb";
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -23,20 +31,28 @@ export function AiChatPanel({
   open,
   seed,
   onClose,
-  voiceSlot,
 }: {
   open: boolean;
   seed?: string | null;
   onClose: () => void;
-  voiceSlot?: ReactNode;
 }) {
   const router = useRouter();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [action, setAction] = useState<PendingAction | null>(null);
+  const [voiceMode, setVoiceMode] = useState(false);
+  const [voiceState, setVoiceState] = useState<VoiceOrbState>("idle");
+  const [voiceSupported, setVoiceSupported] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
   const seededRef = useRef<string | null>(null);
+  const listenerRef = useRef<Listener | null>(null);
+  const spokenRef = useRef<string>("");
+  const voiceModeRef = useRef(false);
+
+  useEffect(() => {
+    setVoiceSupported(isVoiceSupported());
+  }, []);
 
   // Hydrate / persist conversation
   useEffect(() => {
@@ -62,47 +78,117 @@ export function AiChatPanel({
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, loading]);
 
+  const send = useCallback(
+    async (text: string) => {
+      const t = text.trim();
+      if (!t) return;
+      const next: ChatMessage[] = [...messages, { role: "user", content: t }];
+      setMessages(next);
+      setInput("");
+      setLoading(true);
+      setAction(null);
+      try {
+        const res = await fetch("/api/ai-chat", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ messages: next }),
+        });
+        const data = (await res.json()) as { assistant?: string; action?: PendingAction };
+        setMessages((m) => [...m, { role: "assistant", content: data.assistant ?? "" }]);
+        if (data.action) setAction(data.action);
+      } catch {
+        setMessages((m) => [
+          ...m,
+          { role: "assistant", content: "Sorry, something went wrong — please try again." },
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [messages],
+  );
+
   // Seed first prompt when opened
   useEffect(() => {
     if (!open || !seed || seed === seededRef.current) return;
     seededRef.current = seed;
-    send(seed);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, seed]);
+    void send(seed);
+  }, [open, seed, send]);
 
-  async function send(text: string) {
-    const t = text.trim();
-    if (!t || loading) return;
-    const next: ChatMessage[] = [...messages, { role: "user", content: t }];
-    setMessages(next);
-    setInput("");
-    setLoading(true);
-    setAction(null);
-    try {
-      const res = await fetch("/api/ai-chat", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ messages: next }),
-      });
-      const data = (await res.json()) as { assistant?: string; action?: PendingAction };
-      setMessages((m) => [
-        ...m,
-        { role: "assistant", content: data.assistant ?? "" },
-      ]);
-      if (data.action) setAction(data.action);
-    } catch {
-      setMessages((m) => [
-        ...m,
-        { role: "assistant", content: "Sorry, something went wrong — please try again." },
-      ]);
-    } finally {
-      setLoading(false);
+  // --- Voice loop ---
+  const startListening = useCallback(() => {
+    if (!voiceModeRef.current) return;
+    if (listenerRef.current) return;
+    setVoiceState("listening");
+    listenerRef.current = listen({
+      onFinal: (text) => {
+        listenerRef.current = null;
+        setVoiceState("idle");
+        if (voiceModeRef.current) void send(text);
+      },
+      onError: () => {
+        listenerRef.current = null;
+        setVoiceState("idle");
+      },
+      onEnd: () => {
+        // handled by onFinal / onError
+      },
+    });
+  }, [send]);
+
+  // Auto-speak new assistant messages when voice mode is on; resume listening after.
+  useEffect(() => {
+    if (!voiceMode || messages.length === 0) return;
+    const last = messages[messages.length - 1];
+    if (last.role !== "assistant" || !last.content || spokenRef.current === last.content) return;
+    spokenRef.current = last.content;
+    // pause listening while speaking to avoid feedback
+    listenerRef.current?.stop();
+    listenerRef.current = null;
+    setVoiceState("speaking");
+    speak(last.content, {
+      onEnd: () => {
+        setVoiceState("idle");
+        if (voiceModeRef.current) startListening();
+      },
+    });
+  }, [messages, voiceMode, startListening]);
+
+  // Stop voice when closing the panel
+  useEffect(() => {
+    if (!open) {
+      voiceModeRef.current = false;
+      setVoiceMode(false);
+      setVoiceState("idle");
+      listenerRef.current?.stop();
+      listenerRef.current = null;
+      cancelSpeech();
+    }
+  }, [open]);
+
+  function toggleVoice() {
+    if (!voiceSupported) return;
+    if (voiceMode) {
+      voiceModeRef.current = false;
+      setVoiceMode(false);
+      setVoiceState("idle");
+      listenerRef.current?.stop();
+      listenerRef.current = null;
+      cancelSpeech();
+    } else {
+      voiceModeRef.current = true;
+      setVoiceMode(true);
+      // mark current last assistant as already spoken (don't re-speak history)
+      const last = [...messages].reverse().find((m) => m.role === "assistant");
+      spokenRef.current = last?.content ?? "";
+      startListening();
     }
   }
 
   function clearChat() {
     setMessages([]);
     setAction(null);
+    spokenRef.current = "";
     seededRef.current = null;
     try {
       sessionStorage.removeItem(STORE_KEY);
@@ -145,14 +231,19 @@ export function AiChatPanel({
             <div className="flex items-center justify-between gap-2 border-b border-border p-3">
               <div className="flex items-center gap-2 font-semibold">
                 <Sparkles className="h-5 w-5 text-price" /> Ask TRAVU
+                {voiceMode && (
+                  <span className="ml-1 rounded-full bg-sky-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-price dark:bg-sky-500/20">
+                    Voice
+                  </span>
+                )}
               </div>
               <div className="flex items-center gap-1">
                 {messages.length > 0 && (
                   <button
                     onClick={clearChat}
                     aria-label="Reset conversation"
-                    className="grid h-8 w-8 place-items-center rounded-full border border-border text-muted transition hover:text-text"
                     title="Start over"
+                    className="grid h-8 w-8 place-items-center rounded-full border border-border text-muted transition hover:text-text"
                   >
                     <RotateCcw className="h-3.5 w-3.5" />
                   </button>
@@ -167,11 +258,29 @@ export function AiChatPanel({
               </div>
             </div>
 
+            {voiceMode && (
+              <div className="flex items-center justify-center gap-3 border-b border-border bg-surface-2 py-4">
+                <VoiceOrb state={voiceState} size={32} />
+                <div className="text-xs text-muted">
+                  {voiceState === "listening"
+                    ? "Listening… tap mic to stop."
+                    : voiceState === "speaking"
+                      ? "Speaking…"
+                      : "Voice mode standby."}
+                </div>
+              </div>
+            )}
+
             <div ref={scrollRef} className="h-[420px] space-y-3 overflow-y-auto p-4">
               {messages.length === 0 && !loading && (
                 <div className="text-sm text-muted">
                   Try: <em>{'"book a flight from Dubai to London next Thursday"'}</em>
                   {" "}or <em>{'"cheap nonstop Lagos to JFK for two in business"'}</em>.
+                  {voiceSupported && (
+                    <span className="mt-2 block text-xs">
+                      Tip: tap the mic to talk and TRAVU will speak back.
+                    </span>
+                  )}
                 </div>
               )}
               {messages.map((m, i) => (
@@ -193,10 +302,7 @@ export function AiChatPanel({
                     {Object.entries(action.filter)
                       .filter(([, v]) => v !== undefined && v !== null && v !== "")
                       .map(([k, v]) => (
-                        <span
-                          key={k}
-                          className="rounded-full bg-surface px-2 py-0.5 font-medium"
-                        >
+                        <span key={k} className="rounded-full bg-surface px-2 py-0.5 font-medium">
                           {k}: {String(v)}
                         </span>
                       ))}
@@ -215,11 +321,36 @@ export function AiChatPanel({
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                send(input);
+                void send(input);
               }}
               className="flex items-center gap-2 border-t border-border p-3"
             >
-              {voiceSlot}
+              <button
+                type="button"
+                onClick={toggleVoice}
+                disabled={!voiceSupported}
+                aria-label={voiceMode ? "Turn voice off" : "Turn voice on"}
+                title={
+                  voiceSupported
+                    ? voiceMode
+                      ? "Turn voice off"
+                      : "Tap to talk"
+                    : "Voice not supported in this browser"
+                }
+                className={cn(
+                  "grid h-9 w-9 shrink-0 place-items-center rounded-full border transition",
+                  voiceMode
+                    ? "btn-accent border-transparent text-white shadow-lg"
+                    : "border-border text-muted hover:text-text",
+                  !voiceSupported && "cursor-not-allowed opacity-40",
+                )}
+              >
+                {voiceSupported ? (
+                  <Mic className={cn("h-4 w-4", voiceMode && voiceState === "listening" && "animate-pulse")} />
+                ) : (
+                  <MicOff className="h-4 w-4" />
+                )}
+              </button>
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}

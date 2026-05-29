@@ -21,38 +21,26 @@ export function sortFlights(flights: Flight[], sort: FlightFilter["sort"]): Flig
   return out;
 }
 
-export function searchFlights(filter: FlightFilter, ds: Dataset): SearchResult {
-  if (!filter.origin || !filter.destination || !filter.departDate) {
-    return { flights: [], count: 0 };
-  }
-  const origin = filter.origin.toUpperCase();
-  const destination = filter.destination.toUpperCase();
-
-  let flights = generateFlights(
-    { origin, dest: destination, date: filter.departDate, cabin: filter.cabin },
-    ds,
-  );
-
-  if (typeof filter.maxStops === "number") {
-    flights = flights.filter((f) => f.stops <= filter.maxStops!);
-  }
-  if (typeof filter.maxBudget === "number") {
-    flights = flights.filter((f) => f.fare.total <= filter.maxBudget!);
-  }
-  if (typeof filter.departAfter === "number") {
-    flights = flights.filter((f) => hourOf(f.departIso) >= filter.departAfter!);
-  }
-  if (typeof filter.departBefore === "number") {
-    flights = flights.filter((f) => hourOf(f.departIso) < filter.departBefore!);
-  }
-  if (typeof filter.arriveBefore === "number") {
-    flights = flights.filter((f) => hourOf(f.arriveIso) < filter.arriveBefore!);
-  }
+export function applyFilters(flights: Flight[], filter: FlightFilter): Flight[] {
+  let out = flights;
+  if (typeof filter.maxStops === "number") out = out.filter((f) => f.stops <= filter.maxStops!);
+  if (typeof filter.maxBudget === "number") out = out.filter((f) => f.fare.total <= filter.maxBudget!);
+  if (typeof filter.departAfter === "number") out = out.filter((f) => hourOf(f.departIso) >= filter.departAfter!);
+  if (typeof filter.departBefore === "number") out = out.filter((f) => hourOf(f.departIso) < filter.departBefore!);
+  if (typeof filter.arriveBefore === "number") out = out.filter((f) => hourOf(f.arriveIso) < filter.arriveBefore!);
   if (filter.airlines && filter.airlines.length > 0) {
     const set = new Set(filter.airlines.map((a) => a.toUpperCase()));
-    flights = flights.filter((f) => set.has(f.carrierIata));
+    out = out.filter((f) => set.has(f.carrierIata));
   }
+  return sortFlights(out, filter.sort);
+}
 
-  flights = sortFlights(flights, filter.sort);
-  return { flights, count: flights.length };
+export function searchFlights(filter: FlightFilter, ds: Dataset): SearchResult {
+  if (!filter.origin || !filter.destination || !filter.departDate) return { flights: [], count: 0 };
+  const flights = generateFlights(
+    { origin: filter.origin.toUpperCase(), dest: filter.destination.toUpperCase(), date: filter.departDate, cabin: filter.cabin },
+    ds,
+  );
+  const filtered = applyFilters(flights, filter);
+  return { flights: filtered, count: filtered.length };
 }

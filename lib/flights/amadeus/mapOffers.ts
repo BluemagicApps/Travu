@@ -1,6 +1,5 @@
 import type { Cabin, Fare, Flight, Segment } from "../types";
 import { isoDurationToMinutes } from "../duration";
-export { isoDurationToMinutes } from "../duration";
 
 interface AmSegment {
   departure: { iataCode: string; at: string };

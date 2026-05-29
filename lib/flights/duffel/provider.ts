@@ -25,8 +25,9 @@ export class DuffelProvider implements FlightProvider {
     });
     let lastErr: unknown;
     for (let attempt = 0; attempt < 3; attempt++) {
+      let res: Response;
       try {
-        const res = await fetch(url, {
+        res = await fetch(url, {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -36,14 +37,20 @@ export class DuffelProvider implements FlightProvider {
           },
           body,
         });
-        if (!res.ok) throw new Error(`duffel_offer_request_failed_${res.status}`);
-        const json = (await res.json()) as DuffelOffersResponse;
-        return mapDuffelOffers(json, params.cabin, DEFAULT_BRAND);
       } catch (e) {
-        lastErr = e;
-        // brief backoff before retrying transient network errors
+        lastErr = e; // network error (e.g. ECONNRESET) — retry
         await new Promise((r) => setTimeout(r, 600 * (attempt + 1)));
+        continue;
       }
+      if (!res.ok) {
+        const err = new Error(`duffel_offer_request_failed_${res.status}`);
+        if (res.status < 500) throw err; // client error — fail fast, no retry
+        lastErr = err;
+        await new Promise((r) => setTimeout(r, 600 * (attempt + 1)));
+        continue;
+      }
+      const json = (await res.json()) as DuffelOffersResponse;
+      return mapDuffelOffers(json, params.cabin, DEFAULT_BRAND);
     }
     throw lastErr;
   }

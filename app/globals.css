@@ -62,3 +62,23 @@ body {
     border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
   }
 }
+
+/* Print only the booking confirmation slip, nothing else on the page. */
+@media print {
+  body {
+    background: #ffffff;
+  }
+  body * {
+    visibility: hidden;
+  }
+  #travu-slip,
+  #travu-slip * {
+    visibility: visible;
+  }
+  #travu-slip {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    width: 100%;
+  }
+}

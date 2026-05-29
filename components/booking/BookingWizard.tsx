@@ -7,6 +7,8 @@ import type { FareOption } from "@/lib/flights/fares";
 import { ReviewTrip } from "./steps/ReviewTrip";
 import { Travellers } from "./steps/Travellers";
 import { Payment } from "./steps/Payment";
+import { detectBrand } from "./CardBrandIcons";
+import { getCountry } from "@/lib/constants/countries";
 import { ReviewAndBook } from "./steps/ReviewAndBook";
 import { BookingSidebar } from "./BookingSidebar";
 import { StepHeader, type WizardStep } from "./StepHeader";
@@ -102,9 +104,10 @@ export function BookingWizard({
           })),
           contactEmail: state.contact.email.trim(),
           contactPhone: state.contact.phone
-            ? `+${state.contact.phoneCountry}${state.contact.phone.replace(/\D/g, "")}`
+            ? `+${getCountry(state.contact.phoneCountry)?.dial ?? ""}${state.contact.phone.replace(/\D/g, "")}`
             : undefined,
           cardLast4: state.payment.cardNumber.replace(/\D/g, "").slice(-4),
+          cardBrand: detectBrand(state.payment.cardNumber) ?? undefined,
         }),
       });
       if (res.status === 401) {

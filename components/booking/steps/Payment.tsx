@@ -2,20 +2,8 @@
 
 import { ShieldCheck } from "lucide-react";
 import type { PaymentInput } from "@/lib/booking/wizard-state";
-import { BrandIconStrip, detectBrand } from "../CardBrandIcons";
-
-const COUNTRIES = [
-  { code: "NG", label: "Nigeria" },
-  { code: "GB", label: "United Kingdom" },
-  { code: "US", label: "United States" },
-  { code: "FR", label: "France" },
-  { code: "DE", label: "Germany" },
-  { code: "AE", label: "United Arab Emirates" },
-  { code: "GH", label: "Ghana" },
-  { code: "KE", label: "Kenya" },
-  { code: "ZA", label: "South Africa" },
-  { code: "IN", label: "India" },
-];
+import { COUNTRIES } from "@/lib/constants/countries";
+import { BrandIcon, BrandIconStrip, detectBrand } from "../CardBrandIcons";
 
 const field =
   "w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-sm outline-none focus:border-sky-400";
@@ -70,14 +58,23 @@ export function Payment({
             <span className={label}>
               Debit/Credit card number <span className="text-rose-500">*</span>
             </span>
-            <input
-              required
-              inputMode="numeric"
-              placeholder="4242 4242 4242 4242"
-              className={field}
-              value={value.cardNumber}
-              onChange={(e) => onChange({ ...value, cardNumber: formatCardNumber(e.target.value) })}
-            />
+            <div className="relative">
+              {brand && (
+                <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2">
+                  <BrandIcon brand={brand} className="h-6 w-9 rounded" />
+                </span>
+              )}
+              <input
+                required
+                inputMode="numeric"
+                placeholder="4242 4242 4242 4242"
+                className={`${field} ${brand ? "pl-16" : ""}`}
+                value={value.cardNumber}
+                onChange={(e) =>
+                  onChange({ ...value, cardNumber: formatCardNumber(e.target.value) })
+                }
+              />
+            </div>
           </label>
 
           <label className="block">
@@ -123,7 +120,7 @@ export function Payment({
             >
               {COUNTRIES.map((c) => (
                 <option key={c.code} value={c.code}>
-                  {c.label}
+                  {c.name}
                 </option>
               ))}
             </select>

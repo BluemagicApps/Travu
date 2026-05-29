@@ -1,3 +1,5 @@
+import { isValidPassport, isValidPhone } from "@/lib/constants/countries";
+
 export interface TravellerInput {
   firstName: string;
   middleName: string;
@@ -48,7 +50,7 @@ export const emptyTraveller: TravellerInput = {
 export const emptyContact: ContactInput = {
   email: "",
   emailConfirmed: true,
-  phoneCountry: "234",
+  phoneCountry: "NG",
   phone: "",
 };
 
@@ -120,13 +122,19 @@ const DOB_OK = (t: TravellerInput) =>
   /^\d{1,2}$/.test(t.dobDay) && /^\d{1,2}$/.test(t.dobMonth) && /^\d{4}$/.test(t.dobYear);
 
 export function isTravellerComplete(t: TravellerInput): boolean {
-  return Boolean(t.firstName.trim() && t.lastName.trim() && DOB_OK(t) && t.passportNumber.trim());
+  return Boolean(
+    t.firstName.trim() &&
+      t.lastName.trim() &&
+      DOB_OK(t) &&
+      t.passportCountry &&
+      isValidPassport(t.passportCountry, t.passportNumber),
+  );
 }
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
 export function isContactComplete(c: ContactInput): boolean {
-  return EMAIL_RE.test(c.email) && c.phone.replace(/\D/g, "").length >= 5;
+  return EMAIL_RE.test(c.email) && isValidPhone(c.phoneCountry, c.phone);
 }
 
 export function isPaymentComplete(p: PaymentInput): boolean {

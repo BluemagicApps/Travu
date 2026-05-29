@@ -36,7 +36,8 @@ test("golden path: signup -> wizard -> confirm -> track", async ({ page }) => {
   // Travellers form
   await page.getByLabel("First name").fill("Test");
   await page.getByLabel("Surname").fill("Traveller");
-  await page.getByLabel("Passport number").fill("AB12345");
+  // Nigeria (default) passport format: a letter followed by 8 digits.
+  await page.getByLabel("Passport number").fill("A12345678");
   await page.getByLabel("Date of birth day").selectOption("15");
   await page.getByLabel("Date of birth month").selectOption("5");
   await page.getByLabel("Date of birth year").selectOption("1990");

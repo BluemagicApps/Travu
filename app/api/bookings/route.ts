@@ -7,18 +7,26 @@ import { decodeId, generateFlights } from "@/lib/flights/generator";
 import { loadDataset } from "@/lib/flights/dataset";
 import { findFareOption, fareOptionsFor } from "@/lib/flights/fares";
 import { makeRef } from "@/lib/utils/ref";
+import { isValidPassport } from "@/lib/constants/countries";
 
 export const runtime = "nodejs";
 
-const Passenger = z.object({
-  firstName: z.string().trim().min(1),
-  middleName: z.string().trim().optional(),
-  lastName: z.string().trim().min(1),
-  dateOfBirth: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
-  type: z.enum(["ADULT", "CHILD", "INFANT"]).default("ADULT"),
-  passportNumber: z.string().trim().optional(),
-  passportCountry: z.string().trim().optional(),
-});
+const Passenger = z
+  .object({
+    firstName: z.string().trim().min(1),
+    middleName: z.string().trim().optional(),
+    lastName: z.string().trim().min(1),
+    dateOfBirth: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    type: z.enum(["ADULT", "CHILD", "INFANT"]).default("ADULT"),
+    passportNumber: z.string().trim().optional(),
+    passportCountry: z.string().trim().optional(),
+  })
+  .refine(
+    (p) =>
+      // If both passport fields are present, the number must match the country's format.
+      !p.passportNumber || !p.passportCountry || isValidPassport(p.passportCountry, p.passportNumber),
+    { message: "passport_format", path: ["passportNumber"] },
+  );
 
 const Body = z.object({
   flightId: z.string().min(1),
@@ -28,6 +36,7 @@ const Body = z.object({
   contactEmail: z.string().email().optional(),
   contactPhone: z.string().optional(),
   cardLast4: z.string().regex(/^\d{4}$/),
+  cardBrand: z.string().trim().optional(),
 });
 
 export async function POST(req: Request) {
@@ -80,7 +89,9 @@ export async function POST(req: Request) {
         create: {
           amount: total,
           currency: "USD",
-          method: "CARD_SIM",
+          // Store the detected card brand (e.g. "VISA") so the confirmation slip
+          // can show "PAID VIA VISA" without persisting the full card number.
+          method: parsed.data.cardBrand ? parsed.data.cardBrand.toUpperCase() : "CARD",
           status: "PAID",
           last4: parsed.data.cardLast4,
         },

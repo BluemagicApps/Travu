@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db/prisma";
 import type { Flight } from "@/lib/flights/types";
 import { statusFor } from "@/lib/booking/status";
+import { getProvider } from "@/lib/flights/provider";
 
 export const runtime = "nodejs";
 
@@ -21,13 +22,18 @@ export async function POST(req: NextRequest) {
   if (!booking) return NextResponse.json({ error: "not_found" }, { status: 404 });
 
   const flight = booking.flightSnapshot as unknown as Flight;
-  const status = statusFor(flight.departIso, flight.arriveIso);
+  const seg = flight.segments[0];
+  const live = seg
+    ? await getProvider().status(seg.airlineIata, seg.flightNo, flight.departIso.slice(0, 10))
+    : null;
+  const status = live?.status ?? statusFor(flight.departIso, flight.arriveIso);
 
   return NextResponse.json({
     ref: booking.bookingRef,
     tripType: booking.tripType,
     fareName: booking.fareName,
     status,
+    live: Boolean(live?.live),
     flight: {
       carrierIata: flight.carrierIata,
       carrierName: flight.carrierName,

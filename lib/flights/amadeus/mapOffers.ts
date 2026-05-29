@@ -13,6 +13,7 @@ interface AmOffer {
   itineraries: { duration?: string; segments: AmSegment[] }[];
   price: { currency: string; base?: string; total?: string; grandTotal?: string };
   validatingAirlineCodes?: string[];
+  numberOfBookableSeats?: number;
 }
 export interface AmOffersResponse {
   data: AmOffer[];
@@ -31,11 +32,6 @@ function cents(value: string | undefined): number {
   return Math.round(Number(value ?? 0) * 100);
 }
 
-let counter = 0;
-function offerId(): string {
-  counter = (counter + 1) % 1_000_000;
-  return `amadeus:${counter.toString(36)}:${String(globalThis.performance.now()).replace(".", "")}`;
-}
 
 export function mapOffers(resp: AmOffersResponse, cabin: Cabin, brandColor: string): Flight[] {
   const carriers = resp.dictionaries?.carriers ?? {};
@@ -63,7 +59,7 @@ export function mapOffers(resp: AmOffersResponse, cabin: Cabin, brandColor: stri
     const fare: Fare = { base, taxes: Math.max(0, total - base), fees: 0, total };
 
     out.push({
-      id: offerId(),
+      id: `amadeus:${crypto.randomUUID()}`,
       carrierIata,
       carrierName: carriers[carrierIata] ?? carrierIata,
       carrierColor: brandColor,
@@ -73,7 +69,7 @@ export function mapOffers(resp: AmOffersResponse, cabin: Cabin, brandColor: stri
       durationMin: isoDurationToMinutes(itin.duration) || segments.reduce((n, s) => n + s.durationMin, 0),
       departIso: first.departIso,
       arriveIso: last.arriveIso,
-      seatsLeft: 9,
+      seatsLeft: offer.numberOfBookableSeats ?? 9,
       fare,
       segments,
     });

@@ -1,7 +1,8 @@
 import { PlaneTakeoff } from "lucide-react";
 import { FlightFilter, type Leg, legsFromFilter } from "@/lib/ai/schema";
-import { loadDataset, getAirportOptions } from "@/lib/flights/dataset";
-import { searchFlights, type SearchResult } from "@/lib/flights/engine";
+import { getAirportOptions } from "@/lib/flights/dataset";
+import type { SearchResult } from "@/lib/flights/engine";
+import { searchLeg as providerSearchLeg, providerKind } from "@/lib/flights/search";
 import { predict } from "@/lib/flights/prediction";
 import { daysFromToday, addDays } from "@/lib/utils/dates";
 import { SearchForm } from "@/components/search/SearchForm";
@@ -11,7 +12,7 @@ import { PricePrediction } from "@/components/flights/PricePrediction";
 import { ResultsSidebar, type ResultsFacets } from "@/components/flights/ResultsSidebar";
 import { ResultsSortBar } from "@/components/flights/ResultsSortBar";
 import { PriceTrackingStrip, type StripDay } from "@/components/flights/PriceTrackingStrip";
-import type { Dataset, Flight } from "@/lib/flights/types";
+import type { Flight } from "@/lib/flights/types";
 import type { z } from "zod";
 
 type ParsedFilter = z.infer<typeof FlightFilter>;
@@ -45,20 +46,21 @@ function computeFacets(flights: Flight[]): ResultsFacets {
   };
 }
 
-function searchLeg(filter: ParsedFilter, leg: Leg, ds: Dataset): SearchResult {
-  return searchFlights(
-    { ...filter, origin: leg.origin, destination: leg.dest, departDate: leg.date },
-    ds,
-  );
+async function searchLeg(filter: ParsedFilter, leg: Leg): Promise<SearchResult> {
+  return providerSearchLeg({ ...filter, origin: leg.origin, destination: leg.dest, departDate: leg.date }, leg);
 }
 
-function computePriceStrip(filter: ParsedFilter, leg: Leg, ds: Dataset): StripDay[] {
-  return [-3, -2, -1, 0, 1, 2, 3].map((d) => {
-    const date = addDays(leg.date, d);
-    const r = searchLeg({ ...filter, airlines: undefined }, { ...leg, date }, ds);
-    const min = r.flights.reduce((m, f) => Math.min(m, f.fare.total), Number.POSITIVE_INFINITY);
-    return { date, minPrice: Number.isFinite(min) ? min : null, isActive: d === 0 };
-  });
+async function computePriceStrip(filter: ParsedFilter, leg: Leg): Promise<StripDay[] | null> {
+  if (providerKind() !== "mock") return null; // avoid 7 live API calls
+  const days = await Promise.all(
+    [-3, -2, -1, 0, 1, 2, 3].map(async (d) => {
+      const date = addDays(leg.date, d);
+      const r = await searchLeg({ ...filter, airlines: undefined }, { ...leg, date });
+      const min = r.flights.reduce((m, f) => Math.min(m, f.fare.total), Number.POSITIVE_INFINITY);
+      return { date, minPrice: Number.isFinite(min) ? min : null, isActive: d === 0 };
+    }),
+  );
+  return days;
 }
 
 interface LegSection {
@@ -67,21 +69,21 @@ interface LegSection {
   result: SearchResult;
 }
 
-function buildLegSections(filter: ParsedFilter, legs: Leg[], ds: Dataset): LegSection[] {
+async function buildLegSections(filter: ParsedFilter, legs: Leg[]): Promise<LegSection[]> {
   if (filter.tripType === "return" && legs.length >= 2) {
     return [
-      { title: "Departing flights", leg: legs[0], result: searchLeg(filter, legs[0], ds) },
-      { title: "Returning flights", leg: legs[1], result: searchLeg(filter, legs[1], ds) },
+      { title: "Departing flights", leg: legs[0], result: await searchLeg(filter, legs[0]) },
+      { title: "Returning flights", leg: legs[1], result: await searchLeg(filter, legs[1]) },
     ];
   }
   if (filter.tripType === "multi-city") {
-    return legs.map((leg, idx) => ({
-      title: `Leg ${idx + 1}: ${leg.origin} → ${leg.dest}`,
-      leg,
-      result: searchLeg(filter, leg, ds),
-    }));
+    const out: LegSection[] = [];
+    for (let idx = 0; idx < legs.length; idx++) {
+      out.push({ title: `Leg ${idx + 1}: ${legs[idx].origin} → ${legs[idx].dest}`, leg: legs[idx], result: await searchLeg(filter, legs[idx]) });
+    }
+    return out;
   }
-  return [{ title: "Departing flights", leg: legs[0], result: searchLeg(filter, legs[0], ds) }];
+  return [{ title: "Departing flights", leg: legs[0], result: await searchLeg(filter, legs[0]) }];
 }
 
 function EmptyState() {
@@ -130,15 +132,14 @@ export default async function SearchPage({
     );
   }
 
-  const ds = await loadDataset();
   const legs = legsFromFilter(filter);
-  const sections = legs.length > 0 ? buildLegSections(filter, legs, ds) : [];
+  const sections = legs.length > 0 ? await buildLegSections(filter, legs) : [];
   const mainSection = sections[0];
   const facets = mainSection
     ? computeFacets(mainSection.result.flights)
     : { stopCounts: { 0: 0, 1: 0 }, airlines: [] };
   const strip =
-    filter.tripType === "one-way" && mainSection ? computePriceStrip(filter, mainSection.leg, ds) : null;
+    filter.tripType === "one-way" && mainSection ? await computePriceStrip(filter, mainSection.leg) : null;
   const totalCount = sections.reduce((sum, s) => sum + s.result.count, 0);
 
   return (

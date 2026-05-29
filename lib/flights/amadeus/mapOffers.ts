@@ -1,4 +1,6 @@
 import type { Cabin, Fare, Flight, Segment } from "../types";
+import { isoDurationToMinutes } from "../duration";
+export { isoDurationToMinutes } from "../duration";
 
 interface AmSegment {
   departure: { iataCode: string; at: string };
@@ -18,14 +20,6 @@ interface AmOffer {
 export interface AmOffersResponse {
   data: AmOffer[];
   dictionaries?: { carriers?: Record<string, string> };
-}
-
-/** ISO-8601 duration "PT8H5M" -> minutes. */
-export function isoDurationToMinutes(iso: string | undefined): number {
-  if (!iso) return 0;
-  const m = iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?/);
-  if (!m) return 0;
-  return Number(m[1] ?? 0) * 60 + Number(m[2] ?? 0);
 }
 
 function cents(value: string | undefined): number {

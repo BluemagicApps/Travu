@@ -1,0 +1,122 @@
+{
+  "data": {
+    "offers": [
+      {
+        "id": "off_0000B6ndbMUNHivHABaUMu",
+        "total_amount": "215.03",
+        "total_currency": "USD",
+        "base_amount": "117.18",
+        "tax_amount": "97.85",
+        "owner": {
+          "iata_code": "LH",
+          "name": "Lufthansa"
+        },
+        "slices": [
+          {
+            "duration": "PT5H35M",
+            "segments": [
+              {
+                "origin": {
+                  "iata_code": "LHR"
+                },
+                "destination": {
+                  "iata_code": "MUC"
+                },
+                "departing_at": "2026-08-15T06:55:00",
+                "arriving_at": "2026-08-15T09:50:00",
+                "duration": "PT1H55M",
+                "marketing_carrier": {
+                  "iata_code": "LH",
+                  "name": "Lufthansa"
+                },
+                "marketing_carrier_flight_number": "2483",
+                "operating_carrier": {
+                  "iata_code": "LH",
+                  "name": "Lufthansa"
+                }
+              },
+              {
+                "origin": {
+                  "iata_code": "MUC"
+                },
+                "destination": {
+                  "iata_code": "CDG"
+                },
+                "departing_at": "2026-08-15T11:55:00",
+                "arriving_at": "2026-08-15T13:30:00",
+                "duration": "PT1H35M",
+                "marketing_carrier": {
+                  "iata_code": "LH",
+                  "name": "Lufthansa"
+                },
+                "marketing_carrier_flight_number": "2230",
+                "operating_carrier": {
+                  "iata_code": "LH",
+                  "name": "Lufthansa"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "off_0000B6ndbVBuviVS9Y1NNa",
+        "total_amount": "206.80",
+        "total_currency": "USD",
+        "base_amount": "92.00",
+        "tax_amount": "114.8",
+        "owner": {
+          "iata_code": "SK",
+          "name": "SAS"
+        },
+        "slices": [
+          {
+            "duration": "PT12H45M",
+            "segments": [
+              {
+                "origin": {
+                  "iata_code": "LHR"
+                },
+                "destination": {
+                  "iata_code": "ARN"
+                },
+                "departing_at": "2026-08-15T06:40:00",
+                "arriving_at": "2026-08-15T10:05:00",
+                "duration": "PT2H25M",
+                "marketing_carrier": {
+                  "iata_code": "SK",
+                  "name": "SAS"
+                },
+                "marketing_carrier_flight_number": "1530",
+                "operating_carrier": {
+                  "iata_code": "SK",
+                  "name": "SAS"
+                }
+              },
+              {
+                "origin": {
+                  "iata_code": "ARN"
+                },
+                "destination": {
+                  "iata_code": "CDG"
+                },
+                "departing_at": "2026-08-15T17:50:00",
+                "arriving_at": "2026-08-15T20:25:00",
+                "duration": "PT2H35M",
+                "marketing_carrier": {
+                  "iata_code": "SK",
+                  "name": "SAS"
+                },
+                "marketing_carrier_flight_number": "0579",
+                "operating_carrier": {
+                  "iata_code": "SK",
+                  "name": "SAS"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

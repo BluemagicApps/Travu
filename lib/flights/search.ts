@@ -13,11 +13,11 @@ export async function searchLeg(filter: FlightFilter, leg: Leg): Promise<SearchR
     passengers: filter.passengers,
     nonStop: filter.maxStops === 0,
   });
-  if (provider.kind === "amadeus") await cacheOffers(flights);
+  if (provider.kind !== "mock") await cacheOffers(flights);
   const filtered = applyFilters(flights, filter);
   return { flights: filtered, count: filtered.length };
 }
 
-export function providerKind(): "amadeus" | "mock" {
+export function providerKind(): "amadeus" | "duffel" | "mock" {
   return getProvider().kind;
 }

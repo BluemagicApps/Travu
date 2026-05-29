@@ -6,6 +6,7 @@ describe("getProvider", () => {
     __resetProvider();
     delete process.env.AMADEUS_CLIENT_ID;
     delete process.env.AMADEUS_CLIENT_SECRET;
+    delete process.env.DUFFEL_API_TOKEN;
   });
 
   it("returns the mock provider when no Amadeus keys are set", () => {
@@ -17,5 +18,19 @@ describe("getProvider", () => {
     process.env.AMADEUS_CLIENT_SECRET = "secret";
     __resetProvider();
     expect(getProvider().kind).toBe("amadeus");
+  });
+
+  it("returns the duffel provider when DUFFEL_API_TOKEN is set", () => {
+    process.env.DUFFEL_API_TOKEN = "duffel_test_x";
+    __resetProvider();
+    expect(getProvider().kind).toBe("duffel");
+  });
+
+  it("duffel takes priority over amadeus when both tokens are set", () => {
+    process.env.DUFFEL_API_TOKEN = "duffel_test_x";
+    process.env.AMADEUS_CLIENT_ID = "id";
+    process.env.AMADEUS_CLIENT_SECRET = "secret";
+    __resetProvider();
+    expect(getProvider().kind).toBe("duffel");
   });
 });

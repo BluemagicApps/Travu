@@ -87,3 +87,11 @@ model Payment {
   last4     String
   createdAt DateTime @default(now())
 }
+
+model CachedOffer {
+  id        String   @id
+  payload   Json
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}

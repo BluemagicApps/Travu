@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "itineraries": [
+        {
+          "duration": "PT8H5M",
+          "segments": [
+            {
+              "departure": { "iataCode": "LOS", "at": "2026-09-15T22:25:00" },
+              "arrival": { "iataCode": "DXB", "at": "2026-09-16T06:30:00" },
+              "carrierCode": "EK",
+              "number": "784",
+              "duration": "PT8H5M",
+              "numberOfStops": 0
+            }
+          ]
+        }
+      ],
+      "price": { "currency": "USD", "base": "420.00", "grandTotal": "519.00" },
+      "validatingAirlineCodes": ["EK"]
+    }
+  ],
+  "dictionaries": { "carriers": { "EK": "EMIRATES" } }
+}

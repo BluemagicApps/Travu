@@ -24,7 +24,9 @@ export interface StatusInfo {
 }
 
 function parseIso(naive: string): number {
-  return Date.parse(naive + (naive.endsWith("Z") ? "" : "Z"));
+  // Treat bare timestamps as UTC, but respect an explicit Z or numeric offset.
+  const hasZone = naive.endsWith("Z") || /[+-]\d{2}:\d{2}$/.test(naive);
+  return Date.parse(hasZone ? naive : naive + "Z");
 }
 
 /** Derive a deterministic status from the flight's depart/arrive times. */

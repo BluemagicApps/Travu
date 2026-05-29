@@ -7,6 +7,8 @@ test("golden path: signup -> wizard -> confirm -> track", async ({ page }) => {
 
   // Sign up (auto-signs in and lands on the dashboard)
   await page.goto("/signup");
+  await page.waitForLoadState("networkidle");
+  await page.waitForTimeout(1500);
   await page.getByLabel("Name").fill("E2E Test");
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("supersecret123");
@@ -15,6 +17,8 @@ test("golden path: signup -> wizard -> confirm -> track", async ({ page }) => {
 
   // Search flights from the home form (LOS -> DXB default)
   await page.goto("/");
+  await page.waitForLoadState("networkidle");
+  await page.waitForTimeout(1500);
   await page.locator('input[type="date"]').fill("2026-09-15");
   await page.getByRole("button", { name: /search flights/i }).click();
   await expect(page).toHaveURL(/\/search\?/);
@@ -55,7 +59,7 @@ test("golden path: signup -> wizard -> confirm -> track", async ({ page }) => {
   await page.getByLabel("Security code").fill("123");
   await page.getByLabel("Billing address 1").fill("123 Main St");
   await page.getByLabel("Postal code").fill("100001");
-  await page.getByLabel("City").fill("Lagos");
+  await page.getByRole("textbox", { name: /city/i }).fill("Lagos");
 
   // Next: Review
   await page.getByRole("button", { name: /Next: Review/i }).click();

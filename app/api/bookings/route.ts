@@ -5,6 +5,8 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db/prisma";
 import { decodeId, generateFlights } from "@/lib/flights/generator";
 import { loadDataset } from "@/lib/flights/dataset";
+import { getCachedOffer } from "@/lib/flights/offer-cache";
+import type { Flight } from "@/lib/flights/types";
 import { findFareOption, fareOptionsFor } from "@/lib/flights/fares";
 import { makeRef } from "@/lib/utils/ref";
 import { isValidPassport } from "@/lib/constants/countries";
@@ -46,14 +48,18 @@ export async function POST(req: Request) {
   const parsed = Body.safeParse(await req.json().catch(() => ({})));
   if (!parsed.success) return NextResponse.json({ error: "invalid_input" }, { status: 400 });
 
-  const decoded = decodeId(parsed.data.flightId);
-  if (!decoded) return NextResponse.json({ error: "bad_flight_id" }, { status: 400 });
-
-  const ds = await loadDataset();
-  const flight = generateFlights(
-    { origin: decoded.origin, dest: decoded.dest, date: decoded.date, cabin: decoded.cabin },
-    ds,
-  ).find((f) => f.id === parsed.data.flightId);
+  // Resolve the selected flight: cached (Amadeus) offer first, else regenerate (mock).
+  let flight: Flight | null = await getCachedOffer(parsed.data.flightId);
+  if (!flight) {
+    const decoded = decodeId(parsed.data.flightId);
+    if (!decoded) return NextResponse.json({ error: "bad_flight_id" }, { status: 400 });
+    const ds = await loadDataset();
+    flight =
+      generateFlights(
+        { origin: decoded.origin, dest: decoded.dest, date: decoded.date, cabin: decoded.cabin },
+        ds,
+      ).find((f) => f.id === parsed.data.flightId) ?? null;
+  }
   if (!flight) return NextResponse.json({ error: "flight_unavailable" }, { status: 404 });
 
   const options = fareOptionsFor(flight);

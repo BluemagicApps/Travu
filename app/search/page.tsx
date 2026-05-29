@@ -1,6 +1,7 @@
+import { Suspense } from "react";
 import { PlaneTakeoff } from "lucide-react";
 import { FlightFilter, type Leg, legsFromFilter } from "@/lib/ai/schema";
-import { getAirportOptions } from "@/lib/flights/dataset";
+import { getAirportOptions, type AirportOption } from "@/lib/flights/dataset";
 import type { SearchResult } from "@/lib/flights/engine";
 import { searchLeg as providerSearchLeg, providerKind } from "@/lib/flights/search";
 import { predict } from "@/lib/flights/prediction";
@@ -12,6 +13,7 @@ import { PricePrediction } from "@/components/flights/PricePrediction";
 import { ResultsSidebar, type ResultsFacets } from "@/components/flights/ResultsSidebar";
 import { ResultsSortBar } from "@/components/flights/ResultsSortBar";
 import { PriceTrackingStrip, type StripDay } from "@/components/flights/PriceTrackingStrip";
+import { ResultsSkeleton } from "@/components/flights/ResultsSkeleton";
 import type { Flight } from "@/lib/flights/types";
 import type { z } from "zod";
 
@@ -79,7 +81,11 @@ async function buildLegSections(filter: ParsedFilter, legs: Leg[]): Promise<LegS
   if (filter.tripType === "multi-city") {
     const out: LegSection[] = [];
     for (let idx = 0; idx < legs.length; idx++) {
-      out.push({ title: `Leg ${idx + 1}: ${legs[idx].origin} → ${legs[idx].dest}`, leg: legs[idx], result: await searchLeg(filter, legs[idx]) });
+      out.push({
+        title: `Leg ${idx + 1}: ${legs[idx].origin} → ${legs[idx].dest}`,
+        leg: legs[idx],
+        result: await searchLeg(filter, legs[idx]),
+      });
     }
     return out;
   }
@@ -95,43 +101,15 @@ function EmptyState() {
   );
 }
 
-export default async function SearchPage({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-}) {
-  const sp = await searchParams;
-  const airports = await getAirportOptions();
+/**
+ * The slow part of the page (live provider search) lives here so it can be
+ * wrapped in <Suspense>. The page shell (search form) streams immediately and
+ * a skeleton shows here until the provider responds.
+ */
+async function SearchResults({ filter, airports }: { filter: ParsedFilter; airports: AirportOption[] }) {
   const airportMap = new Map<string, AirportLite>(
     airports.map((a) => [a.iata, { iata: a.iata, city: a.city }]),
   );
-  const parsed = FlightFilter.safeParse(sp);
-  const filter = parsed.success ? parsed.data : null;
-
-  const initial = filter
-    ? {
-        tripType: filter.tripType,
-        origin: filter.origin?.toUpperCase(),
-        destination: filter.destination?.toUpperCase(),
-        departDate: filter.departDate,
-        returnDate: filter.returnDate,
-        legs: filter.legs,
-        passengers: filter.passengers,
-        cabin: filter.cabin,
-      }
-    : undefined;
-
-  if (!filter) {
-    return (
-      <div className="mx-auto max-w-6xl px-4 py-8">
-        <SearchForm airports={airports} initial={initial} />
-        <div className="mt-6">
-          <EmptyState />
-        </div>
-      </div>
-    );
-  }
-
   const legs = legsFromFilter(filter);
   const sections = legs.length > 0 ? await buildLegSections(filter, legs) : [];
   const mainSection = sections[0];
@@ -143,9 +121,7 @@ export default async function SearchPage({
   const totalCount = sections.reduce((sum, s) => sum + s.result.count, 0);
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-8">
-      <SearchForm airports={airports} initial={initial} />
-
+    <>
       {strip && (
         <div className="mt-4">
           <PriceTrackingStrip days={strip} />
@@ -190,6 +166,47 @@ export default async function SearchPage({
           </div>
         </div>
       </div>
+    </>
+  );
+}
+
+export default async function SearchPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const sp = await searchParams;
+  const airports = await getAirportOptions();
+  const parsed = FlightFilter.safeParse(sp);
+  const filter = parsed.success ? parsed.data : null;
+
+  const initial = filter
+    ? {
+        tripType: filter.tripType,
+        origin: filter.origin?.toUpperCase(),
+        destination: filter.destination?.toUpperCase(),
+        departDate: filter.departDate,
+        returnDate: filter.returnDate,
+        legs: filter.legs,
+        passengers: filter.passengers,
+        cabin: filter.cabin,
+      }
+    : undefined;
+
+  return (
+    <div className="mx-auto max-w-6xl px-4 py-8">
+      <SearchForm airports={airports} initial={initial} />
+
+      {!filter ? (
+        <div className="mt-6">
+          <EmptyState />
+        </div>
+      ) : (
+        // Keyed on the query so a new search re-shows the skeleton while it streams.
+        <Suspense key={JSON.stringify(sp)} fallback={<ResultsSkeleton />}>
+          <SearchResults filter={filter} airports={airports} />
+        </Suspense>
+      )}
     </div>
   );
 }

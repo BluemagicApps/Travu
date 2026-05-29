@@ -15,7 +15,7 @@ export class DuffelProvider implements FlightProvider {
   async searchLeg(params: FlightLegParams): Promise<Flight[]> {
     const token = process.env.DUFFEL_API_TOKEN ?? "";
     const version = process.env.DUFFEL_VERSION || "v2";
-    const url = "https://api.duffel.com/air/offer_requests?return_offers=true&supplier_timeout=15000";
+    const url = "https://api.duffel.com/air/offer_requests?return_offers=true&supplier_timeout=10000";
     const body = JSON.stringify({
       data: {
         slices: [{ origin: params.origin, destination: params.dest, departure_date: params.date }],

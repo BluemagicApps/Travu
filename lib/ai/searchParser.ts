@@ -110,7 +110,7 @@ Respond with ONLY a JSON object (no prose, no markdown fences) with these keys:
 - clarificationMessage: string, or null`;
 
     const res = await client.messages.create({
-      model: "claude-opus-4-7",
+      model: "claude-opus-4-8",
       max_tokens: 400,
       system: [{ type: "text", text: system, cache_control: { type: "ephemeral" } }],
       messages: [{ role: "user", content: `Current date: ${today}\nRequest: ${query}` }],

@@ -6,8 +6,8 @@ import { Check, X } from "lucide-react";
 import type { ReactNode } from "react";
 import type { Flight } from "@/lib/flights/types";
 import type { FareOption, FarePerks } from "@/lib/flights/fares";
-import { formatUSD } from "@/lib/utils/money";
 import { cn } from "@/lib/utils/cn";
+import { Money } from "@/components/Money";
 
 export function FareSelect({
   flight,
@@ -89,7 +89,7 @@ function FareCard({ opt, onSelect }: { opt: FareOption; onSelect: () => void }) 
       <div className="flex items-baseline justify-between gap-2">
         <h3 className="text-base font-bold">{opt.name}</h3>
         <div className="text-right">
-          <div className="text-xl font-extrabold text-price">{formatUSD(opt.fare.total)}</div>
+          <div className="text-xl font-extrabold text-price"><Money cents={opt.fare.total} /></div>
           <div className="text-[10px] text-muted">per traveller</div>
         </div>
       </div>

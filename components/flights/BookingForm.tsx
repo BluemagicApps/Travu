@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Lock } from "lucide-react";
 import type { Flight } from "@/lib/flights/types";
-import { formatUSD } from "@/lib/utils/money";
+import { Money } from "@/components/Money";
 
 export function BookingForm({ flight }: { flight: Flight }) {
   const router = useRouter();
@@ -107,7 +107,7 @@ export function BookingForm({ flight }: { flight: Flight }) {
         disabled={loading}
         className="btn-accent w-full rounded-xl py-3.5 text-sm font-semibold disabled:opacity-60"
       >
-        {loading ? "Processing…" : `Pay ${formatUSD(flight.fare.total)} & confirm`}
+        {loading ? "Processing…" : <span>Pay <Money cents={flight.fare.total} /> &amp; confirm</span>}
       </button>
     </form>
   );

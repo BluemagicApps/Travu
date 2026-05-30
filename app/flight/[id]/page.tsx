@@ -7,8 +7,8 @@ import { getCachedOffer } from "@/lib/flights/offer-cache";
 import type { Flight } from "@/lib/flights/types";
 import { predict } from "@/lib/flights/prediction";
 import { daysFromToday, hhmm, formatDuration } from "@/lib/utils/dates";
-import { formatUSD } from "@/lib/utils/money";
 import { FlightSegments } from "@/components/flights/FlightSegments";
+import { Money } from "@/components/Money";
 import { FareBreakdown } from "@/components/flights/FareBreakdown";
 import { PricePrediction } from "@/components/flights/PricePrediction";
 
@@ -61,7 +61,7 @@ export default async function FlightDetailPage({
             </div>
           </div>
           <div className="ml-auto text-right">
-            <div className="text-2xl font-extrabold text-price">{formatUSD(flight.fare.total)}</div>
+            <div className="text-2xl font-extrabold text-price"><Money cents={flight.fare.total} /></div>
             <div className="text-xs text-muted">per traveller</div>
           </div>
         </div>

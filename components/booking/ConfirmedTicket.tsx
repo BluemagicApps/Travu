@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -10,8 +11,8 @@ import {
   Printer,
 } from "lucide-react";
 import type { SlipData } from "@/lib/booking/confirmation";
-import { formatUSD } from "@/lib/utils/money";
 import { hhmm, formatDuration } from "@/lib/utils/dates";
+import { Money } from "@/components/Money";
 
 function longDate(iso: string, naive = false): string {
   const d = new Date(naive ? iso + "Z" : iso);
@@ -144,15 +145,15 @@ export function ConfirmedTicket({
               </h3>
               <table className="w-full text-sm">
                 <tbody>
-                  <Row label="Air fare" value={formatUSD(slip.breakdown.airFare)} />
-                  <Row label="TRAVU booking fee" value={formatUSD(slip.breakdown.bookingFee)} />
-                  <Row label="Taxes & fees" value={formatUSD(slip.breakdown.taxesFees)} />
+                  <Row label="Air fare" value={<Money cents={slip.breakdown.airFare} />} />
+                  <Row label="TRAVU booking fee" value={<Money cents={slip.breakdown.bookingFee} />} />
+                  <Row label="Taxes & fees" value={<Money cents={slip.breakdown.taxesFees} />} />
                 </tbody>
                 <tfoot>
                   <tr className="border-t-2 border-border">
                     <td className="py-2 text-base font-extrabold">Total paid</td>
                     <td className="py-2 text-right text-base font-extrabold text-price">
-                      {formatUSD(total)}
+                      <Money cents={total} />
                     </td>
                   </tr>
                 </tfoot>
@@ -224,7 +225,7 @@ function Cell({ label, value, mono = false }: { label: string; value: string; mo
   );
 }
 
-function Row({ label, value }: { label: string; value: string }) {
+function Row({ label, value }: { label: string; value: ReactNode }) {
   return (
     <tr>
       <td className="py-1.5 text-muted">{label}</td>

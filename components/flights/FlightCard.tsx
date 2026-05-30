@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { Flight } from "@/lib/flights/types";
-import { formatUSD } from "@/lib/utils/money";
 import { hhmm, formatDuration } from "@/lib/utils/dates";
+import { Money } from "@/components/Money";
 
 export interface AirportLite {
   iata: string;
@@ -68,7 +68,7 @@ export function FlightCard({
         </div>
 
         <div className="ml-auto text-right">
-          <div className="text-xl font-extrabold text-price">{formatUSD(flight.fare.total)}</div>
+          <div className="text-xl font-extrabold text-price"><Money cents={flight.fare.total} /></div>
           <div className="text-[10px] text-muted">per traveller</div>
           {onSelect ? (
             <button

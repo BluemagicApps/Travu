@@ -1,6 +1,6 @@
 import type { Flight } from "@/lib/flights/types";
 import { hhmm, formatDuration } from "@/lib/utils/dates";
-import { formatUSD } from "@/lib/utils/money";
+import { Money } from "@/components/Money";
 
 export function BookingSummary({ flight }: { flight: Flight }) {
   const from = flight.segments[0];
@@ -25,7 +25,7 @@ export function BookingSummary({ flight }: { flight: Flight }) {
           </div>
         </div>
         <div className="text-right">
-          <div className="text-lg font-extrabold text-price">{formatUSD(flight.fare.total)}</div>
+          <div className="text-lg font-extrabold text-price"><Money cents={flight.fare.total} /></div>
           <div className="text-xs text-muted">{flight.carrierName}</div>
         </div>
       </div>

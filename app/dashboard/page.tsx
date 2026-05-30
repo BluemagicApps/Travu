@@ -5,7 +5,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db/prisma";
 import type { Flight } from "@/lib/flights/types";
 import { hhmm, datePart } from "@/lib/utils/dates";
-import { formatUSD } from "@/lib/utils/money";
+import { Money } from "@/components/Money";
 
 export default async function DashboardPage() {
   const session = await auth();
@@ -53,7 +53,7 @@ export default async function DashboardPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-extrabold text-price">{formatUSD(b.totalAmount)}</div>
+                    <div className="font-extrabold text-price"><Money cents={b.totalAmount} /></div>
                     <div className="text-xs text-emerald-500">{b.status}</div>
                   </div>
                 </div>

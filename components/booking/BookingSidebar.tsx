@@ -3,8 +3,8 @@
 import { ArrowRight } from "lucide-react";
 import type { Flight } from "@/lib/flights/types";
 import type { FareOption } from "@/lib/flights/fares";
-import { formatUSD } from "@/lib/utils/money";
 import { hhmm, datePart, formatDuration } from "@/lib/utils/dates";
+import { Money } from "@/components/Money";
 
 const NEXT_LABEL: Record<string, string> = {
   review: "Next: Checkout",
@@ -56,21 +56,21 @@ export function BookingSidebar({
           {Array.from({ length: passengers }).map((_, i) => (
             <div key={i} className="flex justify-between">
               <dt className="text-muted">Traveller {i + 1} · Adult</dt>
-              <dd>{formatUSD(fare.fare.total)}</dd>
+              <dd><Money cents={fare.fare.total} /></dd>
             </div>
           ))}
           <div className="flex justify-between border-t border-border pt-1.5">
             <dt className="text-muted">Base fare</dt>
-            <dd>{formatUSD(totalBase)}</dd>
+            <dd><Money cents={totalBase} /></dd>
           </div>
           <div className="flex justify-between">
             <dt className="text-muted">Taxes & fees</dt>
-            <dd>{formatUSD(totalTaxes)}</dd>
+            <dd><Money cents={totalTaxes} /></dd>
           </div>
         </dl>
         <div className="mt-3 flex items-baseline justify-between border-t border-border pt-2">
-          <span className="font-bold">Total (USD)</span>
-          <span className="text-lg font-extrabold text-price">{formatUSD(total)}</span>
+          <span className="font-bold">Total</span>
+          <span className="text-lg font-extrabold text-price"><Money cents={total} /></span>
         </div>
         {onNext && (
           <button

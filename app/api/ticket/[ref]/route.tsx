@@ -6,6 +6,7 @@ import { prisma } from "@/lib/db/prisma";
 import { loadDataset } from "@/lib/flights/dataset";
 import { buildSlip } from "@/lib/booking/confirmation";
 import { TicketDocument } from "@/lib/pdf/ticket";
+import { getServerCurrency } from "@/lib/utils/currency-server";
 import type { Flight } from "@/lib/flights/types";
 
 export const runtime = "nodejs";
@@ -42,8 +43,9 @@ export async function GET(_req: Request, { params }: { params: Promise<{ ref: st
     cityOf,
   });
 
+  const currency = await getServerCurrency();
   const qrDataUrl = await QRCode.toDataURL(ref);
-  const buffer = await renderToBuffer(<TicketDocument slip={slip} qrDataUrl={qrDataUrl} />);
+  const buffer = await renderToBuffer(<TicketDocument slip={slip} qrDataUrl={qrDataUrl} currency={currency} />);
 
   return new NextResponse(new Uint8Array(buffer), {
     headers: {

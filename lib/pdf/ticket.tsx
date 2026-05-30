@@ -1,7 +1,7 @@
 import { Document, Page, Text, View, StyleSheet, Image } from "@react-pdf/renderer";
 import type { SlipData } from "@/lib/booking/confirmation";
 import { hhmm, formatDuration } from "@/lib/utils/dates";
-import { formatUSD } from "@/lib/utils/money";
+import { formatMoney } from "@/lib/utils/currency";
 
 function longDate(iso: string, naive = false): string {
   const d = new Date(naive ? iso + "Z" : iso);
@@ -107,9 +107,10 @@ const styles = StyleSheet.create({
 export interface TicketProps {
   slip: SlipData;
   qrDataUrl: string;
+  currency: string;
 }
 
-export function TicketDocument({ slip, qrDataUrl }: TicketProps) {
+export function TicketDocument({ slip, qrDataUrl, currency }: TicketProps) {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -188,19 +189,19 @@ export function TicketDocument({ slip, qrDataUrl }: TicketProps) {
               <Text style={styles.sectionTitle}>Payment summary</Text>
               <View style={styles.payLine}>
                 <Text style={styles.payLabel}>Air fare</Text>
-                <Text>{formatUSD(slip.breakdown.airFare)}</Text>
+                <Text>{formatMoney(slip.breakdown.airFare, currency)}</Text>
               </View>
               <View style={styles.payLine}>
                 <Text style={styles.payLabel}>TRAVU booking fee</Text>
-                <Text>{formatUSD(slip.breakdown.bookingFee)}</Text>
+                <Text>{formatMoney(slip.breakdown.bookingFee, currency)}</Text>
               </View>
               <View style={styles.payLine}>
                 <Text style={styles.payLabel}>Taxes &amp; fees</Text>
-                <Text>{formatUSD(slip.breakdown.taxesFees)}</Text>
+                <Text>{formatMoney(slip.breakdown.taxesFees, currency)}</Text>
               </View>
               <View style={styles.totalLine}>
                 <Text style={{ fontFamily: "Helvetica-Bold", fontSize: 12 }}>Total paid</Text>
-                <Text style={styles.total}>{formatUSD(slip.breakdown.total)}</Text>
+                <Text style={styles.total}>{formatMoney(slip.breakdown.total, currency)}</Text>
               </View>
               <Text style={styles.paid}>PAID VIA {slip.paymentLabel}</Text>
             </View>

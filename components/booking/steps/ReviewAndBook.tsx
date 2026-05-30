@@ -5,7 +5,7 @@ import type { Flight } from "@/lib/flights/types";
 import type { FareOption } from "@/lib/flights/fares";
 import type { WizardState } from "@/lib/booking/wizard-state";
 import { datePart, hhmm, formatDuration } from "@/lib/utils/dates";
-import { formatUSD } from "@/lib/utils/money";
+import { Money } from "@/components/Money";
 
 const NUMBERED = [
   "Review your trip details to make sure the dates and times are correct.",
@@ -86,7 +86,7 @@ export function ReviewAndBook({
           <dt className="text-muted">Payment</dt>
           <dd>
             Card ending in {state.payment.cardNumber.replace(/\D/g, "").slice(-4)} ·{" "}
-            {formatUSD(total)}
+            <Money cents={total} />
           </dd>
         </dl>
       </section>
@@ -104,7 +104,7 @@ export function ReviewAndBook({
         className="btn-accent flex w-full items-center justify-center gap-2 rounded-xl py-4 text-base font-bold disabled:opacity-60"
       >
         {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Lock className="h-4 w-4" />}
-        Buy now · {formatUSD(total)} <ArrowRight className="h-4 w-4" />
+        Buy now · <Money cents={total} /> <ArrowRight className="h-4 w-4" />
       </button>
 
       <p className="flex items-center justify-center gap-1.5 text-xs text-muted">

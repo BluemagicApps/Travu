@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { formatUSD } from "@/lib/utils/money";
+import { Money } from "@/components/Money";
 
 export interface AirlineFacet {
   iata: string;
@@ -82,7 +82,7 @@ export function ResultsSidebar({ facets }: { facets: ResultsFacets }) {
                 <span className="flex-1 truncate">
                   {a.name} <span className="text-xs text-muted">({a.count})</span>
                 </span>
-                <span className="text-xs font-semibold text-price">From {formatUSD(a.minPrice)}</span>
+                <span className="text-xs font-semibold text-price">From <Money cents={a.minPrice} /></span>
               </label>
             ))}
           </div>

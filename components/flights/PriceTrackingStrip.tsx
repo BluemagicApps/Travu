@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils/cn";
-import { formatUSD } from "@/lib/utils/money";
+import { Money } from "@/components/Money";
 
 export interface StripDay {
   date: string;
@@ -29,7 +29,7 @@ export function PriceTrackingStrip({ days }: { days: StripDay[] }) {
         <div className="text-xs font-semibold text-muted">Price tracking</div>
         {lowest !== null && (
           <div className="text-xs text-muted">
-            Current lowest price: <span className="font-bold text-price">{formatUSD(lowest)}</span>
+            Current lowest price: <span className="font-bold text-price"><Money cents={lowest} /></span>
           </div>
         )}
       </div>
@@ -54,7 +54,7 @@ export function PriceTrackingStrip({ days }: { days: StripDay[] }) {
                 {dow}, {dm}
               </span>
               <span className={d.isActive ? "text-sm font-bold text-price" : "text-sm font-semibold"}>
-                {d.minPrice !== null ? formatUSD(d.minPrice) : "—"}
+                {d.minPrice !== null ? <Money cents={d.minPrice} /> : "—"}
               </span>
             </button>
           );

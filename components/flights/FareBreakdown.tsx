@@ -1,5 +1,5 @@
 import type { Fare } from "@/lib/flights/types";
-import { formatUSD } from "@/lib/utils/money";
+import { Money } from "@/components/Money";
 
 export function FareBreakdown({ fare, passengers = 1 }: { fare: Fare; passengers?: number }) {
   const rows = [
@@ -16,12 +16,12 @@ export function FareBreakdown({ fare, passengers = 1 }: { fare: Fare; passengers
         {rows.map((r) => (
           <div key={r.label} className="flex justify-between">
             <dt className="text-muted">{r.label}</dt>
-            <dd>{formatUSD(r.value)}</dd>
+            <dd><Money cents={r.value} /></dd>
           </div>
         ))}
         <div className="flex justify-between border-t border-border pt-2 font-bold">
           <dt>Total</dt>
-          <dd className="text-price">{formatUSD(total)}</dd>
+          <dd className="text-price"><Money cents={total} /></dd>
         </div>
       </dl>
     </div>

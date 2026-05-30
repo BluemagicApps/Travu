@@ -7,6 +7,7 @@ import { Plane, BedDouble, Car, Package, Ticket } from "lucide-react";
 import type { ComponentType } from "react";
 import { cn } from "@/lib/utils/cn";
 import { ThemeToggle } from "./ThemeToggle";
+import { CurrencySwitcher } from "./CurrencySwitcher";
 import { Logo } from "./Logo";
 
 type Tab = {
@@ -47,6 +48,7 @@ export function Navbar() {
             >
               Track booking
             </Link>
+            <CurrencySwitcher />
             <ThemeToggle />
             <AuthButtons />
           </div>

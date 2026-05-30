@@ -52,7 +52,7 @@ export function mapOffers(resp: AmOffersResponse, cabin: Cabin, brandColor: stri
     const fare: Fare = { base, taxes: Math.max(0, total - base), fees: 0, total };
 
     out.push({
-      id: `amadeus:${crypto.randomUUID()}`,
+      id: `amadeus_${crypto.randomUUID()}`,
       carrierIata,
       carrierName: carriers[carrierIata] ?? carrierIata,
       carrierColor: brandColor,

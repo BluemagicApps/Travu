@@ -3,6 +3,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { decodeId, generateFlights } from "@/lib/flights/generator";
 import { loadDataset } from "@/lib/flights/dataset";
+import { getCachedOffer } from "@/lib/flights/offer-cache";
+import type { Flight } from "@/lib/flights/types";
 import { predict } from "@/lib/flights/prediction";
 import { daysFromToday, hhmm, formatDuration } from "@/lib/utils/dates";
 import { formatUSD } from "@/lib/utils/money";
@@ -16,18 +18,22 @@ export default async function FlightDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const decoded = decodeId(id);
-  if (!decoded) notFound();
-
-  const ds = await loadDataset();
-  const flights = generateFlights(
-    { origin: decoded.origin, dest: decoded.dest, date: decoded.date, cabin: decoded.cabin },
-    ds,
-  );
-  const flight = flights.find((f) => f.id === id);
+  // Cached (Duffel/Amadeus) offer first, else regenerate (mock).
+  let flight: Flight | null = await getCachedOffer(id);
+  if (!flight) {
+    const decoded = decodeId(id);
+    if (decoded) {
+      const ds = await loadDataset();
+      flight =
+        generateFlights(
+          { origin: decoded.origin, dest: decoded.dest, date: decoded.date, cabin: decoded.cabin },
+          ds,
+        ).find((f) => f.id === id) ?? null;
+    }
+  }
   if (!flight) notFound();
 
-  const prediction = predict({ daysToDeparture: daysFromToday(decoded.date) });
+  const prediction = predict({ daysToDeparture: daysFromToday(flight.departIso.slice(0, 10)) });
   const from = flight.segments[0];
   const to = flight.segments[flight.segments.length - 1];
 
@@ -50,7 +56,7 @@ export default async function FlightDetailPage({
               {from.originIata} → {to.destIata}
             </div>
             <div className="text-sm capitalize text-muted">
-              {flight.carrierName} · {decoded.cabin.toLowerCase()} ·{" "}
+              {flight.carrierName} · {flight.cabin.toLowerCase()} ·{" "}
               {flight.stops === 0 ? "nonstop" : `${flight.stops} stop`}
             </div>
           </div>

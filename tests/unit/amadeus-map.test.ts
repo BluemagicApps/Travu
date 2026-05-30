@@ -19,7 +19,7 @@ describe("mapOffers", () => {
     expect(f.fare.taxes).toBe(51900 - 42000);
     expect(f.segments[0].flightNo).toBe("784");
     expect(f.durationMin).toBe(8 * 60 + 5);
-    expect(f.id).toMatch(/^amadeus:/);
+    expect(f.id).toMatch(/^amadeus_/);
   });
 });
 

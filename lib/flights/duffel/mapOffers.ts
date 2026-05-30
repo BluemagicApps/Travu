@@ -51,7 +51,7 @@ export function mapDuffelOffers(resp: DuffelOffersResponse, cabin: Cabin, brandC
     const fare: Fare = { base, taxes, fees: 0, total };
 
     out.push({
-      id: `duffel:${offer.id}`,
+      id: `duffel_${offer.id}`,
       carrierIata: offer.owner.iata_code,
       carrierName: offer.owner.name,
       carrierColor: brandColor,

@@ -2,7 +2,9 @@ import { redirect, notFound } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { decodeId, generateFlights } from "@/lib/flights/generator";
 import { loadDataset } from "@/lib/flights/dataset";
+import { getCachedOffer } from "@/lib/flights/offer-cache";
 import { fareOptionsFor, findFareOption } from "@/lib/flights/fares";
+import type { Flight } from "@/lib/flights/types";
 import { BookingWizard } from "@/components/booking/BookingWizard";
 
 export default async function BookPage({
@@ -17,14 +19,19 @@ export default async function BookPage({
   const session = await auth();
   if (!session?.user) redirect(`/login?callbackUrl=/book/${id}`);
 
-  const decoded = decodeId(id);
-  if (!decoded) notFound();
-
-  const ds = await loadDataset();
-  const flight = generateFlights(
-    { origin: decoded.origin, dest: decoded.dest, date: decoded.date, cabin: decoded.cabin },
-    ds,
-  ).find((f) => f.id === id);
+  // Resolve the flight: cached (Duffel/Amadeus) offer first, else regenerate (mock).
+  let flight: Flight | null = await getCachedOffer(id);
+  if (!flight) {
+    const decoded = decodeId(id);
+    if (decoded) {
+      const ds = await loadDataset();
+      flight =
+        generateFlights(
+          { origin: decoded.origin, dest: decoded.dest, date: decoded.date, cabin: decoded.cabin },
+          ds,
+        ).find((f) => f.id === id) ?? null;
+    }
+  }
   if (!flight) notFound();
 
   const fareParam = typeof sp.fare === "string" ? sp.fare : null;

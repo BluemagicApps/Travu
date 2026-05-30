@@ -11,7 +11,7 @@ describe("mapDuffelOffers", () => {
 
     const o = fixture.data.offers[0];
     const f = flights[0];
-    expect(f.id).toBe(`duffel:${o.id}`);
+    expect(f.id).toBe(`duffel_${o.id}`);
     expect(f.carrierIata).toBe(o.owner.iata_code);
     expect(f.carrierName).toBe(o.owner.name);
     expect(f.fare.total).toBe(cents(o.total_amount));

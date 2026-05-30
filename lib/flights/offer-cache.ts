@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/db/prisma";
 import type { Flight } from "./types";
 
@@ -5,15 +6,12 @@ const TTL_MS = 30 * 60 * 1000;
 
 export async function cacheOffers(flights: Flight[]): Promise<void> {
   if (flights.length === 0) return;
-  await prisma.$transaction(
-    flights.map((f) =>
-      prisma.cachedOffer.upsert({
-        where: { id: f.id },
-        create: { id: f.id, payload: f as unknown as object },
-        update: { payload: f as unknown as object },
-      }),
-    ),
-  );
+  // Single round-trip insert (offer ids are unique) — far faster than N upserts
+  // in a transaction, which dominated search latency for large result sets.
+  await prisma.cachedOffer.createMany({
+    data: flights.map((f) => ({ id: f.id, payload: f as unknown as Prisma.InputJsonValue })),
+    skipDuplicates: true,
+  });
 }
 
 export async function getCachedOffer(id: string): Promise<Flight | null> {

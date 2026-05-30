@@ -7,49 +7,19 @@ import { searchLeg as providerSearchLeg, providerKind } from "@/lib/flights/sear
 import { predict } from "@/lib/flights/prediction";
 import { daysFromToday, addDays } from "@/lib/utils/dates";
 import { SearchForm } from "@/components/search/SearchForm";
-import { type AirportLite } from "@/components/flights/FlightCard";
-import { FlightResultsList } from "@/components/flights/FlightResultsList";
 import { PricePrediction } from "@/components/flights/PricePrediction";
-import { ResultsSidebar, type ResultsFacets } from "@/components/flights/ResultsSidebar";
-import { ResultsSortBar } from "@/components/flights/ResultsSortBar";
 import { PriceTrackingStrip, type StripDay } from "@/components/flights/PriceTrackingStrip";
 import { ResultsSkeleton } from "@/components/flights/ResultsSkeleton";
-import type { Flight } from "@/lib/flights/types";
+import { ResultsView } from "@/components/flights/ResultsView";
 import type { z } from "zod";
 
 type ParsedFilter = z.infer<typeof FlightFilter>;
 
-function computeFacets(flights: Flight[]): ResultsFacets {
-  const stopCounts = { 0: 0, 1: 0 };
-  const airlines = new Map<
-    string,
-    { iata: string; name: string; count: number; minPrice: number; color: string }
-  >();
-  for (const f of flights) {
-    if (f.stops === 0) stopCounts[0]++;
-    else if (f.stops === 1) stopCounts[1]++;
-    const existing = airlines.get(f.carrierIata);
-    if (existing) {
-      existing.count++;
-      existing.minPrice = Math.min(existing.minPrice, f.fare.total);
-    } else {
-      airlines.set(f.carrierIata, {
-        iata: f.carrierIata,
-        name: f.carrierName,
-        count: 1,
-        minPrice: f.fare.total,
-        color: f.carrierColor,
-      });
-    }
-  }
-  return {
-    stopCounts,
-    airlines: [...airlines.values()].sort((a, b) => a.minPrice - b.minPrice),
-  };
-}
-
 async function searchLeg(filter: ParsedFilter, leg: Leg): Promise<SearchResult> {
-  return providerSearchLeg({ ...filter, origin: leg.origin, destination: leg.dest, departDate: leg.date }, leg);
+  return providerSearchLeg(
+    { ...filter, origin: leg.origin, destination: leg.dest, departDate: leg.date },
+    leg,
+  );
 }
 
 async function computePriceStrip(filter: ParsedFilter, leg: Leg): Promise<StripDay[] | null> {
@@ -102,23 +72,34 @@ function EmptyState() {
 }
 
 /**
- * The slow part of the page (live provider search) lives here so it can be
- * wrapped in <Suspense>. The page shell (search form) streams immediately and
- * a skeleton shows here until the provider responds.
+ * The slow part of the page (live provider search) lives here so it can be wrapped
+ * in <Suspense>: the search form streams immediately, a skeleton shows here until
+ * the provider responds, then the results stream in. Stops/airlines/sort filtering
+ * happens client-side in <ResultsView> so toggling a box filters instantly.
  */
 async function SearchResults({ filter, airports }: { filter: ParsedFilter; airports: AirportOption[] }) {
-  const airportMap = new Map<string, AirportLite>(
-    airports.map((a) => [a.iata, { iata: a.iata, city: a.city }]),
-  );
   const legs = legsFromFilter(filter);
   const sections = legs.length > 0 ? await buildLegSections(filter, legs) : [];
   const mainSection = sections[0];
-  const facets = mainSection
-    ? computeFacets(mainSection.result.flights)
-    : { stopCounts: { 0: 0, 1: 0 }, airlines: [] };
   const strip =
     filter.tripType === "one-way" && mainSection ? await computePriceStrip(filter, mainSection.leg) : null;
-  const totalCount = sections.reduce((sum, s) => sum + s.result.count, 0);
+  const hasAny = sections.some((s) => s.result.flights.length > 0);
+
+  if (sections.length === 0) {
+    return (
+      <div className="mt-6">
+        <EmptyState />
+      </div>
+    );
+  }
+
+  const prediction =
+    hasAny && filter.departDate ? (
+      <PricePrediction
+        prediction={predict({ daysToDeparture: daysFromToday(filter.departDate) })}
+        className="mt-4"
+      />
+    ) : null;
 
   return (
     <>
@@ -128,44 +109,14 @@ async function SearchResults({ filter, airports }: { filter: ParsedFilter; airpo
         </div>
       )}
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[260px_1fr]">
-        <div className="lg:sticky lg:top-20 lg:self-start">
-          <ResultsSidebar facets={facets} />
-        </div>
-
-        <div>
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <h1 className="text-lg font-bold">
-              {totalCount > 0 ? `${totalCount} flights found` : "Search results"}
-            </h1>
-            {totalCount > 0 && <ResultsSortBar />}
-          </div>
-
-          {totalCount > 0 && filter.departDate && (
-            <PricePrediction
-              prediction={predict({ daysToDeparture: daysFromToday(filter.departDate) })}
-              className="mt-4"
-            />
-          )}
-
-          <div className="mt-4 space-y-8">
-            {sections.map((section, idx) => (
-              <section key={idx}>
-                <h2 className="mb-3 text-base font-bold">{section.title}</h2>
-                {section.result.flights.length === 0 ? (
-                  <div className="rounded-2xl border border-border bg-surface p-6 text-center text-sm text-muted">
-                    No flights for this leg.
-                  </div>
-                ) : (
-                  <FlightResultsList flights={section.result.flights} airportMap={airportMap} />
-                )}
-              </section>
-            ))}
-
-            {totalCount === 0 && <EmptyState />}
-          </div>
-        </div>
-      </div>
+      <ResultsView
+        sections={sections.map((s) => ({ title: s.title, flights: s.result.flights }))}
+        airports={airports.map((a) => ({ iata: a.iata, city: a.city }))}
+        initialMaxStops={typeof filter.maxStops === "number" ? String(filter.maxStops) : ""}
+        initialAirlines={filter.airlines ?? []}
+        initialSort={filter.sort}
+        prediction={prediction}
+      />
     </>
   );
 }

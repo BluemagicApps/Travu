@@ -1,24 +1,18 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-
 const SORTS = [
   { key: "best", label: "Recommended" },
   { key: "price", label: "Cheapest" },
   { key: "duration", label: "Fastest" },
 ] as const;
 
-export function ResultsSortBar() {
-  const router = useRouter();
-  const sp = useSearchParams();
-  const sort = sp.get("sort") ?? "best";
-
-  function setSort(value: string) {
-    const next = new URLSearchParams(sp.toString());
-    next.set("sort", value);
-    router.push(`/search?${next.toString()}`);
-  }
-
+export function ResultsSortBar({
+  sort,
+  onChange,
+}: {
+  sort: string;
+  onChange: (value: "best" | "price" | "duration") => void;
+}) {
   return (
     <div className="flex items-center gap-2 text-sm">
       <label htmlFor="sort" className="text-muted">
@@ -27,7 +21,7 @@ export function ResultsSortBar() {
       <select
         id="sort"
         value={sort}
-        onChange={(e) => setSort(e.target.value)}
+        onChange={(e) => onChange(e.target.value as "best" | "price" | "duration")}
         className="rounded-full border border-border bg-surface px-3 py-1.5 outline-none"
       >
         {SORTS.map((s) => (

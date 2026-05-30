@@ -9,6 +9,7 @@ const MAX_RESULTS = 68;
 
 export async function searchLeg(filter: FlightFilter, leg: Leg): Promise<SearchResult> {
   const provider = getProvider();
+  // No nonStop constraint: return all stops so the sidebar (client-side) can filter them.
   const legParams = {
     origin: leg.origin,
     dest: leg.dest,
@@ -17,7 +18,6 @@ export async function searchLeg(filter: FlightFilter, leg: Leg): Promise<SearchR
     passengers: filter.passengers,
     children: filter.children,
     infants: filter.infants,
-    nonStop: filter.maxStops === 0,
   };
   let flights = [] as Awaited<ReturnType<typeof provider.searchLeg>>;
   try {
@@ -32,7 +32,11 @@ export async function searchLeg(filter: FlightFilter, leg: Leg): Promise<SearchR
     console.error(`[search] ${provider.kind} provider failed; falling back to mock:`, e);
     flights = await new MockProvider().searchLeg(legParams);
   }
-  const filtered = applyFilters(flights, filter);
+  // Apply only non-sidebar filters here (budget/time windows from AI queries);
+  // stops / airlines / sort are applied client-side in ResultsView so toggling a
+  // box filters the curated list instantly without re-running the provider search.
+  const serverFilter = { ...filter, maxStops: undefined, airlines: undefined };
+  const filtered = applyFilters(flights, serverFilter);
   return { flights: filtered, count: filtered.length };
 }
 

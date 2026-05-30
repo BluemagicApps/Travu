@@ -5,6 +5,8 @@ export const SortEnum = z.enum(["best", "price", "duration"]);
 export const TripTypeEnum = z.enum(["one-way", "return", "multi-city"]);
 
 const IATA = /^[A-Za-z]{3}$/;
+// Airline (marketing carrier) codes are 2 alphanumeric chars (e.g. LH, BA, U2); allow up to 3.
+const AIRLINE_CODE = /^[A-Za-z0-9]{2,3}$/;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 export const LegSchema = z.object({
@@ -44,7 +46,7 @@ export const FlightFilter = z.object({
   arriveBefore: z.coerce.number().int().min(1).max(24).optional(),
   airlines: z.preprocess(
     (v) => (typeof v === "string" ? v.split(",").filter(Boolean) : v),
-    z.array(z.string().regex(IATA)).optional(),
+    z.array(z.string().regex(AIRLINE_CODE)).optional(),
   ),
   sort: SortEnum.default("best"),
 });

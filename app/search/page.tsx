@@ -189,6 +189,8 @@ export default async function SearchPage({
         returnDate: filter.returnDate,
         legs: filter.legs,
         passengers: filter.passengers,
+        children: filter.children,
+        infants: filter.infants,
         cabin: filter.cabin,
       }
     : undefined;

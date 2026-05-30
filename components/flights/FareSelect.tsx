@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, X } from "lucide-react";
 import type { ReactNode } from "react";
@@ -19,10 +19,17 @@ export function FareSelect({
   onClose: () => void;
 }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const to = flight.segments[flight.segments.length - 1];
 
   function select(opt: FareOption) {
-    router.push(`/book/${flight.id}?fare=${opt.id}&step=review`);
+    // Carry the traveller counts from the search into the booking wizard.
+    const qp = new URLSearchParams({ fare: opt.id, step: "review" });
+    for (const key of ["passengers", "children", "infants"]) {
+      const v = searchParams.get(key);
+      if (v) qp.set(key, v);
+    }
+    router.push(`/book/${flight.id}?${qp.toString()}`);
   }
 
   return (

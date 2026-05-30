@@ -17,11 +17,16 @@ export class AmadeusProvider implements FlightProvider {
   kind = "amadeus" as const;
 
   async searchLeg(params: FlightLegParams): Promise<Flight[]> {
+    const children = params.children ?? 0;
+    const infants = params.infants ?? 0;
+    const adults = Math.max(1, params.passengers - children - infants);
     const resp = await amadeusGet<AmOffersResponse>("/v2/shopping/flight-offers", {
       originLocationCode: params.origin,
       destinationLocationCode: params.dest,
       departureDate: params.date,
-      adults: params.passengers,
+      adults,
+      children: children || undefined,
+      infants: infants || undefined,
       travelClass: TRAVEL_CLASS[params.cabin],
       nonStop: params.nonStop ? true : undefined,
       currencyCode: "USD",

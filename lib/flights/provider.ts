@@ -10,7 +10,10 @@ export interface FlightLegParams {
   dest: string;
   date: string;
   cabin: Cabin;
+  /** Total travellers (adults + children + infants). */
   passengers: number;
+  children?: number;
+  infants?: number;
   nonStop?: boolean;
 }
 

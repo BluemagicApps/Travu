@@ -7,6 +7,7 @@ import type { AirportOption } from "@/lib/flights/dataset";
 import { encodeLegs } from "@/lib/ai/schema";
 import { TripTypeTabs, type TripType } from "./TripTypeTabs";
 import { LegFields, type LegValue } from "./LegFields";
+import { PassengerSelect, type PassengerCounts } from "./PassengerSelect";
 
 type Cabin = "ECONOMY" | "PREMIUM" | "BUSINESS";
 
@@ -18,6 +19,8 @@ export interface SearchFormInitial {
   returnDate?: string;
   legs?: LegValue[];
   passengers?: number;
+  children?: number;
+  infants?: number;
   cabin?: Cabin;
 }
 
@@ -52,7 +55,11 @@ export function SearchForm({
           { origin: "DXB", dest: "LHR", date: defaultDate(21) },
         ],
   );
-  const [passengers, setPassengers] = useState<number>(initial?.passengers ?? 1);
+  const [pax, setPax] = useState<PassengerCounts>({
+    adults: Math.max(1, (initial?.passengers ?? 1) - (initial?.children ?? 0) - (initial?.infants ?? 0)),
+    children: initial?.children ?? 0,
+    infants: initial?.infants ?? 0,
+  });
   const [cabin, setCabin] = useState<Cabin>(initial?.cabin ?? "ECONOMY");
 
   function addLeg() {
@@ -73,11 +80,14 @@ export function SearchForm({
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
+    const totalPassengers = pax.adults + pax.children + pax.infants;
     const qs = new URLSearchParams({
       tripType,
-      passengers: String(passengers),
+      passengers: String(totalPassengers),
       cabin,
     });
+    if (pax.children > 0) qs.set("children", String(pax.children));
+    if (pax.infants > 0) qs.set("infants", String(pax.infants));
     if (tripType === "multi-city") {
       qs.set("legs", encodeLegs(multiLegs));
     } else {
@@ -151,17 +161,9 @@ export function SearchForm({
       )}
 
       <div className="mt-3 grid gap-3 sm:grid-cols-2">
-        <label className="block">
-          <span className="mb-1 block text-xs font-medium text-muted">Travellers</span>
-          <input
-            type="number"
-            min={1}
-            max={9}
-            className={field}
-            value={passengers}
-            onChange={(e) => setPassengers(Number(e.target.value))}
-          />
-        </label>
+        <div className="block">
+          <PassengerSelect value={pax} onChange={setPax} />
+        </div>
         <label className="block">
           <span className="mb-1 block text-xs font-medium text-muted">Cabin</span>
           <select className={field} value={cabin} onChange={(e) => setCabin(e.target.value as Cabin)}>

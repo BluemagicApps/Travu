@@ -15,6 +15,8 @@ export async function searchLeg(filter: FlightFilter, leg: Leg): Promise<SearchR
     date: leg.date,
     cabin: filter.cabin,
     passengers: filter.passengers,
+    children: filter.children,
+    infants: filter.infants,
     nonStop: filter.maxStops === 0,
   };
   let flights = [] as Awaited<ReturnType<typeof provider.searchLeg>>;

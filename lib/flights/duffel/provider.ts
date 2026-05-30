@@ -16,10 +16,18 @@ export class DuffelProvider implements FlightProvider {
     const token = process.env.DUFFEL_API_TOKEN ?? "";
     const version = process.env.DUFFEL_VERSION || "v2";
     const url = "https://api.duffel.com/air/offer_requests?return_offers=true&supplier_timeout=10000";
+    const children = params.children ?? 0;
+    const infants = params.infants ?? 0;
+    const adults = Math.max(1, params.passengers - children - infants);
+    const passengers = [
+      ...Array.from({ length: adults }, () => ({ type: "adult" })),
+      ...Array.from({ length: children }, () => ({ type: "child" })),
+      ...Array.from({ length: infants }, () => ({ type: "infant_without_seat" })),
+    ];
     const body = JSON.stringify({
       data: {
         slices: [{ origin: params.origin, destination: params.dest, departure_date: params.date }],
-        passengers: Array.from({ length: Math.max(1, params.passengers) }, () => ({ type: "adult" })),
+        passengers,
         cabin_class: CABIN_CLASS[params.cabin],
       },
     });

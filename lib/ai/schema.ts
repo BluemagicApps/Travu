@@ -33,6 +33,9 @@ export const FlightFilter = z.object({
   returnDate: z.string().regex(ISO_DATE).optional(),
   legs: z.preprocess(preprocessLegs, z.array(LegSchema).max(6).optional()),
   passengers: z.coerce.number().int().min(1).max(9).default(1),
+  // Breakdown of the passenger mix; `passengers` is the total (adults + children + infants).
+  children: z.coerce.number().int().min(0).max(8).optional(),
+  infants: z.coerce.number().int().min(0).max(8).optional(),
   cabin: CabinEnum.default("ECONOMY"),
   maxStops: z.coerce.number().int().min(0).max(2).optional(),
   maxBudget: z.coerce.number().int().min(0).optional(),

@@ -61,4 +61,11 @@ describe("generateStays", () => {
     expect(out.length).toBe(24);
     expect(out[0].name).toContain("Atlantis");
   });
+
+  it("never doubles the city name when a curated hotel name already leads with it", () => {
+    // e.g. Bangkok has "Bangkok Garden Hotel" — must not become "Bangkok Bangkok Garden Hotel"
+    for (const s of generateStays({ ...params, destination: "Bangkok" })) {
+      expect(s.name).not.toMatch(/^Bangkok Bangkok/);
+    }
+  });
 });

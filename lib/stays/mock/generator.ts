@@ -59,8 +59,11 @@ export function generateStays(params: StayParams): Stay[] {
   for (let i = 0; i < COUNT; i++) {
     const stars = 2 + Math.floor(rng() * 4); // 2..5
 
+    // Some curated hotelNames already lead with the city (e.g. "Bangkok Garden
+    // Hotel"); strip it before prefixing so we never produce "Bangkok Bangkok …".
+    const hotelName = curated ? pick(rng, curated.hotelNames) : "";
     const name = curated
-      ? `${cityName} ${pick(rng, curated.hotelNames)}`
+      ? `${cityName} ${hotelName.startsWith(`${cityName} `) ? hotelName.slice(cityName.length + 1) : hotelName}`
       : `${pick(rng, FALLBACK_PREFIXES)} ${params.destination} ${pick(rng, FALLBACK_SUFFIXES)}`;
     const area = curated ? pick(rng, curated.neighbourhoods) : pick(rng, FALLBACK_AREAS);
 

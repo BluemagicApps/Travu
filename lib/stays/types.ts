@@ -20,7 +20,10 @@ export interface Stay {
   starRating: number; // 1..5 (hotel class)
   guestRating: number; // 0..10 (review score)
   reviewCount: number;
-  images: string[]; // URLs (mock uses picsum-style placeholders)
+  images: string[]; // URLs (5–6 curated photos for the gallery)
+  originalPrice?: number; // cents — pre-discount "was" price; absent when no discount
+  ratingWord?: string; // e.g. "Fabulous" — derived from guestRating
+  description?: string; // short blurb for the detail page
   amenities: string[]; // e.g. ["wifi","pool","parking"]
   roomName: string;
   boardType: BoardType;

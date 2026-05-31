@@ -1,0 +1,97 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime  @default(now())
+  bookings     Booking[]
+}
+
+model Airport {
+  iata     String @id
+  name     String
+  city     String
+  country  String
+  lat      Float
+  lng      Float
+  timezone String
+}
+
+model Airline {
+  iata       String @id
+  name       String
+  brandColor String
+}
+
+model RouteServed {
+  id          String @id @default(cuid())
+  airlineIata String
+  originIata  String
+  destIata    String
+
+  @@unique([airlineIata, originIata, destIata])
+  @@index([originIata, destIata])
+}
+
+model Booking {
+  id                       String      @id @default(cuid())
+  bookingRef               String      @unique
+  userId                   String
+  user                     User        @relation(fields: [userId], references: [id])
+  status                   String      @default("CONFIRMED")
+  currency                 String      @default("USD")
+  totalAmount              Int
+  tripType                 String      @default("one-way")
+  fareName                 String?
+  contactEmail             String?
+  contactPhone             String?
+  flightSnapshot           Json
+  returnFlightSnapshot     Json?
+  multiCityFlightSnapshots Json?
+  createdAt                DateTime    @default(now())
+  passengers               Passenger[]
+  payment                  Payment?
+}
+
+model Passenger {
+  id              String   @id @default(cuid())
+  bookingId       String
+  booking         Booking  @relation(fields: [bookingId], references: [id])
+  firstName       String
+  middleName      String?
+  lastName        String
+  dateOfBirth     DateTime
+  type            String   @default("ADULT")
+  passportNumber  String?
+  passportCountry String?
+}
+
+model Payment {
+  id        String   @id @default(cuid())
+  bookingId String   @unique
+  booking   Booking  @relation(fields: [bookingId], references: [id])
+  amount    Int
+  currency  String   @default("USD")
+  method    String   @default("CARD_SIM")
+  status    String   @default("PAID")
+  last4     String
+  createdAt DateTime @default(now())
+}
+
+model CachedOffer {
+  id        String   @id
+  payload   Json
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}

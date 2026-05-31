@@ -2,6 +2,7 @@ export interface DecodedStayId {
   destination: string;
   checkIn: string;
   checkOut: string;
+  rooms: number;
   index: number;
 }
 
@@ -16,19 +17,21 @@ function b64urlDecode(s: string): string {
 }
 
 export function encodeStayId(d: DecodedStayId): string {
-  const payload = `${b64urlEncode(d.destination)}.${d.checkIn}.${d.checkOut}.${d.index}`;
+  const payload = `${b64urlEncode(d.destination)}.${d.checkIn}.${d.checkOut}.${d.rooms}.${d.index}`;
   return `${PREFIX}${payload}`;
 }
 
 export function decodeStayId(id: string): DecodedStayId | null {
   if (!id.startsWith(PREFIX)) return null;
   const parts = id.slice(PREFIX.length).split(".");
-  if (parts.length !== 4) return null;
-  const [dest, checkIn, checkOut, idx] = parts;
+  if (parts.length !== 5) return null;
+  const [dest, checkIn, checkOut, roomsStr, idx] = parts;
+  const rooms = Number(roomsStr);
   const index = Number(idx);
+  if (!Number.isInteger(rooms) || rooms < 1) return null;
   if (!Number.isInteger(index) || index < 0) return null;
   try {
-    return { destination: b64urlDecode(dest), checkIn, checkOut, index };
+    return { destination: b64urlDecode(dest), checkIn, checkOut, rooms, index };
   } catch {
     return null;
   }

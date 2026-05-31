@@ -92,6 +92,7 @@ export function generateStays(params: StayParams): Stay[] {
         destination: params.destination,
         checkIn: params.checkIn,
         checkOut: params.checkOut,
+        rooms: params.rooms,
         index: i,
       }),
       name,

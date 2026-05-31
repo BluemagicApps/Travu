@@ -19,12 +19,19 @@ type Tab = {
 };
 
 const tabs: Tab[] = [
-  { href: "/", label: "Flights", icon: Plane, active: true },
-  { href: "#", label: "Stays", icon: BedDouble, soon: true },
+  { href: "/", label: "Flights", icon: Plane },
+  { href: "/stays", label: "Stays", icon: BedDouble },
   { href: "#", label: "Cars", icon: Car, soon: true },
   { href: "#", label: "Packages", icon: Package, soon: true },
   { href: "#", label: "Things to Do", icon: Ticket, soon: true },
 ];
+
+/** Highlight a tab based on the current path. */
+function isTabActive(href: string, pathname: string): boolean {
+  if (href === "#") return false;
+  if (href === "/") return pathname === "/";
+  return pathname.startsWith(href);
+}
 
 export function Navbar() {
   const pathname = usePathname();
@@ -58,10 +65,9 @@ export function Navbar() {
       <nav className="glass fixed inset-x-0 bottom-0 z-50 flex items-center justify-around py-2 md:hidden">
         {tabs.map((tab) => {
           const Icon = tab.icon;
-          const isActive = !!tab.active && pathname === "/";
-          return (
+          const isActive = isTabActive(tab.href, pathname);
+          const inner = (
             <span
-              key={tab.label}
               className={cn(
                 "flex flex-col items-center gap-0.5 px-2 text-[10px]",
                 isActive ? "text-price" : "text-muted",
@@ -71,6 +77,13 @@ export function Navbar() {
               <Icon className="h-5 w-5" />
               {tab.label.split(" ")[0]}
             </span>
+          );
+          return tab.soon ? (
+            <span key={tab.label}>{inner}</span>
+          ) : (
+            <Link key={tab.label} href={tab.href}>
+              {inner}
+            </Link>
           );
         })}
       </nav>
@@ -113,7 +126,7 @@ function AuthButtons() {
 
 function NavItem({ tab, pathname }: { tab: Tab; pathname: string }) {
   const Icon = tab.icon;
-  const isActive = !!tab.active && pathname === "/";
+  const isActive = isTabActive(tab.href, pathname);
 
   if (tab.soon) {
     return (

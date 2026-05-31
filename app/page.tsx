@@ -1,8 +1,7 @@
 import { Sparkles, Plane, ShieldCheck, Clock } from "lucide-react";
 import type { ComponentType } from "react";
 import { getAirportOptions } from "@/lib/flights/dataset";
-import { SearchForm } from "@/components/search/SearchForm";
-import { AiSearchBar } from "@/components/search/AiSearchBar";
+import { HomeSearch } from "@/components/layout/HomeSearch";
 
 export default async function Home() {
   const airports = await getAirportOptions();
@@ -19,21 +18,15 @@ export default async function Home() {
         </span>
 
         <h1 className="mt-6 text-4xl font-extrabold tracking-tight sm:text-6xl">
-          Find your flight in <span className="text-gradient">one sentence.</span>
+          Plan your trip in <span className="text-gradient">one sentence.</span>
         </h1>
 
         <p className="mx-auto mt-4 max-w-xl text-lg text-muted">
-          {"Tell TRAVU where you want to go, the way you'd tell a friend. We handle the search, the price, and the booking — end to end."}
+          {"Tell TRAVU where you want to go, the way you'd tell a friend. Flights and stays — we handle the search, the price, and the booking, end to end."}
         </p>
 
         <div className="mx-auto mt-8 max-w-2xl">
-          <AiSearchBar />
-          <div className="my-4 flex items-center gap-3 text-xs text-muted">
-            <span className="h-px flex-1 bg-border" />
-            or search manually
-            <span className="h-px flex-1 bg-border" />
-          </div>
-          <SearchForm airports={airports} />
+          <HomeSearch airports={airports} />
         </div>
       </section>
 

@@ -4,10 +4,12 @@ import type { Stay } from "@/lib/stays/types";
 import { Money } from "@/components/Money";
 
 export function StayCard({ stay }: { stay: Stay }) {
-  const hasDeal = stay.originalPrice != null && stay.originalPrice > stay.totalPrice;
-  const savePct = hasDeal
-    ? Math.round((1 - stay.totalPrice / stay.originalPrice!) * 100)
-    : 0;
+  const savePct =
+    stay.originalPrice != null && stay.originalPrice > stay.totalPrice
+      ? Math.round((1 - stay.totalPrice / stay.originalPrice) * 100)
+      : 0;
+  // Only flag a deal when it rounds to a visible discount (avoids "0% off").
+  const hasDeal = savePct >= 1;
   const extraAmenities = Math.max(0, stay.amenities.length - 4);
 
   return (

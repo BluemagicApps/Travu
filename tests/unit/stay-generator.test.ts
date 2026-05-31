@@ -41,7 +41,9 @@ describe("generateStays", () => {
 
   it("discounted stays have originalPrice greater than totalPrice", () => {
     const discounted = generateStays(params).filter((s) => s.originalPrice != null);
-    expect(discounted.length).toBeGreaterThan(0);
+    // ~45% of 24 stays carry a deal; assert a meaningful share, not just >0,
+    // to lock the intent against future regressions.
+    expect(discounted.length).toBeGreaterThan(5);
     for (const s of discounted) {
       expect(s.originalPrice!).toBeGreaterThan(s.totalPrice);
     }

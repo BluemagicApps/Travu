@@ -73,6 +73,9 @@ export function generateStays(params: StayParams): Stay[] {
     const refundable = rng() > 0.35;
     const guestRating = Math.round((6.5 + rng() * 3.4) * 10) / 10; // 6.5..9.9
     const photoCount = 5 + Math.floor(rng() * 2); // 5 or 6
+    // pickPhotos must consume a constant number of rng() calls so resolveStay's
+    // regeneration from an id stays byte-identical to the card. Don't change its
+    // rng usage without re-checking the determinism (stay-resolve) tests.
     const images = pickPhotos(rng, photoCount);
 
     const totalPrice = base * nights * params.rooms;

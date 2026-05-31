@@ -15,6 +15,7 @@ model User {
   name         String?
   createdAt    DateTime  @default(now())
   bookings     Booking[]
+  stayBookings StayBooking[]
 }
 
 model Airport {
@@ -94,4 +95,45 @@ model CachedOffer {
   createdAt DateTime @default(now())
 
   @@index([createdAt])
+}
+
+model StayBooking {
+  id           String       @id @default(cuid())
+  bookingRef   String       @unique
+  userId       String
+  user         User         @relation(fields: [userId], references: [id])
+  status       String       @default("CONFIRMED")
+  currency     String       @default("USD")
+  totalAmount  Int
+  checkIn      DateTime
+  checkOut     DateTime
+  nights       Int
+  rooms        Int          @default(1)
+  contactEmail String?
+  contactPhone String?
+  staySnapshot Json
+  createdAt    DateTime     @default(now())
+  guests       StayGuest[]
+  payment      StayPayment?
+}
+
+model StayGuest {
+  id            String      @id @default(cuid())
+  stayBookingId String
+  stayBooking   StayBooking @relation(fields: [stayBookingId], references: [id])
+  firstName     String
+  lastName      String
+  type          String      @default("ADULT")
+}
+
+model StayPayment {
+  id            String      @id @default(cuid())
+  stayBookingId String      @unique
+  stayBooking   StayBooking @relation(fields: [stayBookingId], references: [id])
+  amount        Int
+  currency      String      @default("USD")
+  method        String      @default("CARD_SIM")
+  status        String      @default("PAID")
+  last4         String
+  createdAt     DateTime    @default(now())
 }

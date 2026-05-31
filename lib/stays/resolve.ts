@@ -15,7 +15,7 @@ export async function resolveStay(id: string): Promise<Stay | null> {
       checkIn: decoded.checkIn,
       checkOut: decoded.checkOut,
       adults: 2,
-      rooms: 1,
+      rooms: decoded.rooms,
     }).find((s) => s.id === id) ?? null
   );
 }

@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { generateStays } from "@/lib/stays/mock/generator";
 import { getCityData } from "@/lib/stays/data/cities";
+import { decodeStayId } from "@/lib/stays/offer-id";
 
 const params = { destination: "Barcelona", checkIn: "2026-07-01", checkOut: "2026-07-03", adults: 2, rooms: 1 };
 
@@ -67,5 +68,26 @@ describe("generateStays", () => {
     for (const s of generateStays({ ...params, destination: "Bangkok" })) {
       expect(s.name).not.toMatch(/^Bangkok Bangkok/);
     }
+  });
+
+  it("encodes the room count into each stay id", () => {
+    for (const s of generateStays({ ...params, rooms: 3 })) {
+      expect(decodeStayId(s.id)?.rooms).toBe(3);
+    }
+  });
+
+  it("regenerating a stay from its id (as resolveStay does) preserves the multi-room price", () => {
+    // Guards the rooms-in-id bug: the detail page / booking API regenerate the
+    // hotel from its id, so the price must survive the round-trip for rooms > 1.
+    const target = generateStays({ ...params, rooms: 3 })[7];
+    const decoded = decodeStayId(target.id)!;
+    const regenerated = generateStays({
+      destination: decoded.destination,
+      checkIn: decoded.checkIn,
+      checkOut: decoded.checkOut,
+      adults: 2,
+      rooms: decoded.rooms,
+    }).find((s) => s.id === target.id);
+    expect(regenerated?.totalPrice).toBe(target.totalPrice);
   });
 });

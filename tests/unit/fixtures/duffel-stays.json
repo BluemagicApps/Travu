@@ -1,0 +1,37 @@
+{
+  "data": {
+    "results": [
+      {
+        "id": "res_001",
+        "accommodation": {
+          "name": "Hotel Arts Barcelona",
+          "rating": 5,
+          "review_score": 8.9,
+          "location": {
+            "address": { "city_name": "Barcelona", "region": "Eixample" },
+            "geographic_coordinates": { "latitude": 41.3874, "longitude": 2.1959 }
+          },
+          "amenities": [{ "type": "wifi" }, { "type": "pool" }, { "type": "parking" }],
+          "photos": [{ "url": "https://img.example/1.jpg" }, { "url": "https://img.example/2.jpg" }],
+          "check_in_information": { "check_in_after_time": "15:00", "check_out_before_time": "11:00" }
+        },
+        "cheapest_rate_total_amount": "540.00",
+        "cheapest_rate_currency": "USD",
+        "rooms": [
+          {
+            "name": "Deluxe King",
+            "rates": [
+              {
+                "total_amount": "540.00",
+                "total_currency": "USD",
+                "board_type": "room_only",
+                "available_payment_methods": ["balance"],
+                "conditions": [{ "type": "refundable", "title": "Free cancellation until 24h before" }]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

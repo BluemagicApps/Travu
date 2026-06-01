@@ -9,9 +9,28 @@ import { getServerCurrency } from "@/lib/utils/currency-server";
 const geist = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "TRAVU — AI travel super-app",
+  metadataBase: new URL("https://www.travunow.com"),
+  title: {
+    default: "Travu — AI travel super-app",
+    template: "%s · Travu",
+  },
   description:
-    "Search, book, and track flights with an AI travel agent. Stays, cars and more coming soon.",
+    "Search, book, and track flights and stays with an AI travel agent. Hotels, homes, and more on Travu.",
+  applicationName: "Travu",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: "Travu",
+    url: "https://www.travunow.com",
+    title: "Travu — AI travel super-app",
+    description:
+      "Search, book, and track flights and stays with an AI travel agent. Hotels, homes, and more on Travu.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Travu — AI travel super-app",
+    description: "Search, book, and track flights and stays with an AI travel agent.",
+  },
 };
 
 export default async function RootLayout({

@@ -25,20 +25,27 @@ test("stay golden path: signup -> search -> detail -> book -> voucher", async ({
   await firstDeal.click();
   await expect(page).toHaveURL(/\/stay\//);
 
-  // Reserve -> booking form.
-  await page.getByRole("link", { name: /reserve/i }).click();
-  await expect(page).toHaveURL(/\/book\/stay\//);
+  // Reserve -> booking form. (force: the detail page keeps shifting as the map
+  // iframe + lazy images load, so wait for the link then click past the
+  // stability check rather than for a settled layout that never arrives.)
+  const reserve = page.getByRole("link", { name: /^Reserve$/ });
+  await reserve.scrollIntoViewIfNeeded();
+  await reserve.click({ force: true });
+  await expect(page).toHaveURL(/\/book\/stay\//, { timeout: 30_000 });
 
-  // Lead guest + simulated card.
+  // Lead guest + contact + simulated card (new Expedia-style checkout).
   await page.getByLabel("First name").fill("Test");
   await page.getByLabel("Last name").fill("Guest");
-  await page.getByLabel("Contact email").fill(email);
+  await page.getByLabel("Email address").fill(email);
+  await page.getByLabel("Name on card").fill("Test Guest");
   await page.getByPlaceholder("4242 4242 4242 4242").fill("4242 4242 4242 4242");
   await page.getByPlaceholder("MM/YY").fill("12/29");
   await page.getByPlaceholder("123").fill("123");
 
-  // Confirm -> confirmation page.
-  await page.getByRole("button", { name: /confirm/i }).click();
+  // Book now -> waiting screen -> auto-advance to the confirmation slip.
+  await page.getByRole("button", { name: /book now/i }).click();
+  await expect(page).toHaveURL(/\/stay-processing\//, { timeout: 30_000 });
+  await expect(page.getByText(/completing your booking/i)).toBeVisible();
   await expect(page).toHaveURL(/\/stay-booking\//, { timeout: 30_000 });
   await expect(page.getByText(/booking confirmed/i)).toBeVisible();
 

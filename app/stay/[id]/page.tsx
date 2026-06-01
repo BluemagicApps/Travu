@@ -10,6 +10,7 @@ import type { Stay, StayPhoto } from "@/lib/stays/types";
 import { PhotoGallery } from "@/components/stays/detail/PhotoGallery";
 import { StickySubNav } from "@/components/stays/detail/StickySubNav";
 import { BookingBox } from "@/components/stays/detail/BookingBox";
+import { StickyReserveBar } from "@/components/stays/detail/StickyReserveBar";
 import { MapView } from "@/components/stays/detail/MapView";
 import { ReviewsSection } from "@/components/stays/detail/ReviewsSection";
 import { FaqAccordion } from "@/components/stays/detail/FaqAccordion";
@@ -140,6 +141,11 @@ export default async function StayDetailPage({ params }: { params: Promise<{ id:
       </div>
 
       <StaysFooter />
+
+      {/* Always-reachable Reserve on small screens (side box collapses to page end) */}
+      <StickyReserveBar stay={stay} />
+      {/* spacer so the sticky bar never hides the footer on mobile */}
+      <div className="h-20 lg:hidden" />
     </div>
   );
 }

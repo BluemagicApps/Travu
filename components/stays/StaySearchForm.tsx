@@ -9,6 +9,8 @@ import { StaySearchCard, type StaySearchInitial } from "./StaySearchCard";
  */
 export type { StaySearchInitial };
 
+/** Home page Stays tab → keep the Ask AI bar (showAi). Menu pages render
+ * StaySearchCard directly without it. */
 export function StaySearchForm({ initial }: { initial?: StaySearchInitial }) {
-  return <StaySearchCard initial={initial} />;
+  return <StaySearchCard initial={initial} showAi />;
 }

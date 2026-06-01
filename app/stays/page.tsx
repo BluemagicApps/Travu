@@ -23,13 +23,7 @@ async function StaysResults({ filter }: { filter: StayFilter }) {
       </div>
     );
   }
-  return (
-    <StayResultsView
-      stays={stays}
-      initialMinStars={filter.minStars ?? 0}
-      initialMaxPrice={filter.maxPrice ?? null}
-    />
-  );
+  return <StayResultsView stays={stays} capped={stays.length >= 68} />;
 }
 
 /** Top discounted stays across a couple of seed cities for the landing carousels. */

@@ -96,7 +96,7 @@ export function StayBookingForm({ stay, rooms, onPlanChange }: { stay: Stay; roo
       return;
     }
     const { bookingRef } = await res.json();
-    router.push(`/stay-booking/${bookingRef}`);
+    router.push(`/stay-processing/${bookingRef}`);
   }
 
   return (

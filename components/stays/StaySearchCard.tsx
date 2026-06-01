@@ -22,7 +22,7 @@ export interface StaySearchInitial {
   flex?: number;
 }
 
-export function StaySearchCard({ initial }: { initial?: StaySearchInitial }) {
+export function StaySearchCard({ initial, showAi = false }: { initial?: StaySearchInitial; showAi?: boolean }) {
   const router = useRouter();
   const [destination, setDestination] = useState(initial?.destination ?? "");
   const [range, setRange] = useState<DateRangeValue>(() => {
@@ -110,33 +110,35 @@ export function StaySearchCard({ initial }: { initial?: StaySearchInitial }) {
 
   return (
     <div className="text-left">
-      {/* AI natural-language bar */}
-      <form onSubmit={askAi} className="mb-3">
-        <div
-          className="flex items-center gap-2 rounded-2xl border-2 bg-surface p-2 shadow-lg"
-          style={{ borderImage: "linear-gradient(to right, var(--accent-from), var(--accent-to)) 1" }}
-        >
-          <Sparkles className="ml-2 h-4 w-4 text-price" />
-          <input
-            value={ai}
-            onChange={(e) => setAi(e.target.value)}
-            placeholder='Ask in plain words — e.g. "5-star hotel in Rome for 3 nights with a pool"'
-            className="min-w-0 flex-1 bg-transparent px-1 py-2 text-sm outline-none"
-          />
-          <button
-            type="submit"
-            disabled={aiLoading}
-            className="btn-accent flex shrink-0 items-center gap-1.5 rounded-xl px-5 py-2.5 text-sm font-semibold disabled:opacity-60"
+      {/* AI natural-language bar — home page only (showAi). Hidden on menu pages. */}
+      {showAi && (
+        <form onSubmit={askAi} className="mb-3">
+          <div
+            className="flex items-center gap-2 rounded-2xl border-2 bg-surface p-2 shadow-lg"
+            style={{ borderImage: "linear-gradient(to right, var(--accent-from), var(--accent-to)) 1" }}
           >
-            {aiLoading ? "…" : (
-              <>
-                <Sparkles className="h-4 w-4" /> Ask AI
-              </>
-            )}
-          </button>
-        </div>
-        {aiMsg && <p className="mt-1 text-xs text-rose-500">{aiMsg}</p>}
-      </form>
+            <Sparkles className="ml-2 h-4 w-4 text-price" />
+            <input
+              value={ai}
+              onChange={(e) => setAi(e.target.value)}
+              placeholder='Ask in plain words — e.g. "5-star hotel in Rome for 3 nights with a pool"'
+              className="min-w-0 flex-1 bg-transparent px-1 py-2 text-sm outline-none"
+            />
+            <button
+              type="submit"
+              disabled={aiLoading}
+              className="btn-accent flex shrink-0 items-center gap-1.5 rounded-xl px-5 py-2.5 text-sm font-semibold disabled:opacity-60"
+            >
+              {aiLoading ? "…" : (
+                <>
+                  <Sparkles className="h-4 w-4" /> Ask AI
+                </>
+              )}
+            </button>
+          </div>
+          {aiMsg && <p className="mt-1 text-xs text-rose-500">{aiMsg}</p>}
+        </form>
+      )}
 
       {/* Structured search card */}
       <form onSubmit={submit} className="rounded-2xl border border-border bg-surface p-3 shadow-lg">

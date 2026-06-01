@@ -5,11 +5,15 @@ import { StaySearchCard, type StaySearchInitial } from "../StaySearchCard";
 /** Expedia-style hero: gradient banner, Flights|Stays tabs, and the search card. */
 export function StaysHero({ initial }: { initial?: StaySearchInitial }) {
   return (
-    <section className="relative overflow-hidden">
-      <div
-        className="pointer-events-none absolute -top-40 left-1/2 h-96 w-[52rem] -translate-x-1/2 rounded-full opacity-30 blur-3xl"
-        style={{ backgroundImage: "linear-gradient(to right, var(--accent-from), var(--accent-to))" }}
-      />
+    // No overflow-hidden here — it would clip the search dropdowns. The blur blob
+    // is clipped by its own wrapper instead.
+    <section className="relative">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div
+          className="absolute -top-40 left-1/2 h-96 w-[52rem] -translate-x-1/2 rounded-full opacity-30 blur-3xl"
+          style={{ backgroundImage: "linear-gradient(to right, var(--accent-from), var(--accent-to))" }}
+        />
+      </div>
       <div className="mx-auto max-w-5xl px-4 pt-12 pb-6 text-center">
         <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl">
           The one place you go to <span className="text-gradient">go places.</span>
@@ -28,7 +32,8 @@ export function StaysHero({ initial }: { initial?: StaySearchInitial }) {
           </span>
         </div>
 
-        <div className="mx-auto mt-6 max-w-4xl">
+        {/* relative + high z so the search-card dropdowns paint above the deals carousel below */}
+        <div className="relative z-30 mx-auto mt-6 max-w-4xl">
           <StaySearchCard initial={initial} />
         </div>
       </div>

@@ -98,23 +98,33 @@ model CachedOffer {
 }
 
 model StayBooking {
-  id           String       @id @default(cuid())
-  bookingRef   String       @unique
-  userId       String
-  user         User         @relation(fields: [userId], references: [id])
-  status       String       @default("CONFIRMED")
-  currency     String       @default("USD")
-  totalAmount  Int
-  checkIn      DateTime
-  checkOut     DateTime
-  nights       Int
-  rooms        Int          @default(1)
-  contactEmail String?
-  contactPhone String?
-  staySnapshot Json
-  createdAt    DateTime     @default(now())
-  guests       StayGuest[]
-  payment      StayPayment?
+  id               String       @id @default(cuid())
+  bookingRef       String       @unique
+  userId           String
+  user             User         @relation(fields: [userId], references: [id])
+  status           String       @default("CONFIRMED")
+  currency         String       @default("USD")
+  totalAmount      Int
+  checkIn          DateTime
+  checkOut         DateTime
+  nights           Int
+  rooms            Int          @default(1)
+  contactEmail     String?
+  contactPhone     String?
+  contactCountry   String?
+  billingName      String?
+  billingAddress   String?
+  billingCity      String?
+  billingState     String?
+  billingZip       String?
+  billingCountry   String?
+  protectionPlan   String?
+  protectionAmount Int          @default(0)
+  cancellationTier String?
+  staySnapshot     Json
+  createdAt        DateTime     @default(now())
+  guests           StayGuest[]
+  payment          StayPayment?
 }
 
 model StayGuest {
@@ -124,6 +134,8 @@ model StayGuest {
   firstName     String
   lastName      String
   type          String      @default("ADULT")
+  email         String?
+  phone         String?
 }
 
 model StayPayment {
@@ -135,5 +147,8 @@ model StayPayment {
   method        String      @default("CARD_SIM")
   status        String      @default("PAID")
   last4         String
+  cardBrand     String?
+  expMonth      Int?
+  expYear       Int?
   createdAt     DateTime    @default(now())
 }

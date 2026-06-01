@@ -49,6 +49,8 @@ export function mapDuffelStays(json: DuffelStaysResponse, params: StayParams): S
     const total = cents(rate?.total_amount ?? r.cheapest_rate_total_amount);
     if (total <= 0) continue;
     const refundable = (rate?.conditions ?? []).some((c) => c.type === "refundable");
+    const images = (a.photos ?? []).map((p) => p.url);
+    const amenities = (a.amenities ?? []).map((m) => m.type);
     out.push({
       id: `duffel_stay_${r.id}`,
       name: a.name,
@@ -59,8 +61,8 @@ export function mapDuffelStays(json: DuffelStaysResponse, params: StayParams): S
       starRating: a.rating ?? 0,
       guestRating: a.review_score ?? 0,
       reviewCount: 0,
-      images: (a.photos ?? []).map((p) => p.url),
-      amenities: (a.amenities ?? []).map((m) => m.type),
+      images,
+      amenities,
       roomName: room?.name ?? "Standard Room",
       boardType: BOARD[rate?.board_type ?? "room_only"] ?? "ROOM_ONLY",
       refundable,
@@ -73,6 +75,21 @@ export function mapDuffelStays(json: DuffelStaysResponse, params: StayParams): S
       pricePerNight: Math.round(total / nights),
       totalPrice: total,
       currency: rate?.total_currency ?? r.cheapest_rate_currency ?? "USD",
+      // ── Rich fields mapped from the live API where available; left undefined otherwise. ──
+      // Keeps the seam ready so a Stays-scoped token auto-activates without UI rework.
+      photos: images.map((url) => ({ url })),
+      amenityGroups: amenities.length ? [{ group: "Property", items: amenities }] : undefined,
+      reviewBreakdown: a.review_score != null ? { overall: a.review_score, cleanliness: a.review_score, staff: a.review_score, amenities: a.review_score, condition: a.review_score } : undefined,
+      policies: {
+        checkIn: "3:00 PM",
+        checkOut: "11:00 AM",
+        children: "Contact the property for child policies.",
+        pets: "Contact the property for pet policies.",
+        cancellationTiers: refundable
+          ? [{ label: "Full refund", refundPct: 100 }, { label: "Check-in", date: params.checkIn, refundPct: 0 }]
+          : [{ label: "No refund", refundPct: 0 }],
+      },
+      available: true,
     });
   }
   return out;

@@ -3,9 +3,7 @@ import { z } from "zod";
 import { Prisma } from "@prisma/client";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db/prisma";
-import { getCachedStay } from "@/lib/stays/offer-cache";
-import { generateStays } from "@/lib/stays/mock/generator";
-import { decodeStayId } from "@/lib/stays/offer-id";
+import { resolveStay } from "@/lib/stays/resolve";
 import { computeStayPrice, type ProtectionPlanId } from "@/lib/stays/pricing";
 import type { Stay } from "@/lib/stays/types";
 import { makeRef } from "@/lib/utils/ref";
@@ -51,20 +49,8 @@ export async function POST(req: Request) {
   if (!parsed.success) return NextResponse.json({ error: "invalid_input" }, { status: 400 });
   const d = parsed.data;
 
-  // Resolve the stay: cached offer first, else regenerate from a decoded mock id.
-  let stay: Stay | null = await getCachedStay(d.stayId);
-  if (!stay) {
-    const decoded = decodeStayId(d.stayId);
-    if (!decoded) return NextResponse.json({ error: "bad_stay_id" }, { status: 400 });
-    stay =
-      generateStays({
-        destination: decoded.destination,
-        checkIn: decoded.checkIn,
-        checkOut: decoded.checkOut,
-        adults: d.guests.filter((g) => g.type === "ADULT").length || 1,
-        rooms: d.rooms,
-      }).find((s) => s.id === d.stayId) ?? null;
-  }
+  // Resolve the stay (cached offer → LiteAPI detail → mock regen, all handled).
+  const stay: Stay | null = await resolveStay(d.stayId);
   if (!stay) return NextResponse.json({ error: "stay_unavailable" }, { status: 404 });
 
   // Server-side price (single source of truth shared with the summary).

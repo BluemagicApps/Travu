@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils/cn";
 import { ThemeToggle } from "./ThemeToggle";
 import { CurrencySwitcher } from "./CurrencySwitcher";
 import { Logo } from "./Logo";
+import { OneTokenBadge } from "@/components/onetoken/OneTokenBadge";
 
 type Tab = {
   href: string;
@@ -55,6 +56,7 @@ export function Navbar() {
             >
               Track booking
             </Link>
+            <OneTokenBadge />
             <CurrencySwitcher />
             <ThemeToggle />
             <AuthButtons />

@@ -14,6 +14,11 @@ echo "→ Applying database migrations…"
 npx prisma migrate deploy
 npx prisma generate
 
+echo "→ Reseeding reference data (airports/airlines/routes)…"
+# Idempotent: rebuilds only reference tables so new airports/airlines in the code
+# (e.g. the worldwide expansion) reach prod. Does NOT touch user/booking data.
+npm run db:seed
+
 echo "→ Building…"
 npm run build
 

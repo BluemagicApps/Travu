@@ -63,8 +63,10 @@ Fill `.env`:
 - `DATABASE_URL` / `DIRECT_URL` → `postgresql://travu:<your pw>@localhost:5432/travu` (both identical)
 - `AUTH_SECRET` → generate: `openssl rand -base64 32` and paste the output
 - `AUTH_URL` → `https://travunow.com`
-- `ANTHROPIC_API_KEY`, `DUFFEL_API_TOKEN` → copy from your current local `.env`
-- Amadeus keys can stay blank (mock flight fallback).
+- `ANTHROPIC_API_KEY` → copy from your current local `.env`
+- `LITEAPI_KEY` → copy from your local `.env` (enables real hotels + real photos for Stays; blank = mock hotels)
+- `FLIGHTS_PROVIDER` → leave blank for instant mock flights (150–200 results). Set to `duffel` only if you want live Duffel flights, and also fill `DUFFEL_API_TOKEN`.
+- Amadeus keys can stay blank.
 
 > **GitHub auth:** the repo is private, so `git clone`/`git pull` will prompt for
 > a username + a **Personal Access Token** (not your password). Create one at
@@ -120,13 +122,20 @@ sudo ufw --force enable
 From your laptop: push to `main` (or merge a PR) as usual. Then on the VPS:
 ```bash
 cd ~/travu
-bash deploy/update.sh        # pull main → npm ci → migrate deploy → build → pm2 restart
+bash deploy/update.sh        # pull main → npm ci → migrate deploy → db:seed → build → pm2 restart
 ```
+`update.sh` now also reseeds reference data (airports/airlines/routes) so code
+changes to the airport list reach prod; it never touches user/booking data.
+
+> **New env vars?** If a deploy adds env keys (e.g. `LITEAPI_KEY`), add them to
+> `.env` on the VPS *before* running `update.sh`, then `pm2 restart travu --update-env`.
+
 Watch logs with `pm2 logs travu`. Roll back with `git checkout <previous-sha> && bash deploy/update.sh`.
 
 ## Troubleshooting
 - **502 Bad Gateway** → app isn't on :3000. `pm2 status`, `pm2 logs travu`.
 - **DB connection errors** → check `.env` `DATABASE_URL` matches the password in step 3; `psql '<DATABASE_URL>' -c '\conninfo'`.
 - **Build OOM on a small VPS** → add swap: `sudo fallocate -l 2G /swapfile && sudo chmod 600 /swapfile && sudo mkswap /swapfile && sudo swapon /swapfile`.
-- **Duffel Stays still mock** → expected; the live Stays API is 403 until Duffel enables it on your account. Flights use the real Duffel token.
+- **Stays showing generic photos** → `LITEAPI_KEY` isn't set in the VPS `.env` (Stays falls back to the mock generator). Add it, then `pm2 restart travu --update-env`.
+- **Flights look the same regardless of route** → expected: flights run on the instant mock generator by default. Set `FLIGHTS_PROVIDER=duffel` (+ token) for live Duffel data.
 - **Env change** → edit `.env`, then `pm2 restart travu --update-env`.

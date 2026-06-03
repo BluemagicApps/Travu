@@ -12,9 +12,22 @@ function blockMinutes(distanceKm: number): number {
 function clamp(x: number, lo: number, hi: number): number {
   return Math.max(lo, Math.min(hi, x));
 }
-function unique<T>(arr: T[]): T[] {
-  return [...new Set(arr)];
+
+/** Deterministic Fisher-Yates shuffle (fixed rand draws → reproducible). */
+function shuffle<T>(arr: readonly T[], rand: () => number): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
+
+// Major connecting hubs used to synthesise 1-stop options for any city pair.
+const HUBS = [
+  "DXB", "DOH", "IST", "LHR", "CDG", "AMS", "FRA", "SIN", "ADD", "JFK",
+  "ORD", "NBO", "HKG", "DEL", "CAI", "CMN", "AUH", "ICN", "JNB", "BKK",
+];
 
 export function encodeId(
   origin: string,
@@ -61,39 +74,39 @@ export function generateFlights(
   const ctx: GenCtx = { ds, date, cabin, daysToDep, rand };
   const totalDist = haversineKm(o, d);
 
+  // Target a large, realistic spread (150–200 results), generated deterministically
+  // in-memory so search stays fast. Route-independent: carriers are drawn from the
+  // global pool, so any city pair yields results (no seeded RouteServed needed).
+  const target = 150 + Math.floor(rand() * 51); // 150..200
+  const nonstopShare = totalDist > 12000 ? 0.3 : totalDist > 7500 ? 0.5 : 0.65;
+  const nonstopTarget = Math.max(8, Math.round(target * nonstopShare));
+
+  const allCarriers = [...ds.airlines.keys()];
+  const carriers = shuffle(allCarriers, rand).slice(0, Math.min(18, allCarriers.length));
+  if (carriers.length === 0) return [];
+
   const flights: Flight[] = [];
   let idx = 0;
 
-  const nonstopAirlines = unique(
-    ds.routes
-      .filter((r) => r.originIata === origin && r.destIata === dest)
-      .map((r) => r.airlineIata),
-  );
-
-  for (const al of nonstopAirlines) {
-    const count = 1 + Math.floor(rand() * 2);
-    for (let k = 0; k < count; k++) {
-      flights.push(buildNonstop(idx++, al, origin, dest, totalDist, ctx));
-    }
+  // Nonstop options: round-robin carriers; each call draws a fresh seeded departure.
+  let ci = 0;
+  while (flights.length < nonstopTarget) {
+    flights.push(buildNonstop(idx++, carriers[ci % carriers.length], origin, dest, totalDist, ctx));
+    ci++;
   }
 
-  if (flights.length < 6 || totalDist > 4000) {
-    const used = new Set<string>();
-    const leg1s = ds.routes.filter(
-      (r) => r.originIata === origin && r.destIata !== dest && r.destIata !== origin,
-    );
-    for (const leg1 of leg1s) {
-      if (flights.length >= 12) break;
-      const hub = leg1.destIata;
-      const key = `${leg1.airlineIata}:${hub}`;
-      if (used.has(key)) continue;
-      const leg2 = ds.routes.find(
-        (r) =>
-          r.airlineIata === leg1.airlineIata && r.originIata === hub && r.destIata === dest,
+  // 1-stop connections through plausible hubs (excluding the O&D themselves).
+  const hubs = shuffle(
+    HUBS.filter((h) => h !== origin && h !== dest && ds.airports.has(h)),
+    rand,
+  );
+  if (hubs.length > 0) {
+    let k = 0;
+    while (flights.length < target) {
+      flights.push(
+        buildConnection(idx++, carriers[k % carriers.length], origin, hubs[k % hubs.length], dest, ctx),
       );
-      if (!leg2 || !ds.airports.get(hub)) continue;
-      used.add(key);
-      flights.push(buildConnection(idx++, leg1.airlineIata, origin, hub, dest, ctx));
+      k++;
     }
   }
 

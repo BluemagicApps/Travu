@@ -1,22 +1,9 @@
 import { cn } from "@/lib/utils/cn";
+import { detectBrand, type CardBrand } from "@/lib/booking/card";
 
-export type CardBrand = "visa" | "mastercard" | "amex" | "discover" | "diners" | "jcb";
-
-const PREFIX_RULES: { brand: CardBrand; re: RegExp }[] = [
-  { brand: "visa", re: /^4/ },
-  { brand: "mastercard", re: /^(5[1-5]|2(2[2-9]|[3-6]\d|7[01]|2720))/ },
-  { brand: "amex", re: /^3[47]/ },
-  { brand: "discover", re: /^(6011|65|64[4-9]|622)/ },
-  { brand: "diners", re: /^(30[0-5]|36|38)/ },
-  { brand: "jcb", re: /^35(2[89]|[3-8])/ },
-];
-
-export function detectBrand(input: string): CardBrand | null {
-  const n = (input || "").replace(/\D/g, "");
-  if (!n) return null;
-  for (const rule of PREFIX_RULES) if (rule.re.test(n)) return rule.brand;
-  return null;
-}
+// Re-export so existing importers (BookingWizard, Payment) keep working.
+export { detectBrand };
+export type { CardBrand };
 
 interface IconProps {
   className?: string;

@@ -3,7 +3,7 @@ import { Geist } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/layout/Providers";
 import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import { StaysFooter } from "@/components/stays/landing/StaysFooter";
 import { getServerCurrencyCookie } from "@/lib/utils/currency-server";
 import { getServerLocation } from "@/lib/geo/ip-location";
 
@@ -52,7 +52,7 @@ export default async function RootLayout({
         >
           <Navbar />
           <main className="flex-1 pb-20 md:pb-0">{children}</main>
-          <Footer />
+          <StaysFooter />
         </Providers>
       </body>
     </html>

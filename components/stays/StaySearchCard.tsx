@@ -1,8 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { Search, Sparkles } from "lucide-react";
+import { AnimatedSubmitButton } from "@/components/ui/AnimatedSubmitButton";
 import { LocationAutocomplete } from "./search/LocationAutocomplete";
 import { DateRangePicker, defaultDateRange, type DateRangeValue } from "./search/DateRangePicker";
 import {
@@ -24,6 +25,7 @@ export interface StaySearchInitial {
 
 export function StaySearchCard({ initial, showAi = false }: { initial?: StaySearchInitial; showAi?: boolean }) {
   const router = useRouter();
+  const [pending, startTransition] = useTransition();
   const [destination, setDestination] = useState(initial?.destination ?? "");
   const [range, setRange] = useState<DateRangeValue>(() => {
     if (initial?.checkIn && initial?.checkOut) {
@@ -53,7 +55,9 @@ export function StaySearchCard({ initial, showAi = false }: { initial?: StaySear
   const [aiLoading, setAiLoading] = useState(false);
 
   function go(params: Record<string, string>) {
-    router.push(`/stays?${new URLSearchParams(params).toString()}`);
+    startTransition(() => {
+      router.push(`/stays?${new URLSearchParams(params).toString()}`);
+    });
   }
 
   function submit(e: React.FormEvent) {
@@ -146,12 +150,13 @@ export function StaySearchCard({ initial, showAi = false }: { initial?: StaySear
           <LocationAutocomplete value={destination} onChange={setDestination} />
           <DateRangePicker value={range} onChange={setRange} />
           <TravelersRooms value={travelers} onChange={setTravelers} />
-          <button
-            type="submit"
-            className="btn-accent flex h-[42px] items-center justify-center gap-2 rounded-xl px-6 text-sm font-semibold"
+          <AnimatedSubmitButton
+            loading={pending}
+            loadingLabel="Searching…"
+            className="h-[42px] px-6 py-0"
           >
             <Search className="h-4 w-4" /> Search
-          </button>
+          </AnimatedSubmitButton>
         </div>
         {error && <p className="mt-2 text-xs text-rose-500">{error}</p>}
       </form>

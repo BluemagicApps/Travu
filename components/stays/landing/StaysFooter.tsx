@@ -1,8 +1,51 @@
-const COLUMNS: { heading: string; links: string[] }[] = [
-  { heading: "Company", links: ["About", "Jobs", "List your property", "Partnerships", "Newsroom"] },
-  { heading: "Explore", links: ["Vacation rentals", "Hotels worldwide", "Vacation packages", "Domestic flights", "Car hire"] },
-  { heading: "Policies", links: ["Privacy", "Cookies", "Terms of use", "Accessibility", "Your privacy choices"] },
-  { heading: "Help", links: ["Support", "Cancel your booking", "Refund basics", "Use a coupon", "Travel documents"] },
+import Link from "next/link";
+
+interface FooterLink {
+  label: string;
+  href: string;
+}
+
+const COLUMNS: { heading: string; links: FooterLink[] }[] = [
+  {
+    heading: "Company",
+    links: [
+      { label: "About", href: "/" },
+      { label: "OneToken rewards", href: "/onetoken" },
+      { label: "List your property", href: "/" },
+      { label: "Partnerships", href: "/" },
+      { label: "Newsroom", href: "/" },
+    ],
+  },
+  {
+    heading: "Explore",
+    links: [
+      { label: "Search flights", href: "/" },
+      { label: "Hotels & stays", href: "/stays" },
+      { label: "Vacation rentals", href: "/stays" },
+      { label: "Track a booking", href: "/track" },
+      { label: "My trips", href: "/dashboard" },
+    ],
+  },
+  {
+    heading: "Policies",
+    links: [
+      { label: "Privacy", href: "/" },
+      { label: "Cookies", href: "/" },
+      { label: "Terms of use", href: "/" },
+      { label: "Accessibility", href: "/" },
+      { label: "Your privacy choices", href: "/" },
+    ],
+  },
+  {
+    heading: "Help",
+    links: [
+      { label: "Support", href: "/" },
+      { label: "Cancel your booking", href: "/track" },
+      { label: "Refund basics", href: "/" },
+      { label: "OneToken terms", href: "/onetoken" },
+      { label: "Travel documents", href: "/" },
+    ],
+  },
 ];
 
 export function StaysFooter() {
@@ -14,8 +57,10 @@ export function StaysFooter() {
             <h4 className="text-sm font-bold">{col.heading}</h4>
             <ul className="mt-3 space-y-2">
               {col.links.map((l) => (
-                <li key={l}>
-                  <span className="cursor-default text-sm text-muted transition hover:text-text">{l}</span>
+                <li key={l.label}>
+                  <Link href={l.href} className="text-sm text-muted transition hover:text-text">
+                    {l.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -23,7 +68,7 @@ export function StaysFooter() {
         ))}
       </div>
       <div className="border-t border-border px-4 py-4 text-center text-xs text-muted">
-        © 2026 TRAVU · demo build
+        <span className="text-gradient font-bold">TRAVU</span> · © 2026 Travu · demo build
       </div>
     </footer>
   );

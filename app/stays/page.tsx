@@ -11,7 +11,6 @@ import { StayResultsView } from "@/components/stays/StayResultsView";
 import { StaysHero } from "@/components/stays/landing/StaysHero";
 import { DealsCarousel } from "@/components/stays/landing/DealsCarousel";
 import { FeatureBand } from "@/components/stays/landing/FeatureBand";
-import { StaysFooter } from "@/components/stays/landing/StaysFooter";
 
 async function StaysResults({ filter }: { filter: StayFilter }) {
   const stays = await searchStays(paramsFromFilter(filter));
@@ -53,7 +52,6 @@ export default async function StaysPage({
         <DealsCarousel title="Last-minute weekend deals" stays={dealStays("London", 8)} />
         <FeatureBand />
         <DealsCarousel title="Stays for every travel style" stays={dealStays("Barcelona", 8)} />
-        <StaysFooter />
       </div>
     );
   }

@@ -22,7 +22,6 @@ import {
   PoliciesSection,
   ThingsToDoNearby,
 } from "@/components/stays/detail/DetailSections";
-import { StaysFooter } from "@/components/stays/landing/StaysFooter";
 
 function similarStays(stay: Stay): Stay[] {
   const decoded = decodeStayId(stay.id);
@@ -139,8 +138,6 @@ export default async function StayDetailPage({ params }: { params: Promise<{ id:
 
         <BookingBox stay={stay} />
       </div>
-
-      <StaysFooter />
 
       {/* Always-reachable Reserve on small screens (side box collapses to page end) */}
       <StickyReserveBar stay={stay} />

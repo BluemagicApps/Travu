@@ -7,6 +7,7 @@ import type { Stay } from "@/lib/stays/types";
 import type { ProtectionPlanId } from "@/lib/stays/pricing";
 import { computeStayPrice } from "@/lib/stays/pricing";
 import { Money } from "@/components/Money";
+import { AnimatedSubmitButton } from "@/components/ui/AnimatedSubmitButton";
 
 const field =
   "w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-sm outline-none focus:border-sky-400";
@@ -186,9 +187,9 @@ export function StayBookingForm({ stay, rooms, onPlanChange }: { stay: Stay; roo
       </p>
       {error && <p className="text-sm text-rose-500">{error}</p>}
 
-      <button type="submit" disabled={loading} className="btn-accent w-full rounded-xl py-3.5 text-sm font-semibold disabled:opacity-60">
-        {loading ? "Processing…" : <span>Book now · <Money cents={price.total} /></span>}
-      </button>
+      <AnimatedSubmitButton loading={loading} loadingLabel="Processing…" className="py-3.5">
+        <span>Book now · <Money cents={price.total} /></span>
+      </AnimatedSubmitButton>
       <p className="flex items-center justify-center gap-1.5 text-center text-[11px] text-muted">
         <Lock className="h-3 w-3" /> Our secure encryption protects your personal details at every step.
       </p>

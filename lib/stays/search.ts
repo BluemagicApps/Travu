@@ -21,6 +21,6 @@ export async function searchStays(params: StayParams): Promise<Stay[]> {
   }
 }
 
-export function stayProviderKind(): "duffel" | "mock" {
+export function stayProviderKind(): "liteapi" | "duffel" | "mock" {
   return getStayProvider().kind;
 }

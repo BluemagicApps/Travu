@@ -10,6 +10,7 @@ import type { Flight } from "@/lib/flights/types";
 import { findFareOption, fareOptionsFor } from "@/lib/flights/fares";
 import { makeRef } from "@/lib/utils/ref";
 import { isValidPassport } from "@/lib/constants/countries";
+import { awardForBooking, redeemForBooking } from "@/lib/onetoken/membership";
 
 export const runtime = "nodejs";
 
@@ -39,6 +40,8 @@ const Body = z.object({
   contactPhone: z.string().optional(),
   cardLast4: z.string().regex(/^\d{4}$/),
   cardBrand: z.string().trim().optional(),
+  /** OneTokenCash (cents) the member wants to redeem against this booking. */
+  redeemCents: z.number().int().min(0).optional(),
 });
 
 export async function POST(req: Request) {
@@ -66,8 +69,19 @@ export async function POST(req: Request) {
   const fare =
     findFareOption(flight, parsed.data.fareName ?? null) ?? options.find((o) => o.badge) ?? options[0];
 
-  const total = fare.fare.total * parsed.data.passengers.length;
+  const gross = fare.fare.total * parsed.data.passengers.length;
   const bookingRef = makeRef();
+
+  // Apply any OneTokenCash the member chose to redeem (clamped to balance + total).
+  const redeemed = parsed.data.redeemCents
+    ? await redeemForBooking({
+        userId: session.user.id,
+        requestedCents: parsed.data.redeemCents,
+        maxCents: gross,
+        bookingRef,
+      })
+    : 0;
+  const total = gross - redeemed;
 
   await prisma.booking.create({
     data: {
@@ -105,7 +119,15 @@ export async function POST(req: Request) {
     },
   });
 
-  return NextResponse.json({ bookingRef }, { status: 201 });
+  // Earn OneTokenCash on the amount paid (members only; no-op otherwise).
+  const earned = await awardForBooking({
+    userId: session.user.id,
+    amountCents: total,
+    bookingRef,
+    kind: "flight",
+  });
+
+  return NextResponse.json({ bookingRef, earned, redeemed }, { status: 201 });
 }
 
 export async function GET() {

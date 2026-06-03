@@ -16,6 +16,35 @@ model User {
   createdAt    DateTime  @default(now())
   bookings     Booking[]
   stayBookings StayBooking[]
+  membership   Membership?
+}
+
+/// OneToken rewards membership — one per user. pointsBalance is OneTokenCash in
+/// cents (1 point = 1 cent). tripElements drive tier progression.
+model Membership {
+  id             String              @id @default(cuid())
+  userId         String              @unique
+  user           User                @relation(fields: [userId], references: [id])
+  tier           String              @default("BLUE") // BLUE | SILVER | GOLD | PLATINUM
+  pointsBalance  Int                 @default(0)      // spendable OneTokenCash (cents)
+  lifetimePoints Int                 @default(0)      // total ever earned (cents)
+  tripElements   Int                 @default(0)      // one per booking — drives tier
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  transactions   PointsTransaction[]
+}
+
+model PointsTransaction {
+  id           String     @id @default(cuid())
+  membershipId String
+  membership   Membership @relation(fields: [membershipId], references: [id])
+  type         String     // EARN | REDEEM
+  amount       Int        // cents (positive magnitude)
+  bookingRef   String?
+  description  String?
+  createdAt    DateTime   @default(now())
+
+  @@index([membershipId, createdAt])
 }
 
 model Airport {

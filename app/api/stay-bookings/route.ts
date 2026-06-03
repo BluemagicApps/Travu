@@ -9,6 +9,7 @@ import { decodeStayId } from "@/lib/stays/offer-id";
 import { computeStayPrice, type ProtectionPlanId } from "@/lib/stays/pricing";
 import type { Stay } from "@/lib/stays/types";
 import { makeRef } from "@/lib/utils/ref";
+import { awardForBooking } from "@/lib/onetoken/membership";
 
 export const runtime = "nodejs";
 
@@ -117,5 +118,13 @@ export async function POST(req: Request) {
     },
   });
 
-  return NextResponse.json({ bookingRef }, { status: 201 });
+  // Earn OneTokenCash on the stay (members only; no-op otherwise).
+  const earned = await awardForBooking({
+    userId: session.user.id,
+    amountCents: price.total,
+    bookingRef,
+    kind: "stay",
+  });
+
+  return NextResponse.json({ bookingRef, earned }, { status: 201 });
 }

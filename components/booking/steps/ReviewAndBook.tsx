@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Loader2, Lock, ShieldCheck } from "lucide-react";
+import { ArrowRight, Loader2, Lock, ShieldCheck, Sparkles } from "lucide-react";
 import type { Flight } from "@/lib/flights/types";
 import type { FareOption } from "@/lib/flights/fares";
 import type { WizardState } from "@/lib/booking/wizard-state";
@@ -27,6 +27,10 @@ export function ReviewAndBook({
   submitting,
   error,
   onSubmit,
+  oneTokenBalance = 0,
+  redeem = false,
+  redeemApplied = 0,
+  onToggleRedeem,
 }: {
   flight: Flight;
   fare: FareOption;
@@ -34,10 +38,15 @@ export function ReviewAndBook({
   submitting: boolean;
   error: string | null;
   onSubmit: () => void;
+  oneTokenBalance?: number;
+  redeem?: boolean;
+  redeemApplied?: number;
+  onToggleRedeem?: () => void;
 }) {
   const from = flight.segments[0];
   const to = flight.segments[flight.segments.length - 1];
-  const total = fare.fare.total * state.travellers.length;
+  const gross = fare.fare.total * state.travellers.length;
+  const total = gross - redeemApplied;
 
   return (
     <div className="space-y-5">
@@ -90,6 +99,32 @@ export function ReviewAndBook({
           </dd>
         </dl>
       </section>
+
+      {oneTokenBalance > 0 && (
+        <section className="rounded-2xl border border-border bg-surface p-5">
+          <label className="flex cursor-pointer items-start gap-3">
+            <input
+              type="checkbox"
+              className="mt-1"
+              checked={redeem}
+              onChange={onToggleRedeem}
+            />
+            <span className="flex-1">
+              <span className="flex items-center gap-1.5 font-semibold text-price">
+                <Sparkles className="h-4 w-4" /> Apply my OneTokenCash
+              </span>
+              <span className="mt-1 block text-sm text-muted">
+                You have <Money cents={oneTokenBalance} /> in OneTokenCash.
+                {redeem ? (
+                  <> Applying <Money cents={redeemApplied} /> to this booking.</>
+                ) : (
+                  <> Use it to save up to <Money cents={Math.min(oneTokenBalance, gross)} />.</>
+                )}
+              </span>
+            </span>
+          </label>
+        </section>
+      )}
 
       {error && (
         <div className="rounded-2xl border border-rose-300 bg-rose-50 p-4 text-sm text-rose-700">

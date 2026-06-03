@@ -52,10 +52,29 @@ export function BookingWizard({
   const [submitting, setSubmitting] = useState(false);
   const [showProgress, setShowProgress] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [oneTokenBalance, setOneTokenBalance] = useState(0);
+  const [redeem, setRedeem] = useState(false);
 
   const loginUrl = `/login?callbackUrl=${encodeURIComponent(
     `/book/${flight.id}?fare=${fareOption.id}&step=confirm`,
   )}`;
+
+  // Load the member's OneTokenCash balance to offer it at checkout.
+  useEffect(() => {
+    let active = true;
+    fetch("/api/onetoken/me")
+      .then((r) => r.json())
+      .then((d) => {
+        if (active && d?.membership) setOneTokenBalance(d.membership.pointsBalance as number);
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const grossTotal = fareOption.fare.total * passengers;
+  const redeemApplied = redeem ? Math.min(oneTokenBalance, grossTotal) : 0;
 
   useEffect(() => {
     setState(loadState(key, passengers));
@@ -112,6 +131,7 @@ export function BookingWizard({
           : undefined,
         cardLast4: state.payment.cardNumber.replace(/\D/g, "").slice(-4),
         cardBrand: detectBrand(state.payment.cardNumber) ?? undefined,
+        redeemCents: redeemApplied,
       }),
     });
     if (res.status === 401) throw new Error("login");
@@ -154,6 +174,10 @@ export function BookingWizard({
               submitting={submitting}
               error={error}
               onSubmit={submit}
+              oneTokenBalance={oneTokenBalance}
+              redeem={redeem}
+              redeemApplied={redeemApplied}
+              onToggleRedeem={() => setRedeem((v) => !v)}
             />
           )}
         </div>

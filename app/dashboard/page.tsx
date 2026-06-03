@@ -1,12 +1,13 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { PlaneTakeoff, Download, BedDouble } from "lucide-react";
+import { PlaneTakeoff, Download, BedDouble, Sparkles } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db/prisma";
 import type { Flight } from "@/lib/flights/types";
 import type { Stay } from "@/lib/stays/types";
 import { hhmm, datePart } from "@/lib/utils/dates";
 import { Money } from "@/components/Money";
+import { getMembership, tierConfig, nextTier } from "@/lib/onetoken/membership";
 
 type Row =
   | { kind: "flight"; id: string; createdAt: Date; bookingRef: string; status: string; total: number; flight: Flight }
@@ -16,9 +17,10 @@ export default async function DashboardPage() {
   const session = await auth();
   if (!session?.user) redirect("/login?callbackUrl=/dashboard");
 
-  const [flightBookings, stayBookings] = await Promise.all([
+  const [flightBookings, stayBookings, membership] = await Promise.all([
     prisma.booking.findMany({ where: { userId: session.user.id }, orderBy: { createdAt: "desc" } }),
     prisma.stayBooking.findMany({ where: { userId: session.user.id }, orderBy: { createdAt: "desc" } }),
+    getMembership(session.user.id),
   ]);
 
   const rows: Row[] = [
@@ -47,6 +49,8 @@ export default async function DashboardPage() {
       <h1 className="text-2xl font-extrabold">Your trips</h1>
       <p className="mt-1 text-sm text-muted">Signed in as {session.user.email}</p>
 
+      <OneTokenCard membership={membership} />
+
       {rows.length === 0 ? (
         <div className="glass mt-6 rounded-2xl p-10 text-center text-muted">
           <PlaneTakeoff className="mx-auto h-8 w-8 text-price" />
@@ -61,6 +65,51 @@ export default async function DashboardPage() {
         </div>
       )}
     </div>
+  );
+}
+
+function OneTokenCard({
+  membership,
+}: {
+  membership: Awaited<ReturnType<typeof getMembership>>;
+}) {
+  if (!membership) {
+    return (
+      <Link
+        href="/onetoken"
+        className="mt-5 flex items-center justify-between gap-3 rounded-2xl border border-border bg-surface-2 p-4 transition hover:border-sky-400"
+      >
+        <span className="flex items-center gap-2 text-sm">
+          <Sparkles className="h-5 w-5 text-price" />
+          <span className="font-semibold">Join OneToken</span> — earn OneTokenCash on every trip.
+        </span>
+        <span className="btn-accent rounded-full px-4 py-1.5 text-xs font-bold">Join free</span>
+      </Link>
+    );
+  }
+  const cfg = tierConfig(membership.tier);
+  const next = nextTier(membership.tripElements);
+  return (
+    <Link
+      href="/onetoken"
+      className="mt-5 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-border bg-surface p-4 transition hover:border-sky-400"
+    >
+      <div className="flex items-center gap-3">
+        <span className="rounded-md px-2 py-1 text-xs font-bold text-white" style={{ backgroundColor: cfg.color }}>
+          {cfg.name}
+        </span>
+        <span className="text-sm text-muted">
+          {membership.tripElements} trip elements
+          {next ? ` · ${next.remaining} to ${next.tier.name}` : " · top tier"}
+        </span>
+      </div>
+      <div className="text-right">
+        <div className="text-xs text-muted">OneTokenCash</div>
+        <div className="font-extrabold text-price">
+          <Money cents={membership.pointsBalance} />
+        </div>
+      </div>
+    </Link>
   );
 }
 

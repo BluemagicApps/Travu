@@ -1,4 +1,5 @@
 import { isValidPassport, isValidPhone } from "@/lib/constants/countries";
+import { isCardValid } from "./card";
 
 export interface TravellerInput {
   firstName: string;
@@ -138,10 +139,9 @@ export function isContactComplete(c: ContactInput): boolean {
 }
 
 export function isPaymentComplete(p: PaymentInput): boolean {
-  const digits = p.cardNumber.replace(/\D/g, "");
   return (
     Boolean(p.nameOnCard.trim()) &&
-    digits.length >= 13 &&
+    isCardValid(p.cardNumber) &&
     /^\d{2}\s*\/\s*\d{2}$/.test(p.expiry) &&
     /^\d{3,4}$/.test(p.cvc) &&
     Boolean(p.billingAddress1.trim() && p.postalCode.trim() && p.city.trim())

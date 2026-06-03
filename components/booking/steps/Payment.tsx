@@ -1,18 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import { ShieldCheck } from "lucide-react";
 import type { PaymentInput } from "@/lib/booking/wizard-state";
 import { COUNTRIES } from "@/lib/constants/countries";
+import { formatCardNumber, isUnsupported } from "@/lib/booking/card";
+import { AlertModal } from "@/components/ui/AlertModal";
 import { BrandIcon, BrandIconStrip, detectBrand } from "../CardBrandIcons";
 
 const field =
   "w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-sm outline-none focus:border-sky-400";
 const label = "mb-1 block text-xs font-medium text-muted";
-
-function formatCardNumber(input: string): string {
-  const digits = input.replace(/\D/g, "").slice(0, 19);
-  return digits.replace(/(\d{4})(?=\d)/g, "$1 ");
-}
 
 function formatExpiry(input: string): string {
   const digits = input.replace(/\D/g, "").slice(0, 4);
@@ -28,6 +26,14 @@ export function Payment({
   onChange: (value: PaymentInput) => void;
 }) {
   const brand = detectBrand(value.cardNumber);
+  const [showUnsupported, setShowUnsupported] = useState(false);
+
+  function handleCardChange(raw: string) {
+    const formatted = formatCardNumber(raw);
+    onChange({ ...value, cardNumber: formatted });
+    // Surface the rejection popup as soon as the BIN resolves to no accepted brand.
+    if (isUnsupported(formatted)) setShowUnsupported(true);
+  }
 
   return (
     <div className="space-y-5">
@@ -68,13 +74,19 @@ export function Payment({
                 required
                 inputMode="numeric"
                 placeholder="4242 4242 4242 4242"
-                className={`${field} ${brand ? "pl-16" : ""}`}
+                aria-invalid={isUnsupported(value.cardNumber)}
+                className={`${field} ${brand ? "pl-16" : ""} ${
+                  isUnsupported(value.cardNumber) ? "border-rose-400" : ""
+                }`}
                 value={value.cardNumber}
-                onChange={(e) =>
-                  onChange({ ...value, cardNumber: formatCardNumber(e.target.value) })
-                }
+                onChange={(e) => handleCardChange(e.target.value)}
               />
             </div>
+            {isUnsupported(value.cardNumber) && (
+              <span className="mt-1 block text-xs font-medium text-rose-500">
+                This card is not accepted on Travu. Please try another card.
+              </span>
+            )}
           </label>
 
           <label className="block">
@@ -171,6 +183,14 @@ export function Payment({
           </label>
         </div>
       </section>
+
+      <AlertModal
+        open={showUnsupported}
+        title="Card not accepted"
+        message="This card is not accepted on Travu, Please try another card"
+        actionLabel="Try another card"
+        onClose={() => setShowUnsupported(false)}
+      />
     </div>
   );
 }

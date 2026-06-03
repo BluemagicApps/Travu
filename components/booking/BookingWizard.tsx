@@ -11,6 +11,7 @@ import { detectBrand } from "./CardBrandIcons";
 import { getCountry } from "@/lib/constants/countries";
 import { ReviewAndBook } from "./steps/ReviewAndBook";
 import { BookingSidebar } from "./BookingSidebar";
+import { BookingProgress } from "./BookingProgress";
 import { StepHeader, type WizardStep } from "./StepHeader";
 import {
   clearState,
@@ -49,7 +50,12 @@ export function BookingWizard({
   const [state, setState] = useState<WizardState>(() => initialState(passengers));
   const [hydrated, setHydrated] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [showProgress, setShowProgress] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const loginUrl = `/login?callbackUrl=${encodeURIComponent(
+    `/book/${flight.id}?fare=${fareOption.id}&step=confirm`,
+  )}`;
 
   useEffect(() => {
     setState(loadState(key, passengers));
@@ -81,55 +87,44 @@ export function BookingWizard({
     if (idx < STEPS.length - 1) goto(STEPS[idx + 1]);
   }
 
-  async function submit() {
+  // The actual booking call. Runs in parallel with the progress overlay's
+  // animation; resolves to the booking reference or throws.
+  async function bookingTask(): Promise<string> {
+    const res = await fetch("/api/bookings", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        flightId: flight.id,
+        fareName: fareOption.id,
+        tripType: "one-way",
+        passengers: state.travellers.map((t) => ({
+          firstName: t.firstName.trim(),
+          middleName: t.middleName.trim() || undefined,
+          lastName: t.lastName.trim(),
+          dateOfBirth: dobToIso(t),
+          type: "ADULT",
+          passportNumber: t.passportNumber.trim() || undefined,
+          passportCountry: t.passportCountry || undefined,
+        })),
+        contactEmail: state.contact.email.trim(),
+        contactPhone: state.contact.phone
+          ? `+${getCountry(state.contact.phoneCountry)?.dial ?? ""}${state.contact.phone.replace(/\D/g, "")}`
+          : undefined,
+        cardLast4: state.payment.cardNumber.replace(/\D/g, "").slice(-4),
+        cardBrand: detectBrand(state.payment.cardNumber) ?? undefined,
+      }),
+    });
+    if (res.status === 401) throw new Error("login");
+    if (!res.ok) throw new Error("Could not complete the booking. Please try again.");
+    const { bookingRef } = (await res.json()) as { bookingRef: string };
+    return bookingRef;
+  }
+
+  function submit() {
     if (!canAdvanceFrom("confirm")) return;
-    setSubmitting(true);
     setError(null);
-    try {
-      const res = await fetch("/api/bookings", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          flightId: flight.id,
-          fareName: fareOption.id,
-          tripType: "one-way",
-          passengers: state.travellers.map((t) => ({
-            firstName: t.firstName.trim(),
-            middleName: t.middleName.trim() || undefined,
-            lastName: t.lastName.trim(),
-            dateOfBirth: dobToIso(t),
-            type: "ADULT",
-            passportNumber: t.passportNumber.trim() || undefined,
-            passportCountry: t.passportCountry || undefined,
-          })),
-          contactEmail: state.contact.email.trim(),
-          contactPhone: state.contact.phone
-            ? `+${getCountry(state.contact.phoneCountry)?.dial ?? ""}${state.contact.phone.replace(/\D/g, "")}`
-            : undefined,
-          cardLast4: state.payment.cardNumber.replace(/\D/g, "").slice(-4),
-          cardBrand: detectBrand(state.payment.cardNumber) ?? undefined,
-        }),
-      });
-      if (res.status === 401) {
-        router.push(
-          `/login?callbackUrl=${encodeURIComponent(
-            `/book/${flight.id}?fare=${fareOption.id}&step=confirm`,
-          )}`,
-        );
-        return;
-      }
-      if (!res.ok) {
-        setError("Could not complete the booking. Please try again.");
-        setSubmitting(false);
-        return;
-      }
-      const { bookingRef } = await res.json();
-      clearState(key);
-      router.push(`/booking/${bookingRef}`);
-    } catch {
-      setError("Network error — please try again.");
-      setSubmitting(false);
-    }
+    setSubmitting(true);
+    setShowProgress(true); // overlay drives the booking via bookingTask()
   }
 
   return (
@@ -171,6 +166,25 @@ export function BookingWizard({
           ctaDisabled={!canAdvanceFrom(step)}
         />
       </div>
+
+      {showProgress && (
+        <BookingProgress
+          task={bookingTask}
+          onDone={(bookingRef) => {
+            clearState(key);
+            router.push(`/booking/${bookingRef}`);
+          }}
+          onError={(err) => {
+            setShowProgress(false);
+            setSubmitting(false);
+            if (err instanceof Error && err.message === "login") {
+              router.push(loginUrl);
+            } else {
+              setError(err instanceof Error ? err.message : "Network error — please try again.");
+            }
+          }}
+        />
+      )}
     </div>
   );
 }

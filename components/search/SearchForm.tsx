@@ -1,8 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { Plus, Search, X } from "lucide-react";
+import { AnimatedSubmitButton } from "@/components/ui/AnimatedSubmitButton";
 import type { AirportOption } from "@/lib/flights/dataset";
 import { encodeLegs } from "@/lib/ai/schema";
 import { TripTypeTabs, type TripType } from "./TripTypeTabs";
@@ -40,6 +41,7 @@ export function SearchForm({
   initial?: SearchFormInitial;
 }) {
   const router = useRouter();
+  const [pending, startTransition] = useTransition();
   const { origin: ipOrigin } = useOrigin();
 
   // Default the "From" field to the airport nearest the visitor's IP (Dubai → DXB),
@@ -102,7 +104,11 @@ export function SearchForm({
       qs.set("departDate", primary.date);
       if (tripType === "return") qs.set("returnDate", returnDate);
     }
-    router.push(`/search?${qs.toString()}`);
+    // Run navigation in a transition so the button shows a live "searching" state
+    // until the results route's data is ready.
+    startTransition(() => {
+      router.push(`/search?${qs.toString()}`);
+    });
   }
 
   return (
@@ -180,12 +186,13 @@ export function SearchForm({
         </label>
       </div>
 
-      <button
-        type="submit"
-        className="btn-accent mt-3 flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold"
+      <AnimatedSubmitButton
+        className="mt-3"
+        loading={pending}
+        loadingLabel="Searching for flights…"
       >
         <Search className="h-4 w-4" /> Search flights
-      </button>
+      </AnimatedSubmitButton>
     </form>
   );
 }

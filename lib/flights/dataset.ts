@@ -8,17 +8,13 @@ export interface AirportOption {
   country: string;
 }
 
-export async function getAirportOptions(): Promise<AirportOption[]> {
-  const airports = await prisma.airport.findMany({ orderBy: { city: "asc" } });
-  return airports.map((a) => ({
-    iata: a.iata,
-    city: a.city,
-    name: a.name,
-    country: a.country,
-  }));
-}
+// Airports/airlines/routes are static reference data that only changes on reseed.
+// Memoise the dataset in-process so a single search page (1 main leg + 7 price-strip
+// days = many searchLeg calls) hits the remote DB once instead of ~24 times.
+const DATASET_TTL_MS = 10 * 60 * 1000;
+let datasetCache: { at: number; promise: Promise<Dataset> } | null = null;
 
-export async function loadDataset(): Promise<Dataset> {
+async function fetchDataset(): Promise<Dataset> {
   const [airports, airlines, routes] = await Promise.all([
     prisma.airport.findMany(),
     prisma.airline.findMany(),
@@ -35,4 +31,31 @@ export async function loadDataset(): Promise<Dataset> {
       destIata: r.destIata,
     })),
   };
+}
+
+export function loadDataset(): Promise<Dataset> {
+  const now = Date.now();
+  if (datasetCache && now - datasetCache.at < DATASET_TTL_MS) {
+    return datasetCache.promise;
+  }
+  const promise = fetchDataset().catch((e) => {
+    // Don't cache a failed load.
+    datasetCache = null;
+    throw e;
+  });
+  datasetCache = { at: now, promise };
+  return promise;
+}
+
+/** Clear the in-process dataset cache (e.g. after a reseed in dev). */
+export function __resetDataset(): void {
+  datasetCache = null;
+}
+
+export async function getAirportOptions(): Promise<AirportOption[]> {
+  // Derive from the cached dataset so we don't issue an extra DB query.
+  const ds = await loadDataset();
+  return [...ds.airports.values()]
+    .map((a) => ({ iata: a.iata, city: a.city, name: a.name, country: a.country }))
+    .sort((x, y) => x.city.localeCompare(y.city));
 }

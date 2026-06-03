@@ -32,11 +32,24 @@ function hasDuffelToken(): boolean {
   return Boolean(process.env.DUFFEL_API_TOKEN);
 }
 
+/**
+ * Flights default to the (scaled, instant, 150–200-result) mock generator so every
+ * search is fast and richly populated. The real Duffel/Amadeus providers stay wired
+ * and can be re-enabled by setting FLIGHTS_PROVIDER=duffel|amadeus (a token/keys are
+ * still required). Without that opt-in we never make a slow live flight call.
+ */
+function selectKind(): "amadeus" | "duffel" | "mock" {
+  const pref = process.env.FLIGHTS_PROVIDER?.toLowerCase();
+  if (pref === "duffel" && hasDuffelToken()) return "duffel";
+  if (pref === "amadeus" && hasAmadeusKeys()) return "amadeus";
+  return "mock";
+}
+
 let cached: FlightProvider | null = null;
 let cachedKind: "amadeus" | "duffel" | "mock" | null = null;
 
 export function getProvider(): FlightProvider {
-  const kind = hasDuffelToken() ? "duffel" : hasAmadeusKeys() ? "amadeus" : "mock";
+  const kind = selectKind();
   if (cached && cachedKind === kind) return cached;
   cachedKind = kind;
   if (kind === "duffel") {

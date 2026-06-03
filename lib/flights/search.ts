@@ -5,7 +5,7 @@ import { MockProvider } from "./mock/provider";
 import { cacheOffers } from "./offer-cache";
 
 /** Cap on results per leg — keeps the cheapest N to bound caching + render cost. */
-const MAX_RESULTS = 68;
+const MAX_RESULTS = 200;
 
 export async function searchLeg(filter: FlightFilter, leg: Leg): Promise<SearchResult> {
   const provider = getProvider();

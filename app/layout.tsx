@@ -4,7 +4,8 @@ import "./globals.css";
 import { Providers } from "@/components/layout/Providers";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { getServerCurrency } from "@/lib/utils/currency-server";
+import { getServerCurrencyCookie } from "@/lib/utils/currency-server";
+import { getServerLocation } from "@/lib/geo/ip-location";
 
 const geist = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
@@ -36,11 +37,19 @@ export const metadata: Metadata = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const currency = await getServerCurrency();
+  const [location, cookieCurrency] = await Promise.all([
+    getServerLocation(),
+    getServerCurrencyCookie(),
+  ]);
+  const currency = cookieCurrency ?? location.currency;
   return (
     <html lang="en" suppressHydrationWarning className={`${geist.variable} antialiased`}>
       <body className="flex min-h-screen flex-col font-sans">
-        <Providers initialCurrency={currency}>
+        <Providers
+          initialCurrency={currency}
+          location={location}
+          hadCurrencyCookie={Boolean(cookieCurrency)}
+        >
           <Navbar />
           <main className="flex-1 pb-20 md:pb-0">{children}</main>
           <Footer />

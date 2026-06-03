@@ -8,6 +8,7 @@ import { encodeLegs } from "@/lib/ai/schema";
 import { TripTypeTabs, type TripType } from "./TripTypeTabs";
 import { LegFields, type LegValue } from "./LegFields";
 import { PassengerSelect, type PassengerCounts } from "./PassengerSelect";
+import { useOrigin } from "@/components/layout/OriginProvider";
 
 type Cabin = "ECONOMY" | "PREMIUM" | "BUSINESS";
 
@@ -39,10 +40,15 @@ export function SearchForm({
   initial?: SearchFormInitial;
 }) {
   const router = useRouter();
+  const { origin: ipOrigin } = useOrigin();
+
+  // Default the "From" field to the airport nearest the visitor's IP (Dubai → DXB),
+  // unless an explicit initial origin was provided (e.g. editing an existing search).
+  const defaultOrigin = initial?.origin ?? ipOrigin ?? "LOS";
 
   const [tripType, setTripType] = useState<TripType>(initial?.tripType ?? "one-way");
   const [primary, setPrimary] = useState<LegValue>({
-    origin: initial?.origin ?? "LOS",
+    origin: defaultOrigin,
     dest: initial?.destination ?? "DXB",
     date: initial?.departDate ?? defaultDate(14),
   });

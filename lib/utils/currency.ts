@@ -33,6 +33,24 @@ export function isCurrency(value: unknown): value is CurrencyCode {
   return typeof value === "string" && RATE.has(value);
 }
 
+// ISO-3166 alpha-2 country → default display currency (only currencies we support).
+// Used to pre-select the currency from the visitor's IP location. Unknown → USD.
+const EUROZONE = [
+  "AT", "BE", "HR", "CY", "EE", "FI", "FR", "DE", "GR", "IE", "IT", "LV", "LT",
+  "LU", "MT", "NL", "PT", "SK", "SI", "ES",
+];
+const COUNTRY_CURRENCY: Record<string, CurrencyCode> = {
+  US: "USD", GB: "GBP", NG: "NGN", CA: "CAD", AU: "AUD", NZ: "AUD",
+  AE: "AED", IN: "INR", JP: "JPY", ZA: "ZAR",
+  ...Object.fromEntries(EUROZONE.map((c) => [c, "EUR"])),
+};
+
+/** Map an ISO alpha-2 country code to a supported display currency (defaults to USD). */
+export function countryToCurrency(country?: string | null): CurrencyCode {
+  if (!country) return DEFAULT_CURRENCY;
+  return COUNTRY_CURRENCY[country.toUpperCase()] ?? DEFAULT_CURRENCY;
+}
+
 /** Format an amount given in USD cents into the target currency. */
 export function formatMoney(usdCents: number, currency: CurrencyCode = DEFAULT_CURRENCY): string {
   const rate = RATE.get(currency) ?? 1;

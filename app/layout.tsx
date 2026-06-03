@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/layout/Providers";
@@ -32,6 +32,13 @@ export const metadata: Metadata = {
     title: "Travu — AI travel super-app",
     description: "Search, book, and track flights and stays with an AI travel agent.",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  // Allow pinch-zoom for accessibility, but the page fits at scale 1 by default.
+  maximumScale: 5,
 };
 
 export default async function RootLayout({

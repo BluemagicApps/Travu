@@ -39,9 +39,25 @@
   --font-sans: var(--font-geist-sans);
 }
 
+/* Prevent any decorative/overflowing element from widening the page on mobile
+   (the cause of the "zoom-out" on load). `clip` (not `hidden`) avoids creating a
+   scroll container, so position: sticky keeps working. */
+html {
+  overflow-x: clip;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+/* Embedded media (e.g. the OpenStreetMap iframe) never exceeds its container. */
+iframe,
+img,
+video {
+  max-width: 100%;
 }
 
 @layer utilities {

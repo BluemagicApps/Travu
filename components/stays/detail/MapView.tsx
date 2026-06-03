@@ -13,12 +13,12 @@ export function MapView({ lat, lng, name }: { lat: number; lng: number; name: st
     );
   }
   return (
-    <div className="overflow-hidden rounded-2xl border border-border">
+    <div className="max-w-full overflow-hidden rounded-2xl border border-border">
       <iframe
         title={`Map showing ${name}`}
         src={osmEmbedUrl(lat, lng)}
         loading="lazy"
-        className="h-64 w-full"
+        className="block h-64 w-full max-w-full"
         style={{ border: 0 }}
       />
       <div className="flex items-center justify-between bg-surface px-3 py-2 text-xs">

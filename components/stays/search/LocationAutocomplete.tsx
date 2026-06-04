@@ -15,10 +15,16 @@ export function LocationAutocomplete({
   value,
   onChange,
   placeholder = "Where to?",
+  label = "Where to?",
+  endpoint = "/api/stay-locations",
 }: {
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
+  /** Field label above the input (e.g. "Pick-up location"). */
+  label?: string;
+  /** Suggestions API endpoint (cars use /api/car-locations). */
+  endpoint?: string;
 }) {
   const [open, setOpen] = useState(false);
   const [results, setResults] = useState<LocationSuggestion[]>([]);
@@ -26,17 +32,20 @@ export function LocationAutocomplete({
   const ref = useRef<HTMLDivElement>(null);
   const listId = useId();
 
-  // Debounced fetch when the typed value changes (250ms).
+  // Debounced fetch when the typed value changes (250ms). State updates live in
+  // the timer callback (not the effect body) so the empty-query clear doesn't
+  // trigger a synchronous cascading render.
   useEffect(() => {
     const q = value.trim();
-    if (q.length < 1) {
-      setResults([]);
-      return;
-    }
     const ctrl = new AbortController();
     const t = setTimeout(async () => {
+      if (q.length < 1) {
+        setResults([]);
+        setActive(-1);
+        return;
+      }
       try {
-        const res = await fetch(`/api/stay-locations?q=${encodeURIComponent(q)}`, { signal: ctrl.signal });
+        const res = await fetch(`${endpoint}?q=${encodeURIComponent(q)}`, { signal: ctrl.signal });
         const data = await res.json();
         setResults(data.results ?? []);
         setActive(-1);
@@ -48,7 +57,7 @@ export function LocationAutocomplete({
       clearTimeout(t);
       ctrl.abort();
     };
-  }, [value]);
+  }, [value, endpoint]);
 
   // Close on outside click.
   useEffect(() => {
@@ -84,7 +93,7 @@ export function LocationAutocomplete({
 
   return (
     <div className="relative" ref={ref}>
-      <span className="mb-1 block text-xs font-medium text-muted">Where to?</span>
+      <span className="mb-1 block text-xs font-medium text-muted">{label}</span>
       <div className="flex items-center gap-2 rounded-xl border border-border bg-surface px-3 py-2.5 focus-within:border-sky-400">
         <MapPin className="h-4 w-4 shrink-0 text-muted" />
         <input

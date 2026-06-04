@@ -16,6 +16,7 @@ model User {
   createdAt    DateTime  @default(now())
   bookings     Booking[]
   stayBookings StayBooking[]
+  carBookings  CarBooking[]
   membership   Membership?
 }
 
@@ -180,4 +181,67 @@ model StayPayment {
   expMonth      Int?
   expYear       Int?
   createdAt     DateTime    @default(now())
+}
+
+model CarBooking {
+  id               String       @id @default(cuid())
+  bookingRef       String       @unique
+  userId           String
+  user             User         @relation(fields: [userId], references: [id])
+  status           String       @default("CONFIRMED")
+  currency         String       @default("USD")
+  totalAmount      Int
+  pickupLocation   String
+  dropoffLocation  String
+  pickupDate       DateTime
+  returnDate       DateTime
+  pickupTime       String?
+  dropoffTime      String?
+  rentalDays       Int
+  carClass         String
+  vendor           String
+  contactEmail     String?
+  contactPhone     String?
+  contactCountry   String?
+  billingName      String?
+  billingAddress   String?
+  billingCity      String?
+  billingState     String?
+  billingZip       String?
+  billingCountry   String?
+  protectionPlan   String?
+  protectionAmount Int          @default(0)
+  cancellationTier String?
+  carSnapshot      Json
+  createdAt        DateTime     @default(now())
+  renter           CarRenter?
+  payment          CarPayment?
+}
+
+model CarRenter {
+  id           String     @id @default(cuid())
+  carBookingId String     @unique
+  carBooking   CarBooking @relation(fields: [carBookingId], references: [id])
+  firstName    String
+  lastName     String
+  age          Int?
+  email        String?
+  phone        String?
+  flightNo     String?
+  licenseNo    String?
+}
+
+model CarPayment {
+  id           String     @id @default(cuid())
+  carBookingId String     @unique
+  carBooking   CarBooking @relation(fields: [carBookingId], references: [id])
+  amount       Int
+  currency     String     @default("USD")
+  method       String     @default("CARD_SIM")
+  status       String     @default("PAID")
+  last4        String
+  cardBrand    String?
+  expMonth     Int?
+  expYear      Int?
+  createdAt    DateTime   @default(now())
 }

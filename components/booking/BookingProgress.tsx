@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ComponentType } from "react";
 import { motion } from "framer-motion";
 import { Check, Loader2, Plane } from "lucide-react";
 
-const STEPS = [
+const DEFAULT_STEPS = [
   "Reviewing booking application",
   "Verifying application data",
   "Booking ticket on airline API",
@@ -30,12 +30,20 @@ export function BookingProgress<T>({
   onDone,
   onError,
   brandLabel = "Travu",
+  steps,
+  icon,
 }: {
   task: () => Promise<T>;
   onDone: (result: T) => void;
   onError: (err: unknown) => void;
   brandLabel?: string;
+  /** Override the staged step labels (defaults to the flight booking steps). */
+  steps?: string[];
+  /** Override the header icon (defaults to a plane). */
+  icon?: ComponentType<{ className?: string }>;
 }) {
+  const STEPS = steps ?? DEFAULT_STEPS;
+  const Icon = icon ?? Plane;
   const [active, setActive] = useState(0);
   const started = useRef(false);
 
@@ -88,7 +96,7 @@ export function BookingProgress<T>({
       >
         <div className="mb-6 flex items-center gap-3">
           <span className="btn-accent grid h-11 w-11 place-items-center rounded-2xl">
-            <Plane className="h-5 w-5 text-white" />
+            <Icon className="h-5 w-5 text-white" />
           </span>
           <div>
             <p className="text-sm font-bold">{brandLabel} secure booking</p>

@@ -2,12 +2,20 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Lock, ShieldCheck } from "lucide-react";
+import { Lock, ShieldCheck, BedDouble } from "lucide-react";
 import type { Stay } from "@/lib/stays/types";
 import type { ProtectionPlanId } from "@/lib/stays/pricing";
 import { computeStayPrice } from "@/lib/stays/pricing";
 import { Money } from "@/components/Money";
 import { AnimatedSubmitButton } from "@/components/ui/AnimatedSubmitButton";
+import { BookingProgress } from "@/components/booking/BookingProgress";
+
+const STAY_STEPS = [
+  "Reviewing your booking",
+  "Verifying guest details",
+  "Confirming with the property",
+  "Booking confirmed",
+];
 
 const field =
   "w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-sm outline-none focus:border-sky-400";
@@ -48,7 +56,7 @@ export function StayBookingForm({ stay, rooms, onPlanChange }: { stay: Stay; roo
   const [plan, setPlan] = useState<ProtectionPlanId>("NONE");
   const [requests, setRequests] = useState("");
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [booking, setBooking] = useState(false);
 
   const price = computeStayPrice(stay, rooms, plan);
   const protectPrice = computeStayPrice(stay, rooms, "TRAVU_PROTECT");
@@ -58,7 +66,7 @@ export function StayBookingForm({ stay, rooms, onPlanChange }: { stay: Stay; roo
     onPlanChange?.(p);
   }
 
-  async function submit(e: React.FormEvent) {
+  function submit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
     const digits = card.replace(/\D/g, "");
@@ -66,8 +74,15 @@ export function StayBookingForm({ stay, rooms, onPlanChange }: { stay: Stay; roo
       setError("Enter a valid card number.");
       return;
     }
+    // Hand off to the staged BookingProgress overlay, which runs the POST below
+    // in parallel with the animated steps (unified with the flights flow).
+    setBooking(true);
+  }
+
+  // Performs the real reservation; resolves to the booking ref for the overlay.
+  async function reserve(): Promise<string> {
+    const digits = card.replace(/\D/g, "");
     const [mm, yy] = expiry.split("/").map((s) => s.trim());
-    setLoading(true);
     const res = await fetch("/api/stay-bookings", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -89,18 +104,29 @@ export function StayBookingForm({ stay, rooms, onPlanChange }: { stay: Stay; roo
     });
     if (res.status === 401) {
       router.push(`/login?callbackUrl=/book/stay/${encodeURIComponent(stay.id)}`);
-      return;
+      throw new Error("auth"); // navigation already triggered; suppress the error toast
     }
-    if (!res.ok) {
-      setError("Could not complete the booking. Please try again.");
-      setLoading(false);
-      return;
-    }
+    if (!res.ok) throw new Error("Could not complete the booking. Please try again.");
     const { bookingRef } = await res.json();
-    router.push(`/stay-processing/${bookingRef}`);
+    return bookingRef;
   }
 
   return (
+    <>
+    {booking && (
+      <BookingProgress
+        task={reserve}
+        steps={STAY_STEPS}
+        icon={BedDouble}
+        onDone={(ref) => router.push(`/stay-booking/${ref}`)}
+        onError={(err) => {
+          setBooking(false);
+          if (!(err instanceof Error) || err.message !== "auth") {
+            setError("Could not complete the booking. Please try again.");
+          }
+        }}
+      />
+    )}
     <form onSubmit={submit} className="space-y-5">
       <Section title="Who's checking in?">
         <div className="grid gap-3 sm:grid-cols-2">
@@ -187,12 +213,13 @@ export function StayBookingForm({ stay, rooms, onPlanChange }: { stay: Stay; roo
       </p>
       {error && <p className="text-sm text-rose-500">{error}</p>}
 
-      <AnimatedSubmitButton loading={loading} loadingLabel="Processing…" className="py-3.5">
+      <AnimatedSubmitButton loading={booking} loadingLabel="Processing…" className="py-3.5">
         <span>Book now · <Money cents={price.total} /></span>
       </AnimatedSubmitButton>
       <p className="flex items-center justify-center gap-1.5 text-center text-[11px] text-muted">
         <Lock className="h-3 w-3" /> Our secure encryption protects your personal details at every step.
       </p>
     </form>
+    </>
   );
 }

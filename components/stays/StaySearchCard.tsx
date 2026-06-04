@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { Search, Sparkles } from "lucide-react";
 import { AnimatedSubmitButton } from "@/components/ui/AnimatedSubmitButton";
+import { SearchProgressBar } from "@/components/ui/SearchProgressBar";
 import { LocationAutocomplete } from "./search/LocationAutocomplete";
 import { DateRangePicker, defaultDateRange, type DateRangeValue } from "./search/DateRangePicker";
 import {
@@ -159,6 +160,7 @@ export function StaySearchCard({ initial, showAi = false }: { initial?: StaySear
           </AnimatedSubmitButton>
         </div>
         {error && <p className="mt-2 text-xs text-rose-500">{error}</p>}
+        <SearchProgressBar active={pending} />
       </form>
     </div>
   );

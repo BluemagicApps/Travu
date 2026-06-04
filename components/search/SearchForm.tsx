@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { Plus, Search, X } from "lucide-react";
 import { AnimatedSubmitButton } from "@/components/ui/AnimatedSubmitButton";
+import { SearchProgressBar } from "@/components/ui/SearchProgressBar";
 import type { AirportOption } from "@/lib/flights/dataset";
 import { encodeLegs } from "@/lib/ai/schema";
 import { TripTypeTabs, type TripType } from "./TripTypeTabs";
@@ -193,6 +194,8 @@ export function SearchForm({
       >
         <Search className="h-4 w-4" /> Search flights
       </AnimatedSubmitButton>
+
+      <SearchProgressBar active={pending} />
     </form>
   );
 }

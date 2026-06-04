@@ -28,7 +28,7 @@ function firstWeekday(y: number, m: number): number {
   return new Date(Date.UTC(y, m, 1)).getUTCDay();
 }
 function fmt(iso: string): string {
-  const [y, m, d] = iso.split("-").map(Number);
+  const [, m, d] = iso.split("-").map(Number);
   return `${MONTHS[m - 1].slice(0, 3)} ${d}`;
 }
 
@@ -102,9 +102,21 @@ function MonthGrid({
 export function DateRangePicker({
   value,
   onChange,
+  label = "Dates",
+  unit = "night",
+  hint = "Select check-in and check-out",
+  showFlex = true,
 }: {
   value: DateRangeValue;
   onChange: (v: DateRangeValue) => void;
+  /** Field label above the trigger (e.g. "Pick-up & return"). */
+  label?: string;
+  /** Count word for the range length ("night" for stays, "day" for cars). */
+  unit?: string;
+  /** Helper text inside the popover. */
+  hint?: string;
+  /** Show the ± flexible-dates pills (off for car rentals). */
+  showFlex?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -130,14 +142,14 @@ export function DateRangePicker({
   }
 
   const next = view.m === 11 ? { y: view.y + 1, m: 0 } : { y: view.y, m: view.m + 1 };
-  const nights = value.checkIn && value.checkOut ? dayDiff(value.checkIn, value.checkOut) : 0;
+  const count = value.checkIn && value.checkOut ? dayDiff(value.checkIn, value.checkOut) : 0;
   const summary = value.checkIn
     ? `${fmt(value.checkIn)}${value.checkOut ? ` – ${fmt(value.checkOut)}` : ""}`
     : "Add dates";
 
   return (
     <div className="relative" ref={ref}>
-      <span className="mb-1 block text-xs font-medium text-muted">Dates</span>
+      <span className="mb-1 block text-xs font-medium text-muted">{label}</span>
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
@@ -145,7 +157,7 @@ export function DateRangePicker({
       >
         <CalendarDays className="h-4 w-4 shrink-0 text-muted" />
         <span className="truncate">{summary}</span>
-        {nights > 0 && <span className="ml-auto text-xs text-muted">{nights} night{nights === 1 ? "" : "s"}</span>}
+        {count > 0 && <span className="ml-auto text-xs text-muted">{count} {unit}{count === 1 ? "" : "s"}</span>}
       </button>
 
       {open && (
@@ -159,7 +171,7 @@ export function DateRangePicker({
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
-            <span className="text-xs text-muted">Select check-in and check-out</span>
+            <span className="text-xs text-muted">{hint}</span>
             <button
               type="button"
               aria-label="Next month"
@@ -178,19 +190,20 @@ export function DateRangePicker({
           </div>
 
           <div className="mt-4 flex flex-wrap items-center gap-2">
-            {FLEX_PILLS.map((p) => (
-              <button
-                key={p.value}
-                type="button"
-                onClick={() => onChange({ ...value, flex: p.value })}
-                className={[
-                  "rounded-full border px-3 py-1 text-xs font-medium transition",
-                  value.flex === p.value ? "btn-accent border-transparent text-white" : "border-border text-muted hover:text-text",
-                ].join(" ")}
-              >
-                {p.label}
-              </button>
-            ))}
+            {showFlex &&
+              FLEX_PILLS.map((p) => (
+                <button
+                  key={p.value}
+                  type="button"
+                  onClick={() => onChange({ ...value, flex: p.value })}
+                  className={[
+                    "rounded-full border px-3 py-1 text-xs font-medium transition",
+                    value.flex === p.value ? "btn-accent border-transparent text-white" : "border-border text-muted hover:text-text",
+                  ].join(" ")}
+                >
+                  {p.label}
+                </button>
+              ))}
             <button
               type="button"
               onClick={() => setOpen(false)}

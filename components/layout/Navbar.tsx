@@ -22,7 +22,7 @@ type Tab = {
 const tabs: Tab[] = [
   { href: "/", label: "Flights", icon: Plane },
   { href: "/stays", label: "Stays", icon: BedDouble },
-  { href: "#", label: "Cars", icon: Car, soon: true },
+  { href: "/cars", label: "Cars", icon: Car },
   { href: "#", label: "Packages", icon: Package, soon: true },
   { href: "#", label: "Things to Do", icon: Ticket, soon: true },
 ];

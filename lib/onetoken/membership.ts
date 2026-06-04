@@ -127,7 +127,7 @@ export async function awardForBooking(args: {
   userId: string;
   amountCents: number;
   bookingRef: string;
-  kind: "flight" | "stay";
+  kind: "flight" | "stay" | "car";
 }): Promise<number> {
   const { userId, amountCents, bookingRef, kind } = args;
   const existing = await prisma.membership.findUnique({ where: { userId } });

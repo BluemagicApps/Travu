@@ -13,7 +13,7 @@ export function CarCard({ car }: { car: Car }) {
   const imgs = car.images && car.images.length ? car.images : [car.image];
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-surface transition hover:shadow-md">
+    <div className="card-hover overflow-hidden rounded-2xl border border-border bg-surface">
       <div className="flex flex-col sm:flex-row">
         {/* Vehicle image carousel */}
         <div className="relative h-52 bg-surface-2 sm:h-auto sm:w-72 sm:shrink-0">

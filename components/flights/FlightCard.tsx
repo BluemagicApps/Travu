@@ -34,7 +34,7 @@ export function FlightCard({
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: Math.min(index * 0.03, 0.3) }}
-      className="group rounded-2xl border border-border bg-surface p-4 transition hover:shadow-md"
+      className="group card-hover rounded-2xl border border-border bg-surface p-4"
     >
       <div className="flex flex-wrap items-center gap-4">
         <div

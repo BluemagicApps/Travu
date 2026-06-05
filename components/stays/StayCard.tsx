@@ -15,7 +15,7 @@ export function StayCard({ stay }: { stay: Stay }) {
   const entire = stay.propertyType === "apartment" || stay.propertyType === "home";
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-surface transition hover:shadow-md">
+    <div className="card-hover overflow-hidden rounded-2xl border border-border bg-surface">
       <div className="flex flex-col sm:flex-row">
         {/* Image with carousel + save + ribbon */}
         <div className="relative h-52 sm:h-auto sm:w-72 sm:shrink-0">

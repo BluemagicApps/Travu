@@ -40,7 +40,7 @@ export function CarsHero({ initial }: { initial?: CarSearchInitial }) {
 
         {/* relative + high z so the search-card dropdowns paint above the deals band below */}
         <div className="relative z-30 mx-auto mt-6 max-w-4xl">
-          <CarSearchCard initial={initial} />
+          <CarSearchCard initial={initial} showAi />
         </div>
       </div>
     </section>

@@ -34,7 +34,7 @@ export function StaysHero({ initial }: { initial?: StaySearchInitial }) {
 
         {/* relative + high z so the search-card dropdowns paint above the deals carousel below */}
         <div className="relative z-30 mx-auto mt-6 max-w-4xl">
-          <StaySearchCard initial={initial} />
+          <StaySearchCard initial={initial} showAi />
         </div>
       </div>
     </section>

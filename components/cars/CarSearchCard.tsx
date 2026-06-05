@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
-import { Car, Plane, Search } from "lucide-react";
+import { Car, Plane, Search, Sparkles } from "lucide-react";
 import { AnimatedSubmitButton } from "@/components/ui/AnimatedSubmitButton";
 import { SearchProgressBar } from "@/components/ui/SearchProgressBar";
 import { LocationAutocomplete } from "@/components/stays/search/LocationAutocomplete";
@@ -20,10 +20,14 @@ export interface CarSearchInitial {
 
 type SubTab = "cars" | "transfers";
 
-export function CarSearchCard({ initial }: { initial?: CarSearchInitial }) {
+export function CarSearchCard({ initial, showAi = false }: { initial?: CarSearchInitial; showAi?: boolean }) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [tab, setTab] = useState<SubTab>("cars");
+
+  const [ai, setAi] = useState("");
+  const [aiMsg, setAiMsg] = useState<string | null>(null);
+  const [aiLoading, setAiLoading] = useState(false);
 
   const [pickup, setPickup] = useState(initial?.pickup ?? "");
   const [dropoff, setDropoff] = useState(initial?.dropoff ?? "");
@@ -63,6 +67,37 @@ export function CarSearchCard({ initial }: { initial?: CarSearchInitial }) {
     });
   }
 
+  async function askAi(e: React.FormEvent) {
+    e.preventDefault();
+    if (!ai.trim()) return;
+    setAiLoading(true);
+    setAiMsg(null);
+    const res = await fetch("/api/ai-car-search", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ query: ai }),
+    });
+    setAiLoading(false);
+    const data = await res.json().catch(() => ({}));
+    if (data.filter) {
+      const f = data.filter;
+      const params: Record<string, string> = {
+        pickup: f.pickup,
+        pickupDate: f.pickupDate,
+        returnDate: f.returnDate,
+        pickupTime: f.pickupTime ?? "10:00",
+        dropoffTime: f.dropoffTime ?? "10:00",
+      };
+      if (f.dropoff && f.dropoff !== f.pickup) params.dropoff = f.dropoff;
+      if (f.driverAge) params.driverAge = String(f.driverAge);
+      startTransition(() => {
+        router.push(`/cars?${new URLSearchParams(params).toString()}`);
+      });
+    } else {
+      setAiMsg(data.message ?? "Tell me a city, dates, and pick-up time.");
+    }
+  }
+
   return (
     <div className="text-left">
       {/* Sub-tabs: Rental cars (built) | Airport transportation (coming soon) */}
@@ -84,6 +119,7 @@ export function CarSearchCard({ initial }: { initial?: CarSearchInitial }) {
           </p>
         </div>
       ) : (
+        <>
         <form onSubmit={submit} className="rounded-2xl border border-border bg-surface p-3 shadow-lg">
           <div className="grid gap-3 lg:grid-cols-2">
             <LocationAutocomplete
@@ -144,6 +180,44 @@ export function CarSearchCard({ initial }: { initial?: CarSearchInitial }) {
           {error && <p className="mt-2 text-xs text-rose-500">{error}</p>}
           <SearchProgressBar active={pending} />
         </form>
+
+        {/* AI natural-language bar — rendered below the search card (showAi). */}
+        {showAi && (
+          <>
+            <div className="my-4 flex items-center gap-3 text-xs text-muted">
+              <span className="h-px flex-1 bg-border" />
+              or just tell our AI what you need
+              <span className="h-px flex-1 bg-border" />
+            </div>
+            <form onSubmit={askAi}>
+              <div
+                className="flex items-center gap-2 rounded-2xl border-2 bg-surface p-2 shadow-lg"
+                style={{ borderImage: "linear-gradient(to right, var(--accent-from), var(--accent-to)) 1" }}
+              >
+                <Sparkles className="ml-2 h-4 w-4 text-price" />
+                <input
+                  value={ai}
+                  onChange={(e) => setAi(e.target.value)}
+                  placeholder='Ask in plain words — e.g. "SUV in Miami next weekend, automatic"'
+                  className="min-w-0 flex-1 bg-transparent px-1 py-2 text-sm outline-none"
+                />
+                <button
+                  type="submit"
+                  disabled={aiLoading}
+                  className="btn-accent flex shrink-0 items-center gap-1.5 rounded-xl px-5 py-2.5 text-sm font-semibold disabled:opacity-60"
+                >
+                  {aiLoading ? "…" : (
+                    <>
+                      <Sparkles className="h-4 w-4" /> Ask AI
+                    </>
+                  )}
+                </button>
+              </div>
+              {aiMsg && <p className="mt-1 text-xs text-rose-500">{aiMsg}</p>}
+            </form>
+          </>
+        )}
+        </>
       )}
     </div>
   );

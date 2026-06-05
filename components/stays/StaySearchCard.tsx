@@ -115,36 +115,6 @@ export function StaySearchCard({ initial, showAi = false }: { initial?: StaySear
 
   return (
     <div className="text-left">
-      {/* AI natural-language bar — home page only (showAi). Hidden on menu pages. */}
-      {showAi && (
-        <form onSubmit={askAi} className="mb-3">
-          <div
-            className="flex items-center gap-2 rounded-2xl border-2 bg-surface p-2 shadow-lg"
-            style={{ borderImage: "linear-gradient(to right, var(--accent-from), var(--accent-to)) 1" }}
-          >
-            <Sparkles className="ml-2 h-4 w-4 text-price" />
-            <input
-              value={ai}
-              onChange={(e) => setAi(e.target.value)}
-              placeholder='Ask in plain words — e.g. "5-star hotel in Rome for 3 nights with a pool"'
-              className="min-w-0 flex-1 bg-transparent px-1 py-2 text-sm outline-none"
-            />
-            <button
-              type="submit"
-              disabled={aiLoading}
-              className="btn-accent flex shrink-0 items-center gap-1.5 rounded-xl px-5 py-2.5 text-sm font-semibold disabled:opacity-60"
-            >
-              {aiLoading ? "…" : (
-                <>
-                  <Sparkles className="h-4 w-4" /> Ask AI
-                </>
-              )}
-            </button>
-          </div>
-          {aiMsg && <p className="mt-1 text-xs text-rose-500">{aiMsg}</p>}
-        </form>
-      )}
-
       {/* Structured search card */}
       <form onSubmit={submit} className="rounded-2xl border border-border bg-surface p-3 shadow-lg">
         <div className="grid gap-3 lg:grid-cols-[2fr_2fr_1.5fr_auto] lg:items-end">
@@ -162,6 +132,43 @@ export function StaySearchCard({ initial, showAi = false }: { initial?: StaySear
         {error && <p className="mt-2 text-xs text-rose-500">{error}</p>}
         <SearchProgressBar active={pending} />
       </form>
+
+      {/* AI natural-language bar — rendered below the search card (showAi). */}
+      {showAi && (
+        <>
+          <div className="my-4 flex items-center gap-3 text-xs text-muted">
+            <span className="h-px flex-1 bg-border" />
+            or just tell our AI what you need
+            <span className="h-px flex-1 bg-border" />
+          </div>
+          <form onSubmit={askAi}>
+            <div
+              className="flex items-center gap-2 rounded-2xl border-2 bg-surface p-2 shadow-lg"
+              style={{ borderImage: "linear-gradient(to right, var(--accent-from), var(--accent-to)) 1" }}
+            >
+              <Sparkles className="ml-2 h-4 w-4 text-price" />
+              <input
+                value={ai}
+                onChange={(e) => setAi(e.target.value)}
+                placeholder='Ask in plain words — e.g. "5-star hotel in Rome for 3 nights with a pool"'
+                className="min-w-0 flex-1 bg-transparent px-1 py-2 text-sm outline-none"
+              />
+              <button
+                type="submit"
+                disabled={aiLoading}
+                className="btn-accent flex shrink-0 items-center gap-1.5 rounded-xl px-5 py-2.5 text-sm font-semibold disabled:opacity-60"
+              >
+                {aiLoading ? "…" : (
+                  <>
+                    <Sparkles className="h-4 w-4" /> Ask AI
+                  </>
+                )}
+              </button>
+            </div>
+            {aiMsg && <p className="mt-1 text-xs text-rose-500">{aiMsg}</p>}
+          </form>
+        </>
+      )}
     </div>
   );
 }

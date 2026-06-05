@@ -20,13 +20,13 @@ export function HomeSearch({ airports }: { airports: AirportOption[] }) {
 
       {tab === "flights" ? (
         <>
-          <AiSearchBar />
+          <SearchForm airports={airports} />
           <div className="my-4 flex items-center gap-3 text-xs text-muted">
             <span className="h-px flex-1 bg-border" />
-            or search manually
+            or just tell our AI what you need
             <span className="h-px flex-1 bg-border" />
           </div>
-          <SearchForm airports={airports} />
+          <AiSearchBar />
         </>
       ) : (
         <StaySearchForm />

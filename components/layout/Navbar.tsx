@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
-import { Plane, BedDouble, Car, Package, Ticket } from "lucide-react";
+import { Plane, BedDouble, Car } from "lucide-react";
 import type { ComponentType } from "react";
 import { cn } from "@/lib/utils/cn";
 import { ThemeToggle } from "./ThemeToggle";
@@ -23,8 +23,6 @@ const tabs: Tab[] = [
   { href: "/", label: "Flights", icon: Plane },
   { href: "/stays", label: "Stays", icon: BedDouble },
   { href: "/cars", label: "Cars", icon: Car },
-  { href: "#", label: "Packages", icon: Package, soon: true },
-  { href: "#", label: "Things to Do", icon: Ticket, soon: true },
 ];
 
 /** Highlight a tab based on the current path. */

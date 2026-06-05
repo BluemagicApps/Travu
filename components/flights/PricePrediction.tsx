@@ -1,4 +1,5 @@
 import { TrendingUp, TrendingDown, Minus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { Prediction } from "@/lib/flights/prediction";
 import { cn } from "@/lib/utils/cn";
 
@@ -9,6 +10,7 @@ export function PricePrediction({
   prediction: Prediction;
   className?: string;
 }) {
+  const t = useTranslations("flights");
   const { direction, recommendation, confidence } = prediction;
   const Icon = direction === "rise" ? TrendingUp : direction === "fall" ? TrendingDown : Minus;
   const tone =
@@ -25,9 +27,9 @@ export function PricePrediction({
       </div>
       <div>
         <div className="flex flex-wrap items-center gap-2 text-sm font-semibold">
-          <span>AI price prediction</span>
+          <span>{t("prediction.title")}</span>
           <span className="rounded-full bg-surface-2 px-2 py-0.5 text-[10px] font-medium text-muted">
-            {confidence}% confidence
+            {t("prediction.confidence", { confidence })}
           </span>
         </div>
         <p className="text-sm text-muted">{recommendation}</p>

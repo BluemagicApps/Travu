@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Car, SlidersHorizontal, Sparkles } from "lucide-react";
 import type { Car as CarOffer } from "@/lib/cars/types";
@@ -12,13 +13,14 @@ import { CarFilterDrawer } from "./results/CarFilterDrawer";
 
 const SEARCH_KEYS = new Set(["pickup", "dropoff", "pickupDate", "returnDate", "pickupTime", "dropoffTime", "driverAge", "maxPrice"]);
 
-const SORTS: { value: CarSort; label: string }[] = [
-  { value: "recommended", label: "Recommended" },
-  { value: "price", label: "Price (low to high)" },
-  { value: "rating", label: "Rating (high to low)" },
+const SORT_VALUES: { value: CarSort; labelKey: string }[] = [
+  { value: "recommended", labelKey: "sort.recommended" },
+  { value: "price", labelKey: "sort.priceLowToHigh" },
+  { value: "rating", labelKey: "sort.ratingHighToLow" },
 ];
 
 export function CarResultsView({ cars, capped = false }: { cars: CarOffer[]; capped?: boolean }) {
+  const t = useTranslations("cars");
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -41,7 +43,7 @@ export function CarResultsView({ cars, capped = false }: { cars: CarOffer[]; cap
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
-  const location = cars[0]?.pickupLocation ?? "your location";
+  const location = cars[0]?.pickupLocation ?? t("results.yourLocation");
 
   return (
     <div className="mt-6 grid gap-6 md:grid-cols-[260px_1fr]">
@@ -54,10 +56,10 @@ export function CarResultsView({ cars, capped = false }: { cars: CarOffer[]; cap
         {/* Summary + sort bar */}
         <div className="mb-3 flex flex-wrap items-center gap-3">
           <div className="min-w-0">
-            <h1 className="truncate text-lg font-bold">Cars in {location}</h1>
+            <h1 className="truncate text-lg font-bold">{t("results.carsIn", { location })}</h1>
             <p className="text-xs text-muted">
-              {visible.length} {visible.length === 1 ? "car" : "cars"}
-              {capped && visible.length === cars.length ? " (top results)" : ""}
+              {t("results.count", { count: visible.length })}
+              {capped && visible.length === cars.length ? ` ${t("results.topResults")}` : ""}
             </p>
           </div>
           <div className="ml-auto flex items-center gap-2">
@@ -66,17 +68,17 @@ export function CarResultsView({ cars, capped = false }: { cars: CarOffer[]; cap
               onClick={() => setDrawerOpen(true)}
               className="flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-sm font-medium md:hidden"
             >
-              <SlidersHorizontal className="h-4 w-4" /> Filters
+              <SlidersHorizontal className="h-4 w-4" /> {t("results.filters")}
             </button>
             <label className="flex items-center gap-1.5 text-sm">
-              <span className="hidden text-muted sm:inline">Sort</span>
+              <span className="hidden text-muted sm:inline">{t("results.sort")}</span>
               <select
                 value={state.sort}
                 onChange={(e) => setState((s) => ({ ...s, sort: e.target.value as CarSort }))}
                 className="rounded-lg border border-border bg-surface px-2 py-1.5 text-sm outline-none focus:border-sky-400"
               >
-                {SORTS.map((o) => (
-                  <option key={o.value} value={o.value}>{o.label}</option>
+                {SORT_VALUES.map((o) => (
+                  <option key={o.value} value={o.value}>{t(o.labelKey)}</option>
                 ))}
               </select>
             </label>
@@ -86,13 +88,13 @@ export function CarResultsView({ cars, capped = false }: { cars: CarOffer[]; cap
         {/* Member-prices banner */}
         <div className="mb-3 flex items-center gap-2 rounded-xl border border-border bg-surface-2 px-4 py-2.5 text-sm">
           <Sparkles className="h-4 w-4 shrink-0 text-price" />
-          <span>Members get OneTokenCash back on every rental — sign in to unlock member prices.</span>
+          <span>{t("results.memberBanner")}</span>
         </div>
 
         {visible.length === 0 ? (
           <div className="glass rounded-2xl p-10 text-center text-muted">
             <Car className="mx-auto h-8 w-8 text-price" />
-            <p className="mt-3">No cars match your filters. Try removing a few.</p>
+            <p className="mt-3">{t("results.noneMatchFilters")}</p>
           </div>
         ) : (
           <div className="space-y-3">

@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { PlaneTakeoff, Download, BedDouble, Sparkles } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db/prisma";
@@ -14,6 +15,7 @@ type Row =
   | { kind: "stay"; id: string; createdAt: Date; bookingRef: string; status: string; total: number; stay: Stay };
 
 export default async function DashboardPage() {
+  const t = await getTranslations("dashboard");
   const session = await auth();
   if (!session?.user) redirect("/login?callbackUrl=/dashboard");
 
@@ -46,17 +48,17 @@ export default async function DashboardPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">
-      <h1 className="text-2xl font-extrabold">Your trips</h1>
-      <p className="mt-1 text-sm text-muted">Signed in as {session.user.email}</p>
+      <h1 className="text-2xl font-extrabold">{t("heading")}</h1>
+      <p className="mt-1 text-sm text-muted">{t("signedInAs", { email: session.user.email ?? "" })}</p>
 
       <OneTokenCard membership={membership} />
 
       {rows.length === 0 ? (
         <div className="glass mt-6 rounded-2xl p-10 text-center text-muted">
           <PlaneTakeoff className="mx-auto h-8 w-8 text-price" />
-          <p className="mt-3">No bookings yet.</p>
+          <p className="mt-3">{t("noBookings")}</p>
           <Link href="/" className="btn-accent mt-4 inline-block rounded-xl px-5 py-2.5 text-sm font-semibold">
-            Start a search
+            {t("startSearch")}
           </Link>
         </div>
       ) : (
@@ -68,11 +70,12 @@ export default async function DashboardPage() {
   );
 }
 
-function OneTokenCard({
+async function OneTokenCard({
   membership,
 }: {
   membership: Awaited<ReturnType<typeof getMembership>>;
 }) {
+  const t = await getTranslations("dashboard");
   if (!membership) {
     return (
       <Link
@@ -81,9 +84,11 @@ function OneTokenCard({
       >
         <span className="flex items-center gap-2 text-sm">
           <Sparkles className="h-5 w-5 text-price" />
-          <span className="font-semibold">Join OneToken</span> — earn OneTokenCash on every trip.
+          {t.rich("joinOneToken", {
+            strong: (chunks) => <span className="font-semibold">{chunks}</span>,
+          })}
         </span>
-        <span className="btn-accent rounded-full px-4 py-1.5 text-xs font-bold">Join free</span>
+        <span className="btn-accent rounded-full px-4 py-1.5 text-xs font-bold">{t("joinFree")}</span>
       </Link>
     );
   }
@@ -99,8 +104,8 @@ function OneTokenCard({
           {cfg.name}
         </span>
         <span className="text-sm text-muted">
-          {membership.tripElements} trip elements
-          {next ? ` · ${next.remaining} to ${next.tier.name}` : " · top tier"}
+          {t("tripElements", { count: membership.tripElements })}
+          {next ? ` · ${t("toTier", { count: next.remaining, tier: next.tier.name })}` : ` · ${t("topTier")}`}
         </span>
       </div>
       <div className="text-right">
@@ -133,7 +138,8 @@ function OneTokenCard({
   );
 }
 
-function FlightRow({ row }: { row: Extract<Row, { kind: "flight" }> }) {
+async function FlightRow({ row }: { row: Extract<Row, { kind: "flight" }> }) {
+  const t = await getTranslations("dashboard");
   const flight = row.flight;
   const from = flight.segments[0];
   const to = flight.segments[flight.segments.length - 1];
@@ -163,20 +169,21 @@ function FlightRow({ row }: { row: Extract<Row, { kind: "flight" }> }) {
       </div>
       <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-border pt-3 text-sm">
         <span className="text-muted">
-          Ref <span className="font-semibold text-text">{row.bookingRef}</span>
+          {t("ref")} <span className="font-semibold text-text">{row.bookingRef}</span>
         </span>
         <a
           href={`/api/ticket/${row.bookingRef}`}
           className="flex items-center gap-1.5 font-medium text-price hover:underline"
         >
-          <Download className="h-3.5 w-3.5" /> e-ticket
+          <Download className="h-3.5 w-3.5" /> {t("eTicket")}
         </a>
       </div>
     </div>
   );
 }
 
-function StayRow({ row }: { row: Extract<Row, { kind: "stay" }> }) {
+async function StayRow({ row }: { row: Extract<Row, { kind: "stay" }> }) {
+  const t = await getTranslations("dashboard");
   const stay = row.stay;
   return (
     <div className="rounded-2xl border border-border bg-surface p-4">
@@ -187,7 +194,7 @@ function StayRow({ row }: { row: Extract<Row, { kind: "stay" }> }) {
         <div className="flex-1">
           <div className="font-bold">{stay.name}</div>
           <div className="text-sm text-muted">
-            {stay.city} · {stay.checkIn} → {stay.checkOut} · {stay.nights} night{stay.nights === 1 ? "" : "s"}
+            {stay.city} · {stay.checkIn} → {stay.checkOut} · {t("nights", { count: stay.nights })}
           </div>
         </div>
         <div className="text-right">
@@ -199,13 +206,13 @@ function StayRow({ row }: { row: Extract<Row, { kind: "stay" }> }) {
       </div>
       <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-border pt-3 text-sm">
         <Link href={`/stay-booking/${row.bookingRef}`} className="text-muted hover:text-text">
-          Ref <span className="font-semibold text-text">{row.bookingRef}</span>
+          {t("ref")} <span className="font-semibold text-text">{row.bookingRef}</span>
         </Link>
         <a
           href={`/api/voucher/${row.bookingRef}`}
           className="flex items-center gap-1.5 font-medium text-price hover:underline"
         >
-          <Download className="h-3.5 w-3.5" /> voucher
+          <Download className="h-3.5 w-3.5" /> {t("voucher")}
         </a>
       </div>
     </div>

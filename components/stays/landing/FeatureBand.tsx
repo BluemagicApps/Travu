@@ -1,13 +1,14 @@
+import { getTranslations } from "next-intl/server";
 import { Package, Building2, Sparkles } from "lucide-react";
 import type { ComponentType } from "react";
 
-const FEATURES: { icon: ComponentType<{ className?: string }>; title: string; desc: string }[] = [
-  { icon: Package, title: "Bundle & Save", desc: "Add a flight to your stay and save on both — book it all in one place." },
-  { icon: Building2, title: "One-stop travel shop", desc: "Hotels, homes, flights and more — everything for your trip, together." },
-  { icon: Sparkles, title: "Member prices & rewards", desc: "Unlock instant savings and earn rewards to spend on future travel." },
-];
-
-export function FeatureBand() {
+export async function FeatureBand() {
+  const t = await getTranslations("stays");
+  const FEATURES: { icon: ComponentType<{ className?: string }>; title: string; desc: string }[] = [
+    { icon: Package, title: t("features.bundleSave"), desc: t("features.bundleSaveDesc") },
+    { icon: Building2, title: t("features.oneStop"), desc: t("features.oneStopDesc") },
+    { icon: Sparkles, title: t("features.memberRewards"), desc: t("features.memberRewardsDesc") },
+  ];
   return (
     <section className="mx-auto max-w-6xl px-4 py-8">
       <div className="grid gap-4 rounded-2xl border border-border bg-surface-2 p-6 sm:grid-cols-3">

@@ -2,25 +2,28 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Check, Sparkles } from "lucide-react";
 
 /** Join CTA for the OneToken page. Redirects guests to login, enrols members. */
 export function JoinButton({
   authenticated,
   isMember,
-  label = "Join for free",
+  label,
 }: {
   authenticated: boolean;
   isMember: boolean;
   label?: string;
 }) {
+  const t = useTranslations("onetoken");
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const joinLabel = label ?? t("joinForFree");
 
   if (isMember) {
     return (
       <span className="inline-flex items-center gap-2 rounded-full bg-emerald-100 px-5 py-2.5 text-sm font-bold text-emerald-700">
-        <Check className="h-4 w-4" /> You&apos;re a OneToken member
+        <Check className="h-4 w-4" /> {t("memberBadge")}
       </span>
     );
   }
@@ -43,7 +46,7 @@ export function JoinButton({
       disabled={loading}
       className="btn-accent inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-bold disabled:opacity-70"
     >
-      <Sparkles className="h-4 w-4" /> {loading ? "Joining…" : label}
+      <Sparkles className="h-4 w-4" /> {loading ? t("joining") : joinLabel}
     </button>
   );
 }

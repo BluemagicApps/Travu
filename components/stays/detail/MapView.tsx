@@ -1,14 +1,16 @@
+import { getTranslations } from "next-intl/server";
 import { osmEmbedUrl, osmLinkUrl } from "@/lib/stays/detail";
 
 /**
  * Real interactive map via an embedded OpenStreetMap (pannable/zoomable, keyless,
  * no dependency). Falls back to a static panel only if coords are missing.
  */
-export function MapView({ lat, lng, name }: { lat: number; lng: number; name: string }) {
+export async function MapView({ lat, lng, name }: { lat: number; lng: number; name: string }) {
+  const t = await getTranslations("stays");
   if (!lat || !lng) {
     return (
       <div className="grid h-64 place-items-center rounded-2xl border border-border bg-surface-2 text-sm text-muted">
-        Map preview unavailable for this property.
+        {t("detail.mapUnavailable")}
       </div>
     );
   }
@@ -29,7 +31,7 @@ export function MapView({ lat, lng, name }: { lat: number; lng: number; name: st
           rel="noopener noreferrer"
           className="font-semibold text-price hover:underline"
         >
-          View in a larger map
+          {t("detail.viewLargerMap")}
         </a>
       </div>
     </div>

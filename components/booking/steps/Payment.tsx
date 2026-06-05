@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ShieldCheck } from "lucide-react";
 import type { PaymentInput } from "@/lib/booking/wizard-state";
 import { COUNTRIES } from "@/lib/constants/countries";
@@ -25,6 +26,7 @@ export function Payment({
   value: PaymentInput;
   onChange: (value: PaymentInput) => void;
 }) {
+  const t = useTranslations("flights");
   const brand = detectBrand(value.cardNumber);
   const [showUnsupported, setShowUnsupported] = useState(false);
 
@@ -38,9 +40,9 @@ export function Payment({
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-2xl font-extrabold">How would you like to pay?</h1>
+        <h1 className="text-2xl font-extrabold">{t("payment.title")}</h1>
         <p className="mt-2 flex items-center gap-2 text-xs text-amber-600">
-          <ShieldCheck className="h-3.5 w-3.5" /> Payment is simulated — no real charge is made.
+          <ShieldCheck className="h-3.5 w-3.5" /> {t("payment.simulatedNote")}
         </p>
       </div>
 
@@ -50,7 +52,7 @@ export function Payment({
         <div className="grid gap-3 sm:grid-cols-2">
           <label className="block sm:col-span-2">
             <span className={label}>
-              Name on card <span className="text-rose-500">*</span>
+              {t("payment.nameOnCard")} <span className="text-rose-500">*</span>
             </span>
             <input
               required
@@ -62,7 +64,7 @@ export function Payment({
 
           <label className="block sm:col-span-2">
             <span className={label}>
-              Debit/Credit card number <span className="text-rose-500">*</span>
+              {t("payment.cardNumber")} <span className="text-rose-500">*</span>
             </span>
             <div className="relative">
               {brand && (
@@ -84,14 +86,14 @@ export function Payment({
             </div>
             {isUnsupported(value.cardNumber) && (
               <span className="mt-1 block text-xs font-medium text-rose-500">
-                This card is not accepted on Travu. Please try another card.
+                {t("payment.cardNotAccepted")}
               </span>
             )}
           </label>
 
           <label className="block">
             <span className={label}>
-              Expiry date <span className="text-rose-500">*</span>
+              {t("payment.expiryDate")} <span className="text-rose-500">*</span>
             </span>
             <input
               required
@@ -104,7 +106,7 @@ export function Payment({
           </label>
           <label className="block">
             <span className={label}>
-              Security code <span className="text-rose-500">*</span>
+              {t("payment.securityCode")} <span className="text-rose-500">*</span>
             </span>
             <input
               required
@@ -120,11 +122,11 @@ export function Payment({
       </section>
 
       <section className="rounded-2xl border border-border bg-surface p-5">
-        <h2 className="text-sm font-semibold">Billing address</h2>
+        <h2 className="text-sm font-semibold">{t("payment.billingAddress")}</h2>
 
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           <label className="block sm:col-span-2">
-            <span className={label}>Country / Territory</span>
+            <span className={label}>{t("payment.countryTerritory")}</span>
             <select
               className={field}
               value={value.billingCountry}
@@ -140,7 +142,7 @@ export function Payment({
 
           <label className="block sm:col-span-2">
             <span className={label}>
-              Billing address 1 <span className="text-rose-500">*</span>
+              {t("payment.billingAddress1")} <span className="text-rose-500">*</span>
             </span>
             <input
               required
@@ -151,7 +153,7 @@ export function Payment({
             />
           </label>
           <label className="block sm:col-span-2">
-            <span className={label}>Billing address 2</span>
+            <span className={label}>{t("payment.billingAddress2")}</span>
             <input
               placeholder="Suite 400, Apt 4B"
               className={field}
@@ -161,7 +163,7 @@ export function Payment({
           </label>
           <label className="block">
             <span className={label}>
-              Postal code <span className="text-rose-500">*</span>
+              {t("payment.postalCode")} <span className="text-rose-500">*</span>
             </span>
             <input
               required
@@ -172,7 +174,7 @@ export function Payment({
           </label>
           <label className="block">
             <span className={label}>
-              City <span className="text-rose-500">*</span>
+              {t("payment.city")} <span className="text-rose-500">*</span>
             </span>
             <input
               required
@@ -186,9 +188,9 @@ export function Payment({
 
       <AlertModal
         open={showUnsupported}
-        title="Card not accepted"
-        message="This card is not accepted on Travu, Please try another card"
-        actionLabel="Try another card"
+        title={t("payment.cardNotAcceptedTitle")}
+        message={t("payment.cardNotAcceptedMessage")}
+        actionLabel={t("payment.tryAnotherCard")}
         onClose={() => setShowUnsupported(false)}
       />
     </div>

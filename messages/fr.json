@@ -13,7 +13,842 @@
     "policies": "Politiques",
     "help": "Aide"
   },
+  "footerLinks": {
+    "about": "À propos",
+    "oneTokenRewards": "Récompenses OneToken",
+    "listYourProperty": "Référencez votre logement",
+    "partnerships": "Partenariats",
+    "newsroom": "Salle de presse",
+    "searchFlights": "Rechercher des vols",
+    "hotelsAndStays": "Hôtels et hébergements",
+    "carRentals": "Location de voitures",
+    "trackABooking": "Suivre une réservation",
+    "myTrips": "Mes voyages",
+    "privacy": "Confidentialité",
+    "cookies": "Cookies",
+    "termsOfUse": "Conditions d'utilisation",
+    "accessibility": "Accessibilité",
+    "yourPrivacyChoices": "Vos choix de confidentialité",
+    "support": "Assistance",
+    "cancelYourBooking": "Annuler votre réservation",
+    "refundBasics": "Bases du remboursement",
+    "travelDocuments": "Documents de voyage",
+    "oneTokenTerms": "Conditions OneToken"
+  },
   "common": {
     "language": "Langue"
+  },
+  "home": {
+    "eyebrow": "Le voyage propulsé par l'IA, réinventé",
+    "tagline": "L'endroit unique pour aller partout.",
+    "subtitle": "Dites à Travu où vous voulez aller, comme vous le diriez à un ami. Vols et hébergements — on s'occupe de la recherche, du prix et de la réservation, de A à Z.",
+    "carsTagline": "Prenez la route à votre façon."
+  },
+  "homeSections": {
+    "bundleSave": {
+      "title": "Réservez ensemble, économisez",
+      "desc": "Économisez en réservant tout votre voyage d'un coup, ou au fil du temps."
+    },
+    "oneStopShop": {
+      "title": "Tout le voyage en un seul endroit",
+      "desc": "Réservez vols, hôtels et plus encore — tout au même endroit."
+    },
+    "oneTokenRewards": {
+      "title": "Récompenses OneToken",
+      "desc": "Profitez d'économies immédiates et gagnez du OneTokenCash pour vos prochains voyages."
+    },
+    "travelStyles": {
+      "heading": "Des hébergements pour chaque style de voyage",
+      "subtitle": "Prix moyens basés sur le mois en cours",
+      "avgPerNight": "moy. par nuit",
+      "style": {
+        "beach": "Plage",
+        "culture": "Culture",
+        "ski": "Ski",
+        "family": "Famille",
+        "wellness": "Bien-être et détente"
+      }
+    },
+    "exploreWorld": {
+      "heading": "Explorez un monde de voyages avec Travu"
+    },
+    "stayLikeLocal": {
+      "heading": "Vivez comme un local à {city}",
+      "propertyType": {
+        "privateHomes": "Maisons de vacances privées",
+        "apartments": "Appartements et résidences",
+        "cabins": "Chalets",
+        "cottages": "Cottages",
+        "villas": "Villas"
+      }
+    },
+    "promo": {
+      "eyebrow": "Réservez ensemble, économisez",
+      "heading": "Emportez des souvenirs, pas seulement des valises",
+      "body": "Ajoutez un hébergement à votre vol et profitez d'économies sur des forfaits parmi plus de 500 000 logements dans le monde. Tarifs membres applicables.",
+      "cta": "Commencer à planifier"
+    },
+    "flightDeals": {
+      "heading": "Offres de vols au départ de {city}",
+      "tagline": "Découvrez des offres de vols en temps réel vers des centaines de destinations dans le monde.",
+      "cta": "Voir toutes les offres de vols"
+    }
+  },
+  "search": {
+    "flights": "Rechercher des vols",
+    "search": "Rechercher",
+    "aiDivider": "ou dites simplement à notre IA ce qu'il vous faut",
+    "askAi": "Demander à l'IA",
+    "aiPlaceholderStays": "Demandez avec vos mots — ex. « hôtel 5 étoiles à Rome pour 3 nuits avec piscine »",
+    "aiPlaceholderCars": "Demandez avec vos mots — ex. « SUV à Miami le week-end prochain, automatique »"
+  },
+  "auth": {
+    "loginTitle": "Bon retour parmi nous",
+    "loginSubtitle": "Connectez-vous pour gérer vos voyages.",
+    "signupTitle": "Créez votre compte",
+    "signupSubtitle": "Réservez des vols et suivez vos voyages avec Travu.",
+    "name": "Nom",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "signIn": "Se connecter",
+    "signingIn": "Connexion…",
+    "createAccount": "Créer un compte",
+    "creating": "Création…",
+    "newToTravu": "Nouveau sur Travu ?",
+    "createAccountLink": "Créer un compte",
+    "alreadyHaveAccount": "Vous avez déjà un compte ?",
+    "invalidCredentials": "E-mail ou mot de passe incorrect.",
+    "emailTaken": "Cet e-mail est déjà enregistré.",
+    "invalidSignup": "Veuillez utiliser un e-mail valide et un mot de passe d'au moins 8 caractères."
+  },
+  "track": {
+    "heading": "Suivre une réservation",
+    "intro": "Saisissez votre référence de réservation Travu (ex. <ref>TRV-AB12CD</ref>) pour voir le statut de votre voyage en temps réel.",
+    "placeholder": "TRV-AB12CD",
+    "trackButton": "Suivre",
+    "invalidRef": "Veuillez saisir une référence au format TRV-XXXXXX.",
+    "notFound": "Aucune réservation trouvée pour {ref}.",
+    "lookupError": "Impossible de vérifier cela pour le moment.",
+    "networkError": "Erreur réseau — veuillez réessayer.",
+    "bookingReference": "Référence de réservation",
+    "status": "Statut",
+    "direct": "Direct",
+    "stops": "{count, plural, one {# escale} other {# escales}}",
+    "travellers": "Voyageurs :",
+    "fare": "Tarif :",
+    "estimatedArrival": "Arrivée estimée :",
+    "nextChangeAt": "Prochaine mise à jour à",
+    "onDate": "le {date}"
+  },
+  "dashboard": {
+    "heading": "Vos voyages",
+    "signedInAs": "Connecté en tant que {email}",
+    "noBookings": "Aucune réservation pour l'instant.",
+    "startSearch": "Lancer une recherche",
+    "joinOneToken": "<strong>Rejoignez OneToken</strong> — gagnez du OneTokenCash à chaque voyage.",
+    "joinFree": "Adhérer gratuitement",
+    "tripElements": "{count} éléments de voyage",
+    "toTier": "{count} avant {tier}",
+    "topTier": "niveau supérieur",
+    "ref": "Réf.",
+    "eTicket": "billet électronique",
+    "voucher": "bon",
+    "nights": "{count, plural, one {# nuit} other {# nuits}}"
+  },
+  "onetoken": {
+    "badge": "Travu OneToken",
+    "heroTitle": "Le <gradient>programme de fidélité</gradient> voyage gratuit de Travu",
+    "heroSubtitle": "Profitez d'économies immédiates avec les tarifs membres et gagnez du OneTokenCash à utiliser pour vos prochains voyages.",
+    "joinFree": "Adhérez, c'est gratuit",
+    "joinEarn": "Adhérez et commencez à gagner",
+    "joinForFree": "Adhérer gratuitement",
+    "joining": "Adhésion…",
+    "memberBadge": "Vous êtes membre OneToken",
+    "valueProps": {
+      "savings": {
+        "title": "Des économies sur plus de 1,5 million d'hôtels, logements et voitures",
+        "desc": "Économisez 10 % ou plus avec les tarifs membres sur des centaines de milliers d'hébergements dans le monde."
+      },
+      "earnUse": {
+        "title": "Gagnez et utilisez vos récompenses en plus d'endroits",
+        "desc": "OneTokenCash est votre monnaie de récompense — 1 $ en OneTokenCash vaut 1 $ à utiliser sur les vols et hébergements éligibles."
+      },
+      "perks": {
+        "title": "Profitez d'encore plus d'avantages membres",
+        "desc": "Montez en niveau pour des surclassements de chambre, le suivi des prix gratuit, une assistance prioritaire et des avantages VIP."
+      }
+    },
+    "tripElementsHeading": "Débloquez facilement de nouveaux avantages en montant en niveau",
+    "tripElementsSubtitle": "Soyez récompensé pour chaque élément de voyage réservé, ce qui vous aide à progresser plus vite dans les niveaux — en plus du OneTokenCash gagné.",
+    "tripElementsLabel": "Vous obtenez un élément de voyage pour chaque…",
+    "tripElement": {
+      "hotelRoomNight": "Nuit en chambre d'hôtel",
+      "vacationRentalNight": "Nuit en location de vacances",
+      "flightTicket": "Billet d'avion",
+      "carRentalDay": "Jour de location de voiture",
+      "cruiseCabinNight": "Nuit en cabine de croisière",
+      "activityTicket": "Billet d'activité"
+    },
+    "tiersHeading": "Profitez d'encore plus d'avantages en progressant dans les niveaux",
+    "tierRange": {
+      "blue": "0 à 4 éléments de voyage",
+      "silver": "5 à 14 éléments de voyage",
+      "gold": "15 à 29 éléments de voyage",
+      "platinum": "30+ éléments de voyage"
+    },
+    "savings": "Économies",
+    "savingsDesc": "Économisez {pct} % ou plus avec les tarifs membres sur plus de 10 000 hôtels.",
+    "rewards": "Récompenses",
+    "rewardsDesc": "Gagnez {pct} % en OneTokenCash sur les réservations éligibles.",
+    "perks": "Avantages",
+    "cashHeading": "OneTokenCash — une monnaie de récompense que vous utilisez où vous voulez",
+    "cashSubtitle": "OneTokenCash est à vous pour réserver des hôtels, des vols et plus encore sur Travu. 1 $ en OneTokenCash vaut 1 $ à utiliser sur les réservations éligibles, tous les jours de l'année — sans dates bloquées.",
+    "cashEarn": "Gagnez jusqu'à 4 % en OneTokenCash pour chaque dollar dépensé",
+    "cashEarnNote": "Vous gagnez davantage en montant en niveau.",
+    "faqHeading": "Découvrez-en encore plus sur OneToken",
+    "faq": {
+      "join": {
+        "q": "Comment puis-je rejoindre OneToken ?",
+        "a": "Cliquez ici pour rejoindre OneToken — c'est gratuit et facile à démarrer. Connectez-vous ou créez un compte Travu, puis touchez Adhérer gratuitement sur cette page."
+      },
+      "howItWorks": {
+        "q": "Comment fonctionne le programme de fidélité OneToken ?",
+        "a": "OneToken est notre programme de fidélité où les membres bénéficient de tarifs membres et gagnent du OneTokenCash sur les réservations éligibles. 1 $ en OneTokenCash équivaut à 1 $ à utiliser pour voyager. En réservant des voyages, vous accumulez des éléments de voyage qui vous font monter dans les niveaux — Blue, Silver, Gold et Platinum."
+      },
+      "expire": {
+        "q": "Le OneTokenCash expire-t-il ?",
+        "a": "Le OneTokenCash gagné sur les réservations n'expire pas si vous effectuez une réservation éligible au moins une fois tous les 18 mois."
+      },
+      "flights": {
+        "q": "Puis-je utiliser le OneTokenCash sur les vols ?",
+        "a": "Oui. Le OneTokenCash peut être utilisé au moment du paiement sur les réservations de vols et d'hébergements éligibles, sous forme de remise immédiate sur le montant dû."
+      },
+      "tierStatus": {
+        "q": "Comment atteindre un niveau supérieur avec OneToken ?",
+        "a": "Vous gagnez un élément de voyage pour chaque nuit en chambre d'hôtel, nuit en location de vacances, billet d'avion, jour de location de voiture, nuit en cabine de croisière et billet d'activité réservé. Accumulez-en 5 pour débloquer Silver, 15 pour Gold et 30 pour Platinum."
+      },
+      "free": {
+        "q": "OneToken est-il gratuit ?",
+        "a": "Oui — rejoindre OneToken est entièrement gratuit."
+      }
+    },
+    "tierMember": "Membre {tier}",
+    "tripElementsCount": "{count} éléments de voyage",
+    "yourOneTokenCash": "Votre OneTokenCash",
+    "moreToReach": "{count, plural, one {Encore # élément de voyage pour atteindre {tier}.} other {Encore # éléments de voyage pour atteindre {tier}.}}"
+  },
+  "stays": {
+    "results": {
+      "noneFound": "Aucun hébergement trouvé — essayez d'autres dates ou une ville voisine.",
+      "noMatch": "Aucun hébergement ne correspond à vos filtres. Essayez d'en retirer quelques-uns.",
+      "yourDestination": "votre destination",
+      "propertyNoun": "{count, plural, one {logement} other {logements}}",
+      "sortBy": "Trier par",
+      "kindAllStays": "Tous les hébergements",
+      "kindHotels": "Hôtels",
+      "kindHomes": "Logements",
+      "sortRecommended": "Recommandé",
+      "sortPrice": "Prix (croissant)",
+      "sortRating": "Note des voyageurs",
+      "sortDistance": "Distance"
+    },
+    "landing": {
+      "lastMinuteDeals": "Offres week-end de dernière minute",
+      "everyTravelStyle": "Des hébergements pour chaque style de voyage"
+    },
+    "card": {
+      "vipAccess": "Accès VIP",
+      "hotel": "Hôtel",
+      "entireBy": "{type} entier par {host}",
+      "sleeps": "Couchage pour {count}",
+      "beds": "{count, plural, one {# lit} other {# lits}}",
+      "baths": "{count, plural, one {# salle de bain} other {# salles de bain}}",
+      "reviews": "{count} avis",
+      "freeCancellation": "Annulation gratuite",
+      "nonRefundable": "Non remboursable",
+      "payLater": "Réservez maintenant, payez plus tard",
+      "percentOff": "{pct} % de remise",
+      "perNight": "/ nuit",
+      "total": "total",
+      "totalInclTaxes": "Total taxes et frais inclus",
+      "totalInclTaxesInline": "total · taxes et frais inclus",
+      "viewDeal": "Voir l'offre →"
+    },
+    "detail": {
+      "seeAllProperties": "Voir tous les logements",
+      "share": "Partager",
+      "save": "Enregistrer",
+      "datesAvailable": "Vos dates sont disponibles",
+      "bedrooms": "{count, plural, one {# chambre} other {# chambres}}",
+      "bathrooms": "{count, plural, one {# salle de bain} other {# salles de bain}}",
+      "sqft": "{count} pi²",
+      "exploreArea": "Explorer les environs",
+      "popularAmenities": "Équipements populaires",
+      "aboutProperty": "À propos de ce logement",
+      "privateHost": "Hôte privé (Vrbo)",
+      "propertyHost": "Hôte du logement",
+      "policies": "Politiques",
+      "afterTime": "Après {time}",
+      "beforeTime": "Avant {time}",
+      "cancellation": "Annulation",
+      "thingsToDo": "Activités populaires à proximité",
+      "similarProperties": "Logements similaires",
+      "faq": "Questions fréquentes",
+      "mapUnavailable": "Aperçu de la carte indisponible pour ce logement.",
+      "viewLargerMap": "Voir sur une carte plus grande",
+      "morePhotos": "+{count} photos",
+      "nights": "{count, plural, one {# nuit} other {# nuits}}",
+      "nightsSleeps": "{nights, plural, one {# nuit} other {# nuits}} · couchage pour {sleeps}",
+      "totalNights": "total · {count, plural, one {# nuit} other {# nuits}}",
+      "inclTaxes": "taxes et frais inclus",
+      "reserve": "Réserver",
+      "notChargedYet": "Vous ne serez pas encore débité"
+    },
+    "nav": {
+      "overview": "Aperçu",
+      "amenities": "Équipements",
+      "reviews": "Avis"
+    },
+    "reviews": {
+      "guestReviews": "Avis des voyageurs",
+      "noReviews": "Aucun avis pour l'instant — soyez le premier à évaluer ce logement après votre séjour.",
+      "cleanliness": "Propreté",
+      "staff": "Personnel",
+      "amenities": "Équipements",
+      "condition": "État"
+    },
+    "promo": {
+      "exploreMore": "Explorez davantage avec {brand}",
+      "memberRates": "Tarifs membres et offres exclusives sur une sélection de logements {brand}."
+    },
+    "adRail": {
+      "discover": "Découvrir",
+      "diveInto": "Plongez dans les sites, la gastronomie et la culture de {city} — réservez votre hébergement et partez à l'aventure.",
+      "memberPrices": "Tarifs membres",
+      "signInToUnlock": "Connectez-vous pour profiter d'économies immédiates sur une sélection d'hébergements."
+    },
+    "features": {
+      "bundleSave": "Réservez ensemble, économisez",
+      "bundleSaveDesc": "Ajoutez un vol à votre hébergement et économisez sur les deux — réservez tout au même endroit.",
+      "oneStop": "Tout le voyage en un seul endroit",
+      "oneStopDesc": "Hôtels, logements, vols et plus encore — tout pour votre voyage, réuni.",
+      "memberRewards": "Tarifs et récompenses membres",
+      "memberRewardsDesc": "Profitez d'économies immédiates et gagnez des récompenses pour vos prochains voyages."
+    },
+    "filters": {
+      "filters": "Filtres",
+      "searchByName": "Rechercher par nom de logement",
+      "searchByNamePlaceholder": "ex. Grand",
+      "totalPrice": "Prix total",
+      "popularFilters": "Filtres populaires",
+      "guestRating": "Note des voyageurs",
+      "ratingAny": "Toutes",
+      "ratingWonderful": "Excellent 9+",
+      "ratingVeryGood": "Très bien 8+",
+      "ratingGood": "Bien 7+",
+      "starRating": "Nombre d'étoiles",
+      "stars": "{count} étoiles",
+      "propertyType": "Type de logement",
+      "typeAll": "Tous",
+      "typeHotelsResorts": "Hôtels et complexes",
+      "typeHomesApartments": "Logements et appartements",
+      "propertyAmenities": "Équipements du logement",
+      "roomAmenities": "Équipements de la chambre",
+      "roomViews": "Vues depuis la chambre",
+      "propertyBrand": "Marque du logement",
+      "paymentType": "Type de paiement",
+      "cancellationOptions": "Options d'annulation",
+      "travelerExperience": "Expérience voyageur",
+      "mealPlans": "Formules repas",
+      "numberOfBedrooms": "Nombre de chambres",
+      "moreOptions": "Plus d'options",
+      "onlyAvailable": "Afficher uniquement les logements disponibles",
+      "beachAccess": "Accès à la plage",
+      "memberDeals": "Offres et remises membres",
+      "noneAvailable": "Aucun disponible",
+      "seeLess": "Voir moins",
+      "seeMore": "Voir plus ({count})",
+      "showProperties": "Afficher {count, plural, one {# logement} other {# logements}}",
+      "labels": {
+        "1": "1 chambre",
+        "2": "2 chambres ou plus",
+        "wifi": "Wi-Fi gratuit",
+        "ac": "Climatisation",
+        "pool": "Piscine",
+        "parking": "Parking",
+        "gym": "Salle de sport",
+        "spa": "Spa",
+        "bar": "Bar",
+        "breakfast": "Petit-déjeuner",
+        "pet_friendly": "Animaux acceptés",
+        "pay_later": "Réservez maintenant, payez plus tard",
+        "fully_refundable": "Entièrement remboursable",
+        "business": "Idéal pour les affaires",
+        "family": "Adapté aux familles",
+        "budget": "Économique",
+        "adults_only": "Réservé aux adultes",
+        "studio": "Studio"
+      }
+    },
+    "booking": {
+      "completeBooking": "Finalisez votre réservation",
+      "whoCheckingIn": "Qui effectue l'enregistrement ?",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "emailAddress": "Adresse e-mail",
+      "countryRegion": "Pays / région",
+      "phoneNumber": "Numéro de téléphone",
+      "paymentDetails": "Détails du paiement",
+      "secureTransaction": "Transaction sûre et sécurisée. Vos informations personnelles sont protégées.",
+      "simulatedNoCharge": "simulé — aucun débit réel",
+      "nameOnCard": "Nom sur la carte",
+      "cardNumber": "Numéro de carte",
+      "expiration": "Expiration",
+      "expiryPlaceholder": "MM/AA",
+      "securityCode": "Code de sécurité",
+      "billingAddress": "Adresse de facturation",
+      "address": "Adresse",
+      "city": "Ville",
+      "stateProvince": "État / province",
+      "zipPostal": "Code postal",
+      "protectYourStay": "Protégez votre séjour",
+      "travuProtect": "Travu Protect",
+      "travuProtectDesc": "Protection en cas d'annulation, couverture en cas d'interruption de voyage et assistance d'urgence 24h/24 et 7j/7 pour ce séjour.",
+      "noProtection": "Aucune protection — je comprends que je peux être responsable des frais d'annulation.",
+      "cancellationPolicy": "Politique d'annulation",
+      "cancellationRefundable": "Entièrement remboursable en cas d'annulation plus de 48 heures avant l'enregistrement. Au-delà, la première nuit n'est pas remboursable.",
+      "cancellationNonRefundable": "Ce tarif n'est pas remboursable. Les modifications ou annulations ne donnent droit à aucun remboursement.",
+      "specialInstructions": "Instructions spéciales pour l'enregistrement",
+      "specialInstructionsPlaceholder": "Demandes éventuelles pour l'hôte (facultatif)",
+      "termsNotice": "En sélectionnant Réserver, j'accepte les Conditions d'utilisation et la Déclaration de confidentialité de Travu, et je confirme qu'il s'agit d'une réservation simulée à des fins de démonstration.",
+      "processing": "Traitement…",
+      "bookNow": "Réserver",
+      "encryptionNotice": "Notre chiffrement sécurisé protège vos données personnelles à chaque étape.",
+      "steps": {
+        "reviewing": "Vérification de votre réservation",
+        "verifying": "Vérification des détails du voyageur",
+        "confirming": "Confirmation auprès du logement",
+        "confirmed": "Réservation confirmée"
+      },
+      "errors": {
+        "invalidCard": "Saisissez un numéro de carte valide.",
+        "bookingFailed": "Impossible de finaliser la réservation. Veuillez réessayer."
+      }
+    },
+    "summary": {
+      "checkIn": "Arrivée",
+      "checkOut": "Départ",
+      "room": "Chambre",
+      "rooms": "Chambres",
+      "nightsRooms": "{nights, plural, one {# nuit} other {# nuits}} × {rooms, plural, one {# chambre} other {# chambres}}",
+      "taxes": "Taxes",
+      "serviceFee": "Frais de service",
+      "total": "Total",
+      "payToday": "À payer aujourd'hui"
+    },
+    "voucher": {
+      "bookingConfirmed": "Réservation confirmée",
+      "print": "Imprimer",
+      "downloadPdf": "Télécharger le PDF",
+      "confirmationVoucher": "Bon de confirmation de séjour",
+      "confirmationNo": "N° de confirmation",
+      "refundable": "Remboursable",
+      "afterTime": "Après {time}",
+      "beforeTime": "Avant {time}",
+      "stay": "Séjour",
+      "nightsRoomsValue": "{nights, plural, one {# nuit} other {# nuits}} · {rooms, plural, one {# chambre} other {# chambres}}",
+      "guestsCount": "{count, plural, one {# voyageur} other {# voyageurs}}",
+      "leadGuest": "Voyageur principal",
+      "guest": "Voyageur",
+      "totalPaid": "Total payé",
+      "presentAtCheckIn": "Présentez ce bon à l'enregistrement",
+      "viewAllTrips": "Voir tous mes voyages"
+    },
+    "waiting": {
+      "completingBooking": "Finalisation de votre réservation",
+      "pleaseWait": "Veuillez patienter pendant que nous confirmons votre réservation auprès du logement. Cela peut prendre quelques instants.",
+      "securingRoom": "Réservation de votre chambre…"
+    }
+  },
+  "cars": {
+    "landing": {
+      "rentInCity": "Louer une voiture à {city}",
+      "topDealsInCity": "Meilleures offres à {city}"
+    },
+    "results": {
+      "noneFound": "Aucune voiture trouvée — essayez d'autres dates ou un lieu voisin.",
+      "noneMatchFilters": "Aucune voiture ne correspond à vos filtres. Essayez d'en retirer quelques-uns.",
+      "yourLocation": "votre lieu",
+      "carsIn": "Voitures à {location}",
+      "count": "{count, plural, one {# voiture} other {# voitures}}",
+      "topResults": "(meilleurs résultats)",
+      "filters": "Filtres",
+      "sort": "Trier",
+      "memberBanner": "Les membres reçoivent du OneTokenCash sur chaque location — connectez-vous pour profiter des tarifs membres."
+    },
+    "sort": {
+      "recommended": "Recommandé",
+      "priceLowToHigh": "Prix (croissant)",
+      "ratingHighToLow": "Note (décroissante)"
+    },
+    "card": {
+      "percentOff": "{pct} % de remise",
+      "deal": "Offre",
+      "previousPhoto": "Photo précédente",
+      "nextPhoto": "Photo suivante",
+      "automatic": "Automatique",
+      "manual": "Manuelle",
+      "auto": "Auto",
+      "seats": "{count} places",
+      "bags": "{count} bagages",
+      "doors": "{count} portes",
+      "aircon": "Clim.",
+      "mileageLabel": "Kilométrage {mileage}",
+      "freeCancellation": "Annulation gratuite",
+      "nonRefundable": "Non remboursable",
+      "unlimitedMileage": "Kilométrage illimité",
+      "perDay": "/ jour",
+      "perDayVendor": "/ jour · {vendor}",
+      "totalForDays": "total · {days, plural, one {# jour} other {# jours}}",
+      "reserve": "Réserver →"
+    },
+    "filters": {
+      "close": "Fermer les filtres",
+      "showCount": "Afficher {count, plural, one {# voiture} other {# voitures}}",
+      "noneAvailable": "Aucun disponible",
+      "seeLess": "Voir moins",
+      "seeMore": "Voir plus ({count})",
+      "searchByCarOrCompany": "Rechercher par voiture ou société",
+      "searchPlaceholder": "ex. Sixt ou RAV4",
+      "totalPrice": "Prix total",
+      "popularFilters": "Filtres populaires",
+      "rating": "Note",
+      "ratingAny": "Toutes",
+      "ratingExceptional": "Exceptionnel 9+",
+      "ratingVeryGood": "Très bien 8+",
+      "ratingGood": "Bien 7+",
+      "carType": "Type de voiture",
+      "capacity": "Capacité",
+      "rentalCompany": "Société de location",
+      "transmission": "Boîte de vitesses",
+      "mileage": "Kilométrage",
+      "moreOptions": "Plus d'options",
+      "freeCancellationOnly": "Annulation gratuite uniquement",
+      "memberDeals": "Offres et remises membres",
+      "option": {
+        "automatic": "Automatique",
+        "manual": "Manuelle",
+        "unlimitedMileage": "Kilométrage illimité",
+        "limitedMileage": "Kilométrage limité",
+        "airConditioning": "Climatisation",
+        "freeCancellation": "Annulation gratuite",
+        "seats4": "4 places",
+        "seats5": "5 places",
+        "seats7plus": "7 places ou plus"
+      }
+    },
+    "steps": {
+      "review": "Vérifier",
+      "driver": "Conducteur",
+      "payment": "Paiement"
+    },
+    "progress": {
+      "reviewing": "Vérification de votre réservation",
+      "verifyingDriver": "Vérification des détails du conducteur",
+      "confirmingCompany": "Confirmation auprès de la société de location",
+      "confirmed": "Réservation confirmée"
+    },
+    "booking": {
+      "back": "Retour",
+      "reservationError": "Impossible de finaliser la réservation. Veuillez réessayer.",
+      "reviewYourCar": "Vérifiez votre voiture",
+      "protectYourRental": "Protégez votre location",
+      "fullProtection": "Protection complète",
+      "fullProtectionDesc": "Couverture dommages et vol sans franchise, plus assistance routière 24h/24 et 7j/7 pour toute votre location.",
+      "noProtection": "Aucune protection supplémentaire — je m'appuierai sur la couverture de base de la société de location.",
+      "continueToDriver": "Continuer vers les détails du conducteur",
+      "driverDetails": "Détails du conducteur",
+      "continueToPayment": "Continuer vers le paiement",
+      "processing": "Traitement…",
+      "reserveNow": "Réserver maintenant",
+      "secureNote": "Vos données sont protégées par un chiffrement sécurisé."
+    },
+    "driver": {
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "age": "Âge du conducteur",
+      "licenseNo": "N° de permis de conduire",
+      "email": "E-mail",
+      "countryCode": "Indicatif pays",
+      "phone": "Numéro de téléphone",
+      "flightNo": "Numéro de vol (facultatif)",
+      "flightNoPlaceholder": "ex. BA245 — utile si votre vol est retardé",
+      "youngDriverNote": "Des frais conducteur jeune s'appliquent pour les conducteurs de moins de 25 ans — ils sont inclus dans votre total."
+    },
+    "summary": {
+      "pickUp": "Prise en charge",
+      "dropOff": "Restitution",
+      "transmission": "Boîte de vitesses",
+      "mileage": "Kilométrage",
+      "timesDays": "× {days, plural, one {# jour} other {# jours}}",
+      "taxes": "Taxes",
+      "bookingFee": "Frais de réservation",
+      "youngDriverFee": "Frais conducteur jeune",
+      "total": "Total",
+      "payToday": "À payer aujourd'hui"
+    },
+    "confirmation": {
+      "title": "Réservation confirmée",
+      "print": "Imprimer",
+      "voucherSubtitle": "Bon de confirmation de location de voiture",
+      "confirmationNo": "N° de confirmation",
+      "rental": "Location",
+      "driver": "Conducteur",
+      "days": "{days, plural, one {# jour} other {# jours}}",
+      "daysRental": "{days, plural, one {location de # jour} other {location de # jours}}",
+      "totalPaid": "Total payé",
+      "barcodeAlt": "Code-barres de la réservation {ref}",
+      "presentVoucher": "Présentez ce bon au comptoir de location",
+      "viewAllTrips": "Voir tous mes voyages"
+    }
+  },
+  "flights": {
+    "perTraveller": "par voyageur",
+    "stops": {
+      "nonstop": "sans escale",
+      "direct": "Direct",
+      "directLower": "direct",
+      "count": "{count, plural, one {# escale} other {# escales}}"
+    },
+    "results": {
+      "title": "Résultats de recherche",
+      "flightsFound": "{count} vols trouvés",
+      "departingFlights": "Vols aller",
+      "returningFlights": "Vols retour",
+      "legLabel": "Segment {index} : {origin} → {dest}",
+      "emptyState": "Aucun vol pour l'instant — choisissez un itinéraire et une date ci-dessus pour lancer la recherche.",
+      "noMatchLeg": "Aucun vol ne correspond à vos filtres pour ce segment.",
+      "noMatchFilters": "Aucun vol ne correspond à vos filtres — essayez d'en retirer quelques-uns.",
+      "searching": "Recherche de tarifs en direct auprès des compagnies…",
+      "showMore": "Afficher plus de résultats",
+      "moreCount": "({count} de plus)"
+    },
+    "filters": {
+      "filterBy": "Filtrer par",
+      "stops": "Escales",
+      "any": "Toutes",
+      "upToOneStop": "Jusqu'à 1 escale",
+      "airlines": "Compagnies aériennes",
+      "from": "À partir de"
+    },
+    "sort": {
+      "sortBy": "Trier par",
+      "recommended": "Recommandé",
+      "cheapest": "Le moins cher",
+      "fastest": "Le plus rapide"
+    },
+    "card": {
+      "seatsLeft": "Plus que {count} à ce prix",
+      "select": "Sélectionner",
+      "flightDetails": "Détails du vol"
+    },
+    "detail": {
+      "backToResults": "← Retour aux résultats",
+      "continueToBook": "Continuer pour réserver"
+    },
+    "fare": {
+      "selectFareTo": "Sélectionner le tarif vers {dest}",
+      "close": "Fermer",
+      "operatedBy": "Ce vol est opéré par {carrier}.",
+      "cabin": "Cabine : {cabin}",
+      "select": "Sélectionner"
+    },
+    "perks": {
+      "seatChoiceIncluded": "Choix du siège inclus",
+      "seatChoiceFee": "Choix du siège payant",
+      "handBaggage": "Bagage à main inclus ({kg} kg)",
+      "checkedBag": "{count} × bagage en soute ({kg} kg chacun)",
+      "checkedBags": "{count, plural, one {# bagage en soute} other {# bagages en soute}} ({kg} kg chacun)",
+      "checkedBagFee": "Bagage en soute payant",
+      "refundable": "Remboursable",
+      "nonRefundable": "Non remboursable",
+      "freeChanges": "Modifications gratuites",
+      "changeFee": "Frais de modification applicables",
+      "noChanges": "Modifications non autorisées"
+    },
+    "prediction": {
+      "title": "Prédiction de prix par IA",
+      "confidence": "{confidence} % de confiance"
+    },
+    "priceTracking": {
+      "title": "Suivi des prix",
+      "currentLowest": "Prix le plus bas actuel :"
+    },
+    "fareBreakdown": {
+      "title": "Détail du tarif",
+      "baseFare": "Tarif de base",
+      "baseFareMultiple": "Tarif de base × {count}",
+      "taxes": "Taxes",
+      "fees": "Frais",
+      "total": "Total"
+    },
+    "segments": {
+      "layoverIn": "Escale à {iata}"
+    },
+    "steps": {
+      "reviewTrip": "Vérifier le voyage",
+      "travellers": "Voyageurs",
+      "payment": "Paiement",
+      "reviewAndBook": "Vérifier et réserver"
+    },
+    "sidebar": {
+      "businessFlight": "Vol en classe affaires",
+      "oneWayFlight": "Vol aller simple",
+      "priceSummary": "Récapitulatif de votre prix",
+      "travellerAdult": "Voyageur {index} · Adulte",
+      "taxesFees": "Taxes et frais",
+      "nextCheckout": "Suivant : Paiement",
+      "nextPayment": "Suivant : Paiement",
+      "nextReview": "Suivant : Vérification",
+      "buyNow": "Acheter maintenant",
+      "next": "Suivant"
+    },
+    "progress": {
+      "reviewing": "Vérification de la demande de réservation",
+      "verifying": "Vérification des données de la demande",
+      "bookingTicket": "Réservation du billet via l'API de la compagnie",
+      "approved": "Réservation approuvée",
+      "secureBooking": "Réservation sécurisée {brand}",
+      "keepWindowOpen": "Veuillez garder cette fenêtre ouverte…"
+    },
+    "bookingForm": {
+      "travellerDetails": "Détails du voyageur",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "dateOfBirth": "Date de naissance",
+      "payment": "Paiement",
+      "simulatedCharge": "simulé — aucun débit réel",
+      "cardNumber": "Numéro de carte",
+      "expiry": "Expiration",
+      "cvc": "CVC",
+      "invalidCard": "Saisissez un numéro de carte valide.",
+      "bookingFailed": "Impossible de finaliser la réservation. Veuillez réessayer.",
+      "networkError": "Erreur réseau — veuillez réessayer.",
+      "processing": "Traitement…",
+      "pay": "Payer",
+      "andConfirm": "et confirmer"
+    },
+    "reviewTrip": {
+      "title": "Vérifiez votre voyage",
+      "route": "{origin} à {dest}",
+      "changeFlight": "Changer de vol",
+      "yourFare": "Votre tarif : {fare}",
+      "seatsAndBags": "Sièges et bagages",
+      "seatsAndBagsNote": "Vous pouvez sélectionner des sièges et ajouter des bagages à ce voyage après la réservation depuis votre tableau de bord."
+    },
+    "travellers": {
+      "title": "Réservation sécurisée — quelques minutes suffisent",
+      "nameMatchNote": "Les noms des voyageurs doivent correspondre exactement à une pièce d'identité officielle avec photo.",
+      "required": "Obligatoire",
+      "travellerOf": "Voyageur {index} sur {total}",
+      "firstName": "Prénom",
+      "middleName": "Deuxième prénom",
+      "surname": "Nom de famille",
+      "passportCountry": "Pays du passeport",
+      "passportNumber": "Numéro de passeport",
+      "passportFormatError": "Format attendu comme {example} pour ce pays.",
+      "dateOfBirth": "Date de naissance",
+      "dobDay": "Jour de naissance",
+      "dobMonth": "Mois de naissance",
+      "dobYear": "Année de naissance",
+      "day": "Jour",
+      "month": "Mois",
+      "year": "Année",
+      "contactDetails": "Coordonnées",
+      "contactNote": "Nous enverrons votre billet électronique et toute mise à jour à cette adresse e-mail.",
+      "emailAddress": "Adresse e-mail",
+      "marketingOptIn": "Envoyez-moi des mises à jour de voyage et des offres.",
+      "countryCode": "Indicatif pays",
+      "phoneNumber": "Numéro de téléphone",
+      "phoneDigitsExact": "Les numéros de ce pays comportent {count} chiffres.",
+      "phoneDigitsRange": "Les numéros de ce pays comportent {min} à {max} chiffres."
+    },
+    "payment": {
+      "title": "Comment souhaitez-vous payer ?",
+      "simulatedNote": "Le paiement est simulé — aucun débit réel n'est effectué.",
+      "nameOnCard": "Nom sur la carte",
+      "cardNumber": "Numéro de carte de débit/crédit",
+      "cardNotAccepted": "Cette carte n'est pas acceptée sur Travu. Veuillez essayer une autre carte.",
+      "expiryDate": "Date d'expiration",
+      "securityCode": "Code de sécurité",
+      "billingAddress": "Adresse de facturation",
+      "countryTerritory": "Pays / Territoire",
+      "billingAddress1": "Adresse de facturation 1",
+      "billingAddress2": "Adresse de facturation 2",
+      "postalCode": "Code postal",
+      "city": "Ville",
+      "cardNotAcceptedTitle": "Carte non acceptée",
+      "cardNotAcceptedMessage": "Cette carte n'est pas acceptée sur Travu, veuillez essayer une autre carte",
+      "tryAnotherCard": "Essayer une autre carte"
+    },
+    "reviewBook": {
+      "title": "Vérifiez et réservez votre voyage",
+      "numbered1": "Vérifiez les détails de votre voyage pour vous assurer que les dates et heures sont correctes.",
+      "numbered2": "Vérifiez l'orthographe. Les noms des passagers doivent correspondre exactement à une pièce d'identité officielle avec photo.",
+      "numbered3": "Consultez les conditions de votre réservation.",
+      "fareRule1": "Emportez un bagage à main",
+      "fareRule2": "Payez pour ajouter un bagage en soute",
+      "fareRule3": "Annulations non autorisées",
+      "fareRule4": "Modifications non autorisées",
+      "fareRulesFor": "Règles tarifaires pour {origin} à {dest}",
+      "acknowledgement": "En cliquant sur le bouton ci-dessous, je reconnais avoir consulté la Déclaration de confidentialité et les conseils aux voyageurs des autorités, et avoir lu et accepté les Règles et restrictions ainsi que les Conditions d'utilisation.",
+      "yourTrip": "Votre voyage",
+      "route": "Itinéraire",
+      "date": "Date",
+      "times": "Horaires",
+      "carrier": "Compagnie",
+      "fare": "Tarif",
+      "travellers": "Voyageurs",
+      "contact": "Contact",
+      "payment": "Paiement",
+      "cardEndingIn": "Carte se terminant par {last4}",
+      "applyOneToken": "Utiliser mon OneTokenCash",
+      "oneTokenBalance": "Vous disposez de",
+      "inOneToken": "en OneTokenCash.",
+      "applying": "Application de",
+      "toThisBooking": "à cette réservation.",
+      "useToSave": "Utilisez-le pour économiser jusqu'à",
+      "buyNow": "Acheter maintenant",
+      "secureNote": "Transmission et stockage chiffrés et sécurisés.",
+      "buyMoreSaveTitle": "Achetez plus et économisez à tout moment !",
+      "buyMoreSaveBody": "Vous pouvez économiser sur votre voyage en réservant un vol maintenant et en ajoutant un hébergement plus tard."
+    },
+    "confirmation": {
+      "guest": "Voyageur",
+      "viewAllTrips": "Voir tous mes voyages",
+      "bookingConfirmed": "Réservation confirmée",
+      "slipIssued": "Un récapitulatif de confirmation a été émis pour la référence",
+      "bookingConfirmationHeader": "Confirmation de réservation",
+      "itineraryNo": "N° d'itinéraire",
+      "issued": "Émis le {date}",
+      "travellers": "Voyageur(s)",
+      "departure": "Départ",
+      "bookingReference": "Référence de réservation",
+      "flightDetails": "Détails du vol",
+      "departArrive": "Départ {departTime} · {departDate} — Arrivée {arriveTime} · {arriveDate}",
+      "cabinClass": "Classe {cabin}",
+      "paymentSummary": "Récapitulatif du paiement",
+      "airFare": "Tarif aérien",
+      "bookingFee": "Frais de réservation Travu",
+      "taxesFees": "Taxes et frais",
+      "totalPaid": "Total payé",
+      "paidVia": "Payé via {label}",
+      "qrAlt": "QR pour {ref}",
+      "presentSlip": "Présentez ce récapitulatif et un passeport valide à l'enregistrement",
+      "finePrint": "Ce récapitulatif de confirmation est un reçu simulé généré par Travu à des fins de démonstration uniquement et n'est pas valable pour voyager. Le transport est soumis aux conditions de contrat et aux tarifs de la compagnie opérante. Veuillez vous présenter au moins 3 heures avant un départ international. Les détails de la carte ne sont conservés que sous forme de résumé masqué ; le numéro de carte complet, la date d'expiration et le code de sécurité ne sont jamais conservés. Référence de réservation Travu {ref}.",
+      "downloadPdf": "Télécharger le PDF",
+      "print": "Imprimer",
+      "trackThisTrip": "Suivre ce voyage"
+    }
   }
 }

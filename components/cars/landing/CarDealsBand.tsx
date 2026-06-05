@@ -1,10 +1,12 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Users, Briefcase, Cog } from "lucide-react";
 import type { Car } from "@/lib/cars/types";
 import { Money } from "@/components/Money";
 
 /** Horizontal "Rent a car in {city}" deals band — mirrors the Expedia deal rows. */
 export function CarDealsBand({ title, cars }: { title: string; cars: Car[] }) {
+  const t = useTranslations("cars");
   if (cars.length === 0) return null;
   return (
     <section className="mx-auto max-w-6xl px-4 py-6">
@@ -26,7 +28,7 @@ export function CarDealsBand({ title, cars }: { title: string; cars: Car[] }) {
               />
               {car.originalPrice != null && car.originalPrice > car.totalPrice && (
                 <span className="absolute left-2 top-2 rounded-md bg-rose-600 px-2 py-1 text-[10px] font-bold text-white">
-                  Deal
+                  {t("card.deal")}
                 </span>
               )}
             </div>
@@ -36,11 +38,11 @@ export function CarDealsBand({ title, cars }: { title: string; cars: Car[] }) {
               <p className="mt-1 flex items-center gap-2 text-xs text-muted">
                 <span className="flex items-center gap-1"><Users className="h-3.5 w-3.5" /> {car.seats}</span>
                 <span className="flex items-center gap-1"><Briefcase className="h-3.5 w-3.5" /> {car.bags}</span>
-                <span className="flex items-center gap-1"><Cog className="h-3.5 w-3.5" /> {car.transmission === "automatic" ? "Auto" : "Manual"}</span>
+                <span className="flex items-center gap-1"><Cog className="h-3.5 w-3.5" /> {car.transmission === "automatic" ? t("card.auto") : t("card.manual")}</span>
               </p>
               <p className="mt-2 text-sm font-extrabold">
                 <Money cents={car.pricePerDay} />
-                <span className="ml-1 text-xs font-normal text-muted">/ day · {car.vendor}</span>
+                <span className="ml-1 text-xs font-normal text-muted">{t("card.perDayVendor", { vendor: car.vendor })}</span>
               </p>
             </div>
           </Link>

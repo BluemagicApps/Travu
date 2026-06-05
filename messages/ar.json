@@ -1,9 +1,9 @@
 {
   "nav": {
-    "flights": "رحلات الطيران",
+    "flights": "الرحلات",
     "stays": "الإقامات",
     "cars": "السيارات",
-    "trackBooking": "تتبع الحجز",
+    "trackBooking": "تتبّع الحجز",
     "signIn": "تسجيل الدخول",
     "signOut": "تسجيل الخروج"
   },
@@ -13,7 +13,842 @@
     "policies": "السياسات",
     "help": "المساعدة"
   },
+  "footerLinks": {
+    "about": "من نحن",
+    "oneTokenRewards": "مكافآت OneToken",
+    "listYourProperty": "أدرج عقارك",
+    "partnerships": "الشراكات",
+    "newsroom": "غرفة الأخبار",
+    "searchFlights": "ابحث عن رحلات",
+    "hotelsAndStays": "الفنادق والإقامات",
+    "carRentals": "تأجير السيارات",
+    "trackABooking": "تتبّع حجزًا",
+    "myTrips": "رحلاتي",
+    "privacy": "الخصوصية",
+    "cookies": "ملفات تعريف الارتباط",
+    "termsOfUse": "شروط الاستخدام",
+    "accessibility": "إمكانية الوصول",
+    "yourPrivacyChoices": "خيارات الخصوصية الخاصة بك",
+    "support": "الدعم",
+    "cancelYourBooking": "ألغِ حجزك",
+    "refundBasics": "أساسيات الاسترداد",
+    "travelDocuments": "وثائق السفر",
+    "oneTokenTerms": "شروط OneToken"
+  },
   "common": {
     "language": "اللغة"
+  },
+  "home": {
+    "eyebrow": "سفر مدعوم بالذكاء الاصطناعي، بحُلّة جديدة",
+    "tagline": "المكان الوحيد الذي تنطلق منه إلى كل الأماكن.",
+    "subtitle": "أخبر Travu إلى أين تريد الذهاب، تمامًا كما تخبر صديقًا. الرحلات والإقامات — نتولّى البحث والسعر والحجز من البداية حتى النهاية.",
+    "carsTagline": "قُد رحلتك على طريقتك."
+  },
+  "homeSections": {
+    "bundleSave": {
+      "title": "اجمع ووفّر",
+      "desc": "وفّر عند حجز رحلتك دفعة واحدة، أو على مراحل."
+    },
+    "oneStopShop": {
+      "title": "متجر سفر متكامل",
+      "desc": "احجز الرحلات والفنادق وأكثر — كل ذلك في مكان واحد."
+    },
+    "oneTokenRewards": {
+      "title": "مكافآت OneToken",
+      "desc": "احصل على توفير فوري واكسب OneTokenCash لرحلاتك القادمة."
+    },
+    "travelStyles": {
+      "heading": "إقامات تناسب كل أساليب السفر",
+      "subtitle": "متوسط الأسعار بناءً على الشهر الحالي",
+      "avgPerNight": "متوسط الليلة",
+      "style": {
+        "beach": "الشاطئ",
+        "culture": "الثقافة",
+        "ski": "التزلج",
+        "family": "العائلة",
+        "wellness": "العافية والاسترخاء"
+      }
+    },
+    "exploreWorld": {
+      "heading": "استكشف عالمًا من السفر مع Travu"
+    },
+    "stayLikeLocal": {
+      "heading": "أقم كأحد سكان {city}",
+      "propertyType": {
+        "privateHomes": "بيوت عطلات خاصة",
+        "apartments": "شقق ووحدات سكنية",
+        "cabins": "أكواخ",
+        "cottages": "بيوت ريفية",
+        "villas": "فلل"
+      }
+    },
+    "promo": {
+      "eyebrow": "اجمع ووفّر",
+      "heading": "احزم الذكريات، لا الحقائب فقط",
+      "body": "أضِف إقامة إلى رحلتك واحصل على توفير الباقات في أكثر من 500,000 عقار حول العالم. تطبّق أسعار الأعضاء.",
+      "cta": "ابدأ التخطيط"
+    },
+    "flightDeals": {
+      "heading": "عروض الرحلات من {city}",
+      "tagline": "استكشف عروض الرحلات الفورية إلى مئات الوجهات حول العالم.",
+      "cta": "استكشف كل عروض الرحلات"
+    }
+  },
+  "search": {
+    "flights": "ابحث عن رحلات",
+    "search": "بحث",
+    "aiDivider": "أو أخبر ذكاءنا الاصطناعي بما تحتاجه",
+    "askAi": "اسأل الذكاء الاصطناعي",
+    "aiPlaceholderStays": "اسأل بكلمات بسيطة — مثلاً \"فندق 5 نجوم في روما لـ 3 ليالٍ مع مسبح\"",
+    "aiPlaceholderCars": "اسأل بكلمات بسيطة — مثلاً \"سيارة دفع رباعي في ميامي نهاية الأسبوع القادم، أوتوماتيك\""
+  },
+  "auth": {
+    "loginTitle": "مرحبًا بعودتك",
+    "loginSubtitle": "سجّل الدخول لإدارة رحلاتك.",
+    "signupTitle": "أنشئ حسابك",
+    "signupSubtitle": "احجز الرحلات وتتبّع رحلاتك مع Travu.",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "signIn": "تسجيل الدخول",
+    "signingIn": "جارٍ تسجيل الدخول…",
+    "createAccount": "إنشاء حساب",
+    "creating": "جارٍ الإنشاء…",
+    "newToTravu": "جديد على Travu؟",
+    "createAccountLink": "أنشئ حسابًا",
+    "alreadyHaveAccount": "لديك حساب بالفعل؟",
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+    "emailTaken": "هذا البريد الإلكتروني مسجّل بالفعل.",
+    "invalidSignup": "يرجى استخدام بريد إلكتروني صالح وكلمة مرور لا تقل عن 8 أحرف."
+  },
+  "track": {
+    "heading": "تتبّع حجزًا",
+    "intro": "أدخل رقم حجز Travu الخاص بك (مثلاً <ref>TRV-AB12CD</ref>) لمعرفة حالة رحلتك في الوقت الفعلي.",
+    "placeholder": "TRV-AB12CD",
+    "trackButton": "تتبّع",
+    "invalidRef": "يرجى إدخال رقم مرجعي بالصيغة TRV-XXXXXX.",
+    "notFound": "لم يُعثر على حجز لـ {ref}.",
+    "lookupError": "تعذّر البحث عن ذلك الآن.",
+    "networkError": "خطأ في الشبكة — يرجى المحاولة مرة أخرى.",
+    "bookingReference": "رقم الحجز المرجعي",
+    "status": "الحالة",
+    "direct": "مباشرة",
+    "stops": "{count, plural, one {توقف واحد} other {# توقفات}}",
+    "travellers": "المسافرون:",
+    "fare": "السعر:",
+    "estimatedArrival": "الوصول المتوقع:",
+    "nextChangeAt": "التغيير التالي عند",
+    "onDate": "في {date}"
+  },
+  "dashboard": {
+    "heading": "رحلاتك",
+    "signedInAs": "مسجّل الدخول باسم {email}",
+    "noBookings": "لا توجد حجوزات بعد.",
+    "startSearch": "ابدأ بحثًا",
+    "joinOneToken": "<strong>انضم إلى OneToken</strong> — اكسب OneTokenCash في كل رحلة.",
+    "joinFree": "انضم مجانًا",
+    "tripElements": "{count} عناصر رحلة",
+    "toTier": "{count} للوصول إلى {tier}",
+    "topTier": "أعلى مستوى",
+    "ref": "المرجع",
+    "eTicket": "تذكرة إلكترونية",
+    "voucher": "قسيمة",
+    "nights": "{count, plural, one {ليلة واحدة} other {# ليالٍ}}"
+  },
+  "onetoken": {
+    "badge": "Travu OneToken",
+    "heroTitle": "برنامج <gradient>مكافآت السفر</gradient> المجاني من Travu",
+    "heroSubtitle": "احصل على توفير فوري بأسعار الأعضاء واكسب OneTokenCash لاستخدامه في رحلاتك القادمة.",
+    "joinFree": "انضم، فهو مجاني",
+    "joinEarn": "انضم وابدأ بالكسب",
+    "joinForFree": "انضم مجانًا",
+    "joining": "جارٍ الانضمام…",
+    "memberBadge": "أنت عضو في OneToken",
+    "valueProps": {
+      "savings": {
+        "title": "توفير على أكثر من 1.5 مليون فندق ومنزل وسيارة",
+        "desc": "وفّر 10% أو أكثر بأسعار الأعضاء في مئات الآلاف من الإقامات حول العالم."
+      },
+      "earnUse": {
+        "title": "اكسب واستخدم مكافآتك في أماكن أكثر",
+        "desc": "OneTokenCash هي عملة مكافآتك — كل 1 دولار من OneTokenCash يساوي 1 دولار لاستخدامه على الرحلات والإقامات المؤهلة."
+      },
+      "perks": {
+        "title": "احصل على مزايا أكثر للأعضاء",
+        "desc": "ارتقِ في المستويات للحصول على ترقيات الغرف وتتبّع الأسعار مجانًا والدعم بالأولوية ومزايا كبار الشخصيات."
+      }
+    },
+    "tripElementsHeading": "افتح مزايا جديدة بسهولة كلما ارتقيت في المستويات",
+    "tripElementsSubtitle": "احصل على مكافأة عن كل عنصر رحلة تحجزه، مما يساعدك على التقدّم عبر المستويات أسرع — إضافةً إلى OneTokenCash الذي تكسبه.",
+    "tripElementsLabel": "تحصل على عنصر رحلة واحد عن كل…",
+    "tripElement": {
+      "hotelRoomNight": "ليلة في غرفة فندق",
+      "vacationRentalNight": "ليلة في عقار مؤجّر للعطلات",
+      "flightTicket": "تذكرة طيران",
+      "carRentalDay": "يوم تأجير سيارة",
+      "cruiseCabinNight": "ليلة في قمرة رحلة بحرية",
+      "activityTicket": "تذكرة نشاط"
+    },
+    "tiersHeading": "احصل على مزايا أكثر كلما ارتقيت عبر المستويات",
+    "tierRange": {
+      "blue": "0–4 عناصر رحلة",
+      "silver": "5–14 عنصر رحلة",
+      "gold": "15–29 عنصر رحلة",
+      "platinum": "30+ عنصر رحلة"
+    },
+    "savings": "التوفير",
+    "savingsDesc": "وفّر {pct}% أو أكثر بأسعار الأعضاء في أكثر من 10,000 فندق.",
+    "rewards": "المكافآت",
+    "rewardsDesc": "اكسب {pct}% بعملة OneTokenCash على الحجوزات المؤهلة.",
+    "perks": "المزايا",
+    "cashHeading": "OneTokenCash — عملة مكافآت تتيح لك اختيار أين تستخدمها",
+    "cashSubtitle": "OneTokenCash ملك لك لاستخدامه على Travu عند حجز الفنادق والرحلات وأكثر. كل 1 دولار من OneTokenCash يساوي 1 دولار لاستخدامه على الحجوزات المؤهلة، في أي يوم من السنة — دون أي قيود على التواريخ.",
+    "cashEarn": "اكسب حتى 4% بعملة OneTokenCash عن كل دولار تنفقه",
+    "cashEarnNote": "وتكسب أكثر كلما ارتقيت في المستويات أيضًا.",
+    "faqHeading": "اكتشف المزيد عن OneToken",
+    "faq": {
+      "join": {
+        "q": "كيف يمكنني الانضمام إلى OneToken؟",
+        "a": "انقر هنا للانضمام إلى OneToken — الأمر مجاني وسهل للبدء. سجّل الدخول أو أنشئ حساب Travu، ثم اضغط على انضم مجانًا في هذه الصفحة."
+      },
+      "howItWorks": {
+        "q": "كيف يعمل برنامج مكافآت OneToken؟",
+        "a": "OneToken هو برنامج مكافآتنا حيث يستمتع الأعضاء بأسعار الأعضاء ويكسبون OneTokenCash على الحجوزات المؤهلة. كل 1 دولار من OneTokenCash يساوي 1 دولار لاستخدامه على السفر. وكلما حجزت رحلات تجمع عناصر رحلة ترتقي بك عبر المستويات — Blue وSilver وGold وPlatinum."
+      },
+      "expire": {
+        "q": "هل تنتهي صلاحية OneTokenCash؟",
+        "a": "لن تنتهي صلاحية OneTokenCash الذي تكسبه من الحجوزات إذا أجريت حجزًا مؤهلًا مرة واحدة على الأقل خلال 18 شهرًا."
+      },
+      "flights": {
+        "q": "هل يمكنني استخدام OneTokenCash على الرحلات؟",
+        "a": "نعم. يمكن استبدال OneTokenCash عند الدفع على حجوزات الرحلات والإقامات المؤهلة، ويُطبّق كخصم فوري على المبلغ المستحق."
+      },
+      "tierStatus": {
+        "q": "كيف أصل إلى مستوى عضوية في OneToken؟",
+        "a": "تكسب عنصر رحلة واحد عن كل ليلة في غرفة فندق وليلة في عقار عطلات وتذكرة طيران ويوم تأجير سيارة وليلة في قمرة رحلة بحرية وتذكرة نشاط تحجزها. اجمع 5 لفتح Silver، و15 لـ Gold، و30 لـ Platinum."
+      },
+      "free": {
+        "q": "هل OneToken مجاني؟",
+        "a": "نعم — الانضمام إلى OneToken مجاني تمامًا."
+      }
+    },
+    "tierMember": "عضو {tier}",
+    "tripElementsCount": "{count} عناصر رحلة",
+    "yourOneTokenCash": "رصيدك من OneTokenCash",
+    "moreToReach": "{count, plural, one {عنصر رحلة واحد إضافي للوصول إلى {tier}.} other {# عناصر رحلة إضافية للوصول إلى {tier}.}}"
+  },
+  "stays": {
+    "results": {
+      "noneFound": "لم يُعثر على إقامات — جرّب تواريخ مختلفة أو مدينة قريبة.",
+      "noMatch": "لا توجد إقامات تطابق عوامل التصفية. جرّب إزالة بعضها.",
+      "yourDestination": "وجهتك",
+      "propertyNoun": "{count, plural, one {عقار} other {عقارات}}",
+      "sortBy": "ترتيب حسب",
+      "kindAllStays": "كل الإقامات",
+      "kindHotels": "الفنادق",
+      "kindHomes": "المنازل",
+      "sortRecommended": "موصى به",
+      "sortPrice": "السعر (من الأقل للأعلى)",
+      "sortRating": "تقييم النزلاء",
+      "sortDistance": "المسافة"
+    },
+    "landing": {
+      "lastMinuteDeals": "عروض نهاية الأسبوع في اللحظة الأخيرة",
+      "everyTravelStyle": "إقامات تناسب كل أساليب السفر"
+    },
+    "card": {
+      "vipAccess": "وصول كبار الشخصيات",
+      "hotel": "فندق",
+      "entireBy": "{type} بالكامل من {host}",
+      "sleeps": "يتسع لـ {count}",
+      "beds": "{count, plural, one {سرير واحد} other {# أسرّة}}",
+      "baths": "{count, plural, one {حمام واحد} other {# حمامات}}",
+      "reviews": "{count} تقييم",
+      "freeCancellation": "إلغاء مجاني",
+      "nonRefundable": "غير قابل للاسترداد",
+      "payLater": "احجز الآن وادفع لاحقًا",
+      "percentOff": "خصم {pct}%",
+      "perNight": "/ الليلة",
+      "total": "الإجمالي",
+      "totalInclTaxes": "الإجمالي شامل الضرائب والرسوم",
+      "totalInclTaxesInline": "الإجمالي · شامل الضرائب والرسوم",
+      "viewDeal": "عرض الصفقة →"
+    },
+    "detail": {
+      "seeAllProperties": "عرض كل العقارات",
+      "share": "مشاركة",
+      "save": "حفظ",
+      "datesAvailable": "تواريخك متاحة",
+      "bedrooms": "{count, plural, one {غرفة نوم واحدة} other {# غرف نوم}}",
+      "bathrooms": "{count, plural, one {حمام واحد} other {# حمامات}}",
+      "sqft": "{count} قدم مربع",
+      "exploreArea": "استكشف المنطقة",
+      "popularAmenities": "المرافق الشائعة",
+      "aboutProperty": "عن هذا العقار",
+      "privateHost": "مضيف خاص (Vrbo)",
+      "propertyHost": "مضيف العقار",
+      "policies": "السياسات",
+      "afterTime": "بعد {time}",
+      "beforeTime": "قبل {time}",
+      "cancellation": "الإلغاء",
+      "thingsToDo": "أنشطة شائعة قريبة",
+      "similarProperties": "عقارات مشابهة",
+      "faq": "الأسئلة الشائعة",
+      "mapUnavailable": "معاينة الخريطة غير متاحة لهذا العقار.",
+      "viewLargerMap": "عرض في خريطة أكبر",
+      "morePhotos": "+{count} صورة",
+      "nights": "{count, plural, one {ليلة واحدة} other {# ليالٍ}}",
+      "nightsSleeps": "{nights, plural, one {ليلة واحدة} other {# ليالٍ}} · يتسع لـ {sleeps}",
+      "totalNights": "الإجمالي · {count, plural, one {ليلة واحدة} other {# ليالٍ}}",
+      "inclTaxes": "شامل الضرائب والرسوم",
+      "reserve": "احجز",
+      "notChargedYet": "لن يتم خصم أي مبلغ بعد"
+    },
+    "nav": {
+      "overview": "نظرة عامة",
+      "amenities": "المرافق",
+      "reviews": "التقييمات"
+    },
+    "reviews": {
+      "guestReviews": "تقييمات النزلاء",
+      "noReviews": "لا توجد تقييمات بعد — كن أول من يقيّم هذا العقار بعد إقامتك.",
+      "cleanliness": "النظافة",
+      "staff": "الموظفون",
+      "amenities": "المرافق",
+      "condition": "الحالة"
+    },
+    "promo": {
+      "exploreMore": "اكتشف المزيد مع {brand}",
+      "memberRates": "أسعار الأعضاء وعروض حصرية في عقارات {brand} مختارة."
+    },
+    "adRail": {
+      "discover": "اكتشف",
+      "diveInto": "انغمس في معالم {city} وطعامها وثقافتها — احجز إقامتك وابدأ الاستكشاف.",
+      "memberPrices": "أسعار الأعضاء",
+      "signInToUnlock": "سجّل الدخول لفتح توفير فوري على إقامات مختارة."
+    },
+    "features": {
+      "bundleSave": "اجمع ووفّر",
+      "bundleSaveDesc": "أضِف رحلة إلى إقامتك ووفّر على كليهما — احجز كل ذلك في مكان واحد.",
+      "oneStop": "متجر سفر متكامل",
+      "oneStopDesc": "الفنادق والمنازل والرحلات وأكثر — كل ما يلزم رحلتك معًا.",
+      "memberRewards": "أسعار الأعضاء والمكافآت",
+      "memberRewardsDesc": "احصل على توفير فوري واكسب مكافآت لإنفاقها على رحلاتك القادمة."
+    },
+    "filters": {
+      "filters": "عوامل التصفية",
+      "searchByName": "البحث باسم العقار",
+      "searchByNamePlaceholder": "مثلاً Grand",
+      "totalPrice": "السعر الإجمالي",
+      "popularFilters": "عوامل التصفية الشائعة",
+      "guestRating": "تقييم النزلاء",
+      "ratingAny": "أي تقييم",
+      "ratingWonderful": "رائع 9+",
+      "ratingVeryGood": "جيد جدًا 8+",
+      "ratingGood": "جيد 7+",
+      "starRating": "تصنيف النجوم",
+      "stars": "{count} نجوم",
+      "propertyType": "نوع العقار",
+      "typeAll": "الكل",
+      "typeHotelsResorts": "فنادق ومنتجعات",
+      "typeHomesApartments": "منازل وشقق",
+      "propertyAmenities": "مرافق العقار",
+      "roomAmenities": "مرافق الغرفة",
+      "roomViews": "إطلالات الغرفة",
+      "propertyBrand": "العلامة التجارية للعقار",
+      "paymentType": "نوع الدفع",
+      "cancellationOptions": "خيارات الإلغاء",
+      "travelerExperience": "تجربة المسافر",
+      "mealPlans": "خطط الوجبات",
+      "numberOfBedrooms": "عدد غرف النوم",
+      "moreOptions": "خيارات أكثر",
+      "onlyAvailable": "عرض العقارات المتاحة فقط",
+      "beachAccess": "وصول إلى الشاطئ",
+      "memberDeals": "عروض وخصومات الأعضاء",
+      "noneAvailable": "لا يوجد متاح",
+      "seeLess": "عرض أقل",
+      "seeMore": "عرض المزيد ({count})",
+      "showProperties": "عرض {count, plural, one {عقار واحد} other {# عقارات}}",
+      "labels": {
+        "1": "غرفة نوم واحدة",
+        "2": "غرفتا نوم أو أكثر",
+        "wifi": "واي فاي مجاني",
+        "ac": "تكييف هواء",
+        "pool": "مسبح",
+        "parking": "موقف سيارات",
+        "gym": "صالة رياضية",
+        "spa": "سبا",
+        "bar": "بار",
+        "breakfast": "إفطار",
+        "pet_friendly": "يسمح بالحيوانات الأليفة",
+        "pay_later": "احجز الآن وادفع لاحقًا",
+        "fully_refundable": "قابل للاسترداد بالكامل",
+        "business": "مناسب لرجال الأعمال",
+        "family": "مناسب للعائلات",
+        "budget": "اقتصادي",
+        "adults_only": "للبالغين فقط",
+        "studio": "استوديو"
+      }
+    },
+    "booking": {
+      "completeBooking": "أكمل حجزك",
+      "whoCheckingIn": "من سيقوم بتسجيل الوصول؟",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "emailAddress": "البريد الإلكتروني",
+      "countryRegion": "البلد / المنطقة",
+      "phoneNumber": "رقم الهاتف",
+      "paymentDetails": "تفاصيل الدفع",
+      "secureTransaction": "معاملة آمنة وموثوقة. معلوماتك الشخصية محمية.",
+      "simulatedNoCharge": "محاكاة — لا يوجد خصم حقيقي",
+      "nameOnCard": "الاسم على البطاقة",
+      "cardNumber": "رقم البطاقة",
+      "expiration": "تاريخ الانتهاء",
+      "expiryPlaceholder": "شهر/سنة",
+      "securityCode": "رمز الأمان",
+      "billingAddress": "عنوان الفوترة",
+      "address": "العنوان",
+      "city": "المدينة",
+      "stateProvince": "الولاية / المحافظة",
+      "zipPostal": "الرمز البريدي",
+      "protectYourStay": "احمِ إقامتك",
+      "travuProtect": "Travu Protect",
+      "travuProtectDesc": "حماية الإلغاء وتغطية انقطاع الرحلة والمساعدة الطارئة على مدار الساعة لهذه الإقامة.",
+      "noProtection": "بدون حماية — أتفهّم أنني قد أكون مسؤولًا عن رسوم الإلغاء.",
+      "cancellationPolicy": "سياسة الإلغاء",
+      "cancellationRefundable": "قابل للاسترداد بالكامل في حال الإلغاء قبل 48 ساعة من تسجيل الوصول. بعد ذلك، الليلة الأولى غير قابلة للاسترداد.",
+      "cancellationNonRefundable": "هذا السعر غير قابل للاسترداد. التغييرات أو الإلغاءات غير مؤهلة للاسترداد.",
+      "specialInstructions": "تعليمات خاصة لتسجيل الوصول",
+      "specialInstructionsPlaceholder": "أي طلبات للمضيف (اختياري)",
+      "termsNotice": "باختياري احجز الآن، أوافق على شروط خدمة Travu وبيان الخصوصية، وأؤكد أن هذا حجز محاكاة لأغراض العرض.",
+      "processing": "جارٍ المعالجة…",
+      "bookNow": "احجز الآن",
+      "encryptionNotice": "يحمي تشفيرنا الآمن تفاصيلك الشخصية في كل خطوة.",
+      "steps": {
+        "reviewing": "مراجعة حجزك",
+        "verifying": "التحقق من تفاصيل النزيل",
+        "confirming": "التأكيد مع العقار",
+        "confirmed": "تم تأكيد الحجز"
+      },
+      "errors": {
+        "invalidCard": "أدخل رقم بطاقة صالحًا.",
+        "bookingFailed": "تعذّر إكمال الحجز. يرجى المحاولة مرة أخرى."
+      }
+    },
+    "summary": {
+      "checkIn": "تسجيل الوصول",
+      "checkOut": "تسجيل المغادرة",
+      "room": "غرفة",
+      "rooms": "غرف",
+      "nightsRooms": "{nights, plural, one {ليلة واحدة} other {# ليالٍ}} × {rooms, plural, one {غرفة واحدة} other {# غرف}}",
+      "taxes": "الضرائب",
+      "serviceFee": "رسوم الخدمة",
+      "total": "الإجمالي",
+      "payToday": "ادفع اليوم"
+    },
+    "voucher": {
+      "bookingConfirmed": "تم تأكيد الحجز",
+      "print": "طباعة",
+      "downloadPdf": "تنزيل PDF",
+      "confirmationVoucher": "قسيمة تأكيد الإقامة",
+      "confirmationNo": "رقم التأكيد",
+      "refundable": "قابل للاسترداد",
+      "afterTime": "بعد {time}",
+      "beforeTime": "قبل {time}",
+      "stay": "الإقامة",
+      "nightsRoomsValue": "{nights, plural, one {ليلة واحدة} other {# ليالٍ}} · {rooms, plural, one {غرفة واحدة} other {# غرف}}",
+      "guestsCount": "{count, plural, one {نزيل واحد} other {# نزلاء}}",
+      "leadGuest": "النزيل الرئيسي",
+      "guest": "نزيل",
+      "totalPaid": "الإجمالي المدفوع",
+      "presentAtCheckIn": "قدّم هذه القسيمة عند تسجيل الوصول",
+      "viewAllTrips": "عرض كل رحلاتي"
+    },
+    "waiting": {
+      "completingBooking": "جارٍ إكمال حجزك",
+      "pleaseWait": "يرجى الانتظار بينما نؤكد حجزك مع العقار. قد يستغرق ذلك بضع لحظات.",
+      "securingRoom": "جارٍ تأمين غرفتك…"
+    }
+  },
+  "cars": {
+    "landing": {
+      "rentInCity": "استأجر سيارة في {city}",
+      "topDealsInCity": "أفضل العروض في {city}"
+    },
+    "results": {
+      "noneFound": "لم يُعثر على سيارات — جرّب تواريخ مختلفة أو موقعًا قريبًا.",
+      "noneMatchFilters": "لا توجد سيارات تطابق عوامل التصفية. جرّب إزالة بعضها.",
+      "yourLocation": "موقعك",
+      "carsIn": "سيارات في {location}",
+      "count": "{count, plural, one {سيارة واحدة} other {# سيارات}}",
+      "topResults": "(أفضل النتائج)",
+      "filters": "عوامل التصفية",
+      "sort": "ترتيب",
+      "memberBanner": "يحصل الأعضاء على OneTokenCash في كل تأجير — سجّل الدخول لفتح أسعار الأعضاء."
+    },
+    "sort": {
+      "recommended": "موصى به",
+      "priceLowToHigh": "السعر (من الأقل للأعلى)",
+      "ratingHighToLow": "التقييم (من الأعلى للأقل)"
+    },
+    "card": {
+      "percentOff": "خصم {pct}%",
+      "deal": "صفقة",
+      "previousPhoto": "الصورة السابقة",
+      "nextPhoto": "الصورة التالية",
+      "automatic": "أوتوماتيك",
+      "manual": "يدوي",
+      "auto": "أوتو",
+      "seats": "{count} مقاعد",
+      "bags": "{count} حقائب",
+      "doors": "{count} أبواب",
+      "aircon": "تكييف",
+      "mileageLabel": "مسافة {mileage}",
+      "freeCancellation": "إلغاء مجاني",
+      "nonRefundable": "غير قابل للاسترداد",
+      "unlimitedMileage": "مسافة غير محدودة",
+      "perDay": "/ اليوم",
+      "perDayVendor": "/ اليوم · {vendor}",
+      "totalForDays": "الإجمالي · {days, plural, one {يوم واحد} other {# أيام}}",
+      "reserve": "احجز →"
+    },
+    "filters": {
+      "close": "إغلاق عوامل التصفية",
+      "showCount": "عرض {count, plural, one {سيارة واحدة} other {# سيارات}}",
+      "noneAvailable": "لا يوجد متاح",
+      "seeLess": "عرض أقل",
+      "seeMore": "عرض المزيد ({count})",
+      "searchByCarOrCompany": "البحث حسب السيارة أو الشركة",
+      "searchPlaceholder": "مثلاً Sixt أو RAV4",
+      "totalPrice": "السعر الإجمالي",
+      "popularFilters": "عوامل التصفية الشائعة",
+      "rating": "التقييم",
+      "ratingAny": "أي تقييم",
+      "ratingExceptional": "استثنائي 9+",
+      "ratingVeryGood": "جيد جدًا 8+",
+      "ratingGood": "جيد 7+",
+      "carType": "نوع السيارة",
+      "capacity": "السعة",
+      "rentalCompany": "شركة التأجير",
+      "transmission": "ناقل الحركة",
+      "mileage": "المسافة المقطوعة",
+      "moreOptions": "خيارات أكثر",
+      "freeCancellationOnly": "إلغاء مجاني فقط",
+      "memberDeals": "عروض وخصومات الأعضاء",
+      "option": {
+        "automatic": "أوتوماتيك",
+        "manual": "يدوي",
+        "unlimitedMileage": "مسافة غير محدودة",
+        "limitedMileage": "مسافة محدودة",
+        "airConditioning": "تكييف هواء",
+        "freeCancellation": "إلغاء مجاني",
+        "seats4": "4 مقاعد",
+        "seats5": "5 مقاعد",
+        "seats7plus": "7 مقاعد أو أكثر"
+      }
+    },
+    "steps": {
+      "review": "مراجعة",
+      "driver": "السائق",
+      "payment": "الدفع"
+    },
+    "progress": {
+      "reviewing": "مراجعة حجزك",
+      "verifyingDriver": "التحقق من تفاصيل السائق",
+      "confirmingCompany": "التأكيد مع شركة التأجير",
+      "confirmed": "تم تأكيد الحجز"
+    },
+    "booking": {
+      "back": "رجوع",
+      "reservationError": "تعذّر إكمال الحجز. يرجى المحاولة مرة أخرى.",
+      "reviewYourCar": "راجع سيارتك",
+      "protectYourRental": "احمِ سيارتك المستأجرة",
+      "fullProtection": "حماية كاملة",
+      "fullProtectionDesc": "تغطية أضرار وسرقة بدون مبلغ تحمّل إضافةً إلى مساعدة على الطريق على مدار الساعة طوال فترة التأجير.",
+      "noProtection": "بدون حماية إضافية — سأعتمد على التغطية الأساسية لشركة التأجير.",
+      "continueToDriver": "المتابعة إلى تفاصيل السائق",
+      "driverDetails": "تفاصيل السائق",
+      "continueToPayment": "المتابعة إلى الدفع",
+      "processing": "جارٍ المعالجة…",
+      "reserveNow": "احجز الآن",
+      "secureNote": "تفاصيلك محمية بتشفير آمن."
+    },
+    "driver": {
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "age": "عمر السائق",
+      "licenseNo": "رقم رخصة القيادة",
+      "email": "البريد الإلكتروني",
+      "countryCode": "رمز البلد",
+      "phone": "رقم الهاتف",
+      "flightNo": "رقم الرحلة (اختياري)",
+      "flightNoPlaceholder": "مثلاً BA245 — يساعد إذا تأخرت رحلتك",
+      "youngDriverNote": "تُطبّق رسوم السائق الشاب للسائقين دون 25 عامًا — وهي مشمولة في إجماليك."
+    },
+    "summary": {
+      "pickUp": "الاستلام",
+      "dropOff": "التسليم",
+      "transmission": "ناقل الحركة",
+      "mileage": "المسافة المقطوعة",
+      "timesDays": "× {days, plural, one {يوم واحد} other {# أيام}}",
+      "taxes": "الضرائب",
+      "bookingFee": "رسوم الحجز",
+      "youngDriverFee": "رسوم السائق الشاب",
+      "total": "الإجمالي",
+      "payToday": "ادفع اليوم"
+    },
+    "confirmation": {
+      "title": "تم تأكيد الحجز",
+      "print": "طباعة",
+      "voucherSubtitle": "قسيمة تأكيد تأجير السيارة",
+      "confirmationNo": "رقم التأكيد",
+      "rental": "التأجير",
+      "driver": "السائق",
+      "days": "{days, plural, one {يوم واحد} other {# أيام}}",
+      "daysRental": "{days, plural, one {تأجير ليوم واحد} other {تأجير لـ # أيام}}",
+      "totalPaid": "الإجمالي المدفوع",
+      "barcodeAlt": "الرمز الشريطي للحجز {ref}",
+      "presentVoucher": "قدّم هذه القسيمة عند مكتب التأجير",
+      "viewAllTrips": "عرض كل رحلاتي"
+    }
+  },
+  "flights": {
+    "perTraveller": "لكل مسافر",
+    "stops": {
+      "nonstop": "بدون توقف",
+      "direct": "مباشرة",
+      "directLower": "مباشرة",
+      "count": "{count, plural, one {توقف واحد} other {# توقفات}}"
+    },
+    "results": {
+      "title": "نتائج البحث",
+      "flightsFound": "{count} رحلة وُجدت",
+      "departingFlights": "رحلات المغادرة",
+      "returningFlights": "رحلات العودة",
+      "legLabel": "المسار {index}: {origin} ← {dest}",
+      "emptyState": "لا توجد رحلات بعد — اختر مسارًا وتاريخًا أعلاه للبحث.",
+      "noMatchLeg": "لا توجد رحلات تطابق عوامل التصفية لهذا المسار.",
+      "noMatchFilters": "لا توجد رحلات تطابق عوامل التصفية — جرّب إزالة بعضها.",
+      "searching": "جارٍ البحث عن أسعار حية عبر شركات الطيران…",
+      "showMore": "عرض المزيد من النتائج",
+      "moreCount": "({count} أخرى)"
+    },
+    "filters": {
+      "filterBy": "تصفية حسب",
+      "stops": "التوقفات",
+      "any": "أي عدد",
+      "upToOneStop": "حتى توقف واحد",
+      "airlines": "شركات الطيران",
+      "from": "من"
+    },
+    "sort": {
+      "sortBy": "ترتيب حسب",
+      "recommended": "موصى به",
+      "cheapest": "الأرخص",
+      "fastest": "الأسرع"
+    },
+    "card": {
+      "seatsLeft": "بقي {count} فقط بهذا السعر",
+      "select": "اختر",
+      "flightDetails": "تفاصيل الرحلة"
+    },
+    "detail": {
+      "backToResults": "← العودة إلى النتائج",
+      "continueToBook": "المتابعة إلى الحجز"
+    },
+    "fare": {
+      "selectFareTo": "اختر السعر إلى {dest}",
+      "close": "إغلاق",
+      "operatedBy": "تُشغّل هذه الرحلة بواسطة {carrier}.",
+      "cabin": "الدرجة: {cabin}",
+      "select": "اختر"
+    },
+    "perks": {
+      "seatChoiceIncluded": "اختيار المقعد مشمول",
+      "seatChoiceFee": "اختيار المقعد برسوم",
+      "handBaggage": "حقيبة يد مشمولة ({kg} كجم)",
+      "checkedBag": "{count} × حقيبة مسجّلة ({kg} كجم لكل منها)",
+      "checkedBags": "{count, plural, one {حقيبة مسجّلة واحدة} other {# حقائب مسجّلة}} ({kg} كجم لكل منها)",
+      "checkedBagFee": "حقيبة مسجّلة برسوم",
+      "refundable": "قابل للاسترداد",
+      "nonRefundable": "غير قابل للاسترداد",
+      "freeChanges": "تغييرات مجانية",
+      "changeFee": "تُطبّق رسوم التغيير",
+      "noChanges": "التغييرات غير مسموحة"
+    },
+    "prediction": {
+      "title": "توقّع الأسعار بالذكاء الاصطناعي",
+      "confidence": "ثقة {confidence}%"
+    },
+    "priceTracking": {
+      "title": "تتبّع الأسعار",
+      "currentLowest": "أقل سعر حالي:"
+    },
+    "fareBreakdown": {
+      "title": "تفصيل السعر",
+      "baseFare": "السعر الأساسي",
+      "baseFareMultiple": "السعر الأساسي × {count}",
+      "taxes": "الضرائب",
+      "fees": "الرسوم",
+      "total": "الإجمالي"
+    },
+    "segments": {
+      "layoverIn": "توقف في {iata}"
+    },
+    "steps": {
+      "reviewTrip": "مراجعة الرحلة",
+      "travellers": "المسافرون",
+      "payment": "الدفع",
+      "reviewAndBook": "المراجعة والحجز"
+    },
+    "sidebar": {
+      "businessFlight": "رحلة درجة رجال الأعمال",
+      "oneWayFlight": "رحلة ذهاب فقط",
+      "priceSummary": "ملخص سعرك",
+      "travellerAdult": "المسافر {index} · بالغ",
+      "taxesFees": "الضرائب والرسوم",
+      "nextCheckout": "التالي: الدفع",
+      "nextPayment": "التالي: الدفع",
+      "nextReview": "التالي: المراجعة",
+      "buyNow": "اشترِ الآن",
+      "next": "التالي"
+    },
+    "progress": {
+      "reviewing": "مراجعة طلب الحجز",
+      "verifying": "التحقق من بيانات الطلب",
+      "bookingTicket": "حجز التذكرة عبر واجهة برمجة شركة الطيران",
+      "approved": "تمت الموافقة على الحجز",
+      "secureBooking": "حجز آمن من {brand}",
+      "keepWindowOpen": "يرجى إبقاء هذه النافذة مفتوحة…"
+    },
+    "bookingForm": {
+      "travellerDetails": "تفاصيل المسافر",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "dateOfBirth": "تاريخ الميلاد",
+      "payment": "الدفع",
+      "simulatedCharge": "محاكاة — لا يوجد خصم حقيقي",
+      "cardNumber": "رقم البطاقة",
+      "expiry": "تاريخ الانتهاء",
+      "cvc": "رمز التحقق",
+      "invalidCard": "أدخل رقم بطاقة صالحًا.",
+      "bookingFailed": "تعذّر إكمال الحجز. يرجى المحاولة مرة أخرى.",
+      "networkError": "خطأ في الشبكة — يرجى المحاولة مرة أخرى.",
+      "processing": "جارٍ المعالجة…",
+      "pay": "ادفع",
+      "andConfirm": "وأكّد"
+    },
+    "reviewTrip": {
+      "title": "راجع رحلتك",
+      "route": "{origin} إلى {dest}",
+      "changeFlight": "تغيير الرحلة",
+      "yourFare": "سعرك: {fare}",
+      "seatsAndBags": "المقاعد والحقائب",
+      "seatsAndBagsNote": "يمكنك اختيار المقاعد وإضافة الحقائب لهذه الرحلة بعد الحجز من لوحة التحكم."
+    },
+    "travellers": {
+      "title": "حجز آمن — لا يستغرق سوى بضع دقائق",
+      "nameMatchNote": "يجب أن تطابق أسماء المسافرين الهوية الرسمية المزوّدة بصورة تمامًا.",
+      "required": "مطلوب",
+      "travellerOf": "المسافر {index} من {total}",
+      "firstName": "الاسم الأول",
+      "middleName": "الاسم الأوسط",
+      "surname": "اسم العائلة",
+      "passportCountry": "بلد جواز السفر",
+      "passportNumber": "رقم جواز السفر",
+      "passportFormatError": "الصيغة المتوقعة مثل {example} لهذا البلد.",
+      "dateOfBirth": "تاريخ الميلاد",
+      "dobDay": "يوم الميلاد",
+      "dobMonth": "شهر الميلاد",
+      "dobYear": "سنة الميلاد",
+      "day": "اليوم",
+      "month": "الشهر",
+      "year": "السنة",
+      "contactDetails": "تفاصيل الاتصال",
+      "contactNote": "سنرسل تذكرتك الإلكترونية وأي تحديثات إلى هذا البريد الإلكتروني.",
+      "emailAddress": "البريد الإلكتروني",
+      "marketingOptIn": "أرسل لي تحديثات الرحلات وعروض السفر.",
+      "countryCode": "رمز البلد",
+      "phoneNumber": "رقم الهاتف",
+      "phoneDigitsExact": "أرقام هذا البلد تتكون من {count} أرقام.",
+      "phoneDigitsRange": "أرقام هذا البلد تتكون من {min}–{max} رقمًا."
+    },
+    "payment": {
+      "title": "كيف تودّ الدفع؟",
+      "simulatedNote": "الدفع محاكاة — لا يتم خصم أي مبلغ حقيقي.",
+      "nameOnCard": "الاسم على البطاقة",
+      "cardNumber": "رقم بطاقة الخصم/الائتمان",
+      "cardNotAccepted": "هذه البطاقة غير مقبولة على Travu. يرجى تجربة بطاقة أخرى.",
+      "expiryDate": "تاريخ الانتهاء",
+      "securityCode": "رمز الأمان",
+      "billingAddress": "عنوان الفوترة",
+      "countryTerritory": "البلد / الإقليم",
+      "billingAddress1": "عنوان الفوترة 1",
+      "billingAddress2": "عنوان الفوترة 2",
+      "postalCode": "الرمز البريدي",
+      "city": "المدينة",
+      "cardNotAcceptedTitle": "البطاقة غير مقبولة",
+      "cardNotAcceptedMessage": "هذه البطاقة غير مقبولة على Travu، يرجى تجربة بطاقة أخرى",
+      "tryAnotherCard": "جرّب بطاقة أخرى"
+    },
+    "reviewBook": {
+      "title": "راجع واحجز رحلتك",
+      "numbered1": "راجع تفاصيل رحلتك للتأكد من صحة التواريخ والأوقات.",
+      "numbered2": "تحقّق من الإملاء. يجب أن تطابق أسماء الركاب الهوية الرسمية المزوّدة بصورة تمامًا.",
+      "numbered3": "راجع شروط حجزك.",
+      "fareRule1": "إحضار حقيبة يد",
+      "fareRule2": "الدفع لإحضار حقيبة مسجّلة",
+      "fareRule3": "الإلغاءات غير مسموحة",
+      "fareRule4": "التغييرات غير مسموحة",
+      "fareRulesFor": "قواعد السعر من {origin} إلى {dest}",
+      "acknowledgement": "بالنقر على الزر أدناه، أُقرّ بأنني راجعت بيان الخصوصية ونصائح السفر الحكومية، وراجعت وقبلت القواعد والقيود وشروط الاستخدام.",
+      "yourTrip": "رحلتك",
+      "route": "المسار",
+      "date": "التاريخ",
+      "times": "الأوقات",
+      "carrier": "الناقل",
+      "fare": "السعر",
+      "travellers": "المسافرون",
+      "contact": "جهة الاتصال",
+      "payment": "الدفع",
+      "cardEndingIn": "بطاقة تنتهي بـ {last4}",
+      "applyOneToken": "استخدم رصيدي من OneTokenCash",
+      "oneTokenBalance": "لديك",
+      "inOneToken": "بعملة OneTokenCash.",
+      "applying": "جارٍ استخدام",
+      "toThisBooking": "على هذا الحجز.",
+      "useToSave": "استخدمه لتوفّر حتى",
+      "buyNow": "اشترِ الآن",
+      "secureNote": "نقل وتخزين مشفّر وآمن.",
+      "buyMoreSaveTitle": "اشترِ أكثر ووفّر في أي وقت!",
+      "buyMoreSaveBody": "يمكنك التوفير على رحلتك عند حجز رحلة الآن وإضافة إقامة لاحقًا."
+    },
+    "confirmation": {
+      "guest": "نزيل",
+      "viewAllTrips": "عرض كل رحلاتي",
+      "bookingConfirmed": "تم تأكيد الحجز",
+      "slipIssued": "صدر إيصال تأكيد بالرقم المرجعي",
+      "bookingConfirmationHeader": "تأكيد الحجز",
+      "itineraryNo": "رقم خط السير",
+      "issued": "صدر بتاريخ {date}",
+      "travellers": "المسافر/المسافرون",
+      "departure": "المغادرة",
+      "bookingReference": "رقم الحجز المرجعي",
+      "flightDetails": "تفاصيل الرحلة",
+      "departArrive": "المغادرة {departTime} · {departDate} — الوصول {arriveTime} · {arriveDate}",
+      "cabinClass": "درجة {cabin}",
+      "paymentSummary": "ملخص الدفع",
+      "airFare": "سعر التذكرة",
+      "bookingFee": "رسوم حجز Travu",
+      "taxesFees": "الضرائب والرسوم",
+      "totalPaid": "الإجمالي المدفوع",
+      "paidVia": "مدفوع عبر {label}",
+      "qrAlt": "رمز QR لـ {ref}",
+      "presentSlip": "قدّم هذا الإيصال وجواز سفر صالح عند تسجيل الوصول",
+      "finePrint": "هذا الإيصال هو إيصال محاكاة تم إنشاؤه بواسطة Travu لأغراض العرض فقط وغير صالح للسفر. يخضع النقل لشروط العقد وتعريفات الناقل المشغّل. يرجى الوصول قبل المغادرة الدولية بثلاث ساعات على الأقل. تُخزّن تفاصيل البطاقة فقط كملخص مُقنّع؛ ولا يُحتفظ مطلقًا برقم البطاقة الكامل وتاريخ الانتهاء ورمز الأمان. رقم حجز Travu المرجعي {ref}.",
+      "downloadPdf": "تنزيل PDF",
+      "print": "طباعة",
+      "trackThisTrip": "تتبّع هذه الرحلة"
+    }
   }
 }

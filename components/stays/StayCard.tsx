@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Star, Heart, ChevronLeft, ChevronRight, BedDouble, Bath, Users } from "lucide-react";
 import type { Stay } from "@/lib/stays/types";
 import { Money } from "@/components/Money";
 
 export function StayCard({ stay }: { stay: Stay }) {
+  const t = useTranslations("stays");
   const [photo, setPhoto] = useState(0);
   const [saved, setSaved] = useState(false);
   const hasDeal = stay.originalPrice != null && stay.originalPrice > stay.totalPrice;
@@ -23,7 +25,7 @@ export function StayCard({ stay }: { stay: Stay }) {
           <img src={imgs[photo]} alt={stay.name} loading="lazy" className="h-full w-full object-cover" />
           {stay.vipAccess && (
             <span className="absolute left-2 top-2 rounded-md bg-indigo-600 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
-              VIP Access
+              {t("card.vipAccess")}
             </span>
           )}
           <button
@@ -64,7 +66,7 @@ export function StayCard({ stay }: { stay: Stay }) {
                 <h3 className="truncate font-semibold hover:underline">{stay.name}</h3>
               </Link>
               <p className="mt-0.5 text-xs text-muted">
-                {entire ? `Entire ${stay.propertyType} by ${stay.hostType ?? "Vrbo"}` : "Hotel"}
+                {entire ? t("card.entireBy", { type: stay.propertyType ?? "", host: stay.hostType ?? "Vrbo" }) : t("card.hotel")}
               </p>
               <div className="mt-0.5 flex items-center gap-1 text-xs text-muted">
                 {Array.from({ length: stay.starRating }).map((_, i) => (
@@ -76,9 +78,9 @@ export function StayCard({ stay }: { stay: Stay }) {
                 </span>
               </div>
               <div className="mt-1.5 flex flex-wrap gap-3 text-[11px] text-muted">
-                {stay.sleeps != null && <span className="flex items-center gap-1"><Users className="h-3 w-3" /> Sleeps {stay.sleeps}</span>}
-                {stay.bedrooms != null && <span className="flex items-center gap-1"><BedDouble className="h-3 w-3" /> {stay.bedrooms} bed{stay.bedrooms === 1 ? "" : "s"}</span>}
-                {stay.bathrooms != null && <span className="flex items-center gap-1"><Bath className="h-3 w-3" /> {stay.bathrooms} bath{stay.bathrooms === 1 ? "" : "s"}</span>}
+                {stay.sleeps != null && <span className="flex items-center gap-1"><Users className="h-3 w-3" /> {t("card.sleeps", { count: stay.sleeps })}</span>}
+                {stay.bedrooms != null && <span className="flex items-center gap-1"><BedDouble className="h-3 w-3" /> {t("card.beds", { count: stay.bedrooms })}</span>}
+                {stay.bathrooms != null && <span className="flex items-center gap-1"><Bath className="h-3 w-3" /> {t("card.baths", { count: stay.bathrooms })}</span>}
               </div>
             </div>
             <div className="shrink-0 text-right">
@@ -86,21 +88,21 @@ export function StayCard({ stay }: { stay: Stay }) {
                 {stay.guestRating.toFixed(1)}
               </span>
               {stay.ratingWord && <div className="text-[11px] font-semibold text-price">{stay.ratingWord}</div>}
-              <div className="text-[10px] text-muted">{stay.reviewCount} reviews</div>
+              <div className="text-[10px] text-muted">{t("card.reviews", { count: stay.reviewCount })}</div>
             </div>
           </div>
 
           <div className="mt-auto flex items-end justify-between pt-3">
             <div className="text-xs">
               <div className={stay.refundable ? "text-emerald-600 dark:text-emerald-400" : "text-muted"}>
-                {stay.refundable ? "Free cancellation" : "Non-refundable"}
+                {stay.refundable ? t("card.freeCancellation") : t("card.nonRefundable")}
               </div>
-              {stay.payLater && <div className="text-muted">Reserve now, pay later</div>}
+              {stay.payLater && <div className="text-muted">{t("card.payLater")}</div>}
             </div>
             <div className="text-right">
               {savePct >= 1 && (
                 <span className="mb-1 inline-block rounded bg-emerald-600 px-1.5 py-0.5 text-[10px] font-bold text-white">
-                  {savePct}% off
+                  {t("card.percentOff", { pct: savePct })}
                 </span>
               )}
               {hasDeal && (
@@ -110,17 +112,17 @@ export function StayCard({ stay }: { stay: Stay }) {
               )}
               <div className="text-lg font-extrabold text-price">
                 <Money cents={stay.pricePerNight} />
-                <span className="ml-1 text-[10px] font-medium text-muted">/ night</span>
+                <span className="ml-1 text-[10px] font-medium text-muted">{t("card.perNight")}</span>
               </div>
               <div className="text-[10px] text-muted">
-                <Money cents={stay.totalPrice} /> total
+                <Money cents={stay.totalPrice} /> {t("card.total")}
               </div>
-              <div className="text-[10px] text-muted">Total incl. taxes &amp; fees</div>
+              <div className="text-[10px] text-muted">{t("card.totalInclTaxes")}</div>
               <Link
                 href={`/stay/${encodeURIComponent(stay.id)}`}
                 className="btn-accent mt-1 inline-block rounded-lg px-3 py-1.5 text-xs font-semibold"
               >
-                View deal →
+                {t("card.viewDeal")}
               </Link>
             </div>
           </div>

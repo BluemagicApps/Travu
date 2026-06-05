@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { Star } from "lucide-react";
 import type { Stay } from "@/lib/stays/types";
 import { Money } from "@/components/Money";
@@ -18,7 +19,8 @@ export function DealsCarousel({ title, stays }: { title: string; stays: Stay[] }
   );
 }
 
-function DealCard({ stay }: { stay: Stay }) {
+async function DealCard({ stay }: { stay: Stay }) {
+  const t = await getTranslations("stays");
   const hasDeal = stay.originalPrice != null && stay.originalPrice > stay.totalPrice;
   const savePct = hasDeal ? Math.round((1 - stay.totalPrice / stay.originalPrice!) * 100) : 0;
   return (
@@ -36,7 +38,7 @@ function DealCard({ stay }: { stay: Stay }) {
         />
         {savePct >= 1 && (
           <span className="absolute left-2 top-2 rounded-full bg-emerald-600 px-2 py-0.5 text-[10px] font-bold text-white">
-            {savePct}% off
+            {t("card.percentOff", { pct: savePct })}
           </span>
         )}
       </div>
@@ -52,7 +54,7 @@ function DealCard({ stay }: { stay: Stay }) {
           <span className="rounded bg-price px-1.5 py-0.5 text-[11px] font-bold text-white">
             {stay.guestRating.toFixed(1)}
           </span>
-          <span className="text-[11px] text-muted">{stay.ratingWord} · {stay.reviewCount} reviews</span>
+          <span className="text-[11px] text-muted">{stay.ratingWord} · {t("card.reviews", { count: stay.reviewCount })}</span>
         </div>
         <div className="mt-2">
           {hasDeal && (
@@ -63,9 +65,9 @@ function DealCard({ stay }: { stay: Stay }) {
           <span className="text-sm font-extrabold text-price">
             <Money cents={stay.pricePerNight} />
           </span>
-          <span className="text-[11px] text-muted"> / night</span>
+          <span className="text-[11px] text-muted"> {t("card.perNight")}</span>
           <div className="text-[11px] text-muted">
-            <Money cents={stay.totalPrice} /> total · incl. taxes &amp; fees
+            <Money cents={stay.totalPrice} /> {t("card.totalInclTaxesInline")}
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, type ReactNode } from "react";
+import { useTranslations } from "next-intl";
 import { PlaneTakeoff } from "lucide-react";
 import type { Flight } from "@/lib/flights/types";
 import { computeFacets, filterAndSort } from "@/lib/flights/facets";
@@ -31,6 +32,7 @@ export function ResultsView({
   initialSort?: Sort;
   prediction?: ReactNode;
 }) {
+  const t = useTranslations("flights");
   const [maxStops, setMaxStops] = useState(initialMaxStops);
   const [airlines, setAirlines] = useState<Set<string>>(new Set(initialAirlines));
   const [sort, setSort] = useState<Sort>(initialSort);
@@ -77,7 +79,7 @@ export function ResultsView({
       <div>
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h1 className="text-lg font-bold">
-            {totalCount > 0 ? `${totalCount} flights found` : "Search results"}
+            {totalCount > 0 ? t("results.flightsFound", { count: totalCount }) : t("results.title")}
           </h1>
           {sections.some((s) => s.flights.length > 0) && (
             <ResultsSortBar sort={sort} onChange={setSort} />
@@ -92,7 +94,7 @@ export function ResultsView({
               <h2 className="mb-3 text-base font-bold">{section.title}</h2>
               {section.flights.length === 0 ? (
                 <div className="rounded-2xl border border-border bg-surface p-6 text-center text-sm text-muted">
-                  No flights match your filters for this leg.
+                  {t("results.noMatchLeg")}
                 </div>
               ) : (
                 <FlightResultsList flights={section.flights} airportMap={airportMap} />
@@ -103,7 +105,7 @@ export function ResultsView({
           {totalCount === 0 && (
             <div className="glass rounded-2xl p-10 text-center text-muted">
               <PlaneTakeoff className="mx-auto h-8 w-8 text-price" />
-              <p className="mt-3">No flights match your filters — try clearing some.</p>
+              <p className="mt-3">{t("results.noMatchFilters")}</p>
             </div>
           )}
         </div>

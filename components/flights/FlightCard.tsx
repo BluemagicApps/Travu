@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import type { Flight } from "@/lib/flights/types";
 import { hhmm, formatDuration } from "@/lib/utils/dates";
 import { Money } from "@/components/Money";
@@ -23,6 +24,7 @@ export function FlightCard({
   /** When provided, overrides the default "go to /flight/[id]" Select link. */
   onSelect?: () => void;
 }) {
+  const t = useTranslations("flights");
   const from = flight.segments[0];
   const to = flight.segments[flight.segments.length - 1];
   const cityOf = (iata: string) => airportMap?.get(iata)?.city;
@@ -58,32 +60,33 @@ export function FlightCard({
 
         <div className="text-center">
           <div className="text-sm font-medium">
-            {formatDuration(flight.durationMin)} · {flight.stops === 0 ? "Direct" : `${flight.stops} stop`}
+            {formatDuration(flight.durationMin)} ·{" "}
+            {flight.stops === 0 ? t("stops.direct") : t("stops.count", { count: flight.stops })}
           </div>
           {flight.seatsLeft <= 4 && (
             <div className="text-[11px] font-medium text-amber-500">
-              Only {flight.seatsLeft} left at this price
+              {t("card.seatsLeft", { count: flight.seatsLeft })}
             </div>
           )}
         </div>
 
         <div className="ml-auto text-right">
           <div className="text-xl font-extrabold text-price"><Money cents={flight.fare.total} /></div>
-          <div className="text-[10px] text-muted">per traveller</div>
+          <div className="text-[10px] text-muted">{t("perTraveller")}</div>
           {onSelect ? (
             <button
               type="button"
               onClick={onSelect}
               className="btn-accent mt-1 inline-block rounded-lg px-4 py-1.5 text-sm font-semibold"
             >
-              Select
+              {t("card.select")}
             </button>
           ) : (
             <Link
               href={`/flight/${flight.id}`}
               className="btn-accent mt-1 inline-block rounded-lg px-4 py-1.5 text-sm font-semibold"
             >
-              Select
+              {t("card.select")}
             </Link>
           )}
         </div>
@@ -94,7 +97,7 @@ export function FlightCard({
           href={`/flight/${flight.id}`}
           className="text-xs font-medium text-price transition hover:underline"
         >
-          Flight details
+          {t("card.flightDetails")}
         </Link>
       </div>
     </motion.div>

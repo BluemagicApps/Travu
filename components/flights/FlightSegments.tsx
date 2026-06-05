@@ -1,8 +1,10 @@
 import { Plane } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { Segment } from "@/lib/flights/types";
 import { hhmm, formatDuration } from "@/lib/utils/dates";
 
 export function FlightSegments({ segments }: { segments: Segment[] }) {
+  const t = useTranslations("flights");
   return (
     <div className="mt-3 space-y-3 border-t border-border pt-3">
       {segments.map((s, i) => (
@@ -23,7 +25,7 @@ export function FlightSegments({ segments }: { segments: Segment[] }) {
             <span className="ml-auto text-xs text-muted">{formatDuration(s.durationMin)}</span>
           </div>
           {i < segments.length - 1 && (
-            <div className="ml-6 mt-2 text-xs text-muted">Layover in {s.destIata}</div>
+            <div className="ml-6 mt-2 text-xs text-muted">{t("segments.layoverIn", { iata: s.destIata })}</div>
           )}
         </div>
       ))}

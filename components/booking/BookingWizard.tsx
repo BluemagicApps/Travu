@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import type { Flight } from "@/lib/flights/types";
 import type { FareOption } from "@/lib/flights/fares";
 import { ReviewTrip } from "./steps/ReviewTrip";
@@ -37,6 +38,7 @@ export function BookingWizard({
   fareOption: FareOption;
   passengers: number;
 }) {
+  const t = useTranslations("flights");
   const router = useRouter();
   const sp = useSearchParams();
   const pathname = usePathname();
@@ -135,7 +137,7 @@ export function BookingWizard({
       }),
     });
     if (res.status === 401) throw new Error("login");
-    if (!res.ok) throw new Error("Could not complete the booking. Please try again.");
+    if (!res.ok) throw new Error(t("bookingForm.bookingFailed"));
     const { bookingRef } = (await res.json()) as { bookingRef: string };
     return bookingRef;
   }
@@ -204,7 +206,7 @@ export function BookingWizard({
             if (err instanceof Error && err.message === "login") {
               router.push(loginUrl);
             } else {
-              setError(err instanceof Error ? err.message : "Network error — please try again.");
+              setError(err instanceof Error ? err.message : t("bookingForm.networkError"));
             }
           }}
         />

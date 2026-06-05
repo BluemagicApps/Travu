@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Loader2, Search, PlaneTakeoff } from "lucide-react";
 import { TrackTimeline } from "./TrackTimeline";
 import { hhmm, datePart, formatDuration } from "@/lib/utils/dates";
@@ -44,6 +45,7 @@ const field =
   "w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-sm outline-none focus:border-sky-400";
 
 export function TrackClient() {
+  const t = useTranslations("track");
   const sp = useSearchParams();
   const initialRef = (sp.get("ref") ?? "").toUpperCase();
   const [ref, setRef] = useState(initialRef);
@@ -54,7 +56,7 @@ export function TrackClient() {
   async function lookup(value: string) {
     const v = value.trim().toUpperCase();
     if (!/^TRV-[A-Z0-9]{6}$/.test(v)) {
-      setError("Please enter a reference in the form TRV-XXXXXX.");
+      setError(t("invalidRef"));
       setData(null);
       return;
     }
@@ -68,18 +70,18 @@ export function TrackClient() {
       });
       if (res.status === 404) {
         setData(null);
-        setError(`No booking found for ${v}.`);
+        setError(t("notFound", { ref: v }));
         return;
       }
       if (!res.ok) {
         setData(null);
-        setError("Couldn't look that up right now.");
+        setError(t("lookupError"));
         return;
       }
       const json = (await res.json()) as TrackResponse;
       setData(json);
     } catch {
-      setError("Network error — please try again.");
+      setError(t("networkError"));
     } finally {
       setLoading(false);
     }
@@ -101,7 +103,7 @@ export function TrackClient() {
         <input
           value={ref}
           onChange={(e) => setRef(e.target.value.toUpperCase())}
-          placeholder="TRV-AB12CD"
+          placeholder={t("placeholder")}
           className={`${field} font-mono uppercase`}
           style={{ flex: "1 1 220px" }}
         />
@@ -111,7 +113,7 @@ export function TrackClient() {
           className="btn-accent flex items-center gap-1.5 rounded-xl px-5 py-2.5 text-sm font-semibold disabled:opacity-60"
         >
           {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
-          Track
+          {t("trackButton")}
         </button>
       </form>
 
@@ -123,13 +125,13 @@ export function TrackClient() {
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <div className="text-xs font-semibold uppercase tracking-wide text-muted">
-                  Booking reference
+                  {t("bookingReference")}
                 </div>
                 <div className="font-mono text-xl font-bold text-price">{data.ref}</div>
               </div>
               <div className="text-right">
                 <div className="text-xs font-semibold uppercase tracking-wide text-muted">
-                  Status
+                  {t("status")}
                 </div>
                 <div className="text-lg font-bold capitalize">
                   {data.status.phase.replace(/_/g, " ")}
@@ -156,7 +158,7 @@ export function TrackClient() {
                 <div className="text-sm text-muted">
                   {hhmm(data.flight.departIso)} – {hhmm(data.flight.arriveIso)}{" "}
                   ({formatDuration(data.flight.durationMin)}) ·{" "}
-                  {data.flight.stops === 0 ? "Direct" : `${data.flight.stops} stop`}
+                  {data.flight.stops === 0 ? t("direct") : t("stops", { count: data.flight.stops })}
                 </div>
                 <div className="text-sm text-muted">
                   {data.flight.carrierName} · {datePart(data.flight.departIso)}
@@ -185,7 +187,7 @@ export function TrackClient() {
             </div>
 
             <div className="mt-4 border-t border-border pt-3 text-sm">
-              <span className="text-muted">Travellers: </span>
+              <span className="text-muted">{t("travellers")} </span>
               {data.travellers.map((t, i) => (
                 <span key={i} className="font-medium">
                   {t}
@@ -193,17 +195,17 @@ export function TrackClient() {
                 </span>
               ))}
               {data.fareName && (
-                <span className="text-muted"> · Fare: <span className="font-medium text-text">{data.fareName}</span></span>
+                <span className="text-muted"> · {t("fare")} <span className="font-medium text-text">{data.fareName}</span></span>
               )}
             </div>
           </div>
 
           {data.status.etaIso && (
             <div className="rounded-2xl bg-surface-2 p-4 text-xs text-muted">
-              Estimated arrival: <span className="font-semibold text-text">{hhmm(data.status.etaIso)} on {datePart(data.status.etaIso)}</span>
+              {t("estimatedArrival")} <span className="font-semibold text-text">{hhmm(data.status.etaIso)} {t("onDate", { date: datePart(data.status.etaIso) })}</span>
               {data.status.nextChangeAt && (
                 <>
-                  {" · "}Next change at <span className="font-semibold text-text">{hhmm(data.status.nextChangeAt)} on {datePart(data.status.nextChangeAt)}</span>
+                  {" · "}{t("nextChangeAt")} <span className="font-semibold text-text">{hhmm(data.status.nextChangeAt)} {t("onDate", { date: datePart(data.status.nextChangeAt) })}</span>
                 </>
               )}
             </div>

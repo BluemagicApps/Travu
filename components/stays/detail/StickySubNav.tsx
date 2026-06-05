@@ -1,14 +1,16 @@
 "use client";
 
-const TABS = [
-  { id: "overview", label: "Overview" },
-  { id: "amenities", label: "Amenities" },
-  { id: "area", label: "Explore the area" },
-  { id: "policies", label: "Policies" },
-  { id: "reviews", label: "Reviews" },
-];
+import { useTranslations } from "next-intl";
 
 export function StickySubNav() {
+  const t = useTranslations("stays");
+  const TABS = [
+    { id: "overview", label: t("nav.overview") },
+    { id: "amenities", label: t("nav.amenities") },
+    { id: "area", label: t("detail.exploreArea") },
+    { id: "policies", label: t("detail.policies") },
+    { id: "reviews", label: t("nav.reviews") },
+  ];
   function jump(id: string) {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   }

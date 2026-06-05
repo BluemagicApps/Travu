@@ -1,19 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import type { PropertyKind, StaySort } from "@/lib/stays/facets";
-
-const KINDS: { v: PropertyKind; label: string }[] = [
-  { v: "all", label: "All stays" },
-  { v: "hotels", label: "Hotels" },
-  { v: "homes", label: "Homes" },
-];
-
-const SORTS: { v: StaySort; label: string }[] = [
-  { v: "recommended", label: "Recommended" },
-  { v: "price", label: "Price (low to high)" },
-  { v: "rating", label: "Guest rating" },
-  { v: "distance", label: "Distance" },
-];
 
 export function StaysResultsSummaryBar({
   total,
@@ -32,6 +20,18 @@ export function StaysResultsSummaryBar({
   onSort: (s: StaySort) => void;
   onOpenFilters: () => void;
 }) {
+  const t = useTranslations("stays");
+  const KINDS: { v: PropertyKind; label: string }[] = [
+    { v: "all", label: t("results.kindAllStays") },
+    { v: "hotels", label: t("results.kindHotels") },
+    { v: "homes", label: t("results.kindHomes") },
+  ];
+  const SORTS: { v: StaySort; label: string }[] = [
+    { v: "recommended", label: t("results.sortRecommended") },
+    { v: "price", label: t("results.sortPrice") },
+    { v: "rating", label: t("results.sortRating") },
+    { v: "distance", label: t("results.sortDistance") },
+  ];
   return (
     <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
       <div className="flex items-center gap-3">
@@ -40,11 +40,11 @@ export function StaysResultsSummaryBar({
           onClick={onOpenFilters}
           className="rounded-lg border border-border px-3 py-1.5 text-sm font-medium md:hidden"
         >
-          Filters
+          {t("filters.filters")}
         </button>
         <span className="text-sm font-semibold">
           {total}
-          {capped ? "+" : ""} {total === 1 ? "property" : "properties"}
+          {capped ? "+" : ""} {t("results.propertyNoun", { count: total })}
         </span>
       </div>
 
@@ -66,7 +66,7 @@ export function StaysResultsSummaryBar({
         </div>
 
         <label className="flex items-center gap-1.5 text-sm">
-          <span className="hidden text-muted sm:inline">Sort by</span>
+          <span className="hidden text-muted sm:inline">{t("results.sortBy")}</span>
           <select
             value={sort}
             onChange={(e) => onSort(e.target.value as StaySort)}

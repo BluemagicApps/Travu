@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Loader2, BedDouble } from "lucide-react";
 
 /**
@@ -10,6 +11,7 @@ import { Loader2, BedDouble } from "lucide-react";
  */
 export function WaitingOverlay({ bookingRef }: { bookingRef: string }) {
   const router = useRouter();
+  const t = useTranslations("stays");
 
   useEffect(() => {
     // Re-arms on every mount (incl. React strict-mode double-invoke) so the
@@ -31,12 +33,12 @@ export function WaitingOverlay({ bookingRef }: { bookingRef: string }) {
             <BedDouble className="h-7 w-7 text-white" />
           </span>
         </div>
-        <h1 className="mt-6 text-xl font-extrabold">Completing your booking</h1>
+        <h1 className="mt-6 text-xl font-extrabold">{t("waiting.completingBooking")}</h1>
         <p className="mt-2 text-sm text-muted">
-          Please wait while we confirm your reservation with the property. This may take a few moments.
+          {t("waiting.pleaseWait")}
         </p>
         <div className="mt-6 flex items-center justify-center gap-2 text-sm font-medium text-price">
-          <Loader2 className="h-4 w-4 animate-spin" /> Securing your room…
+          <Loader2 className="h-4 w-4 animate-spin" /> {t("waiting.securingRoom")}
         </div>
       </div>
     </div>

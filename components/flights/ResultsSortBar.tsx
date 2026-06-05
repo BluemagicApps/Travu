@@ -1,10 +1,14 @@
 "use client";
 
-const SORTS = [
-  { key: "best", label: "Recommended" },
-  { key: "price", label: "Cheapest" },
-  { key: "duration", label: "Fastest" },
-] as const;
+import { useTranslations } from "next-intl";
+
+const SORT_KEYS = ["best", "price", "duration"] as const;
+
+const SORT_LABEL_KEYS: Record<(typeof SORT_KEYS)[number], string> = {
+  best: "sort.recommended",
+  price: "sort.cheapest",
+  duration: "sort.fastest",
+};
 
 export function ResultsSortBar({
   sort,
@@ -13,10 +17,11 @@ export function ResultsSortBar({
   sort: string;
   onChange: (value: "best" | "price" | "duration") => void;
 }) {
+  const t = useTranslations("flights");
   return (
     <div className="flex items-center gap-2 text-sm">
       <label htmlFor="sort" className="text-muted">
-        Sort by
+        {t("sort.sortBy")}
       </label>
       <select
         id="sort"
@@ -24,9 +29,9 @@ export function ResultsSortBar({
         onChange={(e) => onChange(e.target.value as "best" | "price" | "duration")}
         className="rounded-full border border-border bg-surface px-3 py-1.5 outline-none"
       >
-        {SORTS.map((s) => (
-          <option key={s.key} value={s.key}>
-            {s.label}
+        {SORT_KEYS.map((key) => (
+          <option key={key} value={key}>
+            {t(SORT_LABEL_KEYS[key])}
           </option>
         ))}
       </select>

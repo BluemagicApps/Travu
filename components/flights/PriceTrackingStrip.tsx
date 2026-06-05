@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils/cn";
 import { Money } from "@/components/Money";
 
@@ -11,6 +12,7 @@ export interface StripDay {
 }
 
 export function PriceTrackingStrip({ days }: { days: StripDay[] }) {
+  const t = useTranslations("flights");
   const router = useRouter();
   const sp = useSearchParams();
 
@@ -26,10 +28,11 @@ export function PriceTrackingStrip({ days }: { days: StripDay[] }) {
   return (
     <div className="rounded-2xl border border-border bg-surface p-3">
       <div className="flex flex-wrap items-baseline justify-between gap-2 px-1">
-        <div className="text-xs font-semibold text-muted">Price tracking</div>
+        <div className="text-xs font-semibold text-muted">{t("priceTracking.title")}</div>
         {lowest !== null && (
           <div className="text-xs text-muted">
-            Current lowest price: <span className="font-bold text-price"><Money cents={lowest} /></span>
+            {t("priceTracking.currentLowest")}{" "}
+            <span className="font-bold text-price"><Money cents={lowest} /></span>
           </div>
         )}
       </div>

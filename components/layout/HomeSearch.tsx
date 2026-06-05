@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Plane, BedDouble } from "lucide-react";
 import type { ComponentType } from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils/cn";
 import type { AirportOption } from "@/lib/flights/dataset";
 import { SearchForm } from "@/components/search/SearchForm";
@@ -11,11 +12,13 @@ import { StaySearchForm } from "@/components/stays/StaySearchForm";
 
 export function HomeSearch({ airports }: { airports: AirportOption[] }) {
   const [tab, setTab] = useState<"flights" | "stays">("flights");
+  const tNav = useTranslations("nav");
+  const tSearch = useTranslations("search");
   return (
     <div>
       <div className="mx-auto mb-4 flex w-fit gap-1 rounded-full border border-border bg-surface-2 p-1">
-        <TabBtn active={tab === "flights"} onClick={() => setTab("flights")} icon={Plane} label="Flights" />
-        <TabBtn active={tab === "stays"} onClick={() => setTab("stays")} icon={BedDouble} label="Stays" />
+        <TabBtn active={tab === "flights"} onClick={() => setTab("flights")} icon={Plane} label={tNav("flights")} />
+        <TabBtn active={tab === "stays"} onClick={() => setTab("stays")} icon={BedDouble} label={tNav("stays")} />
       </div>
 
       {tab === "flights" ? (
@@ -23,7 +26,7 @@ export function HomeSearch({ airports }: { airports: AirportOption[] }) {
           <SearchForm airports={airports} />
           <div className="my-4 flex items-center gap-3 text-xs text-muted">
             <span className="h-px flex-1 bg-border" />
-            or just tell our AI what you need
+            {tSearch("aiDivider")}
             <span className="h-px flex-1 bg-border" />
           </div>
           <AiSearchBar />

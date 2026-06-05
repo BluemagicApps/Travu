@@ -1,18 +1,20 @@
 "use client";
 
 import { Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils/cn";
 
 const STEPS = [
-  { key: "review", label: "Review trip" },
-  { key: "travellers", label: "Travellers" },
-  { key: "payment", label: "Payment" },
-  { key: "confirm", label: "Review & book" },
+  { key: "review", labelKey: "steps.reviewTrip" },
+  { key: "travellers", labelKey: "steps.travellers" },
+  { key: "payment", labelKey: "steps.payment" },
+  { key: "confirm", labelKey: "steps.reviewAndBook" },
 ] as const;
 
 export type WizardStep = (typeof STEPS)[number]["key"];
 
 export function StepHeader({ current }: { current: WizardStep }) {
+  const t = useTranslations("flights");
   const idx = STEPS.findIndex((s) => s.key === current);
   return (
     <ol className="flex flex-wrap items-center gap-2 text-xs">
@@ -34,7 +36,7 @@ export function StepHeader({ current }: { current: WizardStep }) {
               {done ? <Check className="h-3 w-3 text-white" /> : i + 1}
             </span>
             <span className={cn("font-medium", active || done ? "text-text" : "text-muted")}>
-              {s.label}
+              {t(s.labelKey)}
             </span>
             {i < STEPS.length - 1 && <span className="text-muted">/</span>}
           </li>

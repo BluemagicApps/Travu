@@ -1,24 +1,19 @@
+import { getTranslations } from "next-intl/server";
 import { Check, MapPin, Clock, Ban, Info } from "lucide-react";
 import type { AmenityGroup, NearbyLandmark, StayPolicies, ThingToDo } from "@/lib/stays/types";
 
-const AMENITY_LABELS: Record<string, string> = {
-  wifi: "Free WiFi",
-  ac: "Air conditioning",
-  pool: "Pool",
-  parking: "Parking",
-  gym: "Gym",
-  spa: "Spa",
-  bar: "Bar",
-  breakfast: "Breakfast",
-  pet_friendly: "Pet friendly",
-};
-const label = (k: string) => AMENITY_LABELS[k] ?? k.replace(/_/g, " ");
+const AMENITY_LABEL_KEYS = new Set([
+  "wifi", "ac", "pool", "parking", "gym", "spa", "bar", "breakfast", "pet_friendly",
+]);
 
-export function AmenitiesGrid({ groups }: { groups: AmenityGroup[] }) {
+export async function AmenitiesGrid({ groups }: { groups: AmenityGroup[] }) {
   if (groups.length === 0) return null;
+  const t = await getTranslations("stays");
+  const label = (k: string) =>
+    AMENITY_LABEL_KEYS.has(k) ? t(`filters.labels.${k}`) : k.replace(/_/g, " ");
   return (
     <section id="amenities" className="scroll-mt-28 border-t border-border py-6">
-      <h2 className="text-lg font-bold">Popular amenities</h2>
+      <h2 className="text-lg font-bold">{t("detail.popularAmenities")}</h2>
       <div className="mt-3 grid gap-4 sm:grid-cols-2">
         {groups.map((g) => (
           <div key={g.group}>
@@ -37,7 +32,7 @@ export function AmenitiesGrid({ groups }: { groups: AmenityGroup[] }) {
   );
 }
 
-export function AboutProperty({
+export async function AboutProperty({
   name,
   description,
   hostName,
@@ -48,9 +43,10 @@ export function AboutProperty({
   hostName?: string;
   hostType?: string;
 }) {
+  const t = await getTranslations("stays");
   return (
     <section id="overview" className="scroll-mt-28 border-t border-border py-6">
-      <h2 className="text-lg font-bold">About this property</h2>
+      <h2 className="text-lg font-bold">{t("detail.aboutProperty")}</h2>
       <h3 className="mt-3 font-semibold">{name}</h3>
       {description && <p className="mt-1 text-sm leading-relaxed text-muted">{description}</p>}
       {hostName && (
@@ -60,7 +56,7 @@ export function AboutProperty({
           </span>
           <div className="text-sm">
             <div className="font-semibold">{hostName}</div>
-            <div className="text-xs text-muted">{hostType === "Vrbo" ? "Private host (Vrbo)" : "Property host"}</div>
+            <div className="text-xs text-muted">{hostType === "Vrbo" ? t("detail.privateHost") : t("detail.propertyHost")}</div>
           </div>
         </div>
       )}
@@ -84,24 +80,25 @@ export function NearbyList({ landmarks }: { landmarks: NearbyLandmark[] }) {
   );
 }
 
-export function PoliciesSection({ policies }: { policies?: StayPolicies }) {
+export async function PoliciesSection({ policies }: { policies?: StayPolicies }) {
   if (!policies) return null;
+  const t = await getTranslations("stays");
   return (
     <section id="policies" className="scroll-mt-28 border-t border-border py-6">
-      <h2 className="text-lg font-bold">Policies</h2>
+      <h2 className="text-lg font-bold">{t("detail.policies")}</h2>
       <div className="mt-3 grid gap-4 sm:grid-cols-2">
         <div className="flex items-start gap-2 text-sm">
           <Clock className="mt-0.5 h-4 w-4 text-price" />
           <div>
-            <div className="font-semibold">Check-in</div>
-            <div className="text-muted">After {policies.checkIn}</div>
+            <div className="font-semibold">{t("summary.checkIn")}</div>
+            <div className="text-muted">{t("detail.afterTime", { time: policies.checkIn })}</div>
           </div>
         </div>
         <div className="flex items-start gap-2 text-sm">
           <Clock className="mt-0.5 h-4 w-4 text-price" />
           <div>
-            <div className="font-semibold">Check-out</div>
-            <div className="text-muted">Before {policies.checkOut}</div>
+            <div className="font-semibold">{t("summary.checkOut")}</div>
+            <div className="text-muted">{t("detail.beforeTime", { time: policies.checkOut })}</div>
           </div>
         </div>
       </div>
@@ -111,7 +108,7 @@ export function PoliciesSection({ policies }: { policies?: StayPolicies }) {
       </div>
       {/* Cancellation timeline */}
       <div className="mt-5">
-        <h3 className="text-sm font-semibold">Cancellation</h3>
+        <h3 className="text-sm font-semibold">{t("detail.cancellation")}</h3>
         <div className="mt-2 flex items-center gap-1">
           {policies.cancellationTiers.map((t, i) => (
             <div key={i} className="flex-1 text-center">
@@ -127,11 +124,12 @@ export function PoliciesSection({ policies }: { policies?: StayPolicies }) {
   );
 }
 
-export function ThingsToDoNearby({ items }: { items: ThingToDo[] }) {
+export async function ThingsToDoNearby({ items }: { items: ThingToDo[] }) {
   if (items.length === 0) return null;
+  const t = await getTranslations("stays");
   return (
     <section className="border-t border-border py-6">
-      <h2 className="text-lg font-bold">Popular things to do nearby</h2>
+      <h2 className="text-lg font-bold">{t("detail.thingsToDo")}</h2>
       <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((t) => (
           <div key={t.name} className="rounded-2xl border border-border p-3">

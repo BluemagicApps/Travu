@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import type { ContactInput, TravellerInput } from "@/lib/booking/wizard-state";
 import {
   COUNTRIES,
@@ -45,6 +46,7 @@ export function Travellers({
   onTravellerChange: (idx: number, value: TravellerInput) => void;
   onContactChange: (value: ContactInput) => void;
 }) {
+  const tr = useTranslations("flights");
   const years = Array.from({ length: 100 }, (_, i) => 2026 - i);
 
   const phoneLengths = phoneLengthsForCountry(contact.phoneCountry);
@@ -56,10 +58,10 @@ export function Travellers({
   return (
     <div className="space-y-5">
       <div>
-        <h1 className="text-2xl font-extrabold">Secure booking — only takes a few minutes</h1>
+        <h1 className="text-2xl font-extrabold">{tr("travellers.title")}</h1>
         <p className="mt-1 text-sm text-muted">
-          Traveller names must match government-issued photo ID exactly.{" "}
-          <span className="text-rose-500">*</span> Required
+          {tr("travellers.nameMatchNote")}{" "}
+          <span className="text-rose-500">*</span> {tr("travellers.required")}
         </p>
       </div>
 
@@ -71,13 +73,13 @@ export function Travellers({
         return (
           <section key={idx} className="rounded-2xl border border-border bg-surface p-5">
             <h2 className="text-sm font-semibold">
-              Traveller {idx + 1} of {travellers.length}
+              {tr("travellers.travellerOf", { index: idx + 1, total: travellers.length })}
             </h2>
 
             <div className="mt-3 grid gap-3 sm:grid-cols-3">
               <label className="block">
                 <span className={label}>
-                  First name <span className="text-rose-500">*</span>
+                  {tr("travellers.firstName")} <span className="text-rose-500">*</span>
                 </span>
                 <input
                   required
@@ -87,7 +89,7 @@ export function Travellers({
                 />
               </label>
               <label className="block">
-                <span className={label}>Middle name</span>
+                <span className={label}>{tr("travellers.middleName")}</span>
                 <input
                   className={field}
                   value={t.middleName}
@@ -96,7 +98,7 @@ export function Travellers({
               </label>
               <label className="block">
                 <span className={label}>
-                  Surname <span className="text-rose-500">*</span>
+                  {tr("travellers.surname")} <span className="text-rose-500">*</span>
                 </span>
                 <input
                   required
@@ -111,7 +113,7 @@ export function Travellers({
               {/* Passport country FIRST — it drives the number format below. */}
               <label className="block">
                 <span className={label}>
-                  Passport country <span className="text-rose-500">*</span>
+                  {tr("travellers.passportCountry")} <span className="text-rose-500">*</span>
                 </span>
                 <select
                   required
@@ -139,7 +141,7 @@ export function Travellers({
               </label>
               <label className="block">
                 <span className={label}>
-                  Passport number <span className="text-rose-500">*</span>
+                  {tr("travellers.passportNumber")} <span className="text-rose-500">*</span>
                 </span>
                 <input
                   required
@@ -158,7 +160,7 @@ export function Travellers({
                 />
                 {passportError && (
                   <span className={errorText}>
-                    Expected format like {rule.example} for this country.
+                    {tr("travellers.passportFormatError", { example: rule.example })}
                   </span>
                 )}
               </label>
@@ -166,16 +168,16 @@ export function Travellers({
 
             <div className="mt-4">
               <span className={label}>
-                Date of birth <span className="text-rose-500">*</span>
+                {tr("travellers.dateOfBirth")} <span className="text-rose-500">*</span>
               </span>
               <div className="grid grid-cols-3 gap-3">
                 <select
-                  aria-label="Date of birth day"
+                  aria-label={tr("travellers.dobDay")}
                   className={field}
                   value={t.dobDay}
                   onChange={(e) => onTravellerChange(idx, { ...t, dobDay: e.target.value })}
                 >
-                  <option value="">Day</option>
+                  <option value="">{tr("travellers.day")}</option>
                   {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
                     <option key={d} value={String(d)}>
                       {d}
@@ -183,12 +185,12 @@ export function Travellers({
                   ))}
                 </select>
                 <select
-                  aria-label="Date of birth month"
+                  aria-label={tr("travellers.dobMonth")}
                   className={field}
                   value={t.dobMonth}
                   onChange={(e) => onTravellerChange(idx, { ...t, dobMonth: e.target.value })}
                 >
-                  <option value="">Month</option>
+                  <option value="">{tr("travellers.month")}</option>
                   {MONTHS.map((m, i) => (
                     <option key={m} value={String(i + 1)}>
                       {m}
@@ -196,12 +198,12 @@ export function Travellers({
                   ))}
                 </select>
                 <select
-                  aria-label="Date of birth year"
+                  aria-label={tr("travellers.dobYear")}
                   className={field}
                   value={t.dobYear}
                   onChange={(e) => onTravellerChange(idx, { ...t, dobYear: e.target.value })}
                 >
-                  <option value="">Year</option>
+                  <option value="">{tr("travellers.year")}</option>
                   {years.map((y) => (
                     <option key={y} value={String(y)}>
                       {y}
@@ -215,15 +217,13 @@ export function Travellers({
       })}
 
       <section className="rounded-2xl border border-border bg-surface p-5">
-        <h2 className="text-sm font-semibold">Contact details</h2>
-        <p className="mt-1 text-xs text-muted">
-          We will send your e-ticket and any updates to this email.
-        </p>
+        <h2 className="text-sm font-semibold">{tr("travellers.contactDetails")}</h2>
+        <p className="mt-1 text-xs text-muted">{tr("travellers.contactNote")}</p>
 
         <div className="mt-3 grid gap-3 sm:grid-cols-[2fr_1fr_2fr]">
           <label className="block sm:col-span-3">
             <span className={label}>
-              Email address <span className="text-rose-500">*</span>
+              {tr("travellers.emailAddress")} <span className="text-rose-500">*</span>
             </span>
             <input
               type="email"
@@ -238,13 +238,13 @@ export function Travellers({
                 checked={contact.emailConfirmed}
                 onChange={(e) => onContactChange({ ...contact, emailConfirmed: e.target.checked })}
               />
-              Send me trip updates and travel deals.
+              {tr("travellers.marketingOptIn")}
             </label>
           </label>
 
           <label className="block">
             <span className={label}>
-              Country code <span className="text-rose-500">*</span>
+              {tr("travellers.countryCode")} <span className="text-rose-500">*</span>
             </span>
             <select
               className={field}
@@ -269,7 +269,7 @@ export function Travellers({
           </label>
           <label className="block sm:col-span-2">
             <span className={label}>
-              Phone number <span className="text-rose-500">*</span>
+              {tr("travellers.phoneNumber")} <span className="text-rose-500">*</span>
             </span>
             <div className="relative">
               {phoneDial && (
@@ -294,11 +294,12 @@ export function Travellers({
             </div>
             {phoneError && (
               <span className={errorText}>
-                This country&apos;s numbers are{" "}
                 {phoneLengths.length === 1
-                  ? `${phoneLengths[0]} digits`
-                  : `${Math.min(...phoneLengths)}–${phoneMax} digits`}
-                .
+                  ? tr("travellers.phoneDigitsExact", { count: phoneLengths[0] })
+                  : tr("travellers.phoneDigitsRange", {
+                      min: Math.min(...phoneLengths),
+                      max: phoneMax,
+                    })}
               </span>
             )}
           </label>

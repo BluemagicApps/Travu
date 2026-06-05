@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import type { Stay } from "@/lib/stays/types";
 import type { ProtectionPlanId } from "@/lib/stays/pricing";
 import { computeStayPrice } from "@/lib/stays/pricing";
@@ -14,6 +17,7 @@ export function StayBookingSummary({
   plan?: ProtectionPlanId;
 }) {
   const p = computeStayPrice(stay, rooms, plan);
+  const t = useTranslations("stays");
   return (
     <aside className="glass h-fit rounded-2xl p-4 text-sm lg:sticky lg:top-24">
       <div className="flex gap-3">
@@ -32,30 +36,30 @@ export function StayBookingSummary({
       </div>
 
       <div className="mt-3 space-y-1 border-t border-border pt-3 text-muted">
-        <div className="flex justify-between"><span>Check-in</span><span className="text-text">{stay.checkIn} · {stay.policies?.checkIn ?? "3:00 PM"}</span></div>
-        <div className="flex justify-between"><span>Check-out</span><span className="text-text">{stay.checkOut} · {stay.policies?.checkOut ?? "11:00 AM"}</span></div>
-        <div className="flex justify-between"><span>Room</span><span className="text-text">{stay.roomName}</span></div>
-        <div className="flex justify-between"><span>Rooms</span><span className="text-text">{rooms}</span></div>
+        <div className="flex justify-between"><span>{t("summary.checkIn")}</span><span className="text-text">{stay.checkIn} · {stay.policies?.checkIn ?? "3:00 PM"}</span></div>
+        <div className="flex justify-between"><span>{t("summary.checkOut")}</span><span className="text-text">{stay.checkOut} · {stay.policies?.checkOut ?? "11:00 AM"}</span></div>
+        <div className="flex justify-between"><span>{t("summary.room")}</span><span className="text-text">{stay.roomName}</span></div>
+        <div className="flex justify-between"><span>{t("summary.rooms")}</span><span className="text-text">{rooms}</span></div>
       </div>
 
       <div className="mt-3 space-y-1 border-t border-border pt-3 text-muted">
         <div className="flex justify-between">
-          <span>{p.nights} night{p.nights === 1 ? "" : "s"} × {rooms} room{rooms === 1 ? "" : "s"}</span>
+          <span>{t("summary.nightsRooms", { nights: p.nights, rooms })}</span>
           <span className="text-text"><Money cents={p.roomSubtotal} /></span>
         </div>
-        <div className="flex justify-between"><span>Taxes</span><span className="text-text"><Money cents={p.taxes} /></span></div>
-        <div className="flex justify-between"><span>Service fee</span><span className="text-text"><Money cents={p.fees} /></span></div>
+        <div className="flex justify-between"><span>{t("summary.taxes")}</span><span className="text-text"><Money cents={p.taxes} /></span></div>
+        <div className="flex justify-between"><span>{t("summary.serviceFee")}</span><span className="text-text"><Money cents={p.fees} /></span></div>
         {p.protection > 0 && (
-          <div className="flex justify-between"><span>Travu Protect</span><span className="text-text"><Money cents={p.protection} /></span></div>
+          <div className="flex justify-between"><span>{t("booking.travuProtect")}</span><span className="text-text"><Money cents={p.protection} /></span></div>
         )}
       </div>
 
       <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
-        <span className="font-semibold">Total</span>
+        <span className="font-semibold">{t("summary.total")}</span>
         <span className="text-lg font-extrabold text-price"><Money cents={p.total} /></span>
       </div>
       <div className="mt-1 flex items-center justify-between text-xs text-muted">
-        <span>Pay today</span>
+        <span>{t("summary.payToday")}</span>
         <span><Money cents={p.payToday} /></span>
       </div>
     </aside>

@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { Plane, BedDouble, Car } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { CarSearchCard, type CarSearchInitial } from "../CarSearchCard";
 
 /** Expedia-style hero: gradient banner, vertical tabs, and the car search card. */
-export function CarsHero({ initial }: { initial?: CarSearchInitial }) {
+export async function CarsHero({ initial }: { initial?: CarSearchInitial }) {
+  const t = await getTranslations("home");
   return (
     // No overflow-hidden here — it would clip the search dropdowns. The blur blob
     // is clipped by its own wrapper instead.
@@ -15,9 +17,7 @@ export function CarsHero({ initial }: { initial?: CarSearchInitial }) {
         />
       </div>
       <div className="mx-auto max-w-5xl px-4 pt-12 pb-6 text-center">
-        <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl">
-          Drive your trip <span className="text-gradient">your way.</span>
-        </h1>
+        <h1 className="text-3xl font-extrabold tracking-tight sm:text-5xl">{t("carsTagline")}</h1>
 
         {/* Vertical tabs */}
         <div className="mx-auto mt-6 flex w-fit gap-1 rounded-full border border-border bg-surface-2 p-1">

@@ -1,4 +1,5 @@
 import { Loader2, PlaneTakeoff } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 function CardSkeleton() {
   return (
@@ -26,6 +27,7 @@ function CardSkeleton() {
 }
 
 export function ResultsSkeleton() {
+  const t = useTranslations("flights");
   return (
     <div className="animate-pulse">
       <div className="mt-6 grid gap-6 lg:grid-cols-[260px_1fr]">
@@ -47,7 +49,7 @@ export function ResultsSkeleton() {
           <div className="flex items-center gap-2 text-sm font-medium text-muted">
             <Loader2 className="h-4 w-4 animate-spin text-price" />
             <PlaneTakeoff className="h-4 w-4 text-price" />
-            Searching live fares across airlines…
+            {t("results.searching")}
           </div>
           <div className="mt-4 space-y-3">
             {Array.from({ length: 5 }).map((_, i) => (

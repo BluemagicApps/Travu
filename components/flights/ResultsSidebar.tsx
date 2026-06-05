@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Money } from "@/components/Money";
 import type { ResultsFacets } from "@/lib/flights/facets";
 
@@ -18,18 +19,19 @@ export function ResultsSidebar({
   onMaxStops: (value: string) => void;
   onToggleAirline: (iata: string) => void;
 }) {
+  const t = useTranslations("flights");
   const stopOptions = [
-    { label: "Any", value: "" },
-    { label: "Direct", value: "0", count: facets.stopCounts[0] },
-    { label: "Up to 1 stop", value: "1", count: facets.stopCounts[0] + facets.stopCounts[1] },
+    { label: t("filters.any"), value: "" },
+    { label: t("stops.direct"), value: "0", count: facets.stopCounts[0] },
+    { label: t("filters.upToOneStop"), value: "1", count: facets.stopCounts[0] + facets.stopCounts[1] },
   ];
 
   return (
     <aside className="rounded-2xl border border-border bg-surface p-4 text-sm">
-      <h2 className="text-base font-bold">Filter by</h2>
+      <h2 className="text-base font-bold">{t("filters.filterBy")}</h2>
 
       <section className="mt-4">
-        <h3 className="text-xs font-semibold uppercase tracking-wide text-muted">Stops</h3>
+        <h3 className="text-xs font-semibold uppercase tracking-wide text-muted">{t("filters.stops")}</h3>
         <div className="mt-2 space-y-1">
           {stopOptions.map((opt) => (
             <label
@@ -53,7 +55,7 @@ export function ResultsSidebar({
 
       {facets.airlines.length > 0 && (
         <section className="mt-5">
-          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted">Airlines</h3>
+          <h3 className="text-xs font-semibold uppercase tracking-wide text-muted">{t("filters.airlines")}</h3>
           <div className="mt-2 space-y-1">
             {facets.airlines.map((a) => (
               <label
@@ -69,7 +71,7 @@ export function ResultsSidebar({
                   {a.name} <span className="text-xs text-muted">({a.count})</span>
                 </span>
                 <span className="text-xs font-semibold text-price">
-                  From <Money cents={a.minPrice} />
+                  {t("filters.from")} <Money cents={a.minPrice} />
                 </span>
               </label>
             ))}

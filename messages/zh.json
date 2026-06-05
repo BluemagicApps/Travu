@@ -1,9 +1,9 @@
 {
   "nav": {
-    "flights": "航班",
+    "flights": "机票",
     "stays": "住宿",
     "cars": "租车",
-    "trackBooking": "查询预订",
+    "trackBooking": "查询订单",
     "signIn": "登录",
     "signOut": "退出登录"
   },
@@ -13,7 +13,842 @@
     "policies": "政策",
     "help": "帮助"
   },
+  "footerLinks": {
+    "about": "关于我们",
+    "oneTokenRewards": "OneToken 奖励",
+    "listYourProperty": "发布您的房源",
+    "partnerships": "合作伙伴",
+    "newsroom": "新闻中心",
+    "searchFlights": "搜索机票",
+    "hotelsAndStays": "酒店与住宿",
+    "carRentals": "租车服务",
+    "trackABooking": "查询订单",
+    "myTrips": "我的行程",
+    "privacy": "隐私",
+    "cookies": "Cookie",
+    "termsOfUse": "使用条款",
+    "accessibility": "无障碍功能",
+    "yourPrivacyChoices": "您的隐私选择",
+    "support": "支持",
+    "cancelYourBooking": "取消订单",
+    "refundBasics": "退款须知",
+    "travelDocuments": "旅行证件",
+    "oneTokenTerms": "OneToken 条款"
+  },
   "common": {
     "language": "语言"
+  },
+  "home": {
+    "eyebrow": "AI 驱动，重塑旅行",
+    "tagline": "一站出发，畅游天下。",
+    "subtitle": "像跟朋友聊天一样，告诉 Travu 你想去哪儿。机票和住宿——搜索、比价、下单，全程交给我们。",
+    "carsTagline": "随心驾驭你的旅程。"
+  },
+  "homeSections": {
+    "bundleSave": {
+      "title": "打包预订，省更多",
+      "desc": "一次预订整段行程，或分批预订，都能省钱。"
+    },
+    "oneStopShop": {
+      "title": "一站式旅行平台",
+      "desc": "机票、酒店等，一个平台全搞定。"
+    },
+    "oneTokenRewards": {
+      "title": "OneToken 奖励",
+      "desc": "即刻享优惠，并赚取 OneTokenCash 用于今后的旅行。"
+    },
+    "travelStyles": {
+      "heading": "适合各种旅行风格的住宿",
+      "subtitle": "平均价格基于当前月份",
+      "avgPerNight": "平均每晚",
+      "style": {
+        "beach": "海滩",
+        "culture": "人文",
+        "ski": "滑雪",
+        "family": "亲子",
+        "wellness": "养生与放松"
+      }
+    },
+    "exploreWorld": {
+      "heading": "用 Travu 探索旅行的精彩世界"
+    },
+    "stayLikeLocal": {
+      "heading": "在{city}像当地人一样入住",
+      "propertyType": {
+        "privateHomes": "私人度假屋",
+        "apartments": "公寓与单元房",
+        "cabins": "小木屋",
+        "cottages": "乡村小屋",
+        "villas": "别墅"
+      }
+    },
+    "promo": {
+      "eyebrow": "打包预订，省更多",
+      "heading": "带走的是回忆，不只是行李",
+      "body": "在机票之外加订住宿，全球超 50 万家房源套餐立减。会员价适用。",
+      "cta": "开始规划"
+    },
+    "flightDeals": {
+      "heading": "从{city}出发的特价机票",
+      "tagline": "实时探索飞往全球数百个目的地的特价机票。",
+      "cta": "查看所有特价机票"
+    }
+  },
+  "search": {
+    "flights": "搜索机票",
+    "search": "搜索",
+    "aiDivider": "或直接告诉我们的 AI 你的需求",
+    "askAi": "问 AI",
+    "aiPlaceholderStays": "用大白话提问——例如「罗马一家带泳池的五星酒店，住 3 晚」",
+    "aiPlaceholderCars": "用大白话提问——例如「下周末迈阿密的 SUV，自动挡」"
+  },
+  "auth": {
+    "loginTitle": "欢迎回来",
+    "loginSubtitle": "登录以管理您的行程。",
+    "signupTitle": "创建您的账户",
+    "signupSubtitle": "用 Travu 预订机票并追踪行程。",
+    "name": "姓名",
+    "email": "邮箱",
+    "password": "密码",
+    "signIn": "登录",
+    "signingIn": "登录中…",
+    "createAccount": "创建账户",
+    "creating": "创建中…",
+    "newToTravu": "初次使用 Travu？",
+    "createAccountLink": "创建账户",
+    "alreadyHaveAccount": "已有账户？",
+    "invalidCredentials": "邮箱或密码有误。",
+    "emailTaken": "该邮箱已被注册。",
+    "invalidSignup": "请输入有效邮箱，密码至少 8 位。"
+  },
+  "track": {
+    "heading": "查询订单",
+    "intro": "输入您的 Travu 订单参考号（例如 <ref>TRV-AB12CD</ref>），即可查看行程的实时状态。",
+    "placeholder": "TRV-AB12CD",
+    "trackButton": "查询",
+    "invalidRef": "请按 TRV-XXXXXX 的格式输入参考号。",
+    "notFound": "未找到与 {ref} 对应的订单。",
+    "lookupError": "暂时无法查询，请稍后再试。",
+    "networkError": "网络错误——请重试。",
+    "bookingReference": "订单参考号",
+    "status": "状态",
+    "direct": "直达",
+    "stops": "{count, plural, other {# 次中转}}",
+    "travellers": "出行人：",
+    "fare": "票价：",
+    "estimatedArrival": "预计到达：",
+    "nextChangeAt": "下次更新于",
+    "onDate": "于 {date}"
+  },
+  "dashboard": {
+    "heading": "您的行程",
+    "signedInAs": "已登录账户：{email}",
+    "noBookings": "暂无订单。",
+    "startSearch": "开始搜索",
+    "joinOneToken": "<strong>加入 OneToken</strong>——每次出行都赚 OneTokenCash。",
+    "joinFree": "免费加入",
+    "tripElements": "{count} 个行程要素",
+    "toTier": "再 {count} 即可升至{tier}",
+    "topTier": "最高等级",
+    "ref": "参考号",
+    "eTicket": "电子机票",
+    "voucher": "凭证",
+    "nights": "{count, plural, other {# 晚}}"
+  },
+  "onetoken": {
+    "badge": "Travu OneToken",
+    "heroTitle": "Travu 免费的<gradient>旅行奖励计划</gradient>",
+    "heroSubtitle": "享会员价即刻省钱，并赚取 OneTokenCash 用于今后的旅行。",
+    "joinFree": "免费加入",
+    "joinEarn": "加入并开始赚奖励",
+    "joinForFree": "免费加入",
+    "joining": "加入中…",
+    "memberBadge": "您已是 OneToken 会员",
+    "valueProps": {
+      "savings": {
+        "title": "超 150 万家酒店、民宿和租车享优惠",
+        "desc": "全球数十万家住宿享会员价，立省 10% 或更多。"
+      },
+      "earnUse": {
+        "title": "在更多地方赚取并使用奖励",
+        "desc": "OneTokenCash 就是你的奖励货币——1 美元 OneTokenCash 可当 1 美元用于符合条件的机票和住宿。"
+      },
+      "perks": {
+        "title": "尊享更多会员福利",
+        "desc": "等级越高，越能享客房升级、免费比价追踪、优先客服和 VIP 福利。"
+      }
+    },
+    "tripElementsHeading": "随等级提升，轻松解锁新权益",
+    "tripElementsSubtitle": "每预订一个行程要素都能获得奖励，助你更快晋级——还能额外赚取 OneTokenCash。",
+    "tripElementsLabel": "以下每一项都可获得一个行程要素……",
+    "tripElement": {
+      "hotelRoomNight": "酒店每间夜",
+      "vacationRentalNight": "度假租赁每晚",
+      "flightTicket": "机票",
+      "carRentalDay": "租车每天",
+      "cruiseCabinNight": "邮轮舱位每晚",
+      "activityTicket": "活动门票"
+    },
+    "tiersHeading": "随等级提升，尊享更多权益",
+    "tierRange": {
+      "blue": "0–4 个行程要素",
+      "silver": "5–14 个行程要素",
+      "gold": "15–29 个行程要素",
+      "platinum": "30+ 个行程要素"
+    },
+    "savings": "优惠",
+    "savingsDesc": "超 10,000 家酒店享会员价，立省 {pct}% 或更多。",
+    "rewards": "奖励",
+    "rewardsDesc": "符合条件的订单可赚取 {pct}% 的 OneTokenCash。",
+    "perks": "福利",
+    "cashHeading": "OneTokenCash——一种由你自由支配使用场景的奖励货币",
+    "cashSubtitle": "OneTokenCash 归你所有，可在 Travu 预订酒店、机票等时使用。1 美元 OneTokenCash 可当 1 美元用于符合条件的订单，全年任意一天均可使用——没有限制日期。",
+    "cashEarn": "每消费 1 美元最高可赚 4% 的 OneTokenCash",
+    "cashEarnNote": "等级越高，赚得越多。",
+    "faqHeading": "进一步了解 OneToken",
+    "faq": {
+      "join": {
+        "q": "如何加入 OneToken？",
+        "a": "点此加入 OneToken——免费且轻松上手。登录或创建 Travu 账户，然后在本页点击「免费加入」即可。"
+      },
+      "howItWorks": {
+        "q": "OneToken 奖励计划如何运作？",
+        "a": "OneToken 是我们的奖励计划，会员可享会员价，并在符合条件的订单上赚取 OneTokenCash。1 美元 OneTokenCash 等于 1 美元可用于旅行。每次预订旅行都能积累行程要素，助你晋级——蓝卡、银卡、金卡和白金卡。"
+      },
+      "expire": {
+        "q": "OneTokenCash 会过期吗？",
+        "a": "只要你在 18 个月内至少完成一次符合条件的预订，订单赚得的 OneTokenCash 就不会过期。"
+      },
+      "flights": {
+        "q": "我可以用 OneTokenCash 订机票吗？",
+        "a": "可以。OneTokenCash 可在结账时用于符合条件的机票和住宿订单，作为即时折扣抵扣应付金额。"
+      },
+      "tierStatus": {
+        "q": "如何在 OneToken 中达到相应等级？",
+        "a": "你预订的每个酒店间夜、度假租赁每晚、机票、租车每天、邮轮舱位每晚和活动门票都可获得一个行程要素。集满 5 个解锁银卡，15 个解锁金卡，30 个解锁白金卡。"
+      },
+      "free": {
+        "q": "OneToken 免费吗？",
+        "a": "是的——加入 OneToken 完全免费。"
+      }
+    },
+    "tierMember": "{tier}会员",
+    "tripElementsCount": "{count} 个行程要素",
+    "yourOneTokenCash": "您的 OneTokenCash",
+    "moreToReach": "{count, plural, other {再获得 # 个行程要素即可升至{tier}。}}"
+  },
+  "stays": {
+    "results": {
+      "noneFound": "未找到住宿——请尝试其他日期或附近城市。",
+      "noMatch": "没有符合筛选条件的住宿。试着去掉几个条件。",
+      "yourDestination": "您的目的地",
+      "propertyNoun": "{count, plural, other {家房源}}",
+      "sortBy": "排序方式",
+      "kindAllStays": "全部住宿",
+      "kindHotels": "酒店",
+      "kindHomes": "民宿",
+      "sortRecommended": "推荐",
+      "sortPrice": "价格（从低到高）",
+      "sortRating": "住客评分",
+      "sortDistance": "距离"
+    },
+    "landing": {
+      "lastMinuteDeals": "周末特惠住宿",
+      "everyTravelStyle": "适合各种旅行风格的住宿"
+    },
+    "card": {
+      "vipAccess": "VIP 专享",
+      "hotel": "酒店",
+      "entireBy": "整套{type}，房东：{host}",
+      "sleeps": "可住 {count} 人",
+      "beds": "{count, plural, other {# 张床}}",
+      "baths": "{count, plural, other {# 间浴室}}",
+      "reviews": "{count} 条评价",
+      "freeCancellation": "免费取消",
+      "nonRefundable": "不可退款",
+      "payLater": "立即预订，到店付款",
+      "percentOff": "{pct}% 折扣",
+      "perNight": "/ 晚",
+      "total": "总价",
+      "totalInclTaxes": "总价（含税费）",
+      "totalInclTaxesInline": "总价 · 含税费",
+      "viewDeal": "查看优惠 →"
+    },
+    "detail": {
+      "seeAllProperties": "查看所有房源",
+      "share": "分享",
+      "save": "收藏",
+      "datesAvailable": "您选择的日期有空房",
+      "bedrooms": "{count, plural, other {# 间卧室}}",
+      "bathrooms": "{count, plural, other {# 间浴室}}",
+      "sqft": "{count} 平方英尺",
+      "exploreArea": "探索周边",
+      "popularAmenities": "热门设施",
+      "aboutProperty": "房源介绍",
+      "privateHost": "私人房东（Vrbo）",
+      "propertyHost": "房源房东",
+      "policies": "政策",
+      "afterTime": "{time} 之后",
+      "beforeTime": "{time} 之前",
+      "cancellation": "取消",
+      "thingsToDo": "周边热门玩乐",
+      "similarProperties": "类似房源",
+      "faq": "常见问题",
+      "mapUnavailable": "此房源暂无地图预览。",
+      "viewLargerMap": "在更大的地图中查看",
+      "morePhotos": "+{count} 张照片",
+      "nights": "{count, plural, other {# 晚}}",
+      "nightsSleeps": "{nights, plural, other {# 晚}} · 可住 {sleeps} 人",
+      "totalNights": "总价 · {count, plural, other {# 晚}}",
+      "inclTaxes": "含税费",
+      "reserve": "预订",
+      "notChargedYet": "暂不收费"
+    },
+    "nav": {
+      "overview": "概览",
+      "amenities": "设施",
+      "reviews": "评价"
+    },
+    "reviews": {
+      "guestReviews": "住客评价",
+      "noReviews": "暂无评价——入住后来当第一个评价的人吧。",
+      "cleanliness": "清洁度",
+      "staff": "服务",
+      "amenities": "设施",
+      "condition": "房况"
+    },
+    "promo": {
+      "exploreMore": "用 {brand} 探索更多",
+      "memberRates": "精选 {brand} 房源享会员价和专属优惠。"
+    },
+    "adRail": {
+      "discover": "发现",
+      "diveInto": "深入体验{city}的景点、美食与文化——预订住宿，开启探索之旅。",
+      "memberPrices": "会员价",
+      "signInToUnlock": "登录即可解锁精选住宿的即时优惠。"
+    },
+    "features": {
+      "bundleSave": "打包预订，省更多",
+      "bundleSaveDesc": "在住宿之外加订机票，两者皆省——一个平台全搞定。",
+      "oneStop": "一站式旅行平台",
+      "oneStopDesc": "酒店、民宿、机票等——出行所需，一应俱全。",
+      "memberRewards": "会员价与奖励",
+      "memberRewardsDesc": "即刻享优惠，并赚取奖励用于今后的旅行。"
+    },
+    "filters": {
+      "filters": "筛选",
+      "searchByName": "按房源名称搜索",
+      "searchByNamePlaceholder": "例如：Grand",
+      "totalPrice": "总价",
+      "popularFilters": "热门筛选",
+      "guestRating": "住客评分",
+      "ratingAny": "不限",
+      "ratingWonderful": "超棒 9 分以上",
+      "ratingVeryGood": "很好 8 分以上",
+      "ratingGood": "不错 7 分以上",
+      "starRating": "星级",
+      "stars": "{count} 星",
+      "propertyType": "房源类型",
+      "typeAll": "全部",
+      "typeHotelsResorts": "酒店与度假村",
+      "typeHomesApartments": "民宿与公寓",
+      "propertyAmenities": "房源设施",
+      "roomAmenities": "客房设施",
+      "roomViews": "客房景观",
+      "propertyBrand": "房源品牌",
+      "paymentType": "付款方式",
+      "cancellationOptions": "取消选项",
+      "travelerExperience": "出行体验",
+      "mealPlans": "餐食方案",
+      "numberOfBedrooms": "卧室数量",
+      "moreOptions": "更多选项",
+      "onlyAvailable": "仅显示有空房的房源",
+      "beachAccess": "可直达海滩",
+      "memberDeals": "会员优惠与折扣",
+      "noneAvailable": "暂无可选",
+      "seeLess": "收起",
+      "seeMore": "查看更多（{count}）",
+      "showProperties": "显示 {count, plural, other {# 家房源}}",
+      "labels": {
+        "1": "1 间卧室",
+        "2": "2 间及以上卧室",
+        "wifi": "免费 WiFi",
+        "ac": "空调",
+        "pool": "泳池",
+        "parking": "停车场",
+        "gym": "健身房",
+        "spa": "水疗",
+        "bar": "酒吧",
+        "breakfast": "早餐",
+        "pet_friendly": "可携带宠物",
+        "pay_later": "立即预订，到店付款",
+        "fully_refundable": "全额退款",
+        "business": "商务友好",
+        "family": "亲子友好",
+        "budget": "经济实惠",
+        "adults_only": "仅限成人",
+        "studio": "开间"
+      }
+    },
+    "booking": {
+      "completeBooking": "完成预订",
+      "whoCheckingIn": "由谁入住？",
+      "firstName": "名",
+      "lastName": "姓",
+      "emailAddress": "邮箱地址",
+      "countryRegion": "国家/地区",
+      "phoneNumber": "电话号码",
+      "paymentDetails": "付款信息",
+      "secureTransaction": "安全可靠的交易。您的个人信息受到保护。",
+      "simulatedNoCharge": "模拟——不会真实扣款",
+      "nameOnCard": "持卡人姓名",
+      "cardNumber": "卡号",
+      "expiration": "有效期",
+      "expiryPlaceholder": "MM/YY",
+      "securityCode": "安全码",
+      "billingAddress": "账单地址",
+      "address": "地址",
+      "city": "城市",
+      "stateProvince": "州/省",
+      "zipPostal": "邮政编码",
+      "protectYourStay": "为您的住宿加保障",
+      "travuProtect": "Travu Protect",
+      "travuProtectDesc": "为本次住宿提供取消保障、行程中断保险及全天候紧急援助。",
+      "noProtection": "不购买保障——我明白可能需要承担取消费用。",
+      "cancellationPolicy": "取消政策",
+      "cancellationRefundable": "入住前 48 小时以上取消可全额退款。之后取消，首晚费用不予退还。",
+      "cancellationNonRefundable": "此房价不可退款。更改或取消均不予退款。",
+      "specialInstructions": "特殊入住说明",
+      "specialInstructionsPlaceholder": "对房东的任何要求（可选）",
+      "termsNotice": "点击「立即预订」即表示我同意 Travu 服务条款和隐私声明，并确认这是用于演示的模拟预订。",
+      "processing": "处理中…",
+      "bookNow": "立即预订",
+      "encryptionNotice": "我们的安全加密在每个环节保护您的个人信息。",
+      "steps": {
+        "reviewing": "核对您的订单",
+        "verifying": "验证住客信息",
+        "confirming": "与房源确认中",
+        "confirmed": "预订已确认"
+      },
+      "errors": {
+        "invalidCard": "请输入有效的卡号。",
+        "bookingFailed": "无法完成预订，请重试。"
+      }
+    },
+    "summary": {
+      "checkIn": "入住",
+      "checkOut": "退房",
+      "room": "客房",
+      "rooms": "客房",
+      "nightsRooms": "{nights, plural, other {# 晚}} × {rooms, plural, other {# 间客房}}",
+      "taxes": "税费",
+      "serviceFee": "服务费",
+      "total": "总计",
+      "payToday": "今日支付"
+    },
+    "voucher": {
+      "bookingConfirmed": "预订已确认",
+      "print": "打印",
+      "downloadPdf": "下载 PDF",
+      "confirmationVoucher": "住宿确认凭证",
+      "confirmationNo": "确认号",
+      "refundable": "可退款",
+      "afterTime": "{time} 之后",
+      "beforeTime": "{time} 之前",
+      "stay": "住宿",
+      "nightsRoomsValue": "{nights, plural, other {# 晚}} · {rooms, plural, other {# 间客房}}",
+      "guestsCount": "{count, plural, other {# 位住客}}",
+      "leadGuest": "主要住客",
+      "guest": "住客",
+      "totalPaid": "已付总额",
+      "presentAtCheckIn": "入住时请出示此凭证",
+      "viewAllTrips": "查看我的所有行程"
+    },
+    "waiting": {
+      "completingBooking": "正在完成您的预订",
+      "pleaseWait": "正在与房源确认您的预订，请稍候。这可能需要一些时间。",
+      "securingRoom": "正在为您锁定客房…"
+    }
+  },
+  "cars": {
+    "landing": {
+      "rentInCity": "在{city}租车",
+      "topDealsInCity": "{city}热门优惠"
+    },
+    "results": {
+      "noneFound": "未找到车辆——请尝试其他日期或附近地点。",
+      "noneMatchFilters": "没有符合筛选条件的车辆。试着去掉几个条件。",
+      "yourLocation": "您的所在地",
+      "carsIn": "{location}的车辆",
+      "count": "{count, plural, other {# 辆车}}",
+      "topResults": "（热门结果）",
+      "filters": "筛选",
+      "sort": "排序",
+      "memberBanner": "会员每次租车都能返 OneTokenCash——登录即可解锁会员价。"
+    },
+    "sort": {
+      "recommended": "推荐",
+      "priceLowToHigh": "价格（从低到高）",
+      "ratingHighToLow": "评分（从高到低）"
+    },
+    "card": {
+      "percentOff": "{pct}% 折扣",
+      "deal": "优惠",
+      "previousPhoto": "上一张照片",
+      "nextPhoto": "下一张照片",
+      "automatic": "自动挡",
+      "manual": "手动挡",
+      "auto": "自动",
+      "seats": "{count} 座",
+      "bags": "{count} 件行李",
+      "doors": "{count} 门",
+      "aircon": "空调",
+      "mileageLabel": "{mileage}里程",
+      "freeCancellation": "免费取消",
+      "nonRefundable": "不可退款",
+      "unlimitedMileage": "不限里程",
+      "perDay": "/ 天",
+      "perDayVendor": "/ 天 · {vendor}",
+      "totalForDays": "总价 · {days, plural, other {# 天}}",
+      "reserve": "预订 →"
+    },
+    "filters": {
+      "close": "关闭筛选",
+      "showCount": "显示 {count, plural, other {# 辆车}}",
+      "noneAvailable": "暂无可选",
+      "seeLess": "收起",
+      "seeMore": "查看更多（{count}）",
+      "searchByCarOrCompany": "按车型或公司搜索",
+      "searchPlaceholder": "例如：Sixt 或 RAV4",
+      "totalPrice": "总价",
+      "popularFilters": "热门筛选",
+      "rating": "评分",
+      "ratingAny": "不限",
+      "ratingExceptional": "卓越 9 分以上",
+      "ratingVeryGood": "很好 8 分以上",
+      "ratingGood": "不错 7 分以上",
+      "carType": "车型",
+      "capacity": "座位数",
+      "rentalCompany": "租车公司",
+      "transmission": "变速箱",
+      "mileage": "里程",
+      "moreOptions": "更多选项",
+      "freeCancellationOnly": "仅限免费取消",
+      "memberDeals": "会员优惠与折扣",
+      "option": {
+        "automatic": "自动挡",
+        "manual": "手动挡",
+        "unlimitedMileage": "不限里程",
+        "limitedMileage": "限制里程",
+        "airConditioning": "空调",
+        "freeCancellation": "免费取消",
+        "seats4": "4 座",
+        "seats5": "5 座",
+        "seats7plus": "7 座及以上"
+      }
+    },
+    "steps": {
+      "review": "核对",
+      "driver": "驾驶人",
+      "payment": "付款"
+    },
+    "progress": {
+      "reviewing": "核对您的预订",
+      "verifyingDriver": "验证驾驶人信息",
+      "confirmingCompany": "与租车公司确认中",
+      "confirmed": "预订已确认"
+    },
+    "booking": {
+      "back": "返回",
+      "reservationError": "无法完成预订，请重试。",
+      "reviewYourCar": "核对您的车辆",
+      "protectYourRental": "为您的租车加保障",
+      "fullProtection": "全面保障",
+      "fullProtectionDesc": "整段租期享零免赔的车损与盗窃保险，外加全天候道路救援。",
+      "noProtection": "不购买额外保障——我将依赖租车公司的基础保险。",
+      "continueToDriver": "继续填写驾驶人信息",
+      "driverDetails": "驾驶人信息",
+      "continueToPayment": "继续付款",
+      "processing": "处理中…",
+      "reserveNow": "立即预订",
+      "secureNote": "您的信息受安全加密保护。"
+    },
+    "driver": {
+      "firstName": "名",
+      "lastName": "姓",
+      "age": "驾驶人年龄",
+      "licenseNo": "驾照号",
+      "email": "邮箱",
+      "countryCode": "国家代码",
+      "phone": "电话号码",
+      "flightNo": "航班号（可选）",
+      "flightNoPlaceholder": "例如：BA245——若航班延误会很有帮助",
+      "youngDriverNote": "25 岁以下驾驶人需收取年轻驾驶人费用，已计入您的总价。"
+    },
+    "summary": {
+      "pickUp": "取车",
+      "dropOff": "还车",
+      "transmission": "变速箱",
+      "mileage": "里程",
+      "timesDays": "× {days, plural, other {# 天}}",
+      "taxes": "税费",
+      "bookingFee": "预订费",
+      "youngDriverFee": "年轻驾驶人费用",
+      "total": "总计",
+      "payToday": "今日支付"
+    },
+    "confirmation": {
+      "title": "预订已确认",
+      "print": "打印",
+      "voucherSubtitle": "租车确认凭证",
+      "confirmationNo": "确认号",
+      "rental": "租车",
+      "driver": "驾驶人",
+      "days": "{days, plural, other {# 天}}",
+      "daysRental": "{days, plural, other {租期 # 天}}",
+      "totalPaid": "已付总额",
+      "barcodeAlt": "订单 {ref} 条形码",
+      "presentVoucher": "在取车柜台出示此凭证",
+      "viewAllTrips": "查看我的所有行程"
+    }
+  },
+  "flights": {
+    "perTraveller": "每位出行人",
+    "stops": {
+      "nonstop": "直飞",
+      "direct": "直达",
+      "directLower": "直达",
+      "count": "{count, plural, other {# 次中转}}"
+    },
+    "results": {
+      "title": "搜索结果",
+      "flightsFound": "找到 {count} 个航班",
+      "departingFlights": "去程航班",
+      "returningFlights": "返程航班",
+      "legLabel": "第 {index} 段：{origin} → {dest}",
+      "emptyState": "暂无航班——请在上方选择航线和日期搜索。",
+      "noMatchLeg": "此航段没有符合筛选条件的航班。",
+      "noMatchFilters": "没有符合筛选条件的航班——试着去掉一些条件。",
+      "searching": "正在实时搜索各航空公司票价…",
+      "showMore": "显示更多结果",
+      "moreCount": "（另有 {count} 个）"
+    },
+    "filters": {
+      "filterBy": "筛选条件",
+      "stops": "中转",
+      "any": "不限",
+      "upToOneStop": "最多 1 次中转",
+      "airlines": "航空公司",
+      "from": "起价"
+    },
+    "sort": {
+      "sortBy": "排序方式",
+      "recommended": "推荐",
+      "cheapest": "最低价",
+      "fastest": "最快"
+    },
+    "card": {
+      "seatsLeft": "此价格仅剩 {count} 个座位",
+      "select": "选择",
+      "flightDetails": "航班详情"
+    },
+    "detail": {
+      "backToResults": "← 返回结果",
+      "continueToBook": "继续预订"
+    },
+    "fare": {
+      "selectFareTo": "选择飞往{dest}的票价",
+      "close": "关闭",
+      "operatedBy": "本航班由 {carrier} 运营。",
+      "cabin": "舱位：{cabin}",
+      "select": "选择"
+    },
+    "perks": {
+      "seatChoiceIncluded": "含选座",
+      "seatChoiceFee": "选座需付费",
+      "handBaggage": "含手提行李（{kg} 公斤）",
+      "checkedBag": "{count} 件托运行李（每件 {kg} 公斤）",
+      "checkedBags": "{count, plural, other {# 件托运行李}}（每件 {kg} 公斤）",
+      "checkedBagFee": "托运行李需付费",
+      "refundable": "可退款",
+      "nonRefundable": "不可退款",
+      "freeChanges": "免费改签",
+      "changeFee": "改签需付费",
+      "noChanges": "不可改签"
+    },
+    "prediction": {
+      "title": "AI 价格预测",
+      "confidence": "{confidence}% 置信度"
+    },
+    "priceTracking": {
+      "title": "价格追踪",
+      "currentLowest": "当前最低价："
+    },
+    "fareBreakdown": {
+      "title": "票价明细",
+      "baseFare": "基础票价",
+      "baseFareMultiple": "基础票价 × {count}",
+      "taxes": "税费",
+      "fees": "手续费",
+      "total": "总计"
+    },
+    "segments": {
+      "layoverIn": "在 {iata} 中转"
+    },
+    "steps": {
+      "reviewTrip": "核对行程",
+      "travellers": "出行人",
+      "payment": "付款",
+      "reviewAndBook": "核对并预订"
+    },
+    "sidebar": {
+      "businessFlight": "商务舱航班",
+      "oneWayFlight": "单程航班",
+      "priceSummary": "您的价格汇总",
+      "travellerAdult": "出行人 {index} · 成人",
+      "taxesFees": "税费",
+      "nextCheckout": "下一步：结账",
+      "nextPayment": "下一步：付款",
+      "nextReview": "下一步：核对",
+      "buyNow": "立即购买",
+      "next": "下一步"
+    },
+    "progress": {
+      "reviewing": "核对预订申请",
+      "verifying": "验证申请数据",
+      "bookingTicket": "通过航空公司 API 出票",
+      "approved": "预订已通过",
+      "secureBooking": "{brand} 安全预订",
+      "keepWindowOpen": "请保持此窗口打开…"
+    },
+    "bookingForm": {
+      "travellerDetails": "出行人信息",
+      "firstName": "名",
+      "lastName": "姓",
+      "dateOfBirth": "出生日期",
+      "payment": "付款",
+      "simulatedCharge": "模拟——不会真实扣款",
+      "cardNumber": "卡号",
+      "expiry": "有效期",
+      "cvc": "CVC",
+      "invalidCard": "请输入有效的卡号。",
+      "bookingFailed": "无法完成预订，请重试。",
+      "networkError": "网络错误——请重试。",
+      "processing": "处理中…",
+      "pay": "支付",
+      "andConfirm": "并确认"
+    },
+    "reviewTrip": {
+      "title": "核对您的行程",
+      "route": "{origin}飞往{dest}",
+      "changeFlight": "更改航班",
+      "yourFare": "您的票价：{fare}",
+      "seatsAndBags": "座位和行李",
+      "seatsAndBagsNote": "预订后可在控制面板为本次行程选座和添加行李。"
+    },
+    "travellers": {
+      "title": "安全预订——只需几分钟",
+      "nameMatchNote": "出行人姓名须与政府签发的带照片证件完全一致。",
+      "required": "必填",
+      "travellerOf": "第 {index} 位出行人，共 {total} 位",
+      "firstName": "名",
+      "middleName": "中间名",
+      "surname": "姓",
+      "passportCountry": "护照签发国",
+      "passportNumber": "护照号",
+      "passportFormatError": "该国家护照号格式应类似 {example}。",
+      "dateOfBirth": "出生日期",
+      "dobDay": "出生日",
+      "dobMonth": "出生月",
+      "dobYear": "出生年",
+      "day": "日",
+      "month": "月",
+      "year": "年",
+      "contactDetails": "联系方式",
+      "contactNote": "我们会将电子机票及任何更新发送至此邮箱。",
+      "emailAddress": "邮箱地址",
+      "marketingOptIn": "向我发送行程更新和旅行优惠。",
+      "countryCode": "国家代码",
+      "phoneNumber": "电话号码",
+      "phoneDigitsExact": "该国家的号码为 {count} 位数字。",
+      "phoneDigitsRange": "该国家的号码为 {min}–{max} 位数字。"
+    },
+    "payment": {
+      "title": "您想如何付款？",
+      "simulatedNote": "付款为模拟——不会真实扣款。",
+      "nameOnCard": "持卡人姓名",
+      "cardNumber": "借记卡/信用卡卡号",
+      "cardNotAccepted": "Travu 不支持此卡。请尝试其他卡。",
+      "expiryDate": "有效期",
+      "securityCode": "安全码",
+      "billingAddress": "账单地址",
+      "countryTerritory": "国家/地区",
+      "billingAddress1": "账单地址 1",
+      "billingAddress2": "账单地址 2",
+      "postalCode": "邮政编码",
+      "city": "城市",
+      "cardNotAcceptedTitle": "此卡不受支持",
+      "cardNotAcceptedMessage": "Travu 不支持此卡，请尝试其他卡",
+      "tryAnotherCard": "尝试其他卡"
+    },
+    "reviewBook": {
+      "title": "核对并预订您的行程",
+      "numbered1": "核对行程详情，确保日期和时间无误。",
+      "numbered2": "检查拼写。乘客姓名须与政府签发的带照片证件完全一致。",
+      "numbered3": "查看预订条款。",
+      "fareRule1": "可携带一件手提行李",
+      "fareRule2": "托运行李需付费",
+      "fareRule3": "不可取消",
+      "fareRule4": "不可改签",
+      "fareRulesFor": "{origin}飞往{dest}的票价规则",
+      "acknowledgement": "点击下方按钮即表示我确认已阅读隐私声明和政府旅行建议，并已查看且接受规则与限制以及使用条款。",
+      "yourTrip": "您的行程",
+      "route": "航线",
+      "date": "日期",
+      "times": "时间",
+      "carrier": "承运方",
+      "fare": "票价",
+      "travellers": "出行人",
+      "contact": "联系方式",
+      "payment": "付款",
+      "cardEndingIn": "尾号为 {last4} 的卡",
+      "applyOneToken": "使用我的 OneTokenCash",
+      "oneTokenBalance": "您拥有",
+      "inOneToken": "的 OneTokenCash。",
+      "applying": "正在抵用",
+      "toThisBooking": "至本次订单。",
+      "useToSave": "用它最高可省",
+      "buyNow": "立即购买",
+      "secureNote": "安全加密传输与存储。",
+      "buyMoreSaveTitle": "随时买得多，省得多！",
+      "buyMoreSaveBody": "现在预订机票，之后再加订住宿，即可为行程省钱。"
+    },
+    "confirmation": {
+      "guest": "住客",
+      "viewAllTrips": "查看我的所有行程",
+      "bookingConfirmed": "预订已确认",
+      "slipIssued": "已开具确认单，参考号为",
+      "bookingConfirmationHeader": "预订确认",
+      "itineraryNo": "行程单号",
+      "issued": "开具于 {date}",
+      "travellers": "出行人",
+      "departure": "出发",
+      "bookingReference": "订单参考号",
+      "flightDetails": "航班详情",
+      "departArrive": "出发 {departTime} · {departDate} — 到达 {arriveTime} · {arriveDate}",
+      "cabinClass": "{cabin}舱",
+      "paymentSummary": "付款汇总",
+      "airFare": "机票费用",
+      "bookingFee": "Travu 预订费",
+      "taxesFees": "税费",
+      "totalPaid": "已付总额",
+      "paidVia": "通过{label}支付",
+      "qrAlt": "{ref} 的二维码",
+      "presentSlip": "办理登机时请出示此确认单和有效护照",
+      "finePrint": "此确认单是 Travu 仅为演示目的生成的模拟收据，不可用于实际出行。运输受运营承运人的运输合同条款和资费规定约束。国际航班请至少提前 3 小时到达。卡片信息仅以脱敏摘要形式存储；完整卡号、有效期和安全码绝不保留。Travu 订单参考号 {ref}。",
+      "downloadPdf": "下载 PDF",
+      "print": "打印",
+      "trackThisTrip": "追踪此行程"
+    }
   }
 }

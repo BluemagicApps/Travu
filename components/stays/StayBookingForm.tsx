@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Lock, ShieldCheck, BedDouble } from "lucide-react";
 import type { Stay } from "@/lib/stays/types";
 import type { ProtectionPlanId } from "@/lib/stays/pricing";
@@ -10,13 +11,6 @@ import { Money } from "@/components/Money";
 import { AnimatedSubmitButton } from "@/components/ui/AnimatedSubmitButton";
 import { BookingProgress } from "@/components/booking/BookingProgress";
 import { rewardQuery, type BookingReward } from "@/lib/onetoken/reward-params";
-
-const STAY_STEPS = [
-  "Reviewing your booking",
-  "Verifying guest details",
-  "Confirming with the property",
-  "Booking confirmed",
-];
 
 const field =
   "w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-sm outline-none focus:border-sky-400";
@@ -40,6 +34,13 @@ function cardBrandOf(digits: string): string | undefined {
 
 export function StayBookingForm({ stay, rooms, onPlanChange }: { stay: Stay; rooms: number; onPlanChange?: (p: ProtectionPlanId) => void }) {
   const router = useRouter();
+  const t = useTranslations("stays");
+  const STAY_STEPS = [
+    t("booking.steps.reviewing"),
+    t("booking.steps.verifying"),
+    t("booking.steps.confirming"),
+    t("booking.steps.confirmed"),
+  ];
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -74,7 +75,7 @@ export function StayBookingForm({ stay, rooms, onPlanChange }: { stay: Stay; roo
     setError(null);
     const digits = card.replace(/\D/g, "");
     if (digits.length < 13) {
-      setError("Enter a valid card number.");
+      setError(t("booking.errors.invalidCard"));
       return;
     }
     // Hand off to the staged BookingProgress overlay, which runs the POST below
@@ -126,102 +127,102 @@ export function StayBookingForm({ stay, rooms, onPlanChange }: { stay: Stay; roo
         onError={(err) => {
           setBooking(false);
           if (!(err instanceof Error) || err.message !== "auth") {
-            setError("Could not complete the booking. Please try again.");
+            setError(t("booking.errors.bookingFailed"));
           }
         }}
       />
     )}
     <form onSubmit={submit} className="space-y-5">
-      <Section title="Who's checking in?">
+      <Section title={t("booking.whoCheckingIn")}>
         <div className="grid gap-3 sm:grid-cols-2">
-          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">First name</span>
+          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">{t("booking.firstName")}</span>
             <input required className={field} value={firstName} onChange={(e) => setFirstName(e.target.value)} /></label>
-          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">Last name</span>
+          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">{t("booking.lastName")}</span>
             <input required className={field} value={lastName} onChange={(e) => setLastName(e.target.value)} /></label>
-          <label className="block sm:col-span-2"><span className="mb-1 block text-xs font-medium text-muted">Email address</span>
+          <label className="block sm:col-span-2"><span className="mb-1 block text-xs font-medium text-muted">{t("booking.emailAddress")}</span>
             <input type="email" className={field} value={email} onChange={(e) => setEmail(e.target.value)} /></label>
-          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">Country / region</span>
+          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">{t("booking.countryRegion")}</span>
             <select className={field} value={phoneCountry} onChange={(e) => setPhoneCountry(e.target.value)}>
               <option>US +1</option><option>UK +44</option><option>NG +234</option><option>AE +971</option><option>JP +81</option>
             </select></label>
-          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">Phone number</span>
+          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">{t("booking.phoneNumber")}</span>
             <input inputMode="tel" className={field} value={phone} onChange={(e) => setPhone(e.target.value)} /></label>
         </div>
       </Section>
 
-      <Section title="Payment details">
+      <Section title={t("booking.paymentDetails")}>
         <p className="-mt-1 mb-3 flex items-center gap-1.5 text-xs text-muted">
-          <Lock className="h-3.5 w-3.5 text-price" /> Safe, secure transaction. Your personal information is protected.
-          <span className="ml-auto rounded-full bg-surface-2 px-2 py-0.5 text-[10px] font-medium">simulated — no real charge</span>
+          <Lock className="h-3.5 w-3.5 text-price" /> {t("booking.secureTransaction")}
+          <span className="ml-auto rounded-full bg-surface-2 px-2 py-0.5 text-[10px] font-medium">{t("booking.simulatedNoCharge")}</span>
         </p>
         <div className="grid gap-3 sm:grid-cols-2">
-          <label className="block sm:col-span-2"><span className="mb-1 block text-xs font-medium text-muted">Name on card</span>
+          <label className="block sm:col-span-2"><span className="mb-1 block text-xs font-medium text-muted">{t("booking.nameOnCard")}</span>
             <input required className={field} value={cardName} onChange={(e) => setCardName(e.target.value)} /></label>
-          <label className="block sm:col-span-2"><span className="mb-1 block text-xs font-medium text-muted">Card number</span>
+          <label className="block sm:col-span-2"><span className="mb-1 block text-xs font-medium text-muted">{t("booking.cardNumber")}</span>
             <input required inputMode="numeric" placeholder="4242 4242 4242 4242" className={field} value={card} onChange={(e) => setCard(e.target.value)} /></label>
-          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">Expiration</span>
-            <input required placeholder="MM/YY" className={field} value={expiry} onChange={(e) => setExpiry(e.target.value)} /></label>
-          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">Security code</span>
+          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">{t("booking.expiration")}</span>
+            <input required placeholder={t("booking.expiryPlaceholder")} className={field} value={expiry} onChange={(e) => setExpiry(e.target.value)} /></label>
+          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">{t("booking.securityCode")}</span>
             <input required inputMode="numeric" placeholder="123" className={field} value={cvc} onChange={(e) => setCvc(e.target.value)} /></label>
         </div>
-        <h3 className="mt-4 text-sm font-semibold">Billing address</h3>
+        <h3 className="mt-4 text-sm font-semibold">{t("booking.billingAddress")}</h3>
         <div className="mt-2 grid gap-3 sm:grid-cols-2">
-          <label className="block sm:col-span-2"><span className="mb-1 block text-xs font-medium text-muted">Country / region</span>
+          <label className="block sm:col-span-2"><span className="mb-1 block text-xs font-medium text-muted">{t("booking.countryRegion")}</span>
             <select className={field} value={billCountry} onChange={(e) => setBillCountry(e.target.value)}>
               <option>United States of America</option><option>United Kingdom</option><option>Nigeria</option><option>United Arab Emirates</option><option>Japan</option>
             </select></label>
-          <label className="block sm:col-span-2"><span className="mb-1 block text-xs font-medium text-muted">Address</span>
+          <label className="block sm:col-span-2"><span className="mb-1 block text-xs font-medium text-muted">{t("booking.address")}</span>
             <input className={field} value={billAddress} onChange={(e) => setBillAddress(e.target.value)} /></label>
-          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">City</span>
+          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">{t("booking.city")}</span>
             <input className={field} value={billCity} onChange={(e) => setBillCity(e.target.value)} /></label>
-          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">State / province</span>
+          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">{t("booking.stateProvince")}</span>
             <input className={field} value={billState} onChange={(e) => setBillState(e.target.value)} /></label>
-          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">ZIP / postal code</span>
+          <label className="block"><span className="mb-1 block text-xs font-medium text-muted">{t("booking.zipPostal")}</span>
             <input className={field} value={billZip} onChange={(e) => setBillZip(e.target.value)} /></label>
         </div>
       </Section>
 
-      <Section title="Protect your stay">
+      <Section title={t("booking.protectYourStay")}>
         <div className="space-y-2">
           <label className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3 ${plan === "TRAVU_PROTECT" ? "border-price bg-price/5" : "border-border"}`}>
             <input type="radio" name="plan" className="mt-1" checked={plan === "TRAVU_PROTECT"} onChange={() => setPlanAndBubble("TRAVU_PROTECT")} />
             <span className="flex-1">
               <span className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5 font-semibold"><ShieldCheck className="h-4 w-4 text-price" /> Travu Protect</span>
+                <span className="flex items-center gap-1.5 font-semibold"><ShieldCheck className="h-4 w-4 text-price" /> {t("booking.travuProtect")}</span>
                 <span className="font-semibold"><Money cents={protectPrice.protection} /></span>
               </span>
-              <span className="mt-1 block text-xs text-muted">Cancellation protection, trip interruption cover, and 24/7 emergency assistance for this stay.</span>
+              <span className="mt-1 block text-xs text-muted">{t("booking.travuProtectDesc")}</span>
             </span>
           </label>
           <label className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3 ${plan === "NONE" ? "border-price bg-price/5" : "border-border"}`}>
             <input type="radio" name="plan" className="mt-1" checked={plan === "NONE"} onChange={() => setPlanAndBubble("NONE")} />
-            <span className="text-sm">No protection — I understand I may be responsible for cancellation fees.</span>
+            <span className="text-sm">{t("booking.noProtection")}</span>
           </label>
         </div>
       </Section>
 
-      <Section title="Cancellation policy">
+      <Section title={t("booking.cancellationPolicy")}>
         <p className="text-sm text-muted">
           {stay.refundable
-            ? "Fully refundable if cancelled before 48 hours of check-in. After that, the first night is non-refundable."
-            : "This rate is non-refundable. Changes or cancellations are not eligible for a refund."}
+            ? t("booking.cancellationRefundable")
+            : t("booking.cancellationNonRefundable")}
         </p>
       </Section>
 
-      <Section title="Special check-in instructions">
-        <textarea className={`${field} min-h-20`} value={requests} onChange={(e) => setRequests(e.target.value)} placeholder="Any requests for the host (optional)" />
+      <Section title={t("booking.specialInstructions")}>
+        <textarea className={`${field} min-h-20`} value={requests} onChange={(e) => setRequests(e.target.value)} placeholder={t("booking.specialInstructionsPlaceholder")} />
       </Section>
 
       <p className="text-xs text-muted">
-        By selecting Book now, I agree to the Travu Terms of Service and Privacy Statement, and confirm this is a simulated booking for demonstration.
+        {t("booking.termsNotice")}
       </p>
       {error && <p className="text-sm text-rose-500">{error}</p>}
 
-      <AnimatedSubmitButton loading={booking} loadingLabel="Processing…" className="py-3.5">
-        <span>Book now · <Money cents={price.total} /></span>
+      <AnimatedSubmitButton loading={booking} loadingLabel={t("booking.processing")} className="py-3.5">
+        <span>{t("booking.bookNow")} · <Money cents={price.total} /></span>
       </AnimatedSubmitButton>
       <p className="flex items-center justify-center gap-1.5 text-center text-[11px] text-muted">
-        <Lock className="h-3 w-3" /> Our secure encryption protects your personal details at every step.
+        <Lock className="h-3 w-3" /> {t("booking.encryptionNotice")}
       </p>
     </form>
     </>

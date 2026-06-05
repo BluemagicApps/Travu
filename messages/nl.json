@@ -10,10 +10,845 @@
   "footer": {
     "company": "Bedrijf",
     "explore": "Ontdekken",
-    "policies": "Beleid",
-    "help": "Help"
+    "policies": "Voorwaarden",
+    "help": "Hulp"
+  },
+  "footerLinks": {
+    "about": "Over ons",
+    "oneTokenRewards": "OneToken-voordelen",
+    "listYourProperty": "Verhuur je accommodatie",
+    "partnerships": "Samenwerkingen",
+    "newsroom": "Nieuws",
+    "searchFlights": "Vluchten zoeken",
+    "hotelsAndStays": "Hotels & verblijven",
+    "carRentals": "Autoverhuur",
+    "trackABooking": "Boeking volgen",
+    "myTrips": "Mijn reizen",
+    "privacy": "Privacy",
+    "cookies": "Cookies",
+    "termsOfUse": "Gebruiksvoorwaarden",
+    "accessibility": "Toegankelijkheid",
+    "yourPrivacyChoices": "Jouw privacykeuzes",
+    "support": "Support",
+    "cancelYourBooking": "Boeking annuleren",
+    "refundBasics": "Terugbetalingen uitgelegd",
+    "travelDocuments": "Reisdocumenten",
+    "oneTokenTerms": "OneToken-voorwaarden"
   },
   "common": {
     "language": "Taal"
+  },
+  "home": {
+    "eyebrow": "Reizen met AI, opnieuw uitgevonden",
+    "tagline": "Dé plek waar je heen gaat om weg te gaan.",
+    "subtitle": "Vertel Travu waar je heen wilt, net zoals je het een vriend zou vertellen. Vluchten en verblijven — wij regelen het zoeken, de prijs en de boeking, van begin tot eind.",
+    "carsTagline": "Rijd je reis op jouw manier."
+  },
+  "homeSections": {
+    "bundleSave": {
+      "title": "Combineer & bespaar",
+      "desc": "Bespaar door je reis in één keer te boeken, of in delen."
+    },
+    "oneStopShop": {
+      "title": "Alles voor je reis op één plek",
+      "desc": "Boek vluchten, hotels en meer — allemaal op één plek."
+    },
+    "oneTokenRewards": {
+      "title": "OneToken-voordelen",
+      "desc": "Profiteer direct van besparingen en spaar OneTokenCash voor toekomstige reizen."
+    },
+    "travelStyles": {
+      "heading": "Verblijven voor elke reisstijl",
+      "subtitle": "Gemiddelde prijzen op basis van de huidige kalendermaand",
+      "avgPerNight": "gem. per nacht",
+      "style": {
+        "beach": "Strand",
+        "culture": "Cultuur",
+        "ski": "Skiën",
+        "family": "Gezin",
+        "wellness": "Wellness & ontspanning"
+      }
+    },
+    "exploreWorld": {
+      "heading": "Ontdek een wereld vol reizen met Travu"
+    },
+    "stayLikeLocal": {
+      "heading": "Verblijf als een local in {city}",
+      "propertyType": {
+        "privateHomes": "Privé vakantiehuizen",
+        "apartments": "Appartementen & flats",
+        "cabins": "Chalets",
+        "cottages": "Vakantiehuisjes",
+        "villas": "Villa's"
+      }
+    },
+    "promo": {
+      "eyebrow": "Combineer & bespaar",
+      "heading": "Verzamel herinneringen, niet alleen koffers",
+      "body": "Voeg een verblijf toe aan je vlucht en bespaar op meer dan 500.000 accommodaties wereldwijd. Ledenprijzen van toepassing.",
+      "cta": "Begin met plannen"
+    },
+    "flightDeals": {
+      "heading": "Vluchtdeals vanuit {city}",
+      "tagline": "Ontdek realtime vluchtdeals naar honderden bestemmingen wereldwijd.",
+      "cta": "Bekijk alle vluchtdeals"
+    }
+  },
+  "search": {
+    "flights": "Vluchten zoeken",
+    "search": "Zoeken",
+    "aiDivider": "of vertel onze AI gewoon wat je nodig hebt",
+    "askAi": "Vraag AI",
+    "aiPlaceholderStays": "Vraag in gewone woorden — bijv. \"5-sterrenhotel in Rome voor 3 nachten met zwembad\"",
+    "aiPlaceholderCars": "Vraag in gewone woorden — bijv. \"SUV in Miami volgend weekend, automaat\""
+  },
+  "auth": {
+    "loginTitle": "Welkom terug",
+    "loginSubtitle": "Log in om je reizen te beheren.",
+    "signupTitle": "Maak je account aan",
+    "signupSubtitle": "Boek vluchten en volg je reizen met Travu.",
+    "name": "Naam",
+    "email": "E-mail",
+    "password": "Wachtwoord",
+    "signIn": "Inloggen",
+    "signingIn": "Bezig met inloggen…",
+    "createAccount": "Account aanmaken",
+    "creating": "Bezig met aanmaken…",
+    "newToTravu": "Nieuw bij Travu?",
+    "createAccountLink": "Maak een account aan",
+    "alreadyHaveAccount": "Heb je al een account?",
+    "invalidCredentials": "Ongeldig e-mailadres of wachtwoord.",
+    "emailTaken": "Dit e-mailadres is al geregistreerd.",
+    "invalidSignup": "Gebruik een geldig e-mailadres en een wachtwoord van minstens 8 tekens."
+  },
+  "track": {
+    "heading": "Boeking volgen",
+    "intro": "Voer je Travu-boekingsreferentie in (bijv. <ref>TRV-AB12CD</ref>) om de realtime status van je reis te zien.",
+    "placeholder": "TRV-AB12CD",
+    "trackButton": "Volgen",
+    "invalidRef": "Voer een referentie in de vorm TRV-XXXXXX in.",
+    "notFound": "Geen boeking gevonden voor {ref}.",
+    "lookupError": "Kon dat nu niet opzoeken.",
+    "networkError": "Netwerkfout — probeer het opnieuw.",
+    "bookingReference": "Boekingsreferentie",
+    "status": "Status",
+    "direct": "Direct",
+    "stops": "{count, plural, one {# tussenstop} other {# tussenstops}}",
+    "travellers": "Reizigers:",
+    "fare": "Tarief:",
+    "estimatedArrival": "Verwachte aankomst:",
+    "nextChangeAt": "Volgende wijziging om",
+    "onDate": "op {date}"
+  },
+  "dashboard": {
+    "heading": "Je reizen",
+    "signedInAs": "Ingelogd als {email}",
+    "noBookings": "Nog geen boekingen.",
+    "startSearch": "Begin een zoekopdracht",
+    "joinOneToken": "<strong>Word lid van OneToken</strong> — spaar OneTokenCash bij elke reis.",
+    "joinFree": "Word gratis lid",
+    "tripElements": "{count} reiselementen",
+    "toTier": "{count} tot {tier}",
+    "topTier": "hoogste niveau",
+    "ref": "Ref",
+    "eTicket": "e-ticket",
+    "voucher": "voucher",
+    "nights": "{count, plural, one {# nacht} other {# nachten}}"
+  },
+  "onetoken": {
+    "badge": "Travu OneToken",
+    "heroTitle": "Travu's gratis <gradient>voordeelprogramma</gradient> voor reizen",
+    "heroSubtitle": "Profiteer direct van besparingen met ledenprijzen en spaar OneTokenCash voor toekomstige reizen.",
+    "joinFree": "Word lid, het is gratis",
+    "joinEarn": "Word lid en begin met sparen",
+    "joinForFree": "Word gratis lid",
+    "joining": "Bezig met aanmelden…",
+    "memberBadge": "Je bent OneToken-lid",
+    "valueProps": {
+      "savings": {
+        "title": "Besparingen op meer dan 1,5 miljoen hotels, woningen en auto's",
+        "desc": "Bespaar 10% of meer met ledenprijzen op honderdduizenden verblijven wereldwijd."
+      },
+      "earnUse": {
+        "title": "Spaar en gebruik voordelen op meer plekken",
+        "desc": "OneTokenCash is je spaarvaluta — $1 in OneTokenCash is $1 om te besteden aan in aanmerking komende vluchten en verblijven."
+      },
+      "perks": {
+        "title": "Krijg nog meer ledenvoordelen",
+        "desc": "Stijg in niveau voor kamerupgrades, gratis prijsvolging, voorrang bij support en VIP-voordelen."
+      }
+    },
+    "tripElementsHeading": "Ontgrendel eenvoudig nieuwe voordelen naarmate je stijgt in niveau",
+    "tripElementsSubtitle": "Word beloond voor elk reiselement dat je boekt, zodat je sneller door de niveaus klimt — bovenop de OneTokenCash die je spaart.",
+    "tripElementsLabel": "Je krijgt één reiselement voor elk(e)…",
+    "tripElement": {
+      "hotelRoomNight": "Hotelnacht",
+      "vacationRentalNight": "Nacht in vakantiewoning",
+      "flightTicket": "Vliegticket",
+      "carRentalDay": "Dag autohuur",
+      "cruiseCabinNight": "Cruisehutnacht",
+      "activityTicket": "Activiteitenticket"
+    },
+    "tiersHeading": "Krijg nog meer voordelen naarmate je door de niveaus klimt",
+    "tierRange": {
+      "blue": "0–4 reiselementen",
+      "silver": "5–14 reiselementen",
+      "gold": "15–29 reiselementen",
+      "platinum": "30+ reiselementen"
+    },
+    "savings": "Besparingen",
+    "savingsDesc": "Bespaar {pct}% of meer met ledenprijzen op 10.000+ hotels.",
+    "rewards": "Voordelen",
+    "rewardsDesc": "Spaar {pct}% in OneTokenCash op in aanmerking komende boekingen.",
+    "perks": "Extra's",
+    "cashHeading": "OneTokenCash — een spaarvaluta waarmee jij kiest waar je het besteedt",
+    "cashSubtitle": "OneTokenCash is van jou om te besteden bij Travu wanneer je hotels, vluchten en meer boekt. $1 in OneTokenCash is $1 om te gebruiken bij in aanmerking komende boekingen, elke dag van het jaar — geen uitgesloten data.",
+    "cashEarn": "Spaar tot 4% in OneTokenCash voor elke uitgegeven dollar",
+    "cashEarnNote": "Je spaart ook meer naarmate je in niveau stijgt.",
+    "faqHeading": "Ontdek nog meer over OneToken",
+    "faq": {
+      "join": {
+        "q": "Hoe word ik lid van OneToken?",
+        "a": "Klik hier om lid te worden van OneToken — het is gratis en je begint zo. Log in of maak een Travu-account aan en tik vervolgens op deze pagina op 'Word gratis lid'."
+      },
+      "howItWorks": {
+        "q": "Hoe werkt het OneToken-voordeelprogramma?",
+        "a": "OneToken is ons voordeelprogramma waarbij leden ledenprijzen krijgen en OneTokenCash sparen op in aanmerking komende boekingen. $1 in OneTokenCash staat gelijk aan $1 om te besteden aan reizen. Naarmate je reizen boekt, verzamel je reiselementen die je door de niveaus laten klimmen — Blue, Silver, Gold en Platinum."
+      },
+      "expire": {
+        "q": "Verloopt OneTokenCash?",
+        "a": "OneTokenCash die je spaart op boekingen verloopt niet als je minstens één keer binnen 18 maanden een in aanmerking komende boeking maakt."
+      },
+      "flights": {
+        "q": "Kan ik OneTokenCash gebruiken voor vluchten?",
+        "a": "Ja. OneTokenCash kan worden ingewisseld bij het afrekenen op in aanmerking komende vlucht- en verblijfsboekingen, als directe korting op het te betalen bedrag."
+      },
+      "tierStatus": {
+        "q": "Hoe bereik ik een niveaustatus bij OneToken?",
+        "a": "Je spaart één reiselement voor elke hotelnacht, nacht in een vakantiewoning, vliegticket, dag autohuur, cruisehutnacht en activiteitenticket die je boekt. Verzamel er 5 voor Silver, 15 voor Gold en 30 voor Platinum."
+      },
+      "free": {
+        "q": "Is OneToken gratis?",
+        "a": "Ja — lid worden van OneToken is volledig gratis."
+      }
+    },
+    "tierMember": "{tier}-lid",
+    "tripElementsCount": "{count} reiselementen",
+    "yourOneTokenCash": "Jouw OneTokenCash",
+    "moreToReach": "{count, plural, one {Nog # reiselement tot {tier}.} other {Nog # reiselementen tot {tier}.}}"
+  },
+  "stays": {
+    "results": {
+      "noneFound": "Geen verblijven gevonden — probeer andere data of een stad in de buurt.",
+      "noMatch": "Geen verblijven passen bij je filters. Probeer er een paar te verwijderen.",
+      "yourDestination": "je bestemming",
+      "propertyNoun": "{count, plural, one {accommodatie} other {accommodaties}}",
+      "sortBy": "Sorteren op",
+      "kindAllStays": "Alle verblijven",
+      "kindHotels": "Hotels",
+      "kindHomes": "Woningen",
+      "sortRecommended": "Aanbevolen",
+      "sortPrice": "Prijs (laag naar hoog)",
+      "sortRating": "Beoordeling gasten",
+      "sortDistance": "Afstand"
+    },
+    "landing": {
+      "lastMinuteDeals": "Last-minute weekenddeals",
+      "everyTravelStyle": "Verblijven voor elke reisstijl"
+    },
+    "card": {
+      "vipAccess": "VIP Access",
+      "hotel": "Hotel",
+      "entireBy": "Hele {type} van {host}",
+      "sleeps": "Slaapplaats voor {count}",
+      "beds": "{count, plural, one {# bed} other {# bedden}}",
+      "baths": "{count, plural, one {# badkamer} other {# badkamers}}",
+      "reviews": "{count} reviews",
+      "freeCancellation": "Gratis annuleren",
+      "nonRefundable": "Niet-restitueerbaar",
+      "payLater": "Reserveer nu, betaal later",
+      "percentOff": "{pct}% korting",
+      "perNight": "/ nacht",
+      "total": "totaal",
+      "totalInclTaxes": "Totaal incl. belastingen & kosten",
+      "totalInclTaxesInline": "totaal · incl. belastingen & kosten",
+      "viewDeal": "Bekijk deal →"
+    },
+    "detail": {
+      "seeAllProperties": "Bekijk alle accommodaties",
+      "share": "Delen",
+      "save": "Opslaan",
+      "datesAvailable": "Je data zijn beschikbaar",
+      "bedrooms": "{count, plural, one {# slaapkamer} other {# slaapkamers}}",
+      "bathrooms": "{count, plural, one {# badkamer} other {# badkamers}}",
+      "sqft": "{count} sq ft",
+      "exploreArea": "Ontdek de omgeving",
+      "popularAmenities": "Populaire voorzieningen",
+      "aboutProperty": "Over deze accommodatie",
+      "privateHost": "Privéverhuurder (Vrbo)",
+      "propertyHost": "Accommodatieverhuurder",
+      "policies": "Voorwaarden",
+      "afterTime": "Na {time}",
+      "beforeTime": "Voor {time}",
+      "cancellation": "Annulering",
+      "thingsToDo": "Populaire activiteiten in de buurt",
+      "similarProperties": "Vergelijkbare accommodaties",
+      "faq": "Veelgestelde vragen",
+      "mapUnavailable": "Kaartvoorbeeld niet beschikbaar voor deze accommodatie.",
+      "viewLargerMap": "Bekijk op een grotere kaart",
+      "morePhotos": "+{count} foto's",
+      "nights": "{count, plural, one {# nacht} other {# nachten}}",
+      "nightsSleeps": "{nights, plural, one {# nacht} other {# nachten}} · slaapplaats voor {sleeps}",
+      "totalNights": "totaal · {count, plural, one {# nacht} other {# nachten}}",
+      "inclTaxes": "incl. belastingen & kosten",
+      "reserve": "Reserveren",
+      "notChargedYet": "Er wordt nog niets in rekening gebracht"
+    },
+    "nav": {
+      "overview": "Overzicht",
+      "amenities": "Voorzieningen",
+      "reviews": "Reviews"
+    },
+    "reviews": {
+      "guestReviews": "Gastreviews",
+      "noReviews": "Nog geen reviews — wees de eerste die deze accommodatie beoordeelt na je verblijf.",
+      "cleanliness": "Netheid",
+      "staff": "Personeel",
+      "amenities": "Voorzieningen",
+      "condition": "Staat"
+    },
+    "promo": {
+      "exploreMore": "Ontdek meer met {brand}",
+      "memberRates": "Ledentarieven en exclusieve deals op geselecteerde {brand}-accommodaties."
+    },
+    "adRail": {
+      "discover": "Ontdek",
+      "diveInto": "Duik in de bezienswaardigheden, het eten en de cultuur van {city} — boek je verblijf en ga op ontdekking.",
+      "memberPrices": "Ledenprijzen",
+      "signInToUnlock": "Log in om direct te besparen op geselecteerde verblijven."
+    },
+    "features": {
+      "bundleSave": "Combineer & bespaar",
+      "bundleSaveDesc": "Voeg een vlucht toe aan je verblijf en bespaar op beide — boek alles op één plek.",
+      "oneStop": "Alles voor je reis op één plek",
+      "oneStopDesc": "Hotels, woningen, vluchten en meer — alles voor je reis, samen.",
+      "memberRewards": "Ledenprijzen & voordelen",
+      "memberRewardsDesc": "Profiteer direct van besparingen en spaar voordelen voor toekomstige reizen."
+    },
+    "filters": {
+      "filters": "Filters",
+      "searchByName": "Zoek op accommodatienaam",
+      "searchByNamePlaceholder": "bijv. Grand",
+      "totalPrice": "Totaalprijs",
+      "popularFilters": "Populaire filters",
+      "guestRating": "Beoordeling gasten",
+      "ratingAny": "Alles",
+      "ratingWonderful": "Geweldig 9+",
+      "ratingVeryGood": "Heel goed 8+",
+      "ratingGood": "Goed 7+",
+      "starRating": "Sterrenclassificatie",
+      "stars": "{count} sterren",
+      "propertyType": "Type accommodatie",
+      "typeAll": "Alles",
+      "typeHotelsResorts": "Hotels & resorts",
+      "typeHomesApartments": "Woningen & appartementen",
+      "propertyAmenities": "Voorzieningen accommodatie",
+      "roomAmenities": "Voorzieningen kamer",
+      "roomViews": "Uitzicht kamer",
+      "propertyBrand": "Accommodatiemerk",
+      "paymentType": "Betaalmethode",
+      "cancellationOptions": "Annuleringsopties",
+      "travelerExperience": "Reiservaring",
+      "mealPlans": "Maaltijdarrangementen",
+      "numberOfBedrooms": "Aantal slaapkamers",
+      "moreOptions": "Meer opties",
+      "onlyAvailable": "Alleen beschikbare accommodaties tonen",
+      "beachAccess": "Toegang tot strand",
+      "memberDeals": "Ledendeals & kortingen",
+      "noneAvailable": "Geen beschikbaar",
+      "seeLess": "Minder tonen",
+      "seeMore": "Meer tonen ({count})",
+      "showProperties": "Toon {count, plural, one {# accommodatie} other {# accommodaties}}",
+      "labels": {
+        "1": "1 slaapkamer",
+        "2": "2+ slaapkamers",
+        "wifi": "Gratis wifi",
+        "ac": "Airconditioning",
+        "pool": "Zwembad",
+        "parking": "Parkeren",
+        "gym": "Fitnessruimte",
+        "spa": "Spa",
+        "bar": "Bar",
+        "breakfast": "Ontbijt",
+        "pet_friendly": "Huisdiervriendelijk",
+        "pay_later": "Reserveer nu, betaal later",
+        "fully_refundable": "Volledig restitueerbaar",
+        "business": "Geschikt voor zakenreizen",
+        "family": "Gezinsvriendelijk",
+        "budget": "Budget",
+        "adults_only": "Alleen volwassenen",
+        "studio": "Studio"
+      }
+    },
+    "booking": {
+      "completeBooking": "Rond je boeking af",
+      "whoCheckingIn": "Wie checkt er in?",
+      "firstName": "Voornaam",
+      "lastName": "Achternaam",
+      "emailAddress": "E-mailadres",
+      "countryRegion": "Land / regio",
+      "phoneNumber": "Telefoonnummer",
+      "paymentDetails": "Betaalgegevens",
+      "secureTransaction": "Veilige, beveiligde transactie. Je persoonlijke gegevens zijn beschermd.",
+      "simulatedNoCharge": "gesimuleerd — geen echte afschrijving",
+      "nameOnCard": "Naam op kaart",
+      "cardNumber": "Kaartnummer",
+      "expiration": "Vervaldatum",
+      "expiryPlaceholder": "MM/JJ",
+      "securityCode": "Beveiligingscode",
+      "billingAddress": "Factuuradres",
+      "address": "Adres",
+      "city": "Plaats",
+      "stateProvince": "Staat / provincie",
+      "zipPostal": "Postcode",
+      "protectYourStay": "Bescherm je verblijf",
+      "travuProtect": "Travu Protect",
+      "travuProtectDesc": "Annuleringsbescherming, dekking bij reisonderbreking en 24/7 noodhulp voor dit verblijf.",
+      "noProtection": "Geen bescherming — ik begrijp dat ik mogelijk annuleringskosten moet betalen.",
+      "cancellationPolicy": "Annuleringsvoorwaarden",
+      "cancellationRefundable": "Volledig restitueerbaar bij annulering tot 48 uur voor de incheck. Daarna is de eerste nacht niet-restitueerbaar.",
+      "cancellationNonRefundable": "Dit tarief is niet-restitueerbaar. Wijzigingen of annuleringen komen niet in aanmerking voor terugbetaling.",
+      "specialInstructions": "Speciale incheckinstructies",
+      "specialInstructionsPlaceholder": "Verzoeken aan de verhuurder (optioneel)",
+      "termsNotice": "Door 'Nu boeken' te selecteren ga ik akkoord met de Travu-servicevoorwaarden en privacyverklaring, en bevestig ik dat dit een gesimuleerde boeking voor demonstratiedoeleinden is.",
+      "processing": "Bezig met verwerken…",
+      "bookNow": "Nu boeken",
+      "encryptionNotice": "Onze beveiligde versleuteling beschermt je persoonlijke gegevens bij elke stap.",
+      "steps": {
+        "reviewing": "Je boeking controleren",
+        "verifying": "Gastgegevens verifiëren",
+        "confirming": "Bevestigen bij de accommodatie",
+        "confirmed": "Boeking bevestigd"
+      },
+      "errors": {
+        "invalidCard": "Voer een geldig kaartnummer in.",
+        "bookingFailed": "Kon de boeking niet afronden. Probeer het opnieuw."
+      }
+    },
+    "summary": {
+      "checkIn": "Inchecken",
+      "checkOut": "Uitchecken",
+      "room": "Kamer",
+      "rooms": "Kamers",
+      "nightsRooms": "{nights, plural, one {# nacht} other {# nachten}} × {rooms, plural, one {# kamer} other {# kamers}}",
+      "taxes": "Belastingen",
+      "serviceFee": "Servicekosten",
+      "total": "Totaal",
+      "payToday": "Vandaag te betalen"
+    },
+    "voucher": {
+      "bookingConfirmed": "Boeking bevestigd",
+      "print": "Afdrukken",
+      "downloadPdf": "PDF downloaden",
+      "confirmationVoucher": "Bevestigingsvoucher verblijf",
+      "confirmationNo": "Bevestigingsnr.",
+      "refundable": "Restitueerbaar",
+      "afterTime": "Na {time}",
+      "beforeTime": "Voor {time}",
+      "stay": "Verblijf",
+      "nightsRoomsValue": "{nights, plural, one {# nacht} other {# nachten}} · {rooms, plural, one {# kamer} other {# kamers}}",
+      "guestsCount": "{count, plural, one {# gast} other {# gasten}}",
+      "leadGuest": "Hoofdgast",
+      "guest": "Gast",
+      "totalPaid": "Totaal betaald",
+      "presentAtCheckIn": "Toon deze voucher bij het inchecken",
+      "viewAllTrips": "Bekijk al mijn reizen"
+    },
+    "waiting": {
+      "completingBooking": "Je boeking afronden",
+      "pleaseWait": "Een ogenblik geduld terwijl we je reservering bevestigen bij de accommodatie. Dit kan even duren.",
+      "securingRoom": "Je kamer vastleggen…"
+    }
+  },
+  "cars": {
+    "landing": {
+      "rentInCity": "Huur een auto in {city}",
+      "topDealsInCity": "Topdeals in {city}"
+    },
+    "results": {
+      "noneFound": "Geen auto's gevonden — probeer andere data of een locatie in de buurt.",
+      "noneMatchFilters": "Geen auto's passen bij je filters. Probeer er een paar te verwijderen.",
+      "yourLocation": "je locatie",
+      "carsIn": "Auto's in {location}",
+      "count": "{count, plural, one {# auto} other {# auto's}}",
+      "topResults": "(topresultaten)",
+      "filters": "Filters",
+      "sort": "Sorteren",
+      "memberBanner": "Leden krijgen OneTokenCash terug bij elke huur — log in om ledenprijzen te ontgrendelen."
+    },
+    "sort": {
+      "recommended": "Aanbevolen",
+      "priceLowToHigh": "Prijs (laag naar hoog)",
+      "ratingHighToLow": "Beoordeling (hoog naar laag)"
+    },
+    "card": {
+      "percentOff": "{pct}% korting",
+      "deal": "Deal",
+      "previousPhoto": "Vorige foto",
+      "nextPhoto": "Volgende foto",
+      "automatic": "Automaat",
+      "manual": "Handgeschakeld",
+      "auto": "Automaat",
+      "seats": "{count} zitplaatsen",
+      "bags": "{count} koffers",
+      "doors": "{count} deuren",
+      "aircon": "Airco",
+      "mileageLabel": "{mileage} kilometrage",
+      "freeCancellation": "Gratis annuleren",
+      "nonRefundable": "Niet-restitueerbaar",
+      "unlimitedMileage": "Onbeperkt aantal kilometers",
+      "perDay": "/ dag",
+      "perDayVendor": "/ dag · {vendor}",
+      "totalForDays": "totaal · {days, plural, one {# dag} other {# dagen}}",
+      "reserve": "Reserveren →"
+    },
+    "filters": {
+      "close": "Filters sluiten",
+      "showCount": "Toon {count, plural, one {# auto} other {# auto's}}",
+      "noneAvailable": "Geen beschikbaar",
+      "seeLess": "Minder tonen",
+      "seeMore": "Meer tonen ({count})",
+      "searchByCarOrCompany": "Zoek op auto of bedrijf",
+      "searchPlaceholder": "bijv. Sixt of RAV4",
+      "totalPrice": "Totaalprijs",
+      "popularFilters": "Populaire filters",
+      "rating": "Beoordeling",
+      "ratingAny": "Alles",
+      "ratingExceptional": "Uitzonderlijk 9+",
+      "ratingVeryGood": "Heel goed 8+",
+      "ratingGood": "Goed 7+",
+      "carType": "Type auto",
+      "capacity": "Capaciteit",
+      "rentalCompany": "Verhuurbedrijf",
+      "transmission": "Transmissie",
+      "mileage": "Kilometrage",
+      "moreOptions": "Meer opties",
+      "freeCancellationOnly": "Alleen gratis annuleren",
+      "memberDeals": "Ledendeals & kortingen",
+      "option": {
+        "automatic": "Automaat",
+        "manual": "Handgeschakeld",
+        "unlimitedMileage": "Onbeperkt aantal kilometers",
+        "limitedMileage": "Beperkt aantal kilometers",
+        "airConditioning": "Airconditioning",
+        "freeCancellation": "Gratis annuleren",
+        "seats4": "4 zitplaatsen",
+        "seats5": "5 zitplaatsen",
+        "seats7plus": "7+ zitplaatsen"
+      }
+    },
+    "steps": {
+      "review": "Controleren",
+      "driver": "Bestuurder",
+      "payment": "Betaling"
+    },
+    "progress": {
+      "reviewing": "Je reservering controleren",
+      "verifyingDriver": "Bestuurdersgegevens verifiëren",
+      "confirmingCompany": "Bevestigen bij het verhuurbedrijf",
+      "confirmed": "Reservering bevestigd"
+    },
+    "booking": {
+      "back": "Terug",
+      "reservationError": "Kon de reservering niet afronden. Probeer het opnieuw.",
+      "reviewYourCar": "Controleer je auto",
+      "protectYourRental": "Bescherm je huurauto",
+      "fullProtection": "Volledige bescherming",
+      "fullProtectionDesc": "Schade- en diefstaldekking zonder eigen risico plus 24/7 pechhulp voor je hele huurperiode.",
+      "noProtection": "Geen extra bescherming — ik vertrouw op de basisdekking van het verhuurbedrijf.",
+      "continueToDriver": "Ga verder naar bestuurdersgegevens",
+      "driverDetails": "Bestuurdersgegevens",
+      "continueToPayment": "Ga verder naar betaling",
+      "processing": "Bezig met verwerken…",
+      "reserveNow": "Nu reserveren",
+      "secureNote": "Je gegevens worden beschermd met beveiligde versleuteling."
+    },
+    "driver": {
+      "firstName": "Voornaam",
+      "lastName": "Achternaam",
+      "age": "Leeftijd bestuurder",
+      "licenseNo": "Rijbewijsnummer",
+      "email": "E-mail",
+      "countryCode": "Landcode",
+      "phone": "Telefoonnummer",
+      "flightNo": "Vluchtnummer (optioneel)",
+      "flightNoPlaceholder": "bijv. BA245 — handig als je vlucht vertraagd is",
+      "youngDriverNote": "Voor bestuurders onder de 25 geldt een toeslag voor jonge bestuurders — deze is inbegrepen in je totaal."
+    },
+    "summary": {
+      "pickUp": "Ophalen",
+      "dropOff": "Inleveren",
+      "transmission": "Transmissie",
+      "mileage": "Kilometrage",
+      "timesDays": "× {days, plural, one {# dag} other {# dagen}}",
+      "taxes": "Belastingen",
+      "bookingFee": "Boekingskosten",
+      "youngDriverFee": "Toeslag jonge bestuurder",
+      "total": "Totaal",
+      "payToday": "Vandaag te betalen"
+    },
+    "confirmation": {
+      "title": "Reservering bevestigd",
+      "print": "Afdrukken",
+      "voucherSubtitle": "Bevestigingsvoucher autohuur",
+      "confirmationNo": "Bevestigingsnr.",
+      "rental": "Huur",
+      "driver": "Bestuurder",
+      "days": "{days, plural, one {# dag} other {# dagen}}",
+      "daysRental": "{days, plural, one {# dag huur} other {# dagen huur}}",
+      "totalPaid": "Totaal betaald",
+      "barcodeAlt": "Barcode boeking {ref}",
+      "presentVoucher": "Toon deze voucher bij de verhuurbalie",
+      "viewAllTrips": "Bekijk al mijn reizen"
+    }
+  },
+  "flights": {
+    "perTraveller": "per reiziger",
+    "stops": {
+      "nonstop": "non-stop",
+      "direct": "Direct",
+      "directLower": "direct",
+      "count": "{count, plural, one {# tussenstop} other {# tussenstops}}"
+    },
+    "results": {
+      "title": "Zoekresultaten",
+      "flightsFound": "{count} vluchten gevonden",
+      "departingFlights": "Vertrekkende vluchten",
+      "returningFlights": "Terugvluchten",
+      "legLabel": "Traject {index}: {origin} → {dest}",
+      "emptyState": "Nog geen vluchten — kies hierboven een route en datum om te zoeken.",
+      "noMatchLeg": "Geen vluchten passen bij je filters voor dit traject.",
+      "noMatchFilters": "Geen vluchten passen bij je filters — probeer er een paar te wissen.",
+      "searching": "Live tarieven zoeken bij verschillende luchtvaartmaatschappijen…",
+      "showMore": "Meer resultaten tonen",
+      "moreCount": "({count} meer)"
+    },
+    "filters": {
+      "filterBy": "Filteren op",
+      "stops": "Tussenstops",
+      "any": "Alles",
+      "upToOneStop": "Maximaal 1 tussenstop",
+      "airlines": "Luchtvaartmaatschappijen",
+      "from": "Vanaf"
+    },
+    "sort": {
+      "sortBy": "Sorteren op",
+      "recommended": "Aanbevolen",
+      "cheapest": "Goedkoopste",
+      "fastest": "Snelste"
+    },
+    "card": {
+      "seatsLeft": "Nog maar {count} voor deze prijs",
+      "select": "Selecteren",
+      "flightDetails": "Vluchtdetails"
+    },
+    "detail": {
+      "backToResults": "← Terug naar resultaten",
+      "continueToBook": "Doorgaan naar boeken"
+    },
+    "fare": {
+      "selectFareTo": "Selecteer tarief naar {dest}",
+      "close": "Sluiten",
+      "operatedBy": "Deze vlucht wordt uitgevoerd door {carrier}.",
+      "cabin": "Klasse: {cabin}",
+      "select": "Selecteren"
+    },
+    "perks": {
+      "seatChoiceIncluded": "Stoelkeuze inbegrepen",
+      "seatChoiceFee": "Stoelkeuze tegen betaling",
+      "handBaggage": "Handbagage inbegrepen ({kg} kg)",
+      "checkedBag": "{count} × ruimbagage ({kg} kg per stuk)",
+      "checkedBags": "{count, plural, one {# stuk ruimbagage} other {# stuks ruimbagage}} ({kg} kg per stuk)",
+      "checkedBagFee": "Ruimbagage tegen betaling",
+      "refundable": "Restitueerbaar",
+      "nonRefundable": "Niet-restitueerbaar",
+      "freeChanges": "Gratis wijzigen",
+      "changeFee": "Wijzigingskosten van toepassing",
+      "noChanges": "Wijzigen niet toegestaan"
+    },
+    "prediction": {
+      "title": "AI-prijsvoorspelling",
+      "confidence": "{confidence}% betrouwbaarheid"
+    },
+    "priceTracking": {
+      "title": "Prijsvolging",
+      "currentLowest": "Huidige laagste prijs:"
+    },
+    "fareBreakdown": {
+      "title": "Tariefspecificatie",
+      "baseFare": "Basistarief",
+      "baseFareMultiple": "Basistarief × {count}",
+      "taxes": "Belastingen",
+      "fees": "Kosten",
+      "total": "Totaal"
+    },
+    "segments": {
+      "layoverIn": "Overstap in {iata}"
+    },
+    "steps": {
+      "reviewTrip": "Reis controleren",
+      "travellers": "Reizigers",
+      "payment": "Betaling",
+      "reviewAndBook": "Controleren & boeken"
+    },
+    "sidebar": {
+      "businessFlight": "Businessvlucht",
+      "oneWayFlight": "Enkele reis",
+      "priceSummary": "Je prijsoverzicht",
+      "travellerAdult": "Reiziger {index} · Volwassene",
+      "taxesFees": "Belastingen & kosten",
+      "nextCheckout": "Volgende: Afrekenen",
+      "nextPayment": "Volgende: Betaling",
+      "nextReview": "Volgende: Controleren",
+      "buyNow": "Nu kopen",
+      "next": "Volgende"
+    },
+    "progress": {
+      "reviewing": "Boekingsaanvraag controleren",
+      "verifying": "Aanvraaggegevens verifiëren",
+      "bookingTicket": "Ticket boeken via API luchtvaartmaatschappij",
+      "approved": "Boeking goedgekeurd",
+      "secureBooking": "{brand} beveiligde boeking",
+      "keepWindowOpen": "Houd dit venster open…"
+    },
+    "bookingForm": {
+      "travellerDetails": "Reizigersgegevens",
+      "firstName": "Voornaam",
+      "lastName": "Achternaam",
+      "dateOfBirth": "Geboortedatum",
+      "payment": "Betaling",
+      "simulatedCharge": "gesimuleerd — geen echte afschrijving",
+      "cardNumber": "Kaartnummer",
+      "expiry": "Vervaldatum",
+      "cvc": "CVC",
+      "invalidCard": "Voer een geldig kaartnummer in.",
+      "bookingFailed": "Kon de boeking niet afronden. Probeer het opnieuw.",
+      "networkError": "Netwerkfout — probeer het opnieuw.",
+      "processing": "Bezig met verwerken…",
+      "pay": "Betalen",
+      "andConfirm": "& bevestigen"
+    },
+    "reviewTrip": {
+      "title": "Controleer je reis",
+      "route": "{origin} naar {dest}",
+      "changeFlight": "Vlucht wijzigen",
+      "yourFare": "Je tarief: {fare}",
+      "seatsAndBags": "Stoelen en bagage",
+      "seatsAndBagsNote": "Je kunt na het boeken stoelen selecteren en bagage toevoegen aan deze reis via je dashboard."
+    },
+    "travellers": {
+      "title": "Beveiligde boeking — duurt maar een paar minuten",
+      "nameMatchNote": "Namen van reizigers moeten exact overeenkomen met een geldig identiteitsbewijs met foto.",
+      "required": "Verplicht",
+      "travellerOf": "Reiziger {index} van {total}",
+      "firstName": "Voornaam",
+      "middleName": "Tweede voornaam",
+      "surname": "Achternaam",
+      "passportCountry": "Land van paspoort",
+      "passportNumber": "Paspoortnummer",
+      "passportFormatError": "Verwacht formaat zoals {example} voor dit land.",
+      "dateOfBirth": "Geboortedatum",
+      "dobDay": "Geboortedag",
+      "dobMonth": "Geboortemaand",
+      "dobYear": "Geboortejaar",
+      "day": "Dag",
+      "month": "Maand",
+      "year": "Jaar",
+      "contactDetails": "Contactgegevens",
+      "contactNote": "We sturen je e-ticket en eventuele updates naar dit e-mailadres.",
+      "emailAddress": "E-mailadres",
+      "marketingOptIn": "Stuur mij reisupdates en reisdeals.",
+      "countryCode": "Landcode",
+      "phoneNumber": "Telefoonnummer",
+      "phoneDigitsExact": "Nummers van dit land hebben {count} cijfers.",
+      "phoneDigitsRange": "Nummers van dit land hebben {min}–{max} cijfers."
+    },
+    "payment": {
+      "title": "Hoe wil je betalen?",
+      "simulatedNote": "De betaling is gesimuleerd — er wordt niets echt afgeschreven.",
+      "nameOnCard": "Naam op kaart",
+      "cardNumber": "Nummer betaal-/creditcard",
+      "cardNotAccepted": "Deze kaart wordt niet geaccepteerd bij Travu. Probeer een andere kaart.",
+      "expiryDate": "Vervaldatum",
+      "securityCode": "Beveiligingscode",
+      "billingAddress": "Factuuradres",
+      "countryTerritory": "Land / gebied",
+      "billingAddress1": "Factuuradres 1",
+      "billingAddress2": "Factuuradres 2",
+      "postalCode": "Postcode",
+      "city": "Plaats",
+      "cardNotAcceptedTitle": "Kaart niet geaccepteerd",
+      "cardNotAcceptedMessage": "Deze kaart wordt niet geaccepteerd bij Travu. Probeer een andere kaart.",
+      "tryAnotherCard": "Probeer een andere kaart"
+    },
+    "reviewBook": {
+      "title": "Controleer en boek je reis",
+      "numbered1": "Controleer je reisgegevens om er zeker van te zijn dat de data en tijden kloppen.",
+      "numbered2": "Controleer je spelling. Namen van passagiers moeten exact overeenkomen met een geldig identiteitsbewijs met foto.",
+      "numbered3": "Bekijk de voorwaarden van je boeking.",
+      "fareRule1": "Handbagage meenemen",
+      "fareRule2": "Betalen voor ruimbagage",
+      "fareRule3": "Annuleringen niet toegestaan",
+      "fareRule4": "Wijzigingen niet toegestaan",
+      "fareRulesFor": "Tariefregels voor {origin} naar {dest}",
+      "acknowledgement": "Door op onderstaande knop te klikken, bevestig ik dat ik de privacyverklaring en het reisadvies van de overheid heb gelezen en dat ik de regels & beperkingen en gebruiksvoorwaarden heb bekeken en accepteer.",
+      "yourTrip": "Je reis",
+      "route": "Route",
+      "date": "Datum",
+      "times": "Tijden",
+      "carrier": "Maatschappij",
+      "fare": "Tarief",
+      "travellers": "Reizigers",
+      "contact": "Contact",
+      "payment": "Betaling",
+      "cardEndingIn": "Kaart eindigend op {last4}",
+      "applyOneToken": "Mijn OneTokenCash toepassen",
+      "oneTokenBalance": "Je hebt",
+      "inOneToken": "in OneTokenCash.",
+      "applying": "Bezig met toepassen",
+      "toThisBooking": "op deze boeking.",
+      "useToSave": "Gebruik het om tot",
+      "buyNow": "Nu kopen",
+      "secureNote": "Beveiligde versleutelde verzending en opslag.",
+      "buyMoreSaveTitle": "Koop meer & bespaar wanneer je wilt!",
+      "buyMoreSaveBody": "Je kunt besparen op je reis door nu een vlucht te boeken en later een verblijf toe te voegen."
+    },
+    "confirmation": {
+      "guest": "Gast",
+      "viewAllTrips": "Bekijk al mijn reizen",
+      "bookingConfirmed": "Boeking bevestigd",
+      "slipIssued": "Er is een bevestigingsbon afgegeven voor referentie",
+      "bookingConfirmationHeader": "Boekingsbevestiging",
+      "itineraryNo": "Reisplannummer",
+      "issued": "Afgegeven {date}",
+      "travellers": "Reiziger(s)",
+      "departure": "Vertrek",
+      "bookingReference": "Boekingsreferentie",
+      "flightDetails": "Vluchtdetails",
+      "departArrive": "Vertrek {departTime} · {departDate} — Aankomst {arriveTime} · {arriveDate}",
+      "cabinClass": "{cabin}-klasse",
+      "paymentSummary": "Betaaloverzicht",
+      "airFare": "Vluchttarief",
+      "bookingFee": "Travu-boekingskosten",
+      "taxesFees": "Belastingen & kosten",
+      "totalPaid": "Totaal betaald",
+      "paidVia": "Betaald via {label}",
+      "qrAlt": "QR voor {ref}",
+      "presentSlip": "Toon deze bon en een geldig paspoort bij het inchecken",
+      "finePrint": "Deze bevestigingsbon is een gesimuleerde bon die door Travu uitsluitend voor demonstratiedoeleinden is gegenereerd en is niet geldig om te reizen. Vervoer is onderworpen aan de vervoersvoorwaarden en tarieven van de uitvoerende maatschappij. Zorg dat je minstens 3 uur voor internationaal vertrek aanwezig bent. Kaartgegevens worden alleen opgeslagen als gemaskeerde samenvatting; het volledige kaartnummer, de vervaldatum en de beveiligingscode worden nooit bewaard. Travu-boekingsreferentie {ref}.",
+      "downloadPdf": "PDF downloaden",
+      "print": "Afdrukken",
+      "trackThisTrip": "Deze reis volgen"
+    }
   }
 }

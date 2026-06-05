@@ -1,16 +1,17 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { Flight } from "@/lib/flights/types";
 import type { FareOption } from "@/lib/flights/fares";
 import { hhmm, datePart, formatDuration } from "@/lib/utils/dates";
 import { Money } from "@/components/Money";
 
-const NEXT_LABEL: Record<string, string> = {
-  review: "Next: Checkout",
-  travellers: "Next: Payment",
-  payment: "Next: Review",
-  confirm: "Buy now",
+const NEXT_LABEL_KEY: Record<string, string> = {
+  review: "sidebar.nextCheckout",
+  travellers: "sidebar.nextPayment",
+  payment: "sidebar.nextReview",
+  confirm: "sidebar.buyNow",
 };
 
 export function BookingSidebar({
@@ -28,6 +29,7 @@ export function BookingSidebar({
   ctaDisabled?: boolean;
   passengers?: number;
 }) {
+  const t = useTranslations("flights");
   const from = flight.segments[0];
   const to = flight.segments[flight.segments.length - 1];
   const total = fare.fare.total * passengers;
@@ -38,7 +40,7 @@ export function BookingSidebar({
     <aside className="space-y-3 lg:sticky lg:top-20 lg:self-start">
       <div className="rounded-2xl border border-border bg-surface p-4">
         <div className="text-xs font-semibold uppercase tracking-wide text-muted">
-          {fare.cabin === "BUSINESS" ? "Business flight" : "One-way flight"}
+          {fare.cabin === "BUSINESS" ? t("sidebar.businessFlight") : t("sidebar.oneWayFlight")}
         </div>
         <div className="mt-1 text-base font-bold">
           {from.originIata} → {to.destIata}
@@ -51,25 +53,25 @@ export function BookingSidebar({
       </div>
 
       <div className="rounded-2xl border border-border bg-surface p-4">
-        <h3 className="text-sm font-semibold">Your price summary</h3>
+        <h3 className="text-sm font-semibold">{t("sidebar.priceSummary")}</h3>
         <dl className="mt-3 space-y-1.5 text-sm">
           {Array.from({ length: passengers }).map((_, i) => (
             <div key={i} className="flex justify-between">
-              <dt className="text-muted">Traveller {i + 1} · Adult</dt>
+              <dt className="text-muted">{t("sidebar.travellerAdult", { index: i + 1 })}</dt>
               <dd><Money cents={fare.fare.total} /></dd>
             </div>
           ))}
           <div className="flex justify-between border-t border-border pt-1.5">
-            <dt className="text-muted">Base fare</dt>
+            <dt className="text-muted">{t("fareBreakdown.baseFare")}</dt>
             <dd><Money cents={totalBase} /></dd>
           </div>
           <div className="flex justify-between">
-            <dt className="text-muted">Taxes & fees</dt>
+            <dt className="text-muted">{t("sidebar.taxesFees")}</dt>
             <dd><Money cents={totalTaxes} /></dd>
           </div>
         </dl>
         <div className="mt-3 flex items-baseline justify-between border-t border-border pt-2">
-          <span className="font-bold">Total</span>
+          <span className="font-bold">{t("fareBreakdown.total")}</span>
           <span className="text-lg font-extrabold text-price"><Money cents={total} /></span>
         </div>
         {onNext && (
@@ -79,7 +81,8 @@ export function BookingSidebar({
             disabled={ctaDisabled}
             className="btn-accent mt-4 flex w-full items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-semibold disabled:opacity-60"
           >
-            {NEXT_LABEL[currentStep] ?? "Next"} <ArrowRight className="h-3.5 w-3.5" />
+            {NEXT_LABEL_KEY[currentStep] ? t(NEXT_LABEL_KEY[currentStep]) : t("sidebar.next")}{" "}
+            <ArrowRight className="h-3.5 w-3.5" />
           </button>
         )}
       </div>

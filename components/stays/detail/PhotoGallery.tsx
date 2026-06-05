@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import type { StayPhoto } from "@/lib/stays/types";
 
 /** Hero + 2x2 tile gallery with a "+N photos" overlay and a lightbox. */
 export function PhotoGallery({ photos, name }: { photos: StayPhoto[]; name: string }) {
+  const tr = useTranslations("stays");
   const [open, setOpen] = useState(false);
   const [idx, setIdx] = useState(0);
   if (photos.length === 0) return null;
@@ -37,7 +39,7 @@ export function PhotoGallery({ photos, name }: { photos: StayPhoto[]; name: stri
               <img src={t.url} alt={t.caption ?? `${name} photo ${i + 2}`} className="h-full w-full object-cover transition hover:scale-105" />
               {isLast && (
                 <span className="absolute inset-0 grid place-items-center bg-black/55 text-sm font-semibold text-white">
-                  +{extra} photos
+                  {tr("detail.morePhotos", { count: extra })}
                 </span>
               )}
             </button>

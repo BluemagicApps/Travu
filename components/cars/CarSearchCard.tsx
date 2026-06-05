@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { Car, Plane, Search, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { AnimatedSubmitButton } from "@/components/ui/AnimatedSubmitButton";
 import { SearchProgressBar } from "@/components/ui/SearchProgressBar";
 import { LocationAutocomplete } from "@/components/stays/search/LocationAutocomplete";
@@ -21,6 +22,7 @@ export interface CarSearchInitial {
 type SubTab = "cars" | "transfers";
 
 export function CarSearchCard({ initial, showAi = false }: { initial?: CarSearchInitial; showAi?: boolean }) {
+  const t = useTranslations("search");
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [tab, setTab] = useState<SubTab>("cars");
@@ -174,8 +176,8 @@ export function CarSearchCard({ initial, showAi = false }: { initial?: CarSearch
             <TimeSelect value={dropoffTime} onChange={setDropoffTime} label="Drop-off time" />
           </div>
 
-          <AnimatedSubmitButton className="mt-3" loading={pending} loadingLabel="Searching for cars…">
-            <Search className="h-4 w-4" /> Search
+          <AnimatedSubmitButton className="mt-3" loading={pending} loadingLabel="…">
+            <Search className="h-4 w-4" /> {t("search")}
           </AnimatedSubmitButton>
           {error && <p className="mt-2 text-xs text-rose-500">{error}</p>}
           <SearchProgressBar active={pending} />
@@ -186,7 +188,7 @@ export function CarSearchCard({ initial, showAi = false }: { initial?: CarSearch
           <>
             <div className="my-4 flex items-center gap-3 text-xs text-muted">
               <span className="h-px flex-1 bg-border" />
-              or just tell our AI what you need
+              {t("aiDivider")}
               <span className="h-px flex-1 bg-border" />
             </div>
             <form onSubmit={askAi}>
@@ -198,7 +200,7 @@ export function CarSearchCard({ initial, showAi = false }: { initial?: CarSearch
                 <input
                   value={ai}
                   onChange={(e) => setAi(e.target.value)}
-                  placeholder='Ask in plain words — e.g. "SUV in Miami next weekend, automatic"'
+                  placeholder={t("aiPlaceholderCars")}
                   className="min-w-0 flex-1 bg-transparent px-1 py-2 text-sm outline-none"
                 />
                 <button
@@ -208,7 +210,7 @@ export function CarSearchCard({ initial, showAi = false }: { initial?: CarSearch
                 >
                   {aiLoading ? "…" : (
                     <>
-                      <Sparkles className="h-4 w-4" /> Ask AI
+                      <Sparkles className="h-4 w-4" /> {t("askAi")}
                     </>
                   )}
                 </button>

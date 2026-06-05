@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { Plus, Search, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { AnimatedSubmitButton } from "@/components/ui/AnimatedSubmitButton";
 import { SearchProgressBar } from "@/components/ui/SearchProgressBar";
 import type { AirportOption } from "@/lib/flights/dataset";
@@ -41,6 +42,7 @@ export function SearchForm({
   airports: AirportOption[];
   initial?: SearchFormInitial;
 }) {
+  const t = useTranslations("search");
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const { origin: ipOrigin } = useOrigin();
@@ -190,9 +192,9 @@ export function SearchForm({
       <AnimatedSubmitButton
         className="mt-3"
         loading={pending}
-        loadingLabel="Searching for flights…"
+        loadingLabel="…"
       >
-        <Search className="h-4 w-4" /> Search flights
+        <Search className="h-4 w-4" /> {t("flights")}
       </AnimatedSubmitButton>
 
       <SearchProgressBar active={pending} />

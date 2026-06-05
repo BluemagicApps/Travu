@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils/cn";
 import { Money } from "@/components/Money";
 
@@ -70,13 +71,14 @@ const STYLES: { key: string; label: string; cards: StayCard[] }[] = [
 
 /** "Stays for every travel style" tabbed price cards — mirrors img3 (bottom). */
 export function TravelStyles() {
+  const t = useTranslations("homeSections");
   const [active, setActive] = useState(STYLES[0].key);
   const current = STYLES.find((s) => s.key === active) ?? STYLES[0];
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-10">
-      <h2 className="text-2xl font-extrabold tracking-tight">Stays for every travel style</h2>
-      <p className="mt-1 text-sm text-muted">Average prices based on current calendar month</p>
+      <h2 className="text-2xl font-extrabold tracking-tight">{t("travelStyles.heading")}</h2>
+      <p className="mt-1 text-sm text-muted">{t("travelStyles.subtitle")}</p>
 
       <div className="mt-4 flex flex-wrap gap-2 border-b border-border">
         {STYLES.map((s) => (
@@ -91,7 +93,7 @@ export function TravelStyles() {
                 : "border-transparent text-muted hover:text-text",
             )}
           >
-            {s.label}
+            {t(`travelStyles.style.${s.key}`)}
           </button>
         ))}
       </div>
@@ -122,7 +124,7 @@ export function TravelStyles() {
               <p className="text-xs text-muted">{c.country}</p>
               <p className="mt-2 text-sm font-extrabold">
                 <Money cents={c.priceUsdCents} />
-                <span className="ml-1 text-xs font-normal text-muted">avg per night</span>
+                <span className="ml-1 text-xs font-normal text-muted">{t("travelStyles.avgPerNight")}</span>
               </p>
             </div>
           </Link>

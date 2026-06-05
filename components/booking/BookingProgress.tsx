@@ -2,14 +2,8 @@
 
 import { useEffect, useRef, useState, type ComponentType } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Check, Loader2, Plane } from "lucide-react";
-
-const DEFAULT_STEPS = [
-  "Reviewing booking application",
-  "Verifying application data",
-  "Booking ticket on airline API",
-  "Booking approved",
-];
 
 const STEP_MS = 1200; // time spent on each of the first three steps
 const APPROVE_HOLD_MS = 800; // dwell on "approved" before navigating
@@ -42,6 +36,13 @@ export function BookingProgress<T>({
   /** Override the header icon (defaults to a plane). */
   icon?: ComponentType<{ className?: string }>;
 }) {
+  const t = useTranslations("flights");
+  const DEFAULT_STEPS = [
+    t("progress.reviewing"),
+    t("progress.verifying"),
+    t("progress.bookingTicket"),
+    t("progress.approved"),
+  ];
   const STEPS = steps ?? DEFAULT_STEPS;
   const Icon = icon ?? Plane;
   const [active, setActive] = useState(0);
@@ -99,8 +100,8 @@ export function BookingProgress<T>({
             <Icon className="h-5 w-5 text-white" />
           </span>
           <div>
-            <p className="text-sm font-bold">{brandLabel} secure booking</p>
-            <p className="text-xs text-muted">Please keep this window open…</p>
+            <p className="text-sm font-bold">{t("progress.secureBooking", { brand: brandLabel })}</p>
+            <p className="text-xs text-muted">{t("progress.keepWindowOpen")}</p>
           </div>
         </div>
 

@@ -4,8 +4,8 @@
     "stays": "ठहराव",
     "cars": "कारें",
     "trackBooking": "बुकिंग ट्रैक करें",
-    "signIn": "साइन इन",
-    "signOut": "साइन आउट"
+    "signIn": "साइन इन करें",
+    "signOut": "साइन आउट करें"
   },
   "footer": {
     "company": "कंपनी",
@@ -13,7 +13,842 @@
     "policies": "नीतियाँ",
     "help": "सहायता"
   },
+  "footerLinks": {
+    "about": "हमारे बारे में",
+    "oneTokenRewards": "OneToken रिवॉर्ड्स",
+    "listYourProperty": "अपनी प्रॉपर्टी लिस्ट करें",
+    "partnerships": "साझेदारियाँ",
+    "newsroom": "न्यूज़रूम",
+    "searchFlights": "उड़ानें खोजें",
+    "hotelsAndStays": "होटल और ठहराव",
+    "carRentals": "कार किराये पर",
+    "trackABooking": "बुकिंग ट्रैक करें",
+    "myTrips": "मेरी यात्राएँ",
+    "privacy": "गोपनीयता",
+    "cookies": "कुकीज़",
+    "termsOfUse": "उपयोग की शर्तें",
+    "accessibility": "सुगम्यता",
+    "yourPrivacyChoices": "आपकी गोपनीयता पसंद",
+    "support": "सहायता",
+    "cancelYourBooking": "अपनी बुकिंग रद्द करें",
+    "refundBasics": "रिफंड की मूल बातें",
+    "travelDocuments": "यात्रा दस्तावेज़",
+    "oneTokenTerms": "OneToken की शर्तें"
+  },
   "common": {
     "language": "भाषा"
+  },
+  "home": {
+    "eyebrow": "AI-संचालित यात्रा, नए अंदाज़ में",
+    "tagline": "एक जगह से पहुँचें हर जगह।",
+    "subtitle": "Travu को बताएँ कि आप कहाँ जाना चाहते हैं, ठीक वैसे जैसे किसी दोस्त को बताते हैं। उड़ानें और ठहराव — खोज, कीमत और बुकिंग, शुरू से अंत तक हम संभालते हैं।",
+    "carsTagline": "अपनी यात्रा, अपने अंदाज़ में चलाएँ।"
+  },
+  "homeSections": {
+    "bundleSave": {
+      "title": "बंडल करें और बचाएँ",
+      "desc": "अपनी पूरी यात्रा एक साथ या समय के साथ बुक करके बचत करें।"
+    },
+    "oneStopShop": {
+      "title": "वन-स्टॉप ट्रैवल शॉप",
+      "desc": "उड़ानें, होटल और बहुत कुछ — सब एक ही जगह बुक करें।"
+    },
+    "oneTokenRewards": {
+      "title": "OneToken रिवॉर्ड्स",
+      "desc": "तुरंत बचत पाएँ और भविष्य की यात्रा के लिए OneTokenCash कमाएँ।"
+    },
+    "travelStyles": {
+      "heading": "हर यात्रा शैली के लिए ठहराव",
+      "subtitle": "मौजूदा कैलेंडर माह के आधार पर औसत कीमतें",
+      "avgPerNight": "औसत प्रति रात",
+      "style": {
+        "beach": "बीच",
+        "culture": "संस्कृति",
+        "ski": "स्की",
+        "family": "परिवार",
+        "wellness": "वेलनेस और आराम"
+      }
+    },
+    "exploreWorld": {
+      "heading": "Travu के साथ यात्रा की दुनिया एक्सप्लोर करें"
+    },
+    "stayLikeLocal": {
+      "heading": "{city} में एक स्थानीय की तरह ठहरें",
+      "propertyType": {
+        "privateHomes": "निजी वेकेशन घर",
+        "apartments": "अपार्टमेंट और कॉन्डो",
+        "cabins": "केबिन",
+        "cottages": "कॉटेज",
+        "villas": "विला"
+      }
+    },
+    "promo": {
+      "eyebrow": "बंडल करें और बचाएँ",
+      "heading": "सिर्फ़ सूटकेस नहीं, यादें भी समेटें",
+      "body": "अपनी उड़ान में एक ठहराव जोड़ें और दुनिया भर की 5,00,000 से ज़्यादा प्रॉपर्टीज़ पर पैकेज बचत पाएँ। मेंबर कीमतें लागू।",
+      "cta": "योजना शुरू करें"
+    },
+    "flightDeals": {
+      "heading": "{city} से उड़ान डील्स",
+      "tagline": "दुनिया भर में सैकड़ों गंतव्यों के लिए रियल-टाइम उड़ान डील्स एक्सप्लोर करें।",
+      "cta": "सभी उड़ान डील्स एक्सप्लोर करें"
+    }
+  },
+  "search": {
+    "flights": "उड़ानें खोजें",
+    "search": "खोजें",
+    "aiDivider": "या बस हमारे AI को बताएँ कि आपको क्या चाहिए",
+    "askAi": "AI से पूछें",
+    "aiPlaceholderStays": "सरल शब्दों में पूछें — जैसे \"रोम में 3 रातों के लिए पूल वाला 5-स्टार होटल\"",
+    "aiPlaceholderCars": "सरल शब्दों में पूछें — जैसे \"अगले सप्ताहांत मियामी में ऑटोमैटिक SUV\""
+  },
+  "auth": {
+    "loginTitle": "वापसी पर स्वागत है",
+    "loginSubtitle": "अपनी यात्राएँ प्रबंधित करने के लिए साइन इन करें।",
+    "signupTitle": "अपना खाता बनाएँ",
+    "signupSubtitle": "Travu के साथ उड़ानें बुक करें और अपनी यात्राएँ ट्रैक करें।",
+    "name": "नाम",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "signIn": "साइन इन करें",
+    "signingIn": "साइन इन हो रहा है…",
+    "createAccount": "खाता बनाएँ",
+    "creating": "बना रहे हैं…",
+    "newToTravu": "Travu पर नए हैं?",
+    "createAccountLink": "एक खाता बनाएँ",
+    "alreadyHaveAccount": "पहले से खाता है?",
+    "invalidCredentials": "अमान्य ईमेल या पासवर्ड।",
+    "emailTaken": "यह ईमेल पहले से पंजीकृत है।",
+    "invalidSignup": "कृपया एक मान्य ईमेल और कम से कम 8 अक्षरों का पासवर्ड इस्तेमाल करें।"
+  },
+  "track": {
+    "heading": "बुकिंग ट्रैक करें",
+    "intro": "अपनी यात्रा की रियल-टाइम स्थिति देखने के लिए अपना Travu बुकिंग संदर्भ (जैसे <ref>TRV-AB12CD</ref>) दर्ज करें।",
+    "placeholder": "TRV-AB12CD",
+    "trackButton": "ट्रैक करें",
+    "invalidRef": "कृपया TRV-XXXXXX प्रारूप में एक संदर्भ दर्ज करें।",
+    "notFound": "{ref} के लिए कोई बुकिंग नहीं मिली।",
+    "lookupError": "अभी यह नहीं देख पाए।",
+    "networkError": "नेटवर्क त्रुटि — कृपया फिर से प्रयास करें।",
+    "bookingReference": "बुकिंग संदर्भ",
+    "status": "स्थिति",
+    "direct": "सीधी",
+    "stops": "{count, plural, one {# स्टॉप} other {# स्टॉप}}",
+    "travellers": "यात्री:",
+    "fare": "किराया:",
+    "estimatedArrival": "अनुमानित आगमन:",
+    "nextChangeAt": "अगला बदलाव",
+    "onDate": "{date} को"
+  },
+  "dashboard": {
+    "heading": "आपकी यात्राएँ",
+    "signedInAs": "{email} के रूप में साइन इन",
+    "noBookings": "अभी कोई बुकिंग नहीं।",
+    "startSearch": "खोज शुरू करें",
+    "joinOneToken": "<strong>OneToken से जुड़ें</strong> — हर यात्रा पर OneTokenCash कमाएँ।",
+    "joinFree": "मुफ़्त जुड़ें",
+    "tripElements": "{count} ट्रिप एलिमेंट",
+    "toTier": "{tier} तक {count}",
+    "topTier": "शीर्ष टियर",
+    "ref": "संदर्भ",
+    "eTicket": "ई-टिकट",
+    "voucher": "वाउचर",
+    "nights": "{count, plural, one {# रात} other {# रातें}}"
+  },
+  "onetoken": {
+    "badge": "Travu OneToken",
+    "heroTitle": "Travu का मुफ़्त ट्रैवल <gradient>रिवॉर्ड्स प्रोग्राम</gradient>",
+    "heroSubtitle": "मेंबर कीमतों के साथ तुरंत बचत पाएँ और भविष्य की यात्रा पर इस्तेमाल के लिए OneTokenCash कमाएँ।",
+    "joinFree": "जुड़ें, यह मुफ़्त है",
+    "joinEarn": "जुड़ें और कमाना शुरू करें",
+    "joinForFree": "मुफ़्त जुड़ें",
+    "joining": "जुड़ रहे हैं…",
+    "memberBadge": "आप एक OneToken मेंबर हैं",
+    "valueProps": {
+      "savings": {
+        "title": "15 लाख से ज़्यादा होटल, घर और कारों पर बचत",
+        "desc": "दुनिया भर के लाखों ठहरावों पर मेंबर कीमतों के साथ 10% या उससे अधिक बचाएँ।"
+      },
+      "earnUse": {
+        "title": "और भी जगहों पर रिवॉर्ड कमाएँ और इस्तेमाल करें",
+        "desc": "OneTokenCash आपकी रिवॉर्ड करेंसी है — OneTokenCash में $1 बराबर है $1 जिसे योग्य उड़ानों और ठहरावों पर इस्तेमाल कर सकते हैं।"
+      },
+      "perks": {
+        "title": "और भी मेंबर सुविधाएँ पाएँ",
+        "desc": "रूम अपग्रेड, मुफ़्त प्राइस ट्रैकिंग, प्राथमिकता सहायता और VIP सुविधाओं के लिए टियर में ऊपर बढ़ें।"
+      }
+    },
+    "tripElementsHeading": "टियर में ऊपर बढ़ते हुए आसानी से नए फ़ायदे अनलॉक करें",
+    "tripElementsSubtitle": "अपनी बुक की गई हर ट्रिप एलिमेंट पर रिवॉर्ड पाएँ, जो आपको टियर में तेज़ी से आगे बढ़ने में मदद करता है — कमाए गए OneTokenCash के अलावा।",
+    "tripElementsLabel": "आपको प्रत्येक के लिए एक ट्रिप एलिमेंट मिलता है…",
+    "tripElement": {
+      "hotelRoomNight": "होटल रूम रात",
+      "vacationRentalNight": "वेकेशन रेंटल रात",
+      "flightTicket": "उड़ान टिकट",
+      "carRentalDay": "कार रेंटल दिन",
+      "cruiseCabinNight": "क्रूज़ केबिन रात",
+      "activityTicket": "एक्टिविटी टिकट"
+    },
+    "tiersHeading": "टियर में आगे बढ़ते हुए और भी फ़ायदे पाएँ",
+    "tierRange": {
+      "blue": "0–4 ट्रिप एलिमेंट",
+      "silver": "5–14 ट्रिप एलिमेंट",
+      "gold": "15–29 ट्रिप एलिमेंट",
+      "platinum": "30+ ट्रिप एलिमेंट"
+    },
+    "savings": "बचत",
+    "savingsDesc": "10,000+ होटलों पर मेंबर कीमतों के साथ {pct}% या उससे अधिक बचाएँ।",
+    "rewards": "रिवॉर्ड्स",
+    "rewardsDesc": "योग्य बुकिंग पर OneTokenCash में {pct}% कमाएँ।",
+    "perks": "सुविधाएँ",
+    "cashHeading": "OneTokenCash — एक रिवॉर्ड करेंसी जो आपको चुनने देती है कि इसे कहाँ इस्तेमाल करें",
+    "cashSubtitle": "OneTokenCash आपका है, जिसे होटल, उड़ानें और बहुत कुछ बुक करते समय Travu पर इस्तेमाल कर सकते हैं। OneTokenCash में $1 बराबर है $1 जिसे साल के किसी भी दिन योग्य बुकिंग पर इस्तेमाल किया जा सकता है — कोई ब्लैकआउट तारीख़ नहीं।",
+    "cashEarn": "खर्च किए गए हर डॉलर पर OneTokenCash में 4% तक कमाएँ",
+    "cashEarnNote": "टियर में ऊपर बढ़ते हुए आप और भी ज़्यादा कमाते हैं।",
+    "faqHeading": "OneToken के बारे में और भी जानें",
+    "faq": {
+      "join": {
+        "q": "मैं OneToken से कैसे जुड़ सकता हूँ?",
+        "a": "OneToken से जुड़ने के लिए यहाँ क्लिक करें — शुरुआत करना मुफ़्त और आसान है। साइन इन करें या Travu खाता बनाएँ, फिर इस पेज पर मुफ़्त जुड़ें टैप करें।"
+      },
+      "howItWorks": {
+        "q": "OneToken रिवॉर्ड्स प्रोग्राम कैसे काम करता है?",
+        "a": "OneToken हमारा रिवॉर्ड्स प्रोग्राम है जहाँ मेंबर मेंबर कीमतों का आनंद लेते हैं और योग्य बुकिंग पर OneTokenCash कमाते हैं। OneTokenCash में $1 बराबर है $1 जिसे यात्रा पर इस्तेमाल किया जा सकता है। यात्रा बुक करते हुए आप ट्रिप एलिमेंट जमा करते हैं जो आपको टियर में ऊपर ले जाते हैं — Blue, Silver, Gold और Platinum।"
+      },
+      "expire": {
+        "q": "क्या OneTokenCash समाप्त हो जाता है?",
+        "a": "बुकिंग पर कमाया गया OneTokenCash समाप्त नहीं होगा यदि आप 18 महीनों के भीतर कम से कम एक बार योग्य बुकिंग करते हैं।"
+      },
+      "flights": {
+        "q": "क्या मैं उड़ानों पर OneTokenCash इस्तेमाल कर सकता हूँ?",
+        "a": "हाँ। OneTokenCash को योग्य उड़ान और ठहराव बुकिंग पर चेकआउट के समय भुना सकते हैं, जो देय राशि पर तुरंत छूट के रूप में लागू होता है।"
+      },
+      "tierStatus": {
+        "q": "मैं OneToken के साथ टियर स्टेटस तक कैसे पहुँचूँ?",
+        "a": "आप प्रत्येक होटल रूम रात, वेकेशन रेंटल रात, उड़ान टिकट, कार रेंटल दिन, क्रूज़ केबिन रात और एक्टिविटी टिकट पर एक ट्रिप एलिमेंट कमाते हैं। Silver के लिए 5, Gold के लिए 15 और Platinum के लिए 30 जमा करें।"
+      },
+      "free": {
+        "q": "क्या OneToken मुफ़्त है?",
+        "a": "हाँ — OneToken से जुड़ना पूरी तरह मुफ़्त है।"
+      }
+    },
+    "tierMember": "{tier} मेंबर",
+    "tripElementsCount": "{count} ट्रिप एलिमेंट",
+    "yourOneTokenCash": "आपका OneTokenCash",
+    "moreToReach": "{count, plural, one {{tier} तक पहुँचने के लिए # और ट्रिप एलिमेंट।} other {{tier} तक पहुँचने के लिए # और ट्रिप एलिमेंट।}}"
+  },
+  "stays": {
+    "results": {
+      "noneFound": "कोई ठहराव नहीं मिला — अलग तारीख़ें या पास का शहर आज़माएँ।",
+      "noMatch": "आपके फ़िल्टर से कोई ठहराव मेल नहीं खाता। कुछ हटाकर देखें।",
+      "yourDestination": "आपका गंतव्य",
+      "propertyNoun": "{count, plural, one {प्रॉपर्टी} other {प्रॉपर्टीज़}}",
+      "sortBy": "इसके अनुसार क्रमबद्ध करें",
+      "kindAllStays": "सभी ठहराव",
+      "kindHotels": "होटल",
+      "kindHomes": "घर",
+      "sortRecommended": "सुझाए गए",
+      "sortPrice": "कीमत (कम से अधिक)",
+      "sortRating": "अतिथि रेटिंग",
+      "sortDistance": "दूरी"
+    },
+    "landing": {
+      "lastMinuteDeals": "अंतिम समय की सप्ताहांत डील्स",
+      "everyTravelStyle": "हर यात्रा शैली के लिए ठहराव"
+    },
+    "card": {
+      "vipAccess": "VIP एक्सेस",
+      "hotel": "होटल",
+      "entireBy": "{host} द्वारा पूरा {type}",
+      "sleeps": "{count} लोगों के सोने की जगह",
+      "beds": "{count, plural, one {# बेड} other {# बेड}}",
+      "baths": "{count, plural, one {# बाथ} other {# बाथ}}",
+      "reviews": "{count} समीक्षाएँ",
+      "freeCancellation": "मुफ़्त रद्दीकरण",
+      "nonRefundable": "गैर-वापसी योग्य",
+      "payLater": "अभी आरक्षित करें, बाद में भुगतान करें",
+      "percentOff": "{pct}% की छूट",
+      "perNight": "/ रात",
+      "total": "कुल",
+      "totalInclTaxes": "कुल कर और शुल्क सहित",
+      "totalInclTaxesInline": "कुल · कर और शुल्क सहित",
+      "viewDeal": "डील देखें →"
+    },
+    "detail": {
+      "seeAllProperties": "सभी प्रॉपर्टीज़ देखें",
+      "share": "शेयर करें",
+      "save": "सहेजें",
+      "datesAvailable": "आपकी तारीख़ें उपलब्ध हैं",
+      "bedrooms": "{count, plural, one {# बेडरूम} other {# बेडरूम}}",
+      "bathrooms": "{count, plural, one {# बाथरूम} other {# बाथरूम}}",
+      "sqft": "{count} वर्ग फुट",
+      "exploreArea": "क्षेत्र एक्सप्लोर करें",
+      "popularAmenities": "लोकप्रिय सुविधाएँ",
+      "aboutProperty": "इस प्रॉपर्टी के बारे में",
+      "privateHost": "निजी होस्ट (Vrbo)",
+      "propertyHost": "प्रॉपर्टी होस्ट",
+      "policies": "नीतियाँ",
+      "afterTime": "{time} के बाद",
+      "beforeTime": "{time} से पहले",
+      "cancellation": "रद्दीकरण",
+      "thingsToDo": "पास में करने योग्य लोकप्रिय चीज़ें",
+      "similarProperties": "समान प्रॉपर्टीज़",
+      "faq": "अक्सर पूछे जाने वाले सवाल",
+      "mapUnavailable": "इस प्रॉपर्टी के लिए मैप पूर्वावलोकन उपलब्ध नहीं है।",
+      "viewLargerMap": "बड़े मैप में देखें",
+      "morePhotos": "+{count} फ़ोटो",
+      "nights": "{count, plural, one {# रात} other {# रातें}}",
+      "nightsSleeps": "{nights, plural, one {# रात} other {# रातें}} · {sleeps} लोगों के सोने की जगह",
+      "totalNights": "कुल · {count, plural, one {# रात} other {# रातें}}",
+      "inclTaxes": "कर और शुल्क सहित",
+      "reserve": "आरक्षित करें",
+      "notChargedYet": "अभी आपसे शुल्क नहीं लिया जाएगा"
+    },
+    "nav": {
+      "overview": "अवलोकन",
+      "amenities": "सुविधाएँ",
+      "reviews": "समीक्षाएँ"
+    },
+    "reviews": {
+      "guestReviews": "अतिथि समीक्षाएँ",
+      "noReviews": "अभी कोई समीक्षा नहीं — अपने ठहराव के बाद इस प्रॉपर्टी की समीक्षा करने वाले पहले बनें।",
+      "cleanliness": "स्वच्छता",
+      "staff": "स्टाफ़",
+      "amenities": "सुविधाएँ",
+      "condition": "स्थिति"
+    },
+    "promo": {
+      "exploreMore": "{brand} के साथ और एक्सप्लोर करें",
+      "memberRates": "चुनिंदा {brand} प्रॉपर्टीज़ पर मेंबर दरें और विशेष डील्स।"
+    },
+    "adRail": {
+      "discover": "खोजें",
+      "diveInto": "{city} के नज़ारों, खाने और संस्कृति में डूबें — अपना ठहराव बुक करें और एक्सप्लोर करना शुरू करें।",
+      "memberPrices": "मेंबर कीमतें",
+      "signInToUnlock": "चुनिंदा ठहरावों पर तुरंत बचत अनलॉक करने के लिए साइन इन करें।"
+    },
+    "features": {
+      "bundleSave": "बंडल करें और बचाएँ",
+      "bundleSaveDesc": "अपने ठहराव में एक उड़ान जोड़ें और दोनों पर बचाएँ — सब एक ही जगह बुक करें।",
+      "oneStop": "वन-स्टॉप ट्रैवल शॉप",
+      "oneStopDesc": "होटल, घर, उड़ानें और बहुत कुछ — आपकी यात्रा के लिए सब कुछ, एक साथ।",
+      "memberRewards": "मेंबर कीमतें और रिवॉर्ड्स",
+      "memberRewardsDesc": "तुरंत बचत अनलॉक करें और भविष्य की यात्रा पर खर्च करने के लिए रिवॉर्ड कमाएँ।"
+    },
+    "filters": {
+      "filters": "फ़िल्टर",
+      "searchByName": "प्रॉपर्टी के नाम से खोजें",
+      "searchByNamePlaceholder": "जैसे Grand",
+      "totalPrice": "कुल कीमत",
+      "popularFilters": "लोकप्रिय फ़िल्टर",
+      "guestRating": "अतिथि रेटिंग",
+      "ratingAny": "कोई भी",
+      "ratingWonderful": "बेहतरीन 9+",
+      "ratingVeryGood": "बहुत अच्छा 8+",
+      "ratingGood": "अच्छा 7+",
+      "starRating": "स्टार रेटिंग",
+      "stars": "{count} स्टार",
+      "propertyType": "प्रॉपर्टी प्रकार",
+      "typeAll": "सभी",
+      "typeHotelsResorts": "होटल और रिज़ॉर्ट",
+      "typeHomesApartments": "घर और अपार्टमेंट",
+      "propertyAmenities": "प्रॉपर्टी सुविधाएँ",
+      "roomAmenities": "रूम सुविधाएँ",
+      "roomViews": "रूम व्यू",
+      "propertyBrand": "प्रॉपर्टी ब्रांड",
+      "paymentType": "भुगतान प्रकार",
+      "cancellationOptions": "रद्दीकरण विकल्प",
+      "travelerExperience": "यात्री अनुभव",
+      "mealPlans": "मील प्लान",
+      "numberOfBedrooms": "बेडरूम की संख्या",
+      "moreOptions": "और विकल्प",
+      "onlyAvailable": "केवल उपलब्ध प्रॉपर्टीज़ दिखाएँ",
+      "beachAccess": "बीच एक्सेस",
+      "memberDeals": "मेंबर डील्स और छूट",
+      "noneAvailable": "कोई उपलब्ध नहीं",
+      "seeLess": "कम देखें",
+      "seeMore": "और देखें ({count})",
+      "showProperties": "{count, plural, one {# प्रॉपर्टी} other {# प्रॉपर्टीज़}} दिखाएँ",
+      "labels": {
+        "1": "1 बेडरूम",
+        "2": "2+ बेडरूम",
+        "wifi": "मुफ़्त WiFi",
+        "ac": "एयर कंडीशनिंग",
+        "pool": "पूल",
+        "parking": "पार्किंग",
+        "gym": "जिम",
+        "spa": "स्पा",
+        "bar": "बार",
+        "breakfast": "नाश्ता",
+        "pet_friendly": "पालतू-अनुकूल",
+        "pay_later": "अभी आरक्षित करें, बाद में भुगतान करें",
+        "fully_refundable": "पूरी तरह वापसी योग्य",
+        "business": "बिज़नेस-अनुकूल",
+        "family": "परिवार-अनुकूल",
+        "budget": "बजट",
+        "adults_only": "केवल वयस्क",
+        "studio": "स्टूडियो"
+      }
+    },
+    "booking": {
+      "completeBooking": "अपनी बुकिंग पूरी करें",
+      "whoCheckingIn": "कौन चेक इन कर रहा है?",
+      "firstName": "पहला नाम",
+      "lastName": "अंतिम नाम",
+      "emailAddress": "ईमेल पता",
+      "countryRegion": "देश / क्षेत्र",
+      "phoneNumber": "फ़ोन नंबर",
+      "paymentDetails": "भुगतान विवरण",
+      "secureTransaction": "सुरक्षित लेन-देन। आपकी निजी जानकारी सुरक्षित है।",
+      "simulatedNoCharge": "सिम्युलेटेड — कोई वास्तविक शुल्क नहीं",
+      "nameOnCard": "कार्ड पर नाम",
+      "cardNumber": "कार्ड नंबर",
+      "expiration": "समाप्ति",
+      "expiryPlaceholder": "MM/YY",
+      "securityCode": "सुरक्षा कोड",
+      "billingAddress": "बिलिंग पता",
+      "address": "पता",
+      "city": "शहर",
+      "stateProvince": "राज्य / प्रांत",
+      "zipPostal": "ZIP / पिन कोड",
+      "protectYourStay": "अपने ठहराव को सुरक्षित करें",
+      "travuProtect": "Travu Protect",
+      "travuProtectDesc": "इस ठहराव के लिए रद्दीकरण सुरक्षा, यात्रा बाधित होने का कवर और 24/7 आपातकालीन सहायता।",
+      "noProtection": "कोई सुरक्षा नहीं — मैं समझता हूँ कि रद्दीकरण शुल्क के लिए मैं ज़िम्मेदार हो सकता हूँ।",
+      "cancellationPolicy": "रद्दीकरण नीति",
+      "cancellationRefundable": "चेक-इन से 48 घंटे पहले रद्द करने पर पूरी तरह वापसी योग्य। उसके बाद, पहली रात गैर-वापसी योग्य है।",
+      "cancellationNonRefundable": "यह दर गैर-वापसी योग्य है। बदलाव या रद्दीकरण रिफंड के योग्य नहीं हैं।",
+      "specialInstructions": "विशेष चेक-इन निर्देश",
+      "specialInstructionsPlaceholder": "होस्ट के लिए कोई अनुरोध (वैकल्पिक)",
+      "termsNotice": "अभी बुक करें चुनकर, मैं Travu की सेवा शर्तों और गोपनीयता विवरण से सहमत हूँ, और पुष्टि करता हूँ कि यह प्रदर्शन के लिए एक सिम्युलेटेड बुकिंग है।",
+      "processing": "प्रोसेस हो रहा है…",
+      "bookNow": "अभी बुक करें",
+      "encryptionNotice": "हमारा सुरक्षित एन्क्रिप्शन हर चरण पर आपके निजी विवरण की रक्षा करता है।",
+      "steps": {
+        "reviewing": "आपकी बुकिंग की समीक्षा हो रही है",
+        "verifying": "अतिथि विवरण सत्यापित हो रहे हैं",
+        "confirming": "प्रॉपर्टी के साथ पुष्टि हो रही है",
+        "confirmed": "बुकिंग की पुष्टि हुई"
+      },
+      "errors": {
+        "invalidCard": "एक मान्य कार्ड नंबर दर्ज करें।",
+        "bookingFailed": "बुकिंग पूरी नहीं हो सकी। कृपया फिर से प्रयास करें।"
+      }
+    },
+    "summary": {
+      "checkIn": "चेक-इन",
+      "checkOut": "चेक-आउट",
+      "room": "रूम",
+      "rooms": "रूम",
+      "nightsRooms": "{nights, plural, one {# रात} other {# रातें}} × {rooms, plural, one {# रूम} other {# रूम}}",
+      "taxes": "कर",
+      "serviceFee": "सेवा शुल्क",
+      "total": "कुल",
+      "payToday": "आज भुगतान करें"
+    },
+    "voucher": {
+      "bookingConfirmed": "बुकिंग की पुष्टि हुई",
+      "print": "प्रिंट करें",
+      "downloadPdf": "PDF डाउनलोड करें",
+      "confirmationVoucher": "ठहराव पुष्टि वाउचर",
+      "confirmationNo": "पुष्टि संख्या",
+      "refundable": "वापसी योग्य",
+      "afterTime": "{time} के बाद",
+      "beforeTime": "{time} से पहले",
+      "stay": "ठहराव",
+      "nightsRoomsValue": "{nights, plural, one {# रात} other {# रातें}} · {rooms, plural, one {# रूम} other {# रूम}}",
+      "guestsCount": "{count, plural, one {# अतिथि} other {# अतिथि}}",
+      "leadGuest": "मुख्य अतिथि",
+      "guest": "अतिथि",
+      "totalPaid": "कुल भुगतान",
+      "presentAtCheckIn": "चेक-इन पर यह वाउचर प्रस्तुत करें",
+      "viewAllTrips": "मेरी सभी यात्राएँ देखें"
+    },
+    "waiting": {
+      "completingBooking": "आपकी बुकिंग पूरी हो रही है",
+      "pleaseWait": "कृपया प्रतीक्षा करें जब तक हम प्रॉपर्टी के साथ आपके आरक्षण की पुष्टि करते हैं। इसमें कुछ क्षण लग सकते हैं।",
+      "securingRoom": "आपका रूम सुरक्षित किया जा रहा है…"
+    }
+  },
+  "cars": {
+    "landing": {
+      "rentInCity": "{city} में कार किराये पर लें",
+      "topDealsInCity": "{city} में टॉप डील्स"
+    },
+    "results": {
+      "noneFound": "कोई कार नहीं मिली — अलग तारीख़ें या पास का स्थान आज़माएँ।",
+      "noneMatchFilters": "आपके फ़िल्टर से कोई कार मेल नहीं खाती। कुछ हटाकर देखें।",
+      "yourLocation": "आपका स्थान",
+      "carsIn": "{location} में कारें",
+      "count": "{count, plural, one {# कार} other {# कारें}}",
+      "topResults": "(टॉप परिणाम)",
+      "filters": "फ़िल्टर",
+      "sort": "क्रमबद्ध करें",
+      "memberBanner": "मेंबर हर रेंटल पर OneTokenCash वापस पाते हैं — मेंबर कीमतें अनलॉक करने के लिए साइन इन करें।"
+    },
+    "sort": {
+      "recommended": "सुझाए गए",
+      "priceLowToHigh": "कीमत (कम से अधिक)",
+      "ratingHighToLow": "रेटिंग (अधिक से कम)"
+    },
+    "card": {
+      "percentOff": "{pct}% की छूट",
+      "deal": "डील",
+      "previousPhoto": "पिछली फ़ोटो",
+      "nextPhoto": "अगली फ़ोटो",
+      "automatic": "ऑटोमैटिक",
+      "manual": "मैनुअल",
+      "auto": "ऑटो",
+      "seats": "{count} सीटें",
+      "bags": "{count} बैग",
+      "doors": "{count} दरवाज़े",
+      "aircon": "A/C",
+      "mileageLabel": "{mileage} माइलेज",
+      "freeCancellation": "मुफ़्त रद्दीकरण",
+      "nonRefundable": "गैर-वापसी योग्य",
+      "unlimitedMileage": "असीमित माइलेज",
+      "perDay": "/ दिन",
+      "perDayVendor": "/ दिन · {vendor}",
+      "totalForDays": "कुल · {days, plural, one {# दिन} other {# दिन}}",
+      "reserve": "आरक्षित करें →"
+    },
+    "filters": {
+      "close": "फ़िल्टर बंद करें",
+      "showCount": "{count, plural, one {# कार} other {# कारें}} दिखाएँ",
+      "noneAvailable": "कोई उपलब्ध नहीं",
+      "seeLess": "कम देखें",
+      "seeMore": "और देखें ({count})",
+      "searchByCarOrCompany": "कार या कंपनी से खोजें",
+      "searchPlaceholder": "जैसे Sixt या RAV4",
+      "totalPrice": "कुल कीमत",
+      "popularFilters": "लोकप्रिय फ़िल्टर",
+      "rating": "रेटिंग",
+      "ratingAny": "कोई भी",
+      "ratingExceptional": "असाधारण 9+",
+      "ratingVeryGood": "बहुत अच्छा 8+",
+      "ratingGood": "अच्छा 7+",
+      "carType": "कार प्रकार",
+      "capacity": "क्षमता",
+      "rentalCompany": "रेंटल कंपनी",
+      "transmission": "ट्रांसमिशन",
+      "mileage": "माइलेज",
+      "moreOptions": "और विकल्प",
+      "freeCancellationOnly": "केवल मुफ़्त रद्दीकरण",
+      "memberDeals": "मेंबर डील्स और छूट",
+      "option": {
+        "automatic": "ऑटोमैटिक",
+        "manual": "मैनुअल",
+        "unlimitedMileage": "असीमित माइलेज",
+        "limitedMileage": "सीमित माइलेज",
+        "airConditioning": "एयर कंडीशनिंग",
+        "freeCancellation": "मुफ़्त रद्दीकरण",
+        "seats4": "4 सीटें",
+        "seats5": "5 सीटें",
+        "seats7plus": "7+ सीटें"
+      }
+    },
+    "steps": {
+      "review": "समीक्षा",
+      "driver": "ड्राइवर",
+      "payment": "भुगतान"
+    },
+    "progress": {
+      "reviewing": "आपके आरक्षण की समीक्षा हो रही है",
+      "verifyingDriver": "ड्राइवर विवरण सत्यापित हो रहे हैं",
+      "confirmingCompany": "रेंटल कंपनी के साथ पुष्टि हो रही है",
+      "confirmed": "आरक्षण की पुष्टि हुई"
+    },
+    "booking": {
+      "back": "वापस",
+      "reservationError": "आरक्षण पूरा नहीं हो सका। कृपया फिर से प्रयास करें।",
+      "reviewYourCar": "अपनी कार की समीक्षा करें",
+      "protectYourRental": "अपने रेंटल को सुरक्षित करें",
+      "fullProtection": "पूर्ण सुरक्षा",
+      "fullProtectionDesc": "आपके पूरे रेंटल के लिए ज़ीरो-एक्सेस क्षति और चोरी कवर के साथ 24/7 रोडसाइड सहायता।",
+      "noProtection": "कोई अतिरिक्त सुरक्षा नहीं — मैं रेंटल कंपनी के बुनियादी कवर पर निर्भर रहूँगा।",
+      "continueToDriver": "ड्राइवर विवरण पर जारी रखें",
+      "driverDetails": "ड्राइवर विवरण",
+      "continueToPayment": "भुगतान पर जारी रखें",
+      "processing": "प्रोसेस हो रहा है…",
+      "reserveNow": "अभी आरक्षित करें",
+      "secureNote": "आपके विवरण सुरक्षित एन्क्रिप्शन से सुरक्षित हैं।"
+    },
+    "driver": {
+      "firstName": "पहला नाम",
+      "lastName": "अंतिम नाम",
+      "age": "ड्राइवर की उम्र",
+      "licenseNo": "ड्राइविंग लाइसेंस नंबर",
+      "email": "ईमेल",
+      "countryCode": "देश कोड",
+      "phone": "फ़ोन नंबर",
+      "flightNo": "उड़ान नंबर (वैकल्पिक)",
+      "flightNoPlaceholder": "जैसे BA245 — यदि आपकी उड़ान में देरी हो तो मददगार",
+      "youngDriverNote": "25 से कम उम्र के ड्राइवरों के लिए यंग-ड्राइवर शुल्क लागू होता है — यह आपके कुल में शामिल है।"
+    },
+    "summary": {
+      "pickUp": "पिक-अप",
+      "dropOff": "ड्रॉप-ऑफ़",
+      "transmission": "ट्रांसमिशन",
+      "mileage": "माइलेज",
+      "timesDays": "× {days, plural, one {# दिन} other {# दिन}}",
+      "taxes": "कर",
+      "bookingFee": "बुकिंग शुल्क",
+      "youngDriverFee": "यंग ड्राइवर शुल्क",
+      "total": "कुल",
+      "payToday": "आज भुगतान करें"
+    },
+    "confirmation": {
+      "title": "आरक्षण की पुष्टि हुई",
+      "print": "प्रिंट करें",
+      "voucherSubtitle": "कार रेंटल पुष्टि वाउचर",
+      "confirmationNo": "पुष्टि संख्या",
+      "rental": "रेंटल",
+      "driver": "ड्राइवर",
+      "days": "{days, plural, one {# दिन} other {# दिन}}",
+      "daysRental": "{days, plural, one {# दिन रेंटल} other {# दिन रेंटल}}",
+      "totalPaid": "कुल भुगतान",
+      "barcodeAlt": "बुकिंग {ref} बारकोड",
+      "presentVoucher": "रेंटल डेस्क पर यह वाउचर प्रस्तुत करें",
+      "viewAllTrips": "मेरी सभी यात्राएँ देखें"
+    }
+  },
+  "flights": {
+    "perTraveller": "प्रति यात्री",
+    "stops": {
+      "nonstop": "नॉनस्टॉप",
+      "direct": "सीधी",
+      "directLower": "सीधी",
+      "count": "{count, plural, one {# स्टॉप} other {# स्टॉप}}"
+    },
+    "results": {
+      "title": "खोज परिणाम",
+      "flightsFound": "{count} उड़ानें मिलीं",
+      "departingFlights": "प्रस्थान उड़ानें",
+      "returningFlights": "वापसी उड़ानें",
+      "legLabel": "चरण {index}: {origin} → {dest}",
+      "emptyState": "अभी कोई उड़ान नहीं — खोजने के लिए ऊपर एक रूट और तारीख़ चुनें।",
+      "noMatchLeg": "इस चरण के लिए आपके फ़िल्टर से कोई उड़ान मेल नहीं खाती।",
+      "noMatchFilters": "आपके फ़िल्टर से कोई उड़ान मेल नहीं खाती — कुछ हटाकर देखें।",
+      "searching": "एयरलाइनों में लाइव किराये खोजे जा रहे हैं…",
+      "showMore": "और परिणाम दिखाएँ",
+      "moreCount": "({count} और)"
+    },
+    "filters": {
+      "filterBy": "इसके अनुसार फ़िल्टर करें",
+      "stops": "स्टॉप",
+      "any": "कोई भी",
+      "upToOneStop": "1 स्टॉप तक",
+      "airlines": "एयरलाइनें",
+      "from": "से"
+    },
+    "sort": {
+      "sortBy": "इसके अनुसार क्रमबद्ध करें",
+      "recommended": "सुझाए गए",
+      "cheapest": "सबसे सस्ता",
+      "fastest": "सबसे तेज़"
+    },
+    "card": {
+      "seatsLeft": "इस कीमत पर केवल {count} बचे हैं",
+      "select": "चुनें",
+      "flightDetails": "उड़ान विवरण"
+    },
+    "detail": {
+      "backToResults": "← परिणामों पर वापस",
+      "continueToBook": "बुक करने के लिए जारी रखें"
+    },
+    "fare": {
+      "selectFareTo": "{dest} के लिए किराया चुनें",
+      "close": "बंद करें",
+      "operatedBy": "यह उड़ान {carrier} द्वारा संचालित है।",
+      "cabin": "केबिन: {cabin}",
+      "select": "चुनें"
+    },
+    "perks": {
+      "seatChoiceIncluded": "सीट चयन शामिल",
+      "seatChoiceFee": "सीट चयन शुल्क पर",
+      "handBaggage": "हैंड बैगेज शामिल ({kg} किग्रा)",
+      "checkedBag": "{count} × चेक्ड बैग (प्रत्येक {kg} किग्रा)",
+      "checkedBags": "{count, plural, one {# चेक्ड बैग} other {# चेक्ड बैग}} (प्रत्येक {kg} किग्रा)",
+      "checkedBagFee": "चेक्ड बैग शुल्क पर",
+      "refundable": "वापसी योग्य",
+      "nonRefundable": "गैर-वापसी योग्य",
+      "freeChanges": "मुफ़्त बदलाव",
+      "changeFee": "बदलाव शुल्क लागू",
+      "noChanges": "बदलाव की अनुमति नहीं"
+    },
+    "prediction": {
+      "title": "AI कीमत भविष्यवाणी",
+      "confidence": "{confidence}% भरोसा"
+    },
+    "priceTracking": {
+      "title": "प्राइस ट्रैकिंग",
+      "currentLowest": "मौजूदा सबसे कम कीमत:"
+    },
+    "fareBreakdown": {
+      "title": "किराया विवरण",
+      "baseFare": "आधार किराया",
+      "baseFareMultiple": "आधार किराया × {count}",
+      "taxes": "कर",
+      "fees": "शुल्क",
+      "total": "कुल"
+    },
+    "segments": {
+      "layoverIn": "{iata} में लेओवर"
+    },
+    "steps": {
+      "reviewTrip": "यात्रा की समीक्षा",
+      "travellers": "यात्री",
+      "payment": "भुगतान",
+      "reviewAndBook": "समीक्षा और बुक करें"
+    },
+    "sidebar": {
+      "businessFlight": "बिज़नेस उड़ान",
+      "oneWayFlight": "एकतरफ़ा उड़ान",
+      "priceSummary": "आपका कीमत सारांश",
+      "travellerAdult": "यात्री {index} · वयस्क",
+      "taxesFees": "कर और शुल्क",
+      "nextCheckout": "अगला: चेकआउट",
+      "nextPayment": "अगला: भुगतान",
+      "nextReview": "अगला: समीक्षा",
+      "buyNow": "अभी ख़रीदें",
+      "next": "अगला"
+    },
+    "progress": {
+      "reviewing": "बुकिंग आवेदन की समीक्षा हो रही है",
+      "verifying": "आवेदन डेटा सत्यापित हो रहा है",
+      "bookingTicket": "एयरलाइन API पर टिकट बुक हो रहा है",
+      "approved": "बुकिंग स्वीकृत",
+      "secureBooking": "{brand} सुरक्षित बुकिंग",
+      "keepWindowOpen": "कृपया यह विंडो खुली रखें…"
+    },
+    "bookingForm": {
+      "travellerDetails": "यात्री विवरण",
+      "firstName": "पहला नाम",
+      "lastName": "अंतिम नाम",
+      "dateOfBirth": "जन्म तिथि",
+      "payment": "भुगतान",
+      "simulatedCharge": "सिम्युलेटेड — कोई वास्तविक शुल्क नहीं",
+      "cardNumber": "कार्ड नंबर",
+      "expiry": "समाप्ति",
+      "cvc": "CVC",
+      "invalidCard": "एक मान्य कार्ड नंबर दर्ज करें।",
+      "bookingFailed": "बुकिंग पूरी नहीं हो सकी। कृपया फिर से प्रयास करें।",
+      "networkError": "नेटवर्क त्रुटि — कृपया फिर से प्रयास करें।",
+      "processing": "प्रोसेस हो रहा है…",
+      "pay": "भुगतान करें",
+      "andConfirm": "और पुष्टि करें"
+    },
+    "reviewTrip": {
+      "title": "अपनी यात्रा की समीक्षा करें",
+      "route": "{origin} से {dest}",
+      "changeFlight": "उड़ान बदलें",
+      "yourFare": "आपका किराया: {fare}",
+      "seatsAndBags": "सीटें और बैग",
+      "seatsAndBagsNote": "बुकिंग के बाद आप अपने डैशबोर्ड से इस यात्रा के लिए सीटें चुन सकते हैं और बैग जोड़ सकते हैं।"
+    },
+    "travellers": {
+      "title": "सुरक्षित बुकिंग — केवल कुछ मिनट लगते हैं",
+      "nameMatchNote": "यात्री के नाम सरकारी फ़ोटो ID से बिल्कुल मेल खाने चाहिए।",
+      "required": "आवश्यक",
+      "travellerOf": "यात्री {index} / {total}",
+      "firstName": "पहला नाम",
+      "middleName": "मध्य नाम",
+      "surname": "उपनाम",
+      "passportCountry": "पासपोर्ट देश",
+      "passportNumber": "पासपोर्ट नंबर",
+      "passportFormatError": "इस देश के लिए {example} जैसा प्रारूप अपेक्षित है।",
+      "dateOfBirth": "जन्म तिथि",
+      "dobDay": "जन्म तिथि का दिन",
+      "dobMonth": "जन्म तिथि का माह",
+      "dobYear": "जन्म तिथि का वर्ष",
+      "day": "दिन",
+      "month": "माह",
+      "year": "वर्ष",
+      "contactDetails": "संपर्क विवरण",
+      "contactNote": "हम आपका ई-टिकट और कोई भी अपडेट इस ईमेल पर भेजेंगे।",
+      "emailAddress": "ईमेल पता",
+      "marketingOptIn": "मुझे यात्रा अपडेट और ट्रैवल डील्स भेजें।",
+      "countryCode": "देश कोड",
+      "phoneNumber": "फ़ोन नंबर",
+      "phoneDigitsExact": "इस देश के नंबर {count} अंकों के होते हैं।",
+      "phoneDigitsRange": "इस देश के नंबर {min}–{max} अंकों के होते हैं।"
+    },
+    "payment": {
+      "title": "आप कैसे भुगतान करना चाहेंगे?",
+      "simulatedNote": "भुगतान सिम्युलेटेड है — कोई वास्तविक शुल्क नहीं लिया जाता।",
+      "nameOnCard": "कार्ड पर नाम",
+      "cardNumber": "डेबिट/क्रेडिट कार्ड नंबर",
+      "cardNotAccepted": "यह कार्ड Travu पर स्वीकार नहीं है। कृपया कोई अन्य कार्ड आज़माएँ।",
+      "expiryDate": "समाप्ति तिथि",
+      "securityCode": "सुरक्षा कोड",
+      "billingAddress": "बिलिंग पता",
+      "countryTerritory": "देश / क्षेत्र",
+      "billingAddress1": "बिलिंग पता 1",
+      "billingAddress2": "बिलिंग पता 2",
+      "postalCode": "पिन कोड",
+      "city": "शहर",
+      "cardNotAcceptedTitle": "कार्ड स्वीकार नहीं",
+      "cardNotAcceptedMessage": "यह कार्ड Travu पर स्वीकार नहीं है, कृपया कोई अन्य कार्ड आज़माएँ",
+      "tryAnotherCard": "कोई अन्य कार्ड आज़माएँ"
+    },
+    "reviewBook": {
+      "title": "अपनी यात्रा की समीक्षा करें और बुक करें",
+      "numbered1": "यह सुनिश्चित करने के लिए कि तारीख़ें और समय सही हैं, अपनी यात्रा का विवरण जाँचें।",
+      "numbered2": "अपनी वर्तनी जाँचें। यात्री के नाम सरकारी फ़ोटो ID से बिल्कुल मेल खाने चाहिए।",
+      "numbered3": "अपनी बुकिंग की शर्तों की समीक्षा करें।",
+      "fareRule1": "एक हैंड बैगेज लाएँ",
+      "fareRule2": "चेक्ड बैग लाने के लिए भुगतान करें",
+      "fareRule3": "रद्दीकरण की अनुमति नहीं",
+      "fareRule4": "बदलाव की अनुमति नहीं",
+      "fareRulesFor": "{origin} से {dest} के लिए किराया नियम",
+      "acknowledgement": "नीचे दिए बटन पर क्लिक करके, मैं स्वीकार करता हूँ कि मैंने गोपनीयता विवरण और सरकारी यात्रा सलाह की समीक्षा की है, और नियम व प्रतिबंध तथा उपयोग की शर्तों की समीक्षा करके उन्हें स्वीकार करता हूँ।",
+      "yourTrip": "आपकी यात्रा",
+      "route": "रूट",
+      "date": "तारीख़",
+      "times": "समय",
+      "carrier": "कैरियर",
+      "fare": "किराया",
+      "travellers": "यात्री",
+      "contact": "संपर्क",
+      "payment": "भुगतान",
+      "cardEndingIn": "{last4} पर समाप्त होने वाला कार्ड",
+      "applyOneToken": "मेरा OneTokenCash लागू करें",
+      "oneTokenBalance": "आपके पास है",
+      "inOneToken": "OneTokenCash में।",
+      "applying": "लागू कर रहे हैं",
+      "toThisBooking": "इस बुकिंग पर।",
+      "useToSave": "इसका इस्तेमाल करके बचाएँ तक",
+      "buyNow": "अभी ख़रीदें",
+      "secureNote": "सुरक्षित एन्क्रिप्टेड ट्रांसमिशन और भंडारण।",
+      "buyMoreSaveTitle": "कभी भी अधिक ख़रीदें और बचाएँ!",
+      "buyMoreSaveBody": "अभी उड़ान बुक करके और बाद में ठहराव जोड़कर आप अपनी यात्रा पर बचा सकते हैं।"
+    },
+    "confirmation": {
+      "guest": "अतिथि",
+      "viewAllTrips": "मेरी सभी यात्राएँ देखें",
+      "bookingConfirmed": "बुकिंग की पुष्टि हुई",
+      "slipIssued": "संदर्भ के लिए एक पुष्टि स्लिप जारी की गई है",
+      "bookingConfirmationHeader": "बुकिंग पुष्टि",
+      "itineraryNo": "यात्रा कार्यक्रम संख्या",
+      "issued": "जारी {date}",
+      "travellers": "यात्री",
+      "departure": "प्रस्थान",
+      "bookingReference": "बुकिंग संदर्भ",
+      "flightDetails": "उड़ान विवरण",
+      "departArrive": "प्रस्थान {departTime} · {departDate} — आगमन {arriveTime} · {arriveDate}",
+      "cabinClass": "{cabin} श्रेणी",
+      "paymentSummary": "भुगतान सारांश",
+      "airFare": "हवाई किराया",
+      "bookingFee": "Travu बुकिंग शुल्क",
+      "taxesFees": "कर और शुल्क",
+      "totalPaid": "कुल भुगतान",
+      "paidVia": "{label} के माध्यम से भुगतान",
+      "qrAlt": "{ref} के लिए QR",
+      "presentSlip": "चेक-इन पर यह स्लिप और एक मान्य पासपोर्ट प्रस्तुत करें",
+      "finePrint": "यह पुष्टि स्लिप Travu द्वारा केवल प्रदर्शन उद्देश्यों के लिए तैयार की गई एक सिम्युलेटेड रसीद है और यात्रा के लिए मान्य नहीं है। परिवहन संचालक कैरियर की अनुबंध शर्तों और टैरिफ के अधीन है। कृपया अंतरराष्ट्रीय प्रस्थान से कम से कम 3 घंटे पहले पहुँचें। कार्ड विवरण केवल मास्क्ड सारांश के रूप में संग्रहीत होते हैं; पूरा कार्ड नंबर, समाप्ति और सुरक्षा कोड कभी नहीं रखे जाते। Travu बुकिंग संदर्भ {ref}।",
+      "downloadPdf": "PDF डाउनलोड करें",
+      "print": "प्रिंट करें",
+      "trackThisTrip": "इस यात्रा को ट्रैक करें"
+    }
   }
 }

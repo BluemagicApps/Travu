@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { Star } from "lucide-react";
 import type { ReviewBreakdown, StayReview } from "@/lib/stays/types";
 import { ratingWordFor } from "@/lib/stays/rating";
@@ -14,7 +15,7 @@ function Bar({ label, score }: { label: string; score: number }) {
   );
 }
 
-export function ReviewsSection({
+export async function ReviewsSection({
   rating,
   reviewCount,
   breakdown,
@@ -25,13 +26,14 @@ export function ReviewsSection({
   breakdown?: ReviewBreakdown;
   reviews?: StayReview[];
 }) {
+  const t = await getTranslations("stays");
   const empty = reviews.length === 0;
   return (
     <section id="reviews" className="scroll-mt-28 border-t border-border py-6">
-      <h2 className="text-lg font-bold">Guest reviews</h2>
+      <h2 className="text-lg font-bold">{t("reviews.guestReviews")}</h2>
       {empty ? (
         <div className="mt-3 rounded-2xl border border-border bg-surface-2 p-6 text-center text-sm text-muted">
-          No reviews yet — be the first to review this property after your stay.
+          {t("reviews.noReviews")}
         </div>
       ) : (
         <>
@@ -39,16 +41,16 @@ export function ReviewsSection({
             <span className="rounded-xl bg-price px-3 py-2 text-xl font-extrabold text-white">{rating.toFixed(1)}</span>
             <div>
               <div className="font-semibold text-price">{ratingWordFor(rating)}</div>
-              <div className="text-xs text-muted">{reviewCount} reviews</div>
+              <div className="text-xs text-muted">{t("card.reviews", { count: reviewCount })}</div>
             </div>
           </div>
 
           {breakdown && (
             <div className="mt-4 grid gap-2 sm:grid-cols-2">
-              <Bar label="Cleanliness" score={breakdown.cleanliness} />
-              <Bar label="Staff" score={breakdown.staff} />
-              <Bar label="Amenities" score={breakdown.amenities} />
-              <Bar label="Condition" score={breakdown.condition} />
+              <Bar label={t("reviews.cleanliness")} score={breakdown.cleanliness} />
+              <Bar label={t("reviews.staff")} score={breakdown.staff} />
+              <Bar label={t("reviews.amenities")} score={breakdown.amenities} />
+              <Bar label={t("reviews.condition")} score={breakdown.condition} />
             </div>
           )}
 

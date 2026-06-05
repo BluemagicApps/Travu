@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { getTranslations } from "next-intl/server";
 import { PlaneTakeoff } from "lucide-react";
 import { FlightFilter, type Leg, legsFromFilter } from "@/lib/ai/schema";
 import { getAirportOptions, type AirportOption } from "@/lib/flights/dataset";
@@ -41,32 +42,43 @@ interface LegSection {
   result: SearchResult;
 }
 
-async function buildLegSections(filter: ParsedFilter, legs: Leg[]): Promise<LegSection[]> {
+async function buildLegSections(
+  filter: ParsedFilter,
+  legs: Leg[],
+  t: Awaited<ReturnType<typeof getTranslations<"flights">>>,
+): Promise<LegSection[]> {
   if (filter.tripType === "return" && legs.length >= 2) {
     return [
-      { title: "Departing flights", leg: legs[0], result: await searchLeg(filter, legs[0]) },
-      { title: "Returning flights", leg: legs[1], result: await searchLeg(filter, legs[1]) },
+      { title: t("results.departingFlights"), leg: legs[0], result: await searchLeg(filter, legs[0]) },
+      { title: t("results.returningFlights"), leg: legs[1], result: await searchLeg(filter, legs[1]) },
     ];
   }
   if (filter.tripType === "multi-city") {
     const out: LegSection[] = [];
     for (let idx = 0; idx < legs.length; idx++) {
       out.push({
-        title: `Leg ${idx + 1}: ${legs[idx].origin} → ${legs[idx].dest}`,
+        title: t("results.legLabel", {
+          index: idx + 1,
+          origin: legs[idx].origin,
+          dest: legs[idx].dest,
+        }),
         leg: legs[idx],
         result: await searchLeg(filter, legs[idx]),
       });
     }
     return out;
   }
-  return [{ title: "Departing flights", leg: legs[0], result: await searchLeg(filter, legs[0]) }];
+  return [
+    { title: t("results.departingFlights"), leg: legs[0], result: await searchLeg(filter, legs[0]) },
+  ];
 }
 
-function EmptyState() {
+async function EmptyState() {
+  const t = await getTranslations("flights");
   return (
     <div className="glass rounded-2xl p-10 text-center text-muted">
       <PlaneTakeoff className="mx-auto h-8 w-8 text-price" />
-      <p className="mt-3">No flights yet — pick a route and date above to search.</p>
+      <p className="mt-3">{t("results.emptyState")}</p>
     </div>
   );
 }
@@ -78,8 +90,9 @@ function EmptyState() {
  * happens client-side in <ResultsView> so toggling a box filters instantly.
  */
 async function SearchResults({ filter, airports }: { filter: ParsedFilter; airports: AirportOption[] }) {
+  const t = await getTranslations("flights");
   const legs = legsFromFilter(filter);
-  const sections = legs.length > 0 ? await buildLegSections(filter, legs) : [];
+  const sections = legs.length > 0 ? await buildLegSections(filter, legs, t) : [];
   const mainSection = sections[0];
   const strip =
     filter.tripType === "one-way" && mainSection ? await computePriceStrip(filter, mainSection.leg) : null;

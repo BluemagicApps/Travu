@@ -1,26 +1,31 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Search } from "lucide-react";
 import type { FacetOption, CarFacets, CarFilterState } from "@/lib/cars/facets";
 import { PriceHistogramSlider } from "@/components/stays/results/PriceHistogramSlider";
 
-const LABELS: Record<string, string> = {
-  automatic: "Automatic",
-  manual: "Manual",
-  Unlimited: "Unlimited mileage",
-  Limited: "Limited mileage",
-  "Automatic transmission": "Automatic",
-  "Air conditioning": "Air conditioning",
-  "Free cancellation": "Free cancellation",
-  "Unlimited mileage": "Unlimited mileage",
-  SUV: "SUV",
-  "4": "4 seats",
-  "5": "5 seats",
-  "7+": "7+ seats",
+type Translate = ReturnType<typeof useTranslations>;
+
+// Maps facet keys to translation keys under cars.filters.option.*. Keys not
+// listed (e.g. provider car classes like "SUV") fall back to the raw key.
+const LABEL_KEYS: Record<string, string> = {
+  automatic: "automatic",
+  manual: "manual",
+  Unlimited: "unlimitedMileage",
+  Limited: "limitedMileage",
+  "Automatic transmission": "automatic",
+  "Air conditioning": "airConditioning",
+  "Free cancellation": "freeCancellation",
+  "Unlimited mileage": "unlimitedMileage",
+  "4": "seats4",
+  "5": "seats5",
+  "7+": "seats7plus",
 };
-function label(key: string): string {
-  return LABELS[key] ?? key;
+function label(t: Translate, key: string): string {
+  const k = LABEL_KEYS[key];
+  return k ? t(`filters.option.${k}`) : key;
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -33,25 +38,27 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 }
 
 function CheckboxList({
+  t,
   options,
   selected,
   onToggle,
   initial = 5,
 }: {
+  t: Translate;
   options: FacetOption[];
   selected: Set<string>;
   onToggle: (key: string) => void;
   initial?: number;
 }) {
   const [expanded, setExpanded] = useState(false);
-  if (options.length === 0) return <p className="text-xs text-muted">None available</p>;
+  if (options.length === 0) return <p className="text-xs text-muted">{t("filters.noneAvailable")}</p>;
   const shown = expanded ? options : options.slice(0, initial);
   return (
     <div className="space-y-1.5">
       {shown.map((o) => (
         <label key={o.key} className="flex items-center gap-2 text-sm">
           <input type="checkbox" checked={selected.has(o.key)} onChange={() => onToggle(o.key)} />
-          <span className="flex-1">{label(o.key)}</span>
+          <span className="flex-1">{label(t, o.key)}</span>
           <span className="text-xs text-muted">{o.count}</span>
         </label>
       ))}
@@ -61,7 +68,7 @@ function CheckboxList({
           onClick={() => setExpanded((e) => !e)}
           className="text-xs font-semibold text-price hover:underline"
         >
-          {expanded ? "See less" : `See more (${options.length - initial})`}
+          {expanded ? t("filters.seeLess") : t("filters.seeMore", { count: options.length - initial })}
         </button>
       )}
     </div>
@@ -84,23 +91,24 @@ export function CarFilterRail({
   state: CarFilterState;
   onChange: (next: CarFilterState) => void;
 }) {
+  const t = useTranslations("cars");
   const set = (patch: Partial<CarFilterState>) => onChange({ ...state, ...patch });
 
   return (
     <div className="text-sm">
-      <Section title="Search by car or company">
+      <Section title={t("filters.searchByCarOrCompany")}>
         <div className="flex items-center gap-2 rounded-lg border border-border bg-surface px-2 py-1.5">
           <Search className="h-4 w-4 text-muted" />
           <input
             value={state.name}
             onChange={(e) => set({ name: e.target.value })}
-            placeholder="e.g. Sixt or RAV4"
+            placeholder={t("filters.searchPlaceholder")}
             className="w-full bg-transparent text-sm outline-none"
           />
         </div>
       </Section>
 
-      <Section title="Total price">
+      <Section title={t("filters.totalPrice")}>
         <PriceHistogramSlider
           min={facets.minPrice}
           max={facets.maxPrice}
@@ -112,18 +120,18 @@ export function CarFilterRail({
       </Section>
 
       {facets.popular.length > 0 && (
-        <Section title="Popular filters">
-          <CheckboxList options={facets.popular} selected={state.popular} onToggle={(k) => set({ popular: toggle(state.popular, k) })} />
+        <Section title={t("filters.popularFilters")}>
+          <CheckboxList t={t} options={facets.popular} selected={state.popular} onToggle={(k) => set({ popular: toggle(state.popular, k) })} />
         </Section>
       )}
 
-      <Section title="Rating">
+      <Section title={t("filters.rating")}>
         <div className="space-y-1.5">
           {[
-            { v: 0, label: "Any" },
-            { v: 9, label: "Exceptional 9+" },
-            { v: 8, label: "Very good 8+" },
-            { v: 7, label: "Good 7+" },
+            { v: 0, label: t("filters.ratingAny") },
+            { v: 9, label: t("filters.ratingExceptional") },
+            { v: 8, label: t("filters.ratingVeryGood") },
+            { v: 7, label: t("filters.ratingGood") },
           ].map((o) => (
             <label key={o.v} className="flex items-center gap-2">
               <input
@@ -139,44 +147,44 @@ export function CarFilterRail({
       </Section>
 
       {facets.carClasses.length > 0 && (
-        <Section title="Car type">
-          <CheckboxList options={facets.carClasses} selected={state.carClasses} onToggle={(k) => set({ carClasses: toggle(state.carClasses, k) })} initial={6} />
+        <Section title={t("filters.carType")}>
+          <CheckboxList t={t} options={facets.carClasses} selected={state.carClasses} onToggle={(k) => set({ carClasses: toggle(state.carClasses, k) })} initial={6} />
         </Section>
       )}
 
       {facets.seats.length > 0 && (
-        <Section title="Capacity">
-          <CheckboxList options={facets.seats} selected={state.seats} onToggle={(k) => set({ seats: toggle(state.seats, k) })} />
+        <Section title={t("filters.capacity")}>
+          <CheckboxList t={t} options={facets.seats} selected={state.seats} onToggle={(k) => set({ seats: toggle(state.seats, k) })} />
         </Section>
       )}
 
       {facets.vendors.length > 0 && (
-        <Section title="Rental company">
-          <CheckboxList options={facets.vendors} selected={state.vendors} onToggle={(k) => set({ vendors: toggle(state.vendors, k) })} />
+        <Section title={t("filters.rentalCompany")}>
+          <CheckboxList t={t} options={facets.vendors} selected={state.vendors} onToggle={(k) => set({ vendors: toggle(state.vendors, k) })} />
         </Section>
       )}
 
       {facets.transmissions.length > 0 && (
-        <Section title="Transmission">
-          <CheckboxList options={facets.transmissions} selected={state.transmissions} onToggle={(k) => set({ transmissions: toggle(state.transmissions, k) })} />
+        <Section title={t("filters.transmission")}>
+          <CheckboxList t={t} options={facets.transmissions} selected={state.transmissions} onToggle={(k) => set({ transmissions: toggle(state.transmissions, k) })} />
         </Section>
       )}
 
       {facets.mileage.length > 0 && (
-        <Section title="Mileage">
-          <CheckboxList options={facets.mileage} selected={state.mileage} onToggle={(k) => set({ mileage: toggle(state.mileage, k) })} />
+        <Section title={t("filters.mileage")}>
+          <CheckboxList t={t} options={facets.mileage} selected={state.mileage} onToggle={(k) => set({ mileage: toggle(state.mileage, k) })} />
         </Section>
       )}
 
-      <Section title="More options">
+      <Section title={t("filters.moreOptions")}>
         <div className="space-y-1.5">
           <label className="flex items-center gap-2">
             <input type="checkbox" checked={state.refundableOnly} onChange={(e) => set({ refundableOnly: e.target.checked })} />
-            Free cancellation only
+            {t("filters.freeCancellationOnly")}
           </label>
           <label className="flex items-center gap-2">
             <input type="checkbox" checked={state.memberDeals} onChange={(e) => set({ memberDeals: e.target.checked })} />
-            Member deals &amp; discounts
+            {t("filters.memberDeals")}
           </label>
         </div>
       </Section>

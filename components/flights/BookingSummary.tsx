@@ -1,8 +1,10 @@
+import { useTranslations } from "next-intl";
 import type { Flight } from "@/lib/flights/types";
 import { hhmm, formatDuration } from "@/lib/utils/dates";
 import { Money } from "@/components/Money";
 
 export function BookingSummary({ flight }: { flight: Flight }) {
+  const t = useTranslations("flights");
   const from = flight.segments[0];
   const to = flight.segments[flight.segments.length - 1];
 
@@ -21,7 +23,7 @@ export function BookingSummary({ flight }: { flight: Flight }) {
           </div>
           <div className="text-sm text-muted">
             {hhmm(flight.departIso)}–{hhmm(flight.arriveIso)} · {formatDuration(flight.durationMin)} ·{" "}
-            {flight.stops === 0 ? "nonstop" : `${flight.stops} stop`}
+            {flight.stops === 0 ? t("stops.nonstop") : t("stops.count", { count: flight.stops })}
           </div>
         </div>
         <div className="text-right">

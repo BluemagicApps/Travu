@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Lock } from "lucide-react";
 import type { Flight } from "@/lib/flights/types";
 import { Money } from "@/components/Money";
 import { rewardQuery } from "@/lib/onetoken/reward-params";
 
 export function BookingForm({ flight }: { flight: Flight }) {
+  const t = useTranslations("flights");
   const router = useRouter();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -23,7 +25,7 @@ export function BookingForm({ flight }: { flight: Flight }) {
     setError(null);
     const digits = card.replace(/\D/g, "");
     if (digits.length < 13) {
-      setError("Enter a valid card number.");
+      setError(t("bookingForm.invalidCard"));
       return;
     }
     setLoading(true);
@@ -41,7 +43,7 @@ export function BookingForm({ flight }: { flight: Flight }) {
       return;
     }
     if (!res.ok) {
-      setError("Could not complete the booking. Please try again.");
+      setError(t("bookingForm.bookingFailed"));
       setLoading(false);
       return;
     }
@@ -56,18 +58,18 @@ export function BookingForm({ flight }: { flight: Flight }) {
   return (
     <form onSubmit={submit} className="mt-4 space-y-5">
       <section className="rounded-2xl border border-border bg-surface p-4">
-        <h2 className="font-semibold">Traveller details</h2>
+        <h2 className="font-semibold">{t("bookingForm.travellerDetails")}</h2>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           <label className="block">
-            <span className="mb-1 block text-xs font-medium text-muted">First name</span>
+            <span className="mb-1 block text-xs font-medium text-muted">{t("bookingForm.firstName")}</span>
             <input required className={field} value={firstName} onChange={(e) => setFirstName(e.target.value)} />
           </label>
           <label className="block">
-            <span className="mb-1 block text-xs font-medium text-muted">Last name</span>
+            <span className="mb-1 block text-xs font-medium text-muted">{t("bookingForm.lastName")}</span>
             <input required className={field} value={lastName} onChange={(e) => setLastName(e.target.value)} />
           </label>
           <label className="block sm:col-span-2">
-            <span className="mb-1 block text-xs font-medium text-muted">Date of birth</span>
+            <span className="mb-1 block text-xs font-medium text-muted">{t("bookingForm.dateOfBirth")}</span>
             <input type="date" required className={field} value={dob} onChange={(e) => setDob(e.target.value)} />
           </label>
         </div>
@@ -75,14 +77,14 @@ export function BookingForm({ flight }: { flight: Flight }) {
 
       <section className="rounded-2xl border border-border bg-surface p-4">
         <h2 className="flex items-center gap-2 font-semibold">
-          <Lock className="h-4 w-4 text-price" /> Payment
+          <Lock className="h-4 w-4 text-price" /> {t("bookingForm.payment")}
           <span className="rounded-full bg-surface-2 px-2 py-0.5 text-[10px] font-medium text-muted">
-            simulated — no real charge
+            {t("bookingForm.simulatedCharge")}
           </span>
         </h2>
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           <label className="block sm:col-span-2">
-            <span className="mb-1 block text-xs font-medium text-muted">Card number</span>
+            <span className="mb-1 block text-xs font-medium text-muted">{t("bookingForm.cardNumber")}</span>
             <input
               required
               inputMode="numeric"
@@ -93,11 +95,11 @@ export function BookingForm({ flight }: { flight: Flight }) {
             />
           </label>
           <label className="block">
-            <span className="mb-1 block text-xs font-medium text-muted">Expiry</span>
+            <span className="mb-1 block text-xs font-medium text-muted">{t("bookingForm.expiry")}</span>
             <input required placeholder="MM/YY" className={field} value={expiry} onChange={(e) => setExpiry(e.target.value)} />
           </label>
           <label className="block">
-            <span className="mb-1 block text-xs font-medium text-muted">CVC</span>
+            <span className="mb-1 block text-xs font-medium text-muted">{t("bookingForm.cvc")}</span>
             <input required inputMode="numeric" placeholder="123" className={field} value={cvc} onChange={(e) => setCvc(e.target.value)} />
           </label>
         </div>
@@ -110,7 +112,13 @@ export function BookingForm({ flight }: { flight: Flight }) {
         disabled={loading}
         className="btn-accent w-full rounded-xl py-3.5 text-sm font-semibold disabled:opacity-60"
       >
-        {loading ? "Processing…" : <span>Pay <Money cents={flight.fare.total} /> &amp; confirm</span>}
+        {loading ? (
+          t("bookingForm.processing")
+        ) : (
+          <span>
+            {t("bookingForm.pay")} <Money cents={flight.fare.total} /> {t("bookingForm.andConfirm")}
+          </span>
+        )}
       </button>
     </form>
   );

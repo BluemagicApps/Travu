@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import {
   ArrowRight,
   CheckCircle2,
@@ -34,14 +35,15 @@ export function ConfirmedTicket({
   total: number;
   qrDataUrl: string;
 }) {
+  const t = useTranslations("flights");
   return (
     <div className="mx-auto max-w-[860px] px-4 py-10">
       {/* Confirmation banner — screen only */}
       <div className="mb-6 text-center print:hidden">
         <CheckCircle2 className="mx-auto h-12 w-12 text-emerald-500" />
-        <h1 className="mt-3 text-2xl font-extrabold">Booking confirmed</h1>
+        <h1 className="mt-3 text-2xl font-extrabold">{t("confirmation.bookingConfirmed")}</h1>
         <p className="mt-1 text-sm text-muted">
-          A confirmation slip has been issued for reference{" "}
+          {t("confirmation.slipIssued")}{" "}
           <span className="font-bold text-price">{slip.bookingRef}</span>
         </p>
       </div>
@@ -62,7 +64,7 @@ export function ConfirmedTicket({
               <span className="text-2xl font-extrabold tracking-tight">TRAVU</span>
             </div>
             <p className="mt-1 text-xs font-medium uppercase tracking-[0.2em] text-white/85">
-              Booking Confirmation
+              {t("confirmation.bookingConfirmationHeader")}
             </p>
           </div>
           <div className="text-right">
@@ -70,10 +72,12 @@ export function ConfirmedTicket({
               {slip.status}
             </span>
             <div className="mt-2 text-[11px] uppercase tracking-wide text-white/75">
-              Itinerary no.
+              {t("confirmation.itineraryNo")}
             </div>
             <div className="font-mono text-lg font-bold">{slip.bookingRef}</div>
-            <div className="mt-1 text-[11px] text-white/75">Issued {longDate(slip.issuedIso)}</div>
+            <div className="mt-1 text-[11px] text-white/75">
+              {t("confirmation.issued", { date: longDate(slip.issuedIso) })}
+            </div>
           </div>
         </header>
 
@@ -92,19 +96,19 @@ export function ConfirmedTicket({
               </span>
             </div>
             <dl className="mt-3 grid grid-cols-2 gap-x-6 gap-y-2 text-sm sm:grid-cols-3">
-              <Cell label="Traveller(s)" value={slip.passengers.map((n) => n.toUpperCase()).join(", ")} />
+              <Cell label={t("confirmation.travellers")} value={slip.passengers.map((n) => n.toUpperCase()).join(", ")} />
               <Cell
-                label="Departure"
+                label={t("confirmation.departure")}
                 value={longDate(slip.segments[0]?.departIso ?? slip.issuedIso, true)}
               />
-              <Cell label="Booking reference" value={slip.bookingRef} mono />
+              <Cell label={t("confirmation.bookingReference")} value={slip.bookingRef} mono />
             </dl>
           </section>
 
           {/* Flight details */}
           <section>
             <h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-muted">
-              Flight details
+              {t("confirmation.flightDetails")}
             </h3>
             <div className="divide-y divide-border rounded-xl border border-border">
               {slip.segments.map((s, i) => (
@@ -120,8 +124,12 @@ export function ConfirmedTicket({
                       </span>
                     </div>
                     <div className="mt-1 text-sm text-muted">
-                      Depart {hhmm(s.departIso)} · {longDate(s.departIso, true)} — Arrive{" "}
-                      {hhmm(s.arriveIso)} · {longDate(s.arriveIso, true)}
+                      {t("confirmation.departArrive", {
+                        departTime: hhmm(s.departIso),
+                        departDate: longDate(s.departIso, true),
+                        arriveTime: hhmm(s.arriveIso),
+                        arriveDate: longDate(s.arriveIso, true),
+                      })}
                     </div>
                   </div>
                   <div className="text-right text-sm">
@@ -130,7 +138,9 @@ export function ConfirmedTicket({
                       {s.flightNo}
                     </div>
                     <div className="text-muted">{formatDuration(s.durationMin)}</div>
-                    <div className="text-muted capitalize">{slip.cabin.toLowerCase()} class</div>
+                    <div className="text-muted capitalize">
+                      {t("confirmation.cabinClass", { cabin: slip.cabin.toLowerCase() })}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -141,17 +151,17 @@ export function ConfirmedTicket({
           <section className="grid gap-6 sm:grid-cols-[1.4fr_1fr]">
             <div>
               <h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-muted">
-                Payment summary
+                {t("confirmation.paymentSummary")}
               </h3>
               <table className="w-full text-sm">
                 <tbody>
-                  <Row label="Air fare" value={<Money cents={slip.breakdown.airFare} />} />
-                  <Row label="TRAVU booking fee" value={<Money cents={slip.breakdown.bookingFee} />} />
-                  <Row label="Taxes & fees" value={<Money cents={slip.breakdown.taxesFees} />} />
+                  <Row label={t("confirmation.airFare")} value={<Money cents={slip.breakdown.airFare} />} />
+                  <Row label={t("confirmation.bookingFee")} value={<Money cents={slip.breakdown.bookingFee} />} />
+                  <Row label={t("confirmation.taxesFees")} value={<Money cents={slip.breakdown.taxesFees} />} />
                 </tbody>
                 <tfoot>
                   <tr className="border-t-2 border-border">
-                    <td className="py-2 text-base font-extrabold">Total paid</td>
+                    <td className="py-2 text-base font-extrabold">{t("confirmation.totalPaid")}</td>
                     <td className="py-2 text-right text-base font-extrabold text-price">
                       <Money cents={total} />
                     </td>
@@ -159,32 +169,27 @@ export function ConfirmedTicket({
                 </tfoot>
               </table>
               <p className="mt-3 rounded-lg bg-emerald-50 px-3 py-2 text-center text-xs font-bold uppercase tracking-wide text-emerald-700">
-                ✓ Paid via {slip.paymentLabel}
+                ✓ {t("confirmation.paidVia", { label: slip.paymentLabel })}
               </p>
             </div>
 
             <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-border p-4">
               {qrDataUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={qrDataUrl} alt={`QR for ${slip.bookingRef}`} className="h-28 w-28" />
+                <img src={qrDataUrl} alt={t("confirmation.qrAlt", { ref: slip.bookingRef })} className="h-28 w-28" />
               ) : (
                 <div className="h-28 w-28 rounded bg-surface-2" />
               )}
               <div className="font-mono text-xs font-bold">{slip.bookingRef}</div>
               <div className="text-center text-[10px] text-muted">
-                Present this slip and a valid passport at check-in
+                {t("confirmation.presentSlip")}
               </div>
             </div>
           </section>
 
           {/* Fine print */}
           <p className="border-t border-border pt-4 text-[10px] leading-relaxed text-muted">
-            This confirmation slip is a simulated receipt generated by TRAVU for demonstration
-            purposes only and is not valid for travel. Carriage is subject to the conditions of
-            contract and tariffs of the operating carrier. Please arrive at least 3 hours before
-            international departure. Card details are stored only as a masked summary; the full card
-            number, expiry and security code are never retained. TRAVU booking reference{" "}
-            {slip.bookingRef}.
+            {t("confirmation.finePrint", { ref: slip.bookingRef })}
           </p>
         </div>
       </article>
@@ -195,14 +200,14 @@ export function ConfirmedTicket({
           href={`/api/ticket/${slip.bookingRef}`}
           className="btn-accent flex flex-1 items-center justify-center gap-2 rounded-xl py-3.5 font-semibold"
         >
-          <Download className="h-4 w-4" /> Download PDF
+          <Download className="h-4 w-4" /> {t("confirmation.downloadPdf")}
         </a>
         <button
           type="button"
           onClick={() => window.print()}
           className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-border py-3.5 font-semibold transition hover:bg-surface-2"
         >
-          <Printer className="h-4 w-4" /> Print
+          <Printer className="h-4 w-4" /> {t("confirmation.print")}
         </button>
       </div>
 
@@ -210,7 +215,7 @@ export function ConfirmedTicket({
         href={`/track?ref=${slip.bookingRef}`}
         className="mt-3 flex items-center justify-center gap-1 text-sm font-medium text-muted transition hover:text-text print:hidden"
       >
-        Track this trip <ExternalLink className="h-3.5 w-3.5" />
+        {t("confirmation.trackThisTrip")} <ExternalLink className="h-3.5 w-3.5" />
       </Link>
     </div>
   );

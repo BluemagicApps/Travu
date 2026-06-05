@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { Star, ChevronLeft, BedDouble, Bath, Maximize, Users, Share2, Heart, ShieldCheck, BadgeCheck } from "lucide-react";
 import { resolveStay } from "@/lib/stays/resolve";
@@ -39,6 +40,7 @@ function similarStays(stay: Stay): Stay[] {
 
 export default async function StayDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  const t = await getTranslations("stays");
   const stay = await resolveStay(decodeURIComponent(id));
   if (!stay) notFound();
 
@@ -50,11 +52,11 @@ export default async function StayDetailPage({ params }: { params: Promise<{ id:
       {/* Header row */}
       <div className="mb-3 flex items-center justify-between">
         <Link href="/stays" className="flex items-center gap-1 text-sm font-medium text-price hover:underline">
-          <ChevronLeft className="h-4 w-4" /> See all properties
+          <ChevronLeft className="h-4 w-4" /> {t("detail.seeAllProperties")}
         </Link>
         <div className="flex items-center gap-3 text-sm text-muted">
-          <button type="button" className="flex items-center gap-1 hover:text-text"><Share2 className="h-4 w-4" /> Share</button>
-          <button type="button" className="flex items-center gap-1 hover:text-text"><Heart className="h-4 w-4" /> Save</button>
+          <button type="button" className="flex items-center gap-1 hover:text-text"><Share2 className="h-4 w-4" /> {t("detail.share")}</button>
+          <button type="button" className="flex items-center gap-1 hover:text-text"><Heart className="h-4 w-4" /> {t("detail.save")}</button>
         </div>
       </div>
 
@@ -80,22 +82,22 @@ export default async function StayDetailPage({ params }: { params: Promise<{ id:
           <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
             {stay.refundable ? (
               <span className="flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-1 font-medium text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400">
-                <ShieldCheck className="h-3.5 w-3.5" /> Free cancellation
+                <ShieldCheck className="h-3.5 w-3.5" /> {t("card.freeCancellation")}
               </span>
             ) : (
-              <span className="rounded-full bg-rose-50 px-2 py-1 font-medium text-rose-600 dark:bg-rose-950/40">Non-refundable</span>
+              <span className="rounded-full bg-rose-50 px-2 py-1 font-medium text-rose-600 dark:bg-rose-950/40">{t("card.nonRefundable")}</span>
             )}
             <span className="flex items-center gap-1 rounded-full bg-surface-2 px-2 py-1 text-muted">
-              <BadgeCheck className="h-3.5 w-3.5 text-price" /> Your dates are available
+              <BadgeCheck className="h-3.5 w-3.5 text-price" /> {t("detail.datesAvailable")}
             </span>
           </div>
 
           {/* Key facts */}
           <div className="mt-4 flex flex-wrap gap-4 border-y border-border py-3 text-sm">
-            {stay.bedrooms != null && <span className="flex items-center gap-1.5"><BedDouble className="h-4 w-4 text-price" /> {stay.bedrooms} bedroom{stay.bedrooms === 1 ? "" : "s"}</span>}
-            {stay.bathrooms != null && <span className="flex items-center gap-1.5"><Bath className="h-4 w-4 text-price" /> {stay.bathrooms} bathroom{stay.bathrooms === 1 ? "" : "s"}</span>}
-            {stay.sleeps != null && <span className="flex items-center gap-1.5"><Users className="h-4 w-4 text-price" /> Sleeps {stay.sleeps}</span>}
-            {stay.sqft != null && <span className="flex items-center gap-1.5"><Maximize className="h-4 w-4 text-price" /> {stay.sqft} sq ft</span>}
+            {stay.bedrooms != null && <span className="flex items-center gap-1.5"><BedDouble className="h-4 w-4 text-price" /> {t("detail.bedrooms", { count: stay.bedrooms })}</span>}
+            {stay.bathrooms != null && <span className="flex items-center gap-1.5"><Bath className="h-4 w-4 text-price" /> {t("detail.bathrooms", { count: stay.bathrooms })}</span>}
+            {stay.sleeps != null && <span className="flex items-center gap-1.5"><Users className="h-4 w-4 text-price" /> {t("card.sleeps", { count: stay.sleeps })}</span>}
+            {stay.sqft != null && <span className="flex items-center gap-1.5"><Maximize className="h-4 w-4 text-price" /> {t("detail.sqft", { count: stay.sqft })}</span>}
           </div>
 
           <div className="mt-4">
@@ -103,7 +105,7 @@ export default async function StayDetailPage({ params }: { params: Promise<{ id:
             <div className="mt-2 flex items-center gap-2 text-sm text-muted">
               <span className="rounded-lg bg-price px-2 py-1 text-sm font-bold text-white">{stay.guestRating.toFixed(1)}</span>
               <span className="font-semibold text-price">{ratingWordFor(stay.guestRating)}</span>
-              <span>· {stay.reviewCount} reviews</span>
+              <span>· {t("card.reviews", { count: stay.reviewCount })}</span>
             </div>
           </div>
 
@@ -111,7 +113,7 @@ export default async function StayDetailPage({ params }: { params: Promise<{ id:
 
           {/* Explore the area */}
           <section id="area" className="scroll-mt-28 border-t border-border py-6">
-            <h2 className="text-lg font-bold">Explore the area</h2>
+            <h2 className="text-lg font-bold">{t("detail.exploreArea")}</h2>
             <div className="mt-3">
               <MapView lat={stay.lat} lng={stay.lng} name={stay.name} />
             </div>

@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { getTranslations } from "next-intl/server";
 import { BedDouble } from "lucide-react";
 import { StayFilter, paramsFromFilter } from "@/lib/stays/schema";
 import { searchStays } from "@/lib/stays/search";
@@ -13,12 +14,13 @@ import { DealsCarousel } from "@/components/stays/landing/DealsCarousel";
 import { FeatureBand } from "@/components/stays/landing/FeatureBand";
 
 async function StaysResults({ filter }: { filter: StayFilter }) {
+  const t = await getTranslations("stays");
   const stays = await searchStays(paramsFromFilter(filter));
   if (stays.length === 0) {
     return (
       <div className="glass mt-6 rounded-2xl p-10 text-center text-muted">
         <BedDouble className="mx-auto h-8 w-8 text-price" />
-        <p className="mt-3">No stays found — try different dates or a nearby city.</p>
+        <p className="mt-3">{t("results.noneFound")}</p>
       </div>
     );
   }
@@ -41,6 +43,7 @@ export default async function StaysPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const sp = await searchParams;
+  const t = await getTranslations("stays");
   const parsed = StayFilter.safeParse(sp);
   const filter = parsed.success ? parsed.data : null;
 
@@ -49,9 +52,9 @@ export default async function StaysPage({
     return (
       <div>
         <StaysHero />
-        <DealsCarousel title="Last-minute weekend deals" stays={dealStays("London", 8)} />
+        <DealsCarousel title={t("landing.lastMinuteDeals")} stays={dealStays("London", 8)} />
         <FeatureBand />
-        <DealsCarousel title="Stays for every travel style" stays={dealStays("Barcelona", 8)} />
+        <DealsCarousel title={t("landing.everyTravelStyle")} stays={dealStays("Barcelona", 8)} />
       </div>
     );
   }

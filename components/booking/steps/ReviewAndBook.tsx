@@ -1,23 +1,24 @@
 "use client";
 
 import { ArrowRight, Loader2, Lock, ShieldCheck, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 import type { Flight } from "@/lib/flights/types";
 import type { FareOption } from "@/lib/flights/fares";
 import type { WizardState } from "@/lib/booking/wizard-state";
 import { datePart, hhmm, formatDuration } from "@/lib/utils/dates";
 import { Money } from "@/components/Money";
 
-const NUMBERED = [
-  "Review your trip details to make sure the dates and times are correct.",
-  "Check your spelling. Passenger names must match government-issued photo ID exactly.",
-  "Review the terms of your booking.",
+const NUMBERED_KEYS = [
+  "reviewBook.numbered1",
+  "reviewBook.numbered2",
+  "reviewBook.numbered3",
 ];
 
-const FARE_RULES = [
-  "Bring a hand baggage",
-  "Pay to bring a checked bag",
-  "Cancellations not allowed",
-  "Changes not allowed",
+const FARE_RULES_KEYS = [
+  "reviewBook.fareRule1",
+  "reviewBook.fareRule2",
+  "reviewBook.fareRule3",
+  "reviewBook.fareRule4",
 ];
 
 export function ReviewAndBook({
@@ -43,6 +44,7 @@ export function ReviewAndBook({
   redeemApplied?: number;
   onToggleRedeem?: () => void;
 }) {
+  const t = useTranslations("flights");
   const from = flight.segments[0];
   const to = flight.segments[flight.segments.length - 1];
   const gross = fare.fare.total * state.travellers.length;
@@ -50,52 +52,50 @@ export function ReviewAndBook({
 
   return (
     <div className="space-y-5">
-      <h1 className="text-2xl font-extrabold">Review and book your trip</h1>
+      <h1 className="text-2xl font-extrabold">{t("reviewBook.title")}</h1>
 
       <section className="rounded-2xl border border-border bg-surface p-5">
         <ol className="list-inside list-decimal space-y-2 text-sm">
-          {NUMBERED.map((line, i) => (
-            <li key={i}>{line}</li>
+          {NUMBERED_KEYS.map((key) => (
+            <li key={key}>{t(key)}</li>
           ))}
         </ol>
         <div className="mt-4 rounded-xl bg-surface-2 p-4">
           <div className="text-sm font-semibold">
-            Fare rules for {from.originIata} to {to.destIata}
+            {t("reviewBook.fareRulesFor", { origin: from.originIata, dest: to.destIata })}
           </div>
           <ul className="mt-2 list-inside list-disc space-y-1 text-sm text-muted">
-            {FARE_RULES.map((r) => (
-              <li key={r}>{r}</li>
+            {FARE_RULES_KEYS.map((key) => (
+              <li key={key}>{t(key)}</li>
             ))}
           </ul>
         </div>
-        <p className="mt-4 text-xs text-muted">
-          By clicking the button below, I acknowledge that I have reviewed the Privacy Statement and
-          Government Travel Advice, and have reviewed and accept the Rules &amp; Restrictions and
-          Terms of Use.
-        </p>
+        <p className="mt-4 text-xs text-muted">{t("reviewBook.acknowledgement")}</p>
       </section>
 
       <section className="rounded-2xl border border-border bg-surface p-5">
-        <h3 className="text-sm font-semibold">Your trip</h3>
+        <h3 className="text-sm font-semibold">{t("reviewBook.yourTrip")}</h3>
         <dl className="mt-3 grid gap-y-1 text-sm sm:grid-cols-2">
-          <dt className="text-muted">Route</dt>
+          <dt className="text-muted">{t("reviewBook.route")}</dt>
           <dd>{from.originIata} → {to.destIata}</dd>
-          <dt className="text-muted">Date</dt>
+          <dt className="text-muted">{t("reviewBook.date")}</dt>
           <dd>{datePart(flight.departIso)}</dd>
-          <dt className="text-muted">Times</dt>
+          <dt className="text-muted">{t("reviewBook.times")}</dt>
           <dd>{hhmm(flight.departIso)}–{hhmm(flight.arriveIso)} ({formatDuration(flight.durationMin)})</dd>
-          <dt className="text-muted">Carrier</dt>
+          <dt className="text-muted">{t("reviewBook.carrier")}</dt>
           <dd>{flight.carrierName}</dd>
-          <dt className="text-muted">Fare</dt>
+          <dt className="text-muted">{t("reviewBook.fare")}</dt>
           <dd>{fare.name} ({fare.cabin.toLowerCase()})</dd>
-          <dt className="text-muted">Travellers</dt>
-          <dd>{state.travellers.map((t) => `${t.firstName} ${t.lastName}`.trim()).join(", ")}</dd>
-          <dt className="text-muted">Contact</dt>
+          <dt className="text-muted">{t("reviewBook.travellers")}</dt>
+          <dd>{state.travellers.map((tr) => `${tr.firstName} ${tr.lastName}`.trim()).join(", ")}</dd>
+          <dt className="text-muted">{t("reviewBook.contact")}</dt>
           <dd className="truncate">{state.contact.email}</dd>
-          <dt className="text-muted">Payment</dt>
+          <dt className="text-muted">{t("reviewBook.payment")}</dt>
           <dd>
-            Card ending in {state.payment.cardNumber.replace(/\D/g, "").slice(-4)} ·{" "}
-            <Money cents={total} />
+            {t("reviewBook.cardEndingIn", {
+              last4: state.payment.cardNumber.replace(/\D/g, "").slice(-4),
+            })}{" "}
+            · <Money cents={total} />
           </dd>
         </dl>
       </section>
@@ -111,14 +111,15 @@ export function ReviewAndBook({
             />
             <span className="flex-1">
               <span className="flex items-center gap-1.5 font-semibold text-price">
-                <Sparkles className="h-4 w-4" /> Apply my OneTokenCash
+                <Sparkles className="h-4 w-4" /> {t("reviewBook.applyOneToken")}
               </span>
               <span className="mt-1 block text-sm text-muted">
-                You have <Money cents={oneTokenBalance} /> in OneTokenCash.
+                {t("reviewBook.oneTokenBalance")} <Money cents={oneTokenBalance} />{" "}
+                {t("reviewBook.inOneToken")}
                 {redeem ? (
-                  <> Applying <Money cents={redeemApplied} /> to this booking.</>
+                  <> {t("reviewBook.applying")} <Money cents={redeemApplied} /> {t("reviewBook.toThisBooking")}</>
                 ) : (
-                  <> Use it to save up to <Money cents={Math.min(oneTokenBalance, gross)} />.</>
+                  <> {t("reviewBook.useToSave")} <Money cents={Math.min(oneTokenBalance, gross)} />.</>
                 )}
               </span>
             </span>
@@ -139,18 +140,16 @@ export function ReviewAndBook({
         className="btn-accent flex w-full items-center justify-center gap-2 rounded-xl py-4 text-base font-bold disabled:opacity-60"
       >
         {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Lock className="h-4 w-4" />}
-        Buy now · <Money cents={total} /> <ArrowRight className="h-4 w-4" />
+        {t("reviewBook.buyNow")} · <Money cents={total} /> <ArrowRight className="h-4 w-4" />
       </button>
 
       <p className="flex items-center justify-center gap-1.5 text-xs text-muted">
-        <ShieldCheck className="h-3.5 w-3.5" /> Secure encrypted transmission and storage.
+        <ShieldCheck className="h-3.5 w-3.5" /> {t("reviewBook.secureNote")}
       </p>
 
       <section className="rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
-        <div className="font-semibold">Buy More &amp; Save anytime!</div>
-        <p className="mt-1 text-xs">
-          You can save on your trip when you book a flight now and add a stay later.
-        </p>
+        <div className="font-semibold">{t("reviewBook.buyMoreSaveTitle")}</div>
+        <p className="mt-1 text-xs">{t("reviewBook.buyMoreSaveBody")}</p>
       </section>
     </div>
   );

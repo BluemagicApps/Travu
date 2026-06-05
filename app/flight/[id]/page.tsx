@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { ArrowRight } from "lucide-react";
 import { decodeId, generateFlights } from "@/lib/flights/generator";
 import { loadDataset } from "@/lib/flights/dataset";
@@ -33,6 +34,7 @@ export default async function FlightDetailPage({
   }
   if (!flight) notFound();
 
+  const t = await getTranslations("flights");
   const prediction = predict({ daysToDeparture: daysFromToday(flight.departIso.slice(0, 10)) });
   const from = flight.segments[0];
   const to = flight.segments[flight.segments.length - 1];
@@ -40,7 +42,7 @@ export default async function FlightDetailPage({
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
       <Link href="/search" className="text-sm text-muted transition hover:text-text">
-        ← Back to results
+        {t("detail.backToResults")}
       </Link>
 
       <div className="mt-3 rounded-2xl border border-border bg-surface p-5">
@@ -57,12 +59,12 @@ export default async function FlightDetailPage({
             </div>
             <div className="text-sm capitalize text-muted">
               {flight.carrierName} · {flight.cabin.toLowerCase()} ·{" "}
-              {flight.stops === 0 ? "nonstop" : `${flight.stops} stop`}
+              {flight.stops === 0 ? t("stops.nonstop") : t("stops.count", { count: flight.stops })}
             </div>
           </div>
           <div className="ml-auto text-right">
             <div className="text-2xl font-extrabold text-price"><Money cents={flight.fare.total} /></div>
-            <div className="text-xs text-muted">per traveller</div>
+            <div className="text-xs text-muted">{t("perTraveller")}</div>
           </div>
         </div>
 
@@ -86,7 +88,7 @@ export default async function FlightDetailPage({
         href={`/book/${flight.id}`}
         className="btn-accent mt-5 flex items-center justify-center gap-2 rounded-xl py-3.5 font-semibold"
       >
-        Continue to book <ArrowRight className="h-4 w-4" />
+        {t("detail.continueToBook")} <ArrowRight className="h-4 w-4" />
       </Link>
     </div>
   );

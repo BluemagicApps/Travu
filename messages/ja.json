@@ -1,19 +1,854 @@
 {
   "nav": {
-    "flights": "フライト",
+    "flights": "航空券",
     "stays": "宿泊",
     "cars": "レンタカー",
-    "trackBooking": "予約を確認",
+    "trackBooking": "予約状況を確認",
     "signIn": "ログイン",
     "signOut": "ログアウト"
   },
   "footer": {
     "company": "会社情報",
-    "explore": "探す",
+    "explore": "見つける",
     "policies": "ポリシー",
     "help": "ヘルプ"
   },
+  "footerLinks": {
+    "about": "Travuについて",
+    "oneTokenRewards": "OneTokenリワード",
+    "listYourProperty": "宿泊施設を掲載",
+    "partnerships": "パートナーシップ",
+    "newsroom": "ニュースルーム",
+    "searchFlights": "航空券を検索",
+    "hotelsAndStays": "ホテル・宿泊施設",
+    "carRentals": "レンタカー",
+    "trackABooking": "予約状況を確認",
+    "myTrips": "マイトリップ",
+    "privacy": "プライバシー",
+    "cookies": "Cookie",
+    "termsOfUse": "利用規約",
+    "accessibility": "アクセシビリティ",
+    "yourPrivacyChoices": "プライバシー設定",
+    "support": "サポート",
+    "cancelYourBooking": "予約をキャンセル",
+    "refundBasics": "返金について",
+    "travelDocuments": "渡航書類",
+    "oneTokenTerms": "OneToken規約"
+  },
   "common": {
     "language": "言語"
+  },
+  "home": {
+    "eyebrow": "AIで生まれ変わる旅",
+    "tagline": "どこへ行くにも、まずTravu。",
+    "subtitle": "行きたい場所を、友だちに話すようにTravuへ。航空券も宿も、検索から料金、予約まですべておまかせください。",
+    "carsTagline": "あなたらしく、旅を走らせよう。"
+  },
+  "homeSections": {
+    "bundleSave": {
+      "title": "まとめてお得",
+      "desc": "旅をまとめて、または分けて予約してもお得に。"
+    },
+    "oneStopShop": {
+      "title": "旅のすべてがここに",
+      "desc": "航空券、ホテルなどをまとめて予約。"
+    },
+    "oneTokenRewards": {
+      "title": "OneTokenリワード",
+      "desc": "今すぐ割引、さらに次の旅で使えるOneTokenCashが貯まる。"
+    },
+    "travelStyles": {
+      "heading": "あらゆる旅のスタイルに合う宿",
+      "subtitle": "今月の平均価格に基づく",
+      "avgPerNight": "1泊あたり平均",
+      "style": {
+        "beach": "ビーチ",
+        "culture": "カルチャー",
+        "ski": "スキー",
+        "family": "ファミリー",
+        "wellness": "ウェルネス・リラクゼーション"
+      }
+    },
+    "exploreWorld": {
+      "heading": "Travuで世界の旅を見つけよう"
+    },
+    "stayLikeLocal": {
+      "heading": "{city}で暮らすように泊まる",
+      "propertyType": {
+        "privateHomes": "貸切バケーションホーム",
+        "apartments": "アパートメント・コンド",
+        "cabins": "キャビン",
+        "cottages": "コテージ",
+        "villas": "ヴィラ"
+      }
+    },
+    "promo": {
+      "eyebrow": "まとめてお得",
+      "heading": "思い出も一緒に持ち帰ろう",
+      "body": "航空券に宿を追加すると、世界50万軒以上のパッケージ割引が使えます。会員価格が適用されます。",
+      "cta": "計画を始める"
+    },
+    "flightDeals": {
+      "heading": "{city}発のお得な航空券",
+      "tagline": "世界各地への航空券の最新お得情報をチェック。",
+      "cta": "お得な航空券をすべて見る"
+    }
+  },
+  "search": {
+    "flights": "航空券を検索",
+    "search": "検索",
+    "aiDivider": "または、AIに希望を伝えるだけ",
+    "askAi": "AIに聞く",
+    "aiPlaceholderStays": "言葉で伝えるだけ。例：「ローマでプール付きの5つ星ホテルに3泊」",
+    "aiPlaceholderCars": "言葉で伝えるだけ。例：「来週末にマイアミでオートマのSUV」"
+  },
+  "auth": {
+    "loginTitle": "おかえりなさい",
+    "loginSubtitle": "ログインして旅を管理しましょう。",
+    "signupTitle": "アカウントを作成",
+    "signupSubtitle": "Travuで航空券を予約して旅を管理。",
+    "name": "名前",
+    "email": "メールアドレス",
+    "password": "パスワード",
+    "signIn": "ログイン",
+    "signingIn": "ログイン中…",
+    "createAccount": "アカウントを作成",
+    "creating": "作成中…",
+    "newToTravu": "Travuは初めてですか？",
+    "createAccountLink": "アカウントを作成",
+    "alreadyHaveAccount": "すでにアカウントをお持ちですか？",
+    "invalidCredentials": "メールアドレスまたはパスワードが正しくありません。",
+    "emailTaken": "このメールアドレスは登録済みです。",
+    "invalidSignup": "有効なメールアドレスと8文字以上のパスワードを入力してください。"
+  },
+  "track": {
+    "heading": "予約状況を確認",
+    "intro": "Travuの予約番号（例：<ref>TRV-AB12CD</ref>）を入力すると、旅の状況をリアルタイムで確認できます。",
+    "placeholder": "TRV-AB12CD",
+    "trackButton": "確認",
+    "invalidRef": "TRV-XXXXXX の形式で入力してください。",
+    "notFound": "{ref} の予約が見つかりませんでした。",
+    "lookupError": "現在、確認できませんでした。",
+    "networkError": "ネットワークエラー。もう一度お試しください。",
+    "bookingReference": "予約番号",
+    "status": "ステータス",
+    "direct": "直行",
+    "stops": "{count, plural, other {#回乗り継ぎ}}",
+    "travellers": "搭乗者：",
+    "fare": "運賃：",
+    "estimatedArrival": "到着予定：",
+    "nextChangeAt": "次の更新：",
+    "onDate": "{date}"
+  },
+  "dashboard": {
+    "heading": "マイトリップ",
+    "signedInAs": "{email} としてログイン中",
+    "noBookings": "まだ予約はありません。",
+    "startSearch": "検索を始める",
+    "joinOneToken": "<strong>OneTokenに参加</strong> — すべての旅でOneTokenCashが貯まります。",
+    "joinFree": "無料で参加",
+    "tripElements": "{count}件の旅エレメント",
+    "toTier": "{tier}まであと{count}",
+    "topTier": "最上位ティア",
+    "ref": "予約番号",
+    "eTicket": "eチケット",
+    "voucher": "バウチャー",
+    "nights": "{count, plural, other {#泊}}"
+  },
+  "onetoken": {
+    "badge": "Travu OneToken",
+    "heroTitle": "Travuの無料トラベル<gradient>リワードプログラム</gradient>",
+    "heroSubtitle": "会員価格で今すぐ割引、さらに次の旅で使えるOneTokenCashが貯まります。",
+    "joinFree": "無料で参加",
+    "joinEarn": "参加して貯め始める",
+    "joinForFree": "無料で参加",
+    "joining": "参加中…",
+    "memberBadge": "あなたはOneToken会員です",
+    "valueProps": {
+      "savings": {
+        "title": "150万軒以上のホテル・住まい・レンタカーがお得に",
+        "desc": "世界中の数十万軒の宿で、会員価格で10%以上お得に。"
+      },
+      "earnUse": {
+        "title": "より多くの場所で貯めて使える",
+        "desc": "OneTokenCashはあなたのリワード通貨。OneTokenCash 1ドルは、対象の航空券や宿で1ドルとして使えます。"
+      },
+      "perks": {
+        "title": "さらに多くの会員特典",
+        "desc": "ティアが上がると、部屋のアップグレード、無料の価格追跡、優先サポート、VIP特典が利用できます。"
+      }
+    },
+    "tripElementsHeading": "ティアが上がるほど、新しい特典がかんたんに解放",
+    "tripElementsSubtitle": "予約する旅エレメントごとにリワードがもらえ、貯まるOneTokenCashに加えてティアアップも早まります。",
+    "tripElementsLabel": "次のそれぞれで1つの旅エレメントを獲得…",
+    "tripElement": {
+      "hotelRoomNight": "ホテル1泊",
+      "vacationRentalNight": "バケーションレンタル1泊",
+      "flightTicket": "航空券1枚",
+      "carRentalDay": "レンタカー1日",
+      "cruiseCabinNight": "クルーズ船室1泊",
+      "activityTicket": "アクティビティチケット1枚"
+    },
+    "tiersHeading": "ティアが上がるほど、さらに多くの特典を",
+    "tierRange": {
+      "blue": "旅エレメント0〜4件",
+      "silver": "旅エレメント5〜14件",
+      "gold": "旅エレメント15〜29件",
+      "platinum": "旅エレメント30件以上"
+    },
+    "savings": "割引",
+    "savingsDesc": "10,000軒以上のホテルで、会員価格で{pct}%以上お得に。",
+    "rewards": "リワード",
+    "rewardsDesc": "対象の予約でOneTokenCashが{pct}%貯まる。",
+    "perks": "特典",
+    "cashHeading": "OneTokenCash — 使い道を選べるリワード通貨",
+    "cashSubtitle": "OneTokenCashは、Travuでホテルや航空券などを予約する際に使えます。OneTokenCash 1ドルは対象予約で1ドルとして、年中いつでも利用可能。ブラックアウト日もありません。",
+    "cashEarn": "1ドルにつき最大4%のOneTokenCashが貯まる",
+    "cashEarnNote": "ティアが上がると、さらに多く貯まります。",
+    "faqHeading": "OneTokenについてもっと知る",
+    "faq": {
+      "join": {
+        "q": "OneTokenにはどうやって参加できますか？",
+        "a": "こちらをクリックしてOneTokenに参加できます。無料でかんたんに始められます。Travuアカウントにログインまたは作成し、このページの「無料で参加」をタップしてください。"
+      },
+      "howItWorks": {
+        "q": "OneTokenリワードプログラムはどう機能しますか？",
+        "a": "OneTokenはリワードプログラムで、会員は会員価格を利用でき、対象予約でOneTokenCashが貯まります。OneTokenCash 1ドルは旅行で1ドルとして使えます。旅行を予約すると旅エレメントが貯まり、Blue、Silver、Gold、Platinumのティアが上がっていきます。"
+      },
+      "expire": {
+        "q": "OneTokenCashに有効期限はありますか？",
+        "a": "予約で獲得したOneTokenCashは、18か月以内に1回以上対象予約をすれば失効しません。"
+      },
+      "flights": {
+        "q": "OneTokenCashは航空券に使えますか？",
+        "a": "はい。OneTokenCashは対象の航空券・宿の予約の決済時に利用でき、お支払い金額からその場で割引されます。"
+      },
+      "tierStatus": {
+        "q": "OneTokenでティアステータスに到達するには？",
+        "a": "ホテル1泊、バケーションレンタル1泊、航空券1枚、レンタカー1日、クルーズ船室1泊、アクティビティチケット1枚ごとに1つの旅エレメントを獲得します。5つでSilver、15でGold、30でPlatinumに到達します。"
+      },
+      "free": {
+        "q": "OneTokenは無料ですか？",
+        "a": "はい。OneTokenへの参加は完全無料です。"
+      }
+    },
+    "tierMember": "{tier}会員",
+    "tripElementsCount": "{count}件の旅エレメント",
+    "yourOneTokenCash": "あなたのOneTokenCash",
+    "moreToReach": "{count, plural, other {{tier}まであと#件の旅エレメント。}}"
+  },
+  "stays": {
+    "results": {
+      "noneFound": "宿が見つかりませんでした。日付を変えるか、近くの都市でお試しください。",
+      "noMatch": "条件に合う宿がありません。いくつか条件を外してみてください。",
+      "yourDestination": "目的地",
+      "propertyNoun": "{count, plural, other {軒}}",
+      "sortBy": "並べ替え",
+      "kindAllStays": "すべての宿",
+      "kindHotels": "ホテル",
+      "kindHomes": "ホーム",
+      "sortRecommended": "おすすめ",
+      "sortPrice": "価格（安い順）",
+      "sortRating": "ゲスト評価",
+      "sortDistance": "距離"
+    },
+    "landing": {
+      "lastMinuteDeals": "直前の週末お得情報",
+      "everyTravelStyle": "あらゆる旅のスタイルに合う宿"
+    },
+    "card": {
+      "vipAccess": "VIPアクセス",
+      "hotel": "ホテル",
+      "entireBy": "{host}の{type}全体",
+      "sleeps": "最大{count}名",
+      "beds": "{count, plural, other {ベッド#台}}",
+      "baths": "{count, plural, other {バスルーム#室}}",
+      "reviews": "{count}件のレビュー",
+      "freeCancellation": "無料キャンセル",
+      "nonRefundable": "返金不可",
+      "payLater": "今すぐ予約、後払い",
+      "percentOff": "{pct}%オフ",
+      "perNight": "／泊",
+      "total": "合計",
+      "totalInclTaxes": "税・手数料込みの合計",
+      "totalInclTaxesInline": "合計・税・手数料込み",
+      "viewDeal": "詳細を見る →"
+    },
+    "detail": {
+      "seeAllProperties": "すべての宿を見る",
+      "share": "共有",
+      "save": "保存",
+      "datesAvailable": "ご希望の日程に空きがあります",
+      "bedrooms": "{count, plural, other {寝室#室}}",
+      "bathrooms": "{count, plural, other {バスルーム#室}}",
+      "sqft": "{count}平方フィート",
+      "exploreArea": "エリアを見る",
+      "popularAmenities": "人気の設備・サービス",
+      "aboutProperty": "この宿について",
+      "privateHost": "個人ホスト（Vrbo）",
+      "propertyHost": "宿泊施設のホスト",
+      "policies": "ポリシー",
+      "afterTime": "{time}以降",
+      "beforeTime": "{time}まで",
+      "cancellation": "キャンセル",
+      "thingsToDo": "近くの人気スポット",
+      "similarProperties": "似ている宿",
+      "faq": "よくある質問",
+      "mapUnavailable": "この宿の地図プレビューはご利用いただけません。",
+      "viewLargerMap": "拡大地図で見る",
+      "morePhotos": "＋{count}枚",
+      "nights": "{count, plural, other {#泊}}",
+      "nightsSleeps": "{nights, plural, other {#泊}}・最大{sleeps}名",
+      "totalNights": "合計・{count, plural, other {#泊}}",
+      "inclTaxes": "税・手数料込み",
+      "reserve": "予約する",
+      "notChargedYet": "まだ請求されません"
+    },
+    "nav": {
+      "overview": "概要",
+      "amenities": "設備・サービス",
+      "reviews": "レビュー"
+    },
+    "reviews": {
+      "guestReviews": "ゲストのレビュー",
+      "noReviews": "まだレビューはありません。宿泊後に最初のレビューを投稿しましょう。",
+      "cleanliness": "清潔さ",
+      "staff": "スタッフ",
+      "amenities": "設備・サービス",
+      "condition": "状態"
+    },
+    "promo": {
+      "exploreMore": "{brand}でもっと見つける",
+      "memberRates": "厳選された{brand}の宿で会員料金と限定特典を。"
+    },
+    "adRail": {
+      "discover": "見つける",
+      "diveInto": "{city}の名所・グルメ・文化を満喫。宿を予約して旅を始めよう。",
+      "memberPrices": "会員価格",
+      "signInToUnlock": "ログインして厳選された宿の割引を解放。"
+    },
+    "features": {
+      "bundleSave": "まとめてお得",
+      "bundleSaveDesc": "宿に航空券を追加して両方お得に。すべてまとめて予約できます。",
+      "oneStop": "旅のすべてがここに",
+      "oneStopDesc": "ホテル、ホーム、航空券など、旅に必要なすべてをまとめて。",
+      "memberRewards": "会員価格・リワード",
+      "memberRewardsDesc": "今すぐ割引、さらに次の旅で使えるリワードが貯まる。"
+    },
+    "filters": {
+      "filters": "絞り込み",
+      "searchByName": "宿名で検索",
+      "searchByNamePlaceholder": "例：グランド",
+      "totalPrice": "合計価格",
+      "popularFilters": "人気の絞り込み",
+      "guestRating": "ゲスト評価",
+      "ratingAny": "すべて",
+      "ratingWonderful": "すばらしい 9以上",
+      "ratingVeryGood": "とても良い 8以上",
+      "ratingGood": "良い 7以上",
+      "starRating": "スター評価",
+      "stars": "{count}つ星",
+      "propertyType": "宿泊施設タイプ",
+      "typeAll": "すべて",
+      "typeHotelsResorts": "ホテル・リゾート",
+      "typeHomesApartments": "ホーム・アパートメント",
+      "propertyAmenities": "施設の設備・サービス",
+      "roomAmenities": "客室の設備・サービス",
+      "roomViews": "客室の眺め",
+      "propertyBrand": "施設ブランド",
+      "paymentType": "支払い方法",
+      "cancellationOptions": "キャンセルオプション",
+      "travelerExperience": "旅の体験",
+      "mealPlans": "食事プラン",
+      "numberOfBedrooms": "寝室数",
+      "moreOptions": "その他のオプション",
+      "onlyAvailable": "空室のある宿のみ表示",
+      "beachAccess": "ビーチへのアクセス",
+      "memberDeals": "会員特典・割引",
+      "noneAvailable": "該当なし",
+      "seeLess": "閉じる",
+      "seeMore": "もっと見る（{count}）",
+      "showProperties": "{count, plural, other {#軒を表示}}",
+      "labels": {
+        "1": "寝室1室",
+        "2": "寝室2室以上",
+        "wifi": "無料WiFi",
+        "ac": "エアコン",
+        "pool": "プール",
+        "parking": "駐車場",
+        "gym": "ジム",
+        "spa": "スパ",
+        "bar": "バー",
+        "breakfast": "朝食",
+        "pet_friendly": "ペット可",
+        "pay_later": "今すぐ予約、後払い",
+        "fully_refundable": "全額返金可",
+        "business": "ビジネス向け",
+        "family": "ファミリー向け",
+        "budget": "リーズナブル",
+        "adults_only": "大人専用",
+        "studio": "スタジオ"
+      }
+    },
+    "booking": {
+      "completeBooking": "予約を完了する",
+      "whoCheckingIn": "チェックインするのは誰ですか？",
+      "firstName": "名",
+      "lastName": "姓",
+      "emailAddress": "メールアドレス",
+      "countryRegion": "国・地域",
+      "phoneNumber": "電話番号",
+      "paymentDetails": "支払い情報",
+      "secureTransaction": "安全な取引です。お客様の個人情報は保護されています。",
+      "simulatedNoCharge": "シミュレーション — 実際の請求はありません",
+      "nameOnCard": "カード名義",
+      "cardNumber": "カード番号",
+      "expiration": "有効期限",
+      "expiryPlaceholder": "MM/YY",
+      "securityCode": "セキュリティコード",
+      "billingAddress": "請求先住所",
+      "address": "住所",
+      "city": "市区町村",
+      "stateProvince": "都道府県・州",
+      "zipPostal": "郵便番号",
+      "protectYourStay": "宿泊を保護する",
+      "travuProtect": "Travu Protect",
+      "travuProtectDesc": "この宿泊のキャンセル保護、旅程中断補償、24時間緊急アシスタンス。",
+      "noProtection": "保護なし — キャンセル料が発生する場合があることを理解しています。",
+      "cancellationPolicy": "キャンセルポリシー",
+      "cancellationRefundable": "チェックインの48時間前までにキャンセルすれば全額返金されます。その後は初泊分が返金不可となります。",
+      "cancellationNonRefundable": "この料金は返金不可です。変更やキャンセルでの返金はできません。",
+      "specialInstructions": "チェックインに関する特記事項",
+      "specialInstructionsPlaceholder": "ホストへのご要望（任意）",
+      "termsNotice": "「今すぐ予約」を選択することで、Travuの利用規約とプライバシーステートメントに同意し、これがデモ用のシミュレーション予約であることを確認します。",
+      "processing": "処理中…",
+      "bookNow": "今すぐ予約",
+      "encryptionNotice": "当社の安全な暗号化が、各ステップでお客様の個人情報を保護します。",
+      "steps": {
+        "reviewing": "予約内容を確認中",
+        "verifying": "ゲスト情報を確認中",
+        "confirming": "宿泊施設に確認中",
+        "confirmed": "予約が確定しました"
+      },
+      "errors": {
+        "invalidCard": "有効なカード番号を入力してください。",
+        "bookingFailed": "予約を完了できませんでした。もう一度お試しください。"
+      }
+    },
+    "summary": {
+      "checkIn": "チェックイン",
+      "checkOut": "チェックアウト",
+      "room": "客室",
+      "rooms": "客室数",
+      "nightsRooms": "{nights, plural, other {#泊}} × {rooms, plural, other {#室}}",
+      "taxes": "税金",
+      "serviceFee": "サービス料",
+      "total": "合計",
+      "payToday": "本日のお支払い"
+    },
+    "voucher": {
+      "bookingConfirmed": "予約が確定しました",
+      "print": "印刷",
+      "downloadPdf": "PDFをダウンロード",
+      "confirmationVoucher": "宿泊確認バウチャー",
+      "confirmationNo": "確認番号",
+      "refundable": "返金可",
+      "afterTime": "{time}以降",
+      "beforeTime": "{time}まで",
+      "stay": "宿泊",
+      "nightsRoomsValue": "{nights, plural, other {#泊}}・{rooms, plural, other {#室}}",
+      "guestsCount": "{count, plural, other {ゲスト#名}}",
+      "leadGuest": "代表ゲスト",
+      "guest": "ゲスト",
+      "totalPaid": "お支払い合計",
+      "presentAtCheckIn": "チェックイン時にこのバウチャーをご提示ください",
+      "viewAllTrips": "マイトリップをすべて見る"
+    },
+    "waiting": {
+      "completingBooking": "予約を完了中",
+      "pleaseWait": "宿泊施設での予約を確認していますので、少々お待ちください。数分かかる場合があります。",
+      "securingRoom": "客室を確保中…"
+    }
+  },
+  "cars": {
+    "landing": {
+      "rentInCity": "{city}でレンタカーを借りる",
+      "topDealsInCity": "{city}のおすすめお得情報"
+    },
+    "results": {
+      "noneFound": "レンタカーが見つかりませんでした。日付を変えるか、近くの場所でお試しください。",
+      "noneMatchFilters": "条件に合うレンタカーがありません。いくつか条件を外してみてください。",
+      "yourLocation": "現在地",
+      "carsIn": "{location}のレンタカー",
+      "count": "{count, plural, other {#台}}",
+      "topResults": "（上位結果）",
+      "filters": "絞り込み",
+      "sort": "並べ替え",
+      "memberBanner": "会員はレンタルごとにOneTokenCashが還元されます。ログインして会員価格を解放しましょう。"
+    },
+    "sort": {
+      "recommended": "おすすめ",
+      "priceLowToHigh": "価格（安い順）",
+      "ratingHighToLow": "評価（高い順）"
+    },
+    "card": {
+      "percentOff": "{pct}%オフ",
+      "deal": "お得",
+      "previousPhoto": "前の写真",
+      "nextPhoto": "次の写真",
+      "automatic": "オートマ",
+      "manual": "マニュアル",
+      "auto": "AT",
+      "seats": "{count}人乗り",
+      "bags": "荷物{count}個",
+      "doors": "{count}ドア",
+      "aircon": "エアコン",
+      "mileageLabel": "{mileage}走行距離",
+      "freeCancellation": "無料キャンセル",
+      "nonRefundable": "返金不可",
+      "unlimitedMileage": "走行距離無制限",
+      "perDay": "／日",
+      "perDayVendor": "／日・{vendor}",
+      "totalForDays": "合計・{days, plural, other {#日}}",
+      "reserve": "予約する →"
+    },
+    "filters": {
+      "close": "絞り込みを閉じる",
+      "showCount": "{count, plural, other {#台を表示}}",
+      "noneAvailable": "該当なし",
+      "seeLess": "閉じる",
+      "seeMore": "もっと見る（{count}）",
+      "searchByCarOrCompany": "車種または会社名で検索",
+      "searchPlaceholder": "例：SixtまたはRAV4",
+      "totalPrice": "合計価格",
+      "popularFilters": "人気の絞り込み",
+      "rating": "評価",
+      "ratingAny": "すべて",
+      "ratingExceptional": "最高 9以上",
+      "ratingVeryGood": "とても良い 8以上",
+      "ratingGood": "良い 7以上",
+      "carType": "車種",
+      "capacity": "定員",
+      "rentalCompany": "レンタカー会社",
+      "transmission": "トランスミッション",
+      "mileage": "走行距離",
+      "moreOptions": "その他のオプション",
+      "freeCancellationOnly": "無料キャンセルのみ",
+      "memberDeals": "会員特典・割引",
+      "option": {
+        "automatic": "オートマ",
+        "manual": "マニュアル",
+        "unlimitedMileage": "走行距離無制限",
+        "limitedMileage": "走行距離制限あり",
+        "airConditioning": "エアコン",
+        "freeCancellation": "無料キャンセル",
+        "seats4": "4人乗り",
+        "seats5": "5人乗り",
+        "seats7plus": "7人乗り以上"
+      }
+    },
+    "steps": {
+      "review": "確認",
+      "driver": "運転者",
+      "payment": "支払い"
+    },
+    "progress": {
+      "reviewing": "予約内容を確認中",
+      "verifyingDriver": "運転者情報を確認中",
+      "confirmingCompany": "レンタカー会社に確認中",
+      "confirmed": "予約が確定しました"
+    },
+    "booking": {
+      "back": "戻る",
+      "reservationError": "予約を完了できませんでした。もう一度お試しください。",
+      "reviewYourCar": "車を確認する",
+      "protectYourRental": "レンタルを保護する",
+      "fullProtection": "フル保護",
+      "fullProtectionDesc": "免責金額ゼロの損害・盗難補償に加え、レンタル期間中24時間のロードサイドアシスタンス。",
+      "noProtection": "追加保護なし — レンタカー会社の基本補償を利用します。",
+      "continueToDriver": "運転者情報へ進む",
+      "driverDetails": "運転者情報",
+      "continueToPayment": "支払いへ進む",
+      "processing": "処理中…",
+      "reserveNow": "今すぐ予約",
+      "secureNote": "お客様の情報は安全な暗号化で保護されます。"
+    },
+    "driver": {
+      "firstName": "名",
+      "lastName": "姓",
+      "age": "運転者の年齢",
+      "licenseNo": "運転免許証番号",
+      "email": "メールアドレス",
+      "countryCode": "国番号",
+      "phone": "電話番号",
+      "flightNo": "便名（任意）",
+      "flightNoPlaceholder": "例：BA245 — 遅延時に役立ちます",
+      "youngDriverNote": "25歳未満の運転者には若年運転者料金がかかります。合計に含まれています。"
+    },
+    "summary": {
+      "pickUp": "受取",
+      "dropOff": "返却",
+      "transmission": "トランスミッション",
+      "mileage": "走行距離",
+      "timesDays": "× {days, plural, other {#日}}",
+      "taxes": "税金",
+      "bookingFee": "予約手数料",
+      "youngDriverFee": "若年運転者料金",
+      "total": "合計",
+      "payToday": "本日のお支払い"
+    },
+    "confirmation": {
+      "title": "予約が確定しました",
+      "print": "印刷",
+      "voucherSubtitle": "レンタカー確認バウチャー",
+      "confirmationNo": "確認番号",
+      "rental": "レンタル",
+      "driver": "運転者",
+      "days": "{days, plural, other {#日}}",
+      "daysRental": "{days, plural, other {#日間レンタル}}",
+      "totalPaid": "お支払い合計",
+      "barcodeAlt": "予約{ref}のバーコード",
+      "presentVoucher": "レンタルカウンターでこのバウチャーをご提示ください",
+      "viewAllTrips": "マイトリップをすべて見る"
+    }
+  },
+  "flights": {
+    "perTraveller": "1名あたり",
+    "stops": {
+      "nonstop": "直行",
+      "direct": "直行",
+      "directLower": "直行",
+      "count": "{count, plural, other {#回乗り継ぎ}}"
+    },
+    "results": {
+      "title": "検索結果",
+      "flightsFound": "{count}件の便が見つかりました",
+      "departingFlights": "往路便",
+      "returningFlights": "復路便",
+      "legLabel": "区間{index}：{origin} → {dest}",
+      "emptyState": "まだ便がありません。上で路線と日付を選んで検索してください。",
+      "noMatchLeg": "この区間で条件に合う便がありません。",
+      "noMatchFilters": "条件に合う便がありません。いくつか外してみてください。",
+      "searching": "各航空会社のリアルタイム運賃を検索中…",
+      "showMore": "もっと結果を表示",
+      "moreCount": "（あと{count}件）"
+    },
+    "filters": {
+      "filterBy": "絞り込み",
+      "stops": "乗り継ぎ",
+      "any": "すべて",
+      "upToOneStop": "乗り継ぎ1回まで",
+      "airlines": "航空会社",
+      "from": "下限"
+    },
+    "sort": {
+      "sortBy": "並べ替え",
+      "recommended": "おすすめ",
+      "cheapest": "最安",
+      "fastest": "最速"
+    },
+    "card": {
+      "seatsLeft": "この価格で残り{count}席",
+      "select": "選択",
+      "flightDetails": "便の詳細"
+    },
+    "detail": {
+      "backToResults": "← 検索結果に戻る",
+      "continueToBook": "予約に進む"
+    },
+    "fare": {
+      "selectFareTo": "{dest}行きの運賃を選択",
+      "close": "閉じる",
+      "operatedBy": "この便は{carrier}が運航します。",
+      "cabin": "客室クラス：{cabin}",
+      "select": "選択"
+    },
+    "perks": {
+      "seatChoiceIncluded": "座席指定込み",
+      "seatChoiceFee": "座席指定は有料",
+      "handBaggage": "手荷物込み（{kg}kg）",
+      "checkedBag": "受託手荷物{count}個（各{kg}kg）",
+      "checkedBags": "{count, plural, other {受託手荷物#個}}（各{kg}kg）",
+      "checkedBagFee": "受託手荷物は有料",
+      "refundable": "返金可",
+      "nonRefundable": "返金不可",
+      "freeChanges": "変更無料",
+      "changeFee": "変更手数料あり",
+      "noChanges": "変更不可"
+    },
+    "prediction": {
+      "title": "AI価格予測",
+      "confidence": "信頼度{confidence}%"
+    },
+    "priceTracking": {
+      "title": "価格追跡",
+      "currentLowest": "現在の最安値："
+    },
+    "fareBreakdown": {
+      "title": "運賃の内訳",
+      "baseFare": "基本運賃",
+      "baseFareMultiple": "基本運賃 × {count}",
+      "taxes": "税金",
+      "fees": "手数料",
+      "total": "合計"
+    },
+    "segments": {
+      "layoverIn": "{iata}で乗り継ぎ"
+    },
+    "steps": {
+      "reviewTrip": "旅程を確認",
+      "travellers": "搭乗者",
+      "payment": "支払い",
+      "reviewAndBook": "確認して予約"
+    },
+    "sidebar": {
+      "businessFlight": "ビジネスクラスの便",
+      "oneWayFlight": "片道便",
+      "priceSummary": "料金の概要",
+      "travellerAdult": "搭乗者{index}・大人",
+      "taxesFees": "税・手数料",
+      "nextCheckout": "次：お会計",
+      "nextPayment": "次：支払い",
+      "nextReview": "次：確認",
+      "buyNow": "今すぐ購入",
+      "next": "次へ"
+    },
+    "progress": {
+      "reviewing": "予約申請を確認中",
+      "verifying": "申請データを確認中",
+      "bookingTicket": "航空会社APIでチケットを予約中",
+      "approved": "予約が承認されました",
+      "secureBooking": "{brand}の安全な予約",
+      "keepWindowOpen": "このウィンドウを開いたままにしてください…"
+    },
+    "bookingForm": {
+      "travellerDetails": "搭乗者情報",
+      "firstName": "名",
+      "lastName": "姓",
+      "dateOfBirth": "生年月日",
+      "payment": "支払い",
+      "simulatedCharge": "シミュレーション — 実際の請求はありません",
+      "cardNumber": "カード番号",
+      "expiry": "有効期限",
+      "cvc": "CVC",
+      "invalidCard": "有効なカード番号を入力してください。",
+      "bookingFailed": "予約を完了できませんでした。もう一度お試しください。",
+      "networkError": "ネットワークエラー。もう一度お試しください。",
+      "processing": "処理中…",
+      "pay": "支払う",
+      "andConfirm": "して確定"
+    },
+    "reviewTrip": {
+      "title": "旅程を確認する",
+      "route": "{origin}から{dest}",
+      "changeFlight": "便を変更",
+      "yourFare": "あなたの運賃：{fare}",
+      "seatsAndBags": "座席と手荷物",
+      "seatsAndBagsNote": "予約後、ダッシュボードからこの旅に座席を指定したり手荷物を追加したりできます。"
+    },
+    "travellers": {
+      "title": "安全な予約 — 数分で完了します",
+      "nameMatchNote": "搭乗者の名前は、政府発行の写真付き身分証明書と完全に一致している必要があります。",
+      "required": "必須",
+      "travellerOf": "搭乗者{index}／{total}",
+      "firstName": "名",
+      "middleName": "ミドルネーム",
+      "surname": "姓",
+      "passportCountry": "パスポート発行国",
+      "passportNumber": "パスポート番号",
+      "passportFormatError": "この国では {example} のような形式が必要です。",
+      "dateOfBirth": "生年月日",
+      "dobDay": "生年月日（日）",
+      "dobMonth": "生年月日（月）",
+      "dobYear": "生年月日（年）",
+      "day": "日",
+      "month": "月",
+      "year": "年",
+      "contactDetails": "連絡先情報",
+      "contactNote": "eチケットや更新情報はこのメールアドレスにお送りします。",
+      "emailAddress": "メールアドレス",
+      "marketingOptIn": "旅の更新情報とお得情報を受け取る。",
+      "countryCode": "国番号",
+      "phoneNumber": "電話番号",
+      "phoneDigitsExact": "この国の番号は{count}桁です。",
+      "phoneDigitsRange": "この国の番号は{min}〜{max}桁です。"
+    },
+    "payment": {
+      "title": "お支払い方法をお選びください",
+      "simulatedNote": "支払いはシミュレーションです。実際の請求はありません。",
+      "nameOnCard": "カード名義",
+      "cardNumber": "デビット／クレジットカード番号",
+      "cardNotAccepted": "このカードはTravuでご利用いただけません。別のカードをお試しください。",
+      "expiryDate": "有効期限",
+      "securityCode": "セキュリティコード",
+      "billingAddress": "請求先住所",
+      "countryTerritory": "国・地域",
+      "billingAddress1": "請求先住所1",
+      "billingAddress2": "請求先住所2",
+      "postalCode": "郵便番号",
+      "city": "市区町村",
+      "cardNotAcceptedTitle": "ご利用いただけないカード",
+      "cardNotAcceptedMessage": "このカードはTravuでご利用いただけません。別のカードをお試しください",
+      "tryAnotherCard": "別のカードを試す"
+    },
+    "reviewBook": {
+      "title": "旅程を確認して予約する",
+      "numbered1": "旅程の詳細を確認し、日付と時刻が正しいことをご確認ください。",
+      "numbered2": "スペルをご確認ください。搭乗者名は政府発行の写真付き身分証明書と完全に一致している必要があります。",
+      "numbered3": "予約の条件をご確認ください。",
+      "fareRule1": "手荷物を持ち込み可",
+      "fareRule2": "受託手荷物は有料",
+      "fareRule3": "キャンセル不可",
+      "fareRule4": "変更不可",
+      "fareRulesFor": "{origin}から{dest}の運賃規則",
+      "acknowledgement": "下のボタンをクリックすることで、プライバシーステートメントと政府の渡航情報を確認し、規則・制限事項および利用規約を確認のうえ同意したことを認めます。",
+      "yourTrip": "あなたの旅程",
+      "route": "路線",
+      "date": "日付",
+      "times": "時刻",
+      "carrier": "運航会社",
+      "fare": "運賃",
+      "travellers": "搭乗者",
+      "contact": "連絡先",
+      "payment": "支払い",
+      "cardEndingIn": "下4桁{last4}のカード",
+      "applyOneToken": "OneTokenCashを利用する",
+      "oneTokenBalance": "ご利用可能：",
+      "inOneToken": "のOneTokenCash。",
+      "applying": "適用中",
+      "toThisBooking": "をこの予約に。",
+      "useToSave": "利用すると最大で",
+      "buyNow": "今すぐ購入",
+      "secureNote": "安全な暗号化による送信・保管。",
+      "buyMoreSaveTitle": "いつでもまとめてお得！",
+      "buyMoreSaveBody": "今航空券を予約して後で宿を追加すれば、旅がお得になります。"
+    },
+    "confirmation": {
+      "guest": "ゲスト",
+      "viewAllTrips": "マイトリップをすべて見る",
+      "bookingConfirmed": "予約が確定しました",
+      "slipIssued": "確認伝票が発行されました。参照番号：",
+      "bookingConfirmationHeader": "予約確認",
+      "itineraryNo": "旅程番号",
+      "issued": "発行日 {date}",
+      "travellers": "搭乗者",
+      "departure": "出発",
+      "bookingReference": "予約番号",
+      "flightDetails": "便の詳細",
+      "departArrive": "出発 {departTime}・{departDate} — 到着 {arriveTime}・{arriveDate}",
+      "cabinClass": "{cabin}クラス",
+      "paymentSummary": "お支払いの概要",
+      "airFare": "航空運賃",
+      "bookingFee": "Travu予約手数料",
+      "taxesFees": "税・手数料",
+      "totalPaid": "お支払い合計",
+      "paidVia": "{label}で支払い済み",
+      "qrAlt": "{ref}のQRコード",
+      "presentSlip": "チェックイン時にこの伝票と有効なパスポートをご提示ください",
+      "finePrint": "この確認伝票はTravuがデモ目的で生成したシミュレーションのレシートであり、渡航には無効です。運送は運航会社の運送約款および運賃規定に従います。国際線の出発少なくとも3時間前にはご到着ください。カード情報はマスクされた概要としてのみ保存され、カード番号全体、有効期限、セキュリティコードは一切保持されません。Travu予約番号 {ref}。",
+      "downloadPdf": "PDFをダウンロード",
+      "print": "印刷",
+      "trackThisTrip": "この旅を追跡"
+    }
   }
 }

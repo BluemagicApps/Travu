@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { getTranslations } from "next-intl/server";
 import { Car } from "lucide-react";
 import { CarFilter, paramsFromFilter } from "@/lib/cars/schema";
 import { searchCars } from "@/lib/cars/search";
@@ -14,12 +15,13 @@ import { PromoBanner } from "@/components/home/PromoBanner";
 import { ValueProps } from "@/components/home/ValueProps";
 
 async function CarsResults({ filter }: { filter: CarFilter }) {
+  const t = await getTranslations("cars");
   const cars = await searchCars(paramsFromFilter(filter));
   if (cars.length === 0) {
     return (
       <div className="glass mt-6 rounded-2xl p-10 text-center text-muted">
         <Car className="mx-auto h-8 w-8 text-price" />
-        <p className="mt-3">No cars found — try different dates or a nearby location.</p>
+        <p className="mt-3">{t("results.noneFound")}</p>
       </div>
     );
   }
@@ -47,12 +49,13 @@ export default async function CarsPage({
 
   // ── No search params → full Expedia-style landing page ──
   if (!filter) {
+    const t = await getTranslations("cars");
     return (
       <div>
         <CarsHero />
-        <CarDealsBand title="Rent a car in London" cars={dealCars("London", 8)} />
+        <CarDealsBand title={t("landing.rentInCity", { city: "London" })} cars={dealCars("London", 8)} />
         <PromoBanner />
-        <CarDealsBand title="Top deals in Dubai" cars={dealCars("Dubai", 8)} />
+        <CarDealsBand title={t("landing.topDealsInCity", { city: "Dubai" })} cars={dealCars("Dubai", 8)} />
         <ValueProps />
       </div>
     );

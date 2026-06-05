@@ -2,6 +2,7 @@
 
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { BedDouble } from "lucide-react";
 import type { Stay } from "@/lib/stays/types";
 import { computeStayFacets, filterAndSortStays, type StayFilterState } from "@/lib/stays/facets";
@@ -22,6 +23,7 @@ export function StayResultsView({
   stays: Stay[];
   capped?: boolean;
 }) {
+  const t = useTranslations("stays");
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -44,7 +46,7 @@ export function StayResultsView({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state]);
 
-  const city = stays[0]?.city ?? "your destination";
+  const city = stays[0]?.city ?? t("results.yourDestination");
   const promoBrand = stays.find((s) => s.brand)?.brand ?? "Travu Partners";
 
   return (
@@ -68,7 +70,7 @@ export function StayResultsView({
         {visible.length === 0 ? (
           <div className="glass rounded-2xl p-10 text-center text-muted">
             <BedDouble className="mx-auto h-8 w-8 text-price" />
-            <p className="mt-3">No stays match your filters. Try removing a few.</p>
+            <p className="mt-3">{t("results.noMatch")}</p>
           </div>
         ) : (
           <div className="space-y-3">

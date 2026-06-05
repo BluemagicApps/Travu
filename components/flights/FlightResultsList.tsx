@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
 import { FlightCard, type AirportLite } from "./FlightCard";
 import { FareSelect } from "./FareSelect";
@@ -18,6 +19,7 @@ export function FlightResultsList({
   flights: Flight[];
   airportMap: Map<string, AirportLite>;
 }) {
+  const t = useTranslations("flights");
   const [active, setActive] = useState<Flight | null>(null);
   const [visible, setVisible] = useState(PAGE);
 
@@ -52,8 +54,8 @@ export function FlightResultsList({
           onClick={() => setVisible((v) => v + PAGE)}
           className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-surface py-3 text-sm font-semibold text-price transition hover:border-sky-400"
         >
-          Show more results
-          <span className="text-muted">({remaining} more)</span>
+          {t("results.showMore")}
+          <span className="text-muted">{t("results.moreCount", { count: remaining })}</span>
           <ChevronDown className="h-4 w-4" />
         </button>
       )}

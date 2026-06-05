@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Car, Check, ChevronLeft, ShieldCheck, Lock } from "lucide-react";
 import type { Car as CarOffer } from "@/lib/cars/types";
@@ -18,13 +19,6 @@ const field =
   "w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-sm outline-none focus:border-sky-400";
 const labelCls = "mb-1 block text-xs font-medium text-muted";
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-
-const CAR_STEPS = [
-  "Reviewing your reservation",
-  "Verifying driver details",
-  "Confirming with the rental company",
-  "Reservation confirmed",
-];
 
 interface DriverInput {
   firstName: string;
@@ -48,10 +42,16 @@ const emptyDriver: DriverInput = {
   licenseNo: "",
 };
 
-const STEP_LABELS = ["Review", "Driver", "Payment"];
-
 export function CarBookingClient({ car }: { car: CarOffer }) {
+  const t = useTranslations("cars");
   const router = useRouter();
+  const CAR_STEPS = [
+    t("progress.reviewing"),
+    t("progress.verifyingDriver"),
+    t("progress.confirmingCompany"),
+    t("progress.confirmed"),
+  ];
+  const STEP_LABELS = [t("steps.review"), t("steps.driver"), t("steps.payment")];
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [plan, setPlan] = useState<ProtectionPlanId>("NONE");
   const [driver, setDriver] = useState<DriverInput>(emptyDriver);
@@ -136,7 +136,7 @@ export function CarBookingClient({ car }: { car: CarOffer }) {
           onError={(err) => {
             setBooking(false);
             if (!(err instanceof Error) || err.message !== "auth") {
-              setError("Could not complete the reservation. Please try again.");
+              setError(t("booking.reservationError"));
             }
           }}
         />
@@ -173,7 +173,7 @@ export function CarBookingClient({ car }: { car: CarOffer }) {
           {/* Step 1 — Review + protection */}
           {step === 1 && (
             <div className="space-y-5">
-              <h1 className="text-2xl font-extrabold">Review your car</h1>
+              <h1 className="text-2xl font-extrabold">{t("booking.reviewYourCar")}</h1>
               <section className="rounded-2xl border border-border bg-surface p-4">
                 <div className="flex gap-4">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -182,7 +182,7 @@ export function CarBookingClient({ car }: { car: CarOffer }) {
                     <p className="text-xs font-semibold text-price">{car.carClass}</p>
                     <h2 className="font-bold">{car.exampleModel}</h2>
                     <p className="mt-1 text-xs text-muted">
-                      {car.transmission === "automatic" ? "Automatic" : "Manual"} · {car.seats} seats · {car.bags} bags · {car.mileage} mileage
+                      {car.transmission === "automatic" ? t("card.automatic") : t("card.manual")} · {t("card.seats", { count: car.seats })} · {t("card.bags", { count: car.bags })} · {t("card.mileageLabel", { mileage: car.mileage })}
                     </p>
                     <p className="mt-1 text-xs text-muted">{car.vendor} · {car.pickupType}</p>
                   </div>
@@ -190,27 +190,27 @@ export function CarBookingClient({ car }: { car: CarOffer }) {
               </section>
 
               <section className="rounded-2xl border border-border bg-surface p-4">
-                <h2 className="font-semibold">Protect your rental</h2>
+                <h2 className="font-semibold">{t("booking.protectYourRental")}</h2>
                 <div className="mt-3 space-y-2">
                   <label className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3 ${plan === "TRAVU_PROTECT" ? "border-price bg-price/5" : "border-border"}`}>
                     <input type="radio" name="plan" className="mt-1" checked={plan === "TRAVU_PROTECT"} onChange={() => setPlan("TRAVU_PROTECT")} />
                     <span className="flex-1">
                       <span className="flex items-center justify-between">
-                        <span className="flex items-center gap-1.5 font-semibold"><ShieldCheck className="h-4 w-4 text-price" /> Full protection</span>
+                        <span className="flex items-center gap-1.5 font-semibold"><ShieldCheck className="h-4 w-4 text-price" /> {t("booking.fullProtection")}</span>
                         <span className="font-semibold"><Money cents={protectPrice.protection} /></span>
                       </span>
-                      <span className="mt-1 block text-xs text-muted">Zero-excess damage &amp; theft cover plus 24/7 roadside assistance for your whole rental.</span>
+                      <span className="mt-1 block text-xs text-muted">{t("booking.fullProtectionDesc")}</span>
                     </span>
                   </label>
                   <label className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3 ${plan === "NONE" ? "border-price bg-price/5" : "border-border"}`}>
                     <input type="radio" name="plan" className="mt-1" checked={plan === "NONE"} onChange={() => setPlan("NONE")} />
-                    <span className="text-sm">No extra protection — I&apos;ll rely on the rental company&apos;s basic cover.</span>
+                    <span className="text-sm">{t("booking.noProtection")}</span>
                   </label>
                 </div>
               </section>
 
               <button type="button" onClick={() => setStep(2)} className="btn-accent w-full rounded-xl py-3.5 text-sm font-semibold">
-                Continue to driver details
+                {t("booking.continueToDriver")}
               </button>
             </div>
           )}
@@ -218,31 +218,31 @@ export function CarBookingClient({ car }: { car: CarOffer }) {
           {/* Step 2 — Driver details */}
           {step === 2 && (
             <div className="space-y-5">
-              <BackLink onClick={() => setStep(1)} />
-              <h1 className="text-2xl font-extrabold">Driver details</h1>
+              <BackLink onClick={() => setStep(1)} label={t("booking.back")} />
+              <h1 className="text-2xl font-extrabold">{t("booking.driverDetails")}</h1>
               <section className="rounded-2xl border border-border bg-surface p-4">
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <label className="block"><span className={labelCls}>First name <span className="text-rose-500">*</span></span>
+                  <label className="block"><span className={labelCls}>{t("driver.firstName")} <span className="text-rose-500">*</span></span>
                     <input className={field} value={driver.firstName} onChange={(e) => setDriverField("firstName", e.target.value)} /></label>
-                  <label className="block"><span className={labelCls}>Last name <span className="text-rose-500">*</span></span>
+                  <label className="block"><span className={labelCls}>{t("driver.lastName")} <span className="text-rose-500">*</span></span>
                     <input className={field} value={driver.lastName} onChange={(e) => setDriverField("lastName", e.target.value)} /></label>
-                  <label className="block"><span className={labelCls}>Driver age <span className="text-rose-500">*</span></span>
+                  <label className="block"><span className={labelCls}>{t("driver.age")} <span className="text-rose-500">*</span></span>
                     <input type="number" min={18} max={99} className={field} value={driver.age} onChange={(e) => setDriverField("age", e.target.value)} /></label>
-                  <label className="block"><span className={labelCls}>Driving licence no.</span>
+                  <label className="block"><span className={labelCls}>{t("driver.licenseNo")}</span>
                     <input className={field} value={driver.licenseNo} onChange={(e) => setDriverField("licenseNo", e.target.value)} /></label>
-                  <label className="block sm:col-span-2"><span className={labelCls}>Email <span className="text-rose-500">*</span></span>
+                  <label className="block sm:col-span-2"><span className={labelCls}>{t("driver.email")} <span className="text-rose-500">*</span></span>
                     <input type="email" className={field} value={driver.email} onChange={(e) => setDriverField("email", e.target.value)} /></label>
-                  <label className="block"><span className={labelCls}>Country code</span>
+                  <label className="block"><span className={labelCls}>{t("driver.countryCode")}</span>
                     <select className={field} value={driver.phoneCountry} onChange={(e) => setDriverField("phoneCountry", e.target.value)}>
                       <option>US +1</option><option>UK +44</option><option>NG +234</option><option>AE +971</option><option>JP +81</option>
                     </select></label>
-                  <label className="block"><span className={labelCls}>Phone number <span className="text-rose-500">*</span></span>
+                  <label className="block"><span className={labelCls}>{t("driver.phone")} <span className="text-rose-500">*</span></span>
                     <input inputMode="tel" className={field} value={driver.phone} onChange={(e) => setDriverField("phone", e.target.value)} /></label>
-                  <label className="block sm:col-span-2"><span className={labelCls}>Flight number (optional)</span>
-                    <input className={field} placeholder="e.g. BA245 — helps if your flight is delayed" value={driver.flightNo} onChange={(e) => setDriverField("flightNo", e.target.value)} /></label>
+                  <label className="block sm:col-span-2"><span className={labelCls}>{t("driver.flightNo")}</span>
+                    <input className={field} placeholder={t("driver.flightNoPlaceholder")} value={driver.flightNo} onChange={(e) => setDriverField("flightNo", e.target.value)} /></label>
                 </div>
                 {driverAge != null && driverAge < 25 && (
-                  <p className="mt-3 text-xs text-amber-600">A young-driver fee applies for drivers under 25 — it&apos;s included in your total.</p>
+                  <p className="mt-3 text-xs text-amber-600">{t("driver.youngDriverNote")}</p>
                 )}
               </section>
               <button
@@ -251,7 +251,7 @@ export function CarBookingClient({ car }: { car: CarOffer }) {
                 onClick={() => setStep(3)}
                 className="btn-accent w-full rounded-xl py-3.5 text-sm font-semibold disabled:opacity-50"
               >
-                Continue to payment
+                {t("booking.continueToPayment")}
               </button>
             </div>
           )}
@@ -259,13 +259,13 @@ export function CarBookingClient({ car }: { car: CarOffer }) {
           {/* Step 3 — Payment */}
           {step === 3 && (
             <div className="space-y-5">
-              <BackLink onClick={() => setStep(2)} />
+              <BackLink onClick={() => setStep(2)} label={t("booking.back")} />
               <Payment value={payment} onChange={setPayment} />
               {error && <p className="text-sm text-rose-500">{error}</p>}
               <AnimatedSubmitButton
                 type="button"
                 loading={booking}
-                loadingLabel="Processing…"
+                loadingLabel={t("booking.processing")}
                 disabled={!paymentComplete}
                 className="py-3.5"
                 onClick={() => {
@@ -273,10 +273,10 @@ export function CarBookingClient({ car }: { car: CarOffer }) {
                   setBooking(true);
                 }}
               >
-                <span>Reserve now · <Money cents={price.total} /></span>
+                <span>{t("booking.reserveNow")} · <Money cents={price.total} /></span>
               </AnimatedSubmitButton>
               <p className="flex items-center justify-center gap-1.5 text-center text-[11px] text-muted">
-                <Lock className="h-3 w-3" /> Your details are protected with secure encryption.
+                <Lock className="h-3 w-3" /> {t("booking.secureNote")}
               </p>
             </div>
           )}
@@ -288,10 +288,10 @@ export function CarBookingClient({ car }: { car: CarOffer }) {
   );
 }
 
-function BackLink({ onClick }: { onClick: () => void }) {
+function BackLink({ onClick, label }: { onClick: () => void; label: string }) {
   return (
     <button type="button" onClick={onClick} className="flex items-center gap-1 text-sm text-muted transition hover:text-text">
-      <ChevronLeft className="h-4 w-4" /> Back
+      <ChevronLeft className="h-4 w-4" /> {label}
     </button>
   );
 }

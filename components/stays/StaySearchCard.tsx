@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { Search, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { AnimatedSubmitButton } from "@/components/ui/AnimatedSubmitButton";
 import { SearchProgressBar } from "@/components/ui/SearchProgressBar";
 import { LocationAutocomplete } from "./search/LocationAutocomplete";
@@ -25,6 +26,7 @@ export interface StaySearchInitial {
 }
 
 export function StaySearchCard({ initial, showAi = false }: { initial?: StaySearchInitial; showAi?: boolean }) {
+  const t = useTranslations("search");
   const router = useRouter();
   const [pending, startTransition] = useTransition();
   const [destination, setDestination] = useState(initial?.destination ?? "");
@@ -123,10 +125,10 @@ export function StaySearchCard({ initial, showAi = false }: { initial?: StaySear
           <TravelersRooms value={travelers} onChange={setTravelers} />
           <AnimatedSubmitButton
             loading={pending}
-            loadingLabel="Searching…"
+            loadingLabel="…"
             className="h-[42px] px-6 py-0"
           >
-            <Search className="h-4 w-4" /> Search
+            <Search className="h-4 w-4" /> {t("search")}
           </AnimatedSubmitButton>
         </div>
         {error && <p className="mt-2 text-xs text-rose-500">{error}</p>}
@@ -138,7 +140,7 @@ export function StaySearchCard({ initial, showAi = false }: { initial?: StaySear
         <>
           <div className="my-4 flex items-center gap-3 text-xs text-muted">
             <span className="h-px flex-1 bg-border" />
-            or just tell our AI what you need
+            {t("aiDivider")}
             <span className="h-px flex-1 bg-border" />
           </div>
           <form onSubmit={askAi}>
@@ -150,7 +152,7 @@ export function StaySearchCard({ initial, showAi = false }: { initial?: StaySear
               <input
                 value={ai}
                 onChange={(e) => setAi(e.target.value)}
-                placeholder='Ask in plain words — e.g. "5-star hotel in Rome for 3 nights with a pool"'
+                placeholder={t("aiPlaceholderStays")}
                 className="min-w-0 flex-1 bg-transparent px-1 py-2 text-sm outline-none"
               />
               <button
@@ -160,7 +162,7 @@ export function StaySearchCard({ initial, showAi = false }: { initial?: StaySear
               >
                 {aiLoading ? "…" : (
                   <>
-                    <Sparkles className="h-4 w-4" /> Ask AI
+                    <Sparkles className="h-4 w-4" /> {t("askAi")}
                   </>
                 )}
               </button>

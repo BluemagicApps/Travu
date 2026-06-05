@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface LinkCol {
   heading: string;
@@ -42,10 +43,11 @@ const COLUMNS: LinkCol[] = [
 
 /** "Explore a world of travel with Travu" multi-column link section — mirrors img4. */
 export function ExploreWorld() {
+  const t = useTranslations("homeSections");
   return (
     <section className="mx-auto max-w-6xl px-4 py-10">
       <h2 className="mb-5 text-2xl font-extrabold tracking-tight">
-        Explore a world of travel with Travu
+        {t("exploreWorld.heading")}
       </h2>
       <div className="grid grid-cols-2 gap-x-6 gap-y-8 lg:grid-cols-4">
         {COLUMNS.map((col) => (

@@ -1,4 +1,5 @@
 import { Sparkles } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { getAirportOptions } from "@/lib/flights/dataset";
 import { getServerLocation } from "@/lib/geo/ip-location";
 import { HomeSearch } from "@/components/layout/HomeSearch";
@@ -10,7 +11,11 @@ import { ExploreWorld } from "@/components/home/ExploreWorld";
 import { ValueProps } from "@/components/home/ValueProps";
 
 export default async function Home() {
-  const [airports, location] = await Promise.all([getAirportOptions(), getServerLocation()]);
+  const [airports, location, t] = await Promise.all([
+    getAirportOptions(),
+    getServerLocation(),
+    getTranslations("home"),
+  ]);
   const city = location.city || "your city";
 
   return (
@@ -22,16 +27,14 @@ export default async function Home() {
 
       <section className="mx-auto max-w-4xl px-4 pt-20 pb-12 text-center">
         <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted">
-          <Sparkles className="h-3.5 w-3.5" /> AI-powered travel, reinvented
+          <Sparkles className="h-3.5 w-3.5" /> {t("eyebrow")}
         </span>
 
         <h1 className="mt-6 text-4xl font-extrabold tracking-tight sm:text-6xl">
-          The one place you go to <span className="text-gradient">go places.</span>
+          {t("tagline")}
         </h1>
 
-        <p className="mx-auto mt-4 max-w-xl text-lg text-muted">
-          {"Tell Travu where you want to go, the way you'd tell a friend. Flights and stays — we handle the search, the price, and the booking, end to end."}
-        </p>
+        <p className="mx-auto mt-4 max-w-xl text-lg text-muted">{t("subtitle")}</p>
 
         <div className="mx-auto mt-8 max-w-2xl">
           <HomeSearch airports={airports} />

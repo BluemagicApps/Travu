@@ -1,5 +1,6 @@
 import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import QRCode from "qrcode";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db/prisma";
@@ -27,6 +28,7 @@ export default async function BookingConfirmationPage({
   });
   if (!booking || booking.userId !== session.user.id) notFound();
 
+  const t = await getTranslations("flights");
   const flight = booking.flightSnapshot as unknown as Flight;
   const ds = await loadDataset();
   const cityOf = (iata: string) => ds.airports.get(iata)?.city ?? iata;
@@ -40,7 +42,7 @@ export default async function BookingConfirmationPage({
     fareName: booking.fareName ?? flight.cabin,
     flight,
     total: booking.totalAmount,
-    passengerNames: passengerNames.length ? passengerNames : ["Guest"],
+    passengerNames: passengerNames.length ? passengerNames : [t("confirmation.guest")],
     paymentMethod: booking.payment?.method,
     last4: booking.payment?.last4,
     cityOf,
@@ -59,7 +61,7 @@ export default async function BookingConfirmationPage({
           href="/dashboard"
           className="text-sm font-medium text-muted transition hover:text-text"
         >
-          View all my trips
+          {t("confirmation.viewAllTrips")}
         </Link>
       </div>
     </>

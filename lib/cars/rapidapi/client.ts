@@ -1,9 +1,10 @@
-// Thin RapidAPI client for a car-rental endpoint (default: Booking.com car
-// rentals via booking-com15). Live only when CARS_RAPIDAPI_KEY is set; until
-// then getCarProvider() serves the mock generator. The exact request/response
-// shape is finalized by probing with a real key (see rapidapi/map.ts).
+// Thin RapidAPI client for a car-rental endpoint (default: Priceline car
+// rentals via priceline-com-provider). Live only when CARS_RAPIDAPI_KEY is set;
+// until then getCarProvider() serves the mock generator. One RapidAPI key works
+// across every API the app is subscribed to, so the same key used elsewhere
+// works here once you subscribe to the Priceline provider's (free) tier.
 
-const DEFAULT_HOST = "booking-com15.p.rapidapi.com";
+const DEFAULT_HOST = "priceline-com-provider.p.rapidapi.com";
 
 export function carRapidApiEnabled(): boolean {
   return Boolean(process.env.CARS_RAPIDAPI_KEY);

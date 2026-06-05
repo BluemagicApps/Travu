@@ -1,65 +1,62 @@
 import type { Car, CarParams } from "../types";
 import type { CarProvider } from "../provider";
 import { rapidApiGet } from "./client";
-import { mapRapidCar, type RawRapidCar } from "./map";
+import { mapPricelineCar, type RawVehicleRate, type PartnerMap } from "./map";
 
-interface RawDestination {
-  name?: string;
-  coordinates?: { latitude?: number; longitude?: number };
-  latitude?: number;
-  longitude?: number;
+// One entry from /v1/cars-rentals/locations (a bare JSON array of these).
+interface RawLocation {
+  id?: string; // e.g. "LHR" (airport) or a numeric city id
+  type?: string; // "AIRPORT" | "CITY" | ...
+  itemName?: string;
+  cityName?: string;
 }
-interface DestinationResp {
-  data?: RawDestination[];
-}
+
 interface SearchResp {
-  data?: { search_results?: RawRapidCar[] };
+  vehicleRates?: Record<string, RawVehicleRate>;
+  partners?: PartnerMap;
 }
 
-function coordsOf(d: RawDestination): { lat: number; lng: number } | null {
-  const lat = d.coordinates?.latitude ?? d.latitude;
-  const lng = d.coordinates?.longitude ?? d.longitude;
-  if (typeof lat === "number" && typeof lng === "number") return { lat, lng };
-  return null;
-}
-
-// Booking.com car-rentals via RapidAPI. Resolves the pickup/dropoff to
-// coordinates, then searches. Any error or empty result bubbles up so
-// searchCars() can fall back to the mock generator.
+// Priceline car rentals via RapidAPI (priceline-com-provider). Resolves the
+// pickup/dropoff names to Priceline location codes, then searches. Any error or
+// empty result bubbles up so searchCars() can fall back to the mock generator.
 export class RapidApiCarProvider implements CarProvider {
   kind = "rapidapi" as const;
 
-  private async resolveCoords(query: string): Promise<{ lat: number; lng: number }> {
-    const resp = await rapidApiGet<DestinationResp>("/api/v1/cars/searchDestination", { query });
-    const first = resp.data?.[0];
-    const coords = first ? coordsOf(first) : null;
-    if (!coords) throw new Error("rapidapi_no_destination");
-    return coords;
+  private async resolveLocationCode(query: string): Promise<string> {
+    const list = await rapidApiGet<RawLocation[]>("/v1/cars-rentals/locations", {
+      name: query.trim().slice(0, 50),
+    });
+    const arr = Array.isArray(list) ? list : [];
+    // Prefer an airport (its id is a clean IATA code) over a city match.
+    const airport = arr.find((l) => l.type === "AIRPORT" && l.id);
+    const code = (airport ?? arr.find((l) => l.id))?.id;
+    if (!code) throw new Error("priceline_no_location");
+    return String(code);
   }
 
   async searchCars(params: CarParams): Promise<Car[]> {
-    const pickup = await this.resolveCoords(params.pickup);
-    const dropoff =
+    const pickupCode = await this.resolveLocationCode(params.pickup);
+    const returnCode =
       params.dropoff && params.dropoff !== params.pickup
-        ? await this.resolveCoords(params.dropoff)
-        : pickup;
+        ? await this.resolveLocationCode(params.dropoff)
+        : pickupCode;
 
-    const resp = await rapidApiGet<SearchResp>("/api/v1/cars/searchCarRentals", {
-      pick_up_latitude: pickup.lat,
-      pick_up_longitude: pickup.lng,
-      drop_off_latitude: dropoff.lat,
-      drop_off_longitude: dropoff.lng,
-      pick_up_date: params.pickupDate,
-      drop_off_date: params.returnDate,
-      pick_up_time: params.pickupTime ?? "10:00",
-      drop_off_time: params.dropoffTime ?? "10:00",
-      driver_age: params.driverAge ?? 30,
-      currency_code: "USD",
+    // Priceline wants "YYYY-MM-DD HH:MM:SS" for both pickup and return.
+    const dt = (date: string, time?: string) => `${date} ${time ?? "10:00"}:00`;
+
+    const resp = await rapidApiGet<SearchResp>("/v1/cars-rentals/search", {
+      location_pickup: pickupCode,
+      location_return: returnCode,
+      date_time_pickup: dt(params.pickupDate, params.pickupTime),
+      date_time_return: dt(params.returnDate, params.dropoffTime),
     });
 
-    const results = resp.data?.search_results ?? [];
-    const cars = results.map((r) => mapRapidCar(r, params)).filter((c): c is Car => c !== null);
-    if (cars.length === 0) throw new Error("rapidapi_empty");
+    const rates = resp.vehicleRates ?? {};
+    const partners = resp.partners ?? {};
+    const cars = Object.values(rates)
+      .map((r) => mapPricelineCar(r, partners, params))
+      .filter((c): c is Car => c !== null);
+    if (cars.length === 0) throw new Error("priceline_empty");
     return cars;
   }
 }

@@ -3,6 +3,7 @@ import { FlightFilter, type Leg, legsFromFilter } from "@/lib/ai/schema";
 import { searchFlights, type SearchResult } from "@/lib/flights/engine";
 import { loadDataset } from "@/lib/flights/dataset";
 import type { Dataset } from "@/lib/flights/types";
+import { enforceRateLimit } from "@/lib/security/rateLimit";
 
 function searchLeg(base: ReturnType<typeof FlightFilter.parse>, leg: Leg, ds: Dataset): SearchResult {
   return searchFlights(
@@ -12,6 +13,9 @@ function searchLeg(base: ReturnType<typeof FlightFilter.parse>, leg: Leg, ds: Da
 }
 
 export async function GET(req: NextRequest) {
+  const limited = enforceRateLimit(req, "search", 60, 60_000);
+  if (limited) return limited;
+
   const raw = Object.fromEntries(req.nextUrl.searchParams.entries());
   const parsed = FlightFilter.safeParse(raw);
   if (!parsed.success) {

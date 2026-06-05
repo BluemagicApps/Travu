@@ -4,7 +4,10 @@ import { prisma } from "@/lib/db/prisma";
 import { verifyPassword } from "./password";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  session: { strategy: "jwt" },
+  // Trust the deployment host (behind the VPS reverse proxy / Cloudflare tunnel).
+  trustHost: true,
+  // JWT sessions capped to 7 days; refreshed at most once a day.
+  session: { strategy: "jwt", maxAge: 60 * 60 * 24 * 7, updateAge: 60 * 60 * 24 },
   pages: { signIn: "/login" },
   providers: [
     Credentials({

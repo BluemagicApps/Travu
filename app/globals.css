@@ -60,6 +60,29 @@ video {
   max-width: 100%;
 }
 
+/* Remove the 300ms tap delay and prevent accidental double-tap zoom on the
+   interactive controls travellers tap most on mobile. */
+button,
+a,
+label,
+select,
+summary,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+/* Honour users who prefer reduced motion — quiet all animations/transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 @layer utilities {
   .btn-accent {
     background-image: linear-gradient(to right, var(--accent-from), var(--accent-to));

@@ -2,6 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db/prisma";
 import { hashPassword } from "@/lib/auth/password";
+import { enforceRateLimit } from "@/lib/security/rateLimit";
 
 const Body = z.object({
   email: z.string().regex(/^[^@\s]+@[^@\s]+\.[^@\s]+$/),
@@ -10,6 +11,9 @@ const Body = z.object({
 });
 
 export async function POST(req: NextRequest) {
+  const limited = enforceRateLimit(req, "signup", 10, 60_000);
+  if (limited) return limited;
+
   const parsed = Body.safeParse(await req.json().catch(() => ({})));
   if (!parsed.success) {
     return NextResponse.json({ error: "invalid_input" }, { status: 400 });

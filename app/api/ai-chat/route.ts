@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { chat, type ChatMessage } from "@/lib/ai/conversation";
 import { getAirportOptions } from "@/lib/flights/dataset";
+import { enforceRateLimit } from "@/lib/security/rateLimit";
 
 export const runtime = "nodejs";
 
@@ -17,6 +18,9 @@ function isMessage(m: unknown): m is ChatMessage {
 }
 
 export async function POST(req: NextRequest) {
+  const limited = enforceRateLimit(req, "ai-chat", 20, 60_000);
+  if (limited) return limited;
+
   const body = (await req.json().catch(() => ({}))) as { messages?: unknown };
   const messages = Array.isArray(body.messages) ? body.messages.filter(isMessage) : [];
   if (messages.length === 0) {

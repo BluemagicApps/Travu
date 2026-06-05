@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "flights": "航班",
+    "stays": "住宿",
+    "cars": "租车",
+    "trackBooking": "查询预订",
+    "signIn": "登录",
+    "signOut": "退出登录"
+  },
+  "footer": {
+    "company": "公司",
+    "explore": "探索",
+    "policies": "政策",
+    "help": "帮助"
+  },
+  "common": {
+    "language": "语言"
+  }
+}

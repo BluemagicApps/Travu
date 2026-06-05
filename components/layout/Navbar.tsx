@@ -5,35 +5,36 @@ import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { Plane, BedDouble, Car } from "lucide-react";
 import type { ComponentType } from "react";
+import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils/cn";
 import { ThemeToggle } from "./ThemeToggle";
 import { CurrencySwitcher } from "./CurrencySwitcher";
+import { LocaleSwitcher } from "./LocaleSwitcher";
 import { Logo } from "./Logo";
 import { OneTokenBadge } from "@/components/onetoken/OneTokenBadge";
 
 type Tab = {
   href: string;
-  label: string;
+  /** Translation key under the "nav" namespace. */
+  key: string;
   icon: ComponentType<{ className?: string }>;
-  active?: boolean;
-  soon?: boolean;
 };
 
 const tabs: Tab[] = [
-  { href: "/", label: "Flights", icon: Plane },
-  { href: "/stays", label: "Stays", icon: BedDouble },
-  { href: "/cars", label: "Cars", icon: Car },
+  { href: "/", key: "flights", icon: Plane },
+  { href: "/stays", key: "stays", icon: BedDouble },
+  { href: "/cars", key: "cars", icon: Car },
 ];
 
 /** Highlight a tab based on the current path. */
 function isTabActive(href: string, pathname: string): boolean {
-  if (href === "#") return false;
   if (href === "/") return pathname === "/";
   return pathname.startsWith(href);
 }
 
 export function Navbar() {
   const pathname = usePathname();
+  const t = useTranslations("nav");
 
   return (
     <>
@@ -43,7 +44,7 @@ export function Navbar() {
 
           <div className="hidden items-center gap-1 md:flex">
             {tabs.map((tab) => (
-              <NavItem key={tab.label} tab={tab} pathname={pathname} />
+              <NavItem key={tab.key} tab={tab} pathname={pathname} label={t(tab.key)} />
             ))}
           </div>
 
@@ -52,9 +53,10 @@ export function Navbar() {
               href="/track"
               className="hidden text-sm font-medium text-muted transition hover:text-text sm:block"
             >
-              Track booking
+              {t("trackBooking")}
             </Link>
             <OneTokenBadge />
+            <LocaleSwitcher />
             <CurrencySwitcher />
             <ThemeToggle />
             <AuthButtons />
@@ -66,23 +68,17 @@ export function Navbar() {
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = isTabActive(tab.href, pathname);
-          const inner = (
-            <span
-              className={cn(
-                "flex flex-col items-center gap-0.5 px-2 text-[10px]",
-                isActive ? "text-price" : "text-muted",
-                tab.soon && "opacity-50",
-              )}
-            >
-              <Icon className="h-5 w-5" />
-              {tab.label.split(" ")[0]}
-            </span>
-          );
-          return tab.soon ? (
-            <span key={tab.label}>{inner}</span>
-          ) : (
-            <Link key={tab.label} href={tab.href}>
-              {inner}
+          return (
+            <Link key={tab.key} href={tab.href}>
+              <span
+                className={cn(
+                  "flex flex-col items-center gap-0.5 px-2 text-[10px]",
+                  isActive ? "text-price" : "text-muted",
+                )}
+              >
+                <Icon className="h-5 w-5" />
+                {t(tab.key)}
+              </span>
             </Link>
           );
         })}
@@ -93,6 +89,7 @@ export function Navbar() {
 
 function AuthButtons() {
   const { data: session, status } = useSession();
+  const t = useTranslations("nav");
 
   if (status === "loading") return <div className="h-9 w-20" />;
 
@@ -111,7 +108,7 @@ function AuthButtons() {
           onClick={() => signOut({ callbackUrl: "/" })}
           className="rounded-full border border-border px-3 py-1.5 text-sm font-medium text-muted transition hover:text-text"
         >
-          Sign out
+          {t("signOut")}
         </button>
       </div>
     );
@@ -119,24 +116,14 @@ function AuthButtons() {
 
   return (
     <Link href="/login" className="btn-accent rounded-full px-4 py-2 text-sm font-semibold">
-      Sign in
+      {t("signIn")}
     </Link>
   );
 }
 
-function NavItem({ tab, pathname }: { tab: Tab; pathname: string }) {
+function NavItem({ tab, pathname, label }: { tab: Tab; pathname: string; label: string }) {
   const Icon = tab.icon;
   const isActive = isTabActive(tab.href, pathname);
-
-  if (tab.soon) {
-    return (
-      <span className="flex cursor-not-allowed items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium text-muted opacity-50">
-        <Icon className="h-4 w-4" />
-        {tab.label}
-        <span className="rounded bg-surface-2 px-1 text-[9px] uppercase">soon</span>
-      </span>
-    );
-  }
 
   return (
     <Link
@@ -147,7 +134,7 @@ function NavItem({ tab, pathname }: { tab: Tab; pathname: string }) {
       )}
     >
       <Icon className="h-4 w-4" />
-      {tab.label}
+      {label}
     </Link>
   );
 }

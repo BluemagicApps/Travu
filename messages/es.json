@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "flights": "Vuelos",
+    "stays": "Alojamientos",
+    "cars": "Coches",
+    "trackBooking": "Seguir una reserva",
+    "signIn": "Iniciar sesión",
+    "signOut": "Cerrar sesión"
+  },
+  "footer": {
+    "company": "Empresa",
+    "explore": "Explorar",
+    "policies": "Políticas",
+    "help": "Ayuda"
+  },
+  "common": {
+    "language": "Idioma"
+  }
+}

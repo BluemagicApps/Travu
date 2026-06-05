@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "flights": "Voos",
+    "stays": "Estadias",
+    "cars": "Carros",
+    "trackBooking": "Acompanhar reserva",
+    "signIn": "Entrar",
+    "signOut": "Sair"
+  },
+  "footer": {
+    "company": "Empresa",
+    "explore": "Explorar",
+    "policies": "Políticas",
+    "help": "Ajuda"
+  },
+  "common": {
+    "language": "Idioma"
+  }
+}

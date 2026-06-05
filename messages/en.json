@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "flights": "Flights",
+    "stays": "Stays",
+    "cars": "Cars",
+    "trackBooking": "Track booking",
+    "signIn": "Sign in",
+    "signOut": "Sign out"
+  },
+  "footer": {
+    "company": "Company",
+    "explore": "Explore",
+    "policies": "Policies",
+    "help": "Help"
+  },
+  "common": {
+    "language": "Language"
+  }
+}

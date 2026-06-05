@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "flights": "Flüge",
+    "stays": "Unterkünfte",
+    "cars": "Mietwagen",
+    "trackBooking": "Buchung verfolgen",
+    "signIn": "Anmelden",
+    "signOut": "Abmelden"
+  },
+  "footer": {
+    "company": "Unternehmen",
+    "explore": "Entdecken",
+    "policies": "Richtlinien",
+    "help": "Hilfe"
+  },
+  "common": {
+    "language": "Sprache"
+  }
+}

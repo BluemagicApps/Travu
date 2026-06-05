@@ -1,5 +1,9 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 import { contentSecurityPolicy } from "./lib/security/csp";
+
+// next-intl: cookie-based locale (no URL segment). Reads ./i18n/request.ts.
+const withNextIntl = createNextIntlPlugin();
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -37,4 +41,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

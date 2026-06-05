@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "flights": "フライト",
+    "stays": "宿泊",
+    "cars": "レンタカー",
+    "trackBooking": "予約を確認",
+    "signIn": "ログイン",
+    "signOut": "ログアウト"
+  },
+  "footer": {
+    "company": "会社情報",
+    "explore": "探す",
+    "policies": "ポリシー",
+    "help": "ヘルプ"
+  },
+  "common": {
+    "language": "言語"
+  }
+}

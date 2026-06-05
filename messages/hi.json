@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "flights": "उड़ानें",
+    "stays": "ठहराव",
+    "cars": "कारें",
+    "trackBooking": "बुकिंग ट्रैक करें",
+    "signIn": "साइन इन",
+    "signOut": "साइन आउट"
+  },
+  "footer": {
+    "company": "कंपनी",
+    "explore": "एक्सप्लोर करें",
+    "policies": "नीतियाँ",
+    "help": "सहायता"
+  },
+  "common": {
+    "language": "भाषा"
+  }
+}

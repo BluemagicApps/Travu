@@ -1,11 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 import "./globals.css";
 import { Providers } from "@/components/layout/Providers";
 import { Navbar } from "@/components/layout/Navbar";
 import { StaysFooter } from "@/components/stays/landing/StaysFooter";
 import { getServerCurrencyCookie } from "@/lib/utils/currency-server";
 import { getServerLocation } from "@/lib/geo/ip-location";
+import { dirFor } from "@/lib/i18n/config";
 
 const geist = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
@@ -44,23 +47,32 @@ export const viewport: Viewport = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const [location, cookieCurrency] = await Promise.all([
+  const [location, cookieCurrency, locale, messages] = await Promise.all([
     getServerLocation(),
     getServerCurrencyCookie(),
+    getLocale(),
+    getMessages(),
   ]);
   const currency = cookieCurrency ?? location.currency;
   return (
-    <html lang="en" suppressHydrationWarning className={`${geist.variable} antialiased`}>
+    <html
+      lang={locale}
+      dir={dirFor(locale)}
+      suppressHydrationWarning
+      className={`${geist.variable} antialiased`}
+    >
       <body className="flex min-h-screen flex-col font-sans">
-        <Providers
-          initialCurrency={currency}
-          location={location}
-          hadCurrencyCookie={Boolean(cookieCurrency)}
-        >
-          <Navbar />
-          <main className="flex-1 pb-20 md:pb-0">{children}</main>
-          <StaysFooter />
-        </Providers>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <Providers
+            initialCurrency={currency}
+            location={location}
+            hadCurrencyCookie={Boolean(cookieCurrency)}
+          >
+            <Navbar />
+            <main className="flex-1 pb-20 md:pb-0">{children}</main>
+            <StaysFooter />
+          </Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

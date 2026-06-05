@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "flights": "Voli",
+    "stays": "Soggiorni",
+    "cars": "Auto",
+    "trackBooking": "Traccia prenotazione",
+    "signIn": "Accedi",
+    "signOut": "Esci"
+  },
+  "footer": {
+    "company": "Azienda",
+    "explore": "Esplora",
+    "policies": "Politiche",
+    "help": "Aiuto"
+  },
+  "common": {
+    "language": "Lingua"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "flights": "Vluchten",
+    "stays": "Verblijven",
+    "cars": "Auto's",
+    "trackBooking": "Boeking volgen",
+    "signIn": "Inloggen",
+    "signOut": "Uitloggen"
+  },
+  "footer": {
+    "company": "Bedrijf",
+    "explore": "Ontdekken",
+    "policies": "Beleid",
+    "help": "Help"
+  },
+  "common": {
+    "language": "Taal"
+  }
+}

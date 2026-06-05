@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "flights": "رحلات الطيران",
+    "stays": "الإقامات",
+    "cars": "السيارات",
+    "trackBooking": "تتبع الحجز",
+    "signIn": "تسجيل الدخول",
+    "signOut": "تسجيل الخروج"
+  },
+  "footer": {
+    "company": "الشركة",
+    "explore": "استكشف",
+    "policies": "السياسات",
+    "help": "المساعدة"
+  },
+  "common": {
+    "language": "اللغة"
+  }
+}

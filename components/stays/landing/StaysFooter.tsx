@@ -1,13 +1,15 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 interface FooterLink {
   label: string;
   href: string;
 }
 
-const COLUMNS: { heading: string; links: FooterLink[] }[] = [
+const COLUMNS: { heading: string; headingKey: string; links: FooterLink[] }[] = [
   {
     heading: "Company",
+    headingKey: "company",
     links: [
       { label: "About", href: "/about" },
       { label: "OneToken rewards", href: "/onetoken" },
@@ -18,6 +20,7 @@ const COLUMNS: { heading: string; links: FooterLink[] }[] = [
   },
   {
     heading: "Explore",
+    headingKey: "explore",
     links: [
       { label: "Search flights", href: "/" },
       { label: "Hotels & stays", href: "/stays" },
@@ -28,6 +31,7 @@ const COLUMNS: { heading: string; links: FooterLink[] }[] = [
   },
   {
     heading: "Policies",
+    headingKey: "policies",
     links: [
       { label: "Privacy", href: "/privacy" },
       { label: "Cookies", href: "/cookies" },
@@ -38,6 +42,7 @@ const COLUMNS: { heading: string; links: FooterLink[] }[] = [
   },
   {
     heading: "Help",
+    headingKey: "help",
     links: [
       { label: "Support", href: "/support" },
       { label: "Cancel your booking", href: "/track" },
@@ -48,13 +53,14 @@ const COLUMNS: { heading: string; links: FooterLink[] }[] = [
   },
 ];
 
-export function StaysFooter() {
+export async function StaysFooter() {
+  const t = await getTranslations("footer");
   return (
     <footer className="mt-8 border-t border-border bg-surface-2">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4">
         {COLUMNS.map((col) => (
           <div key={col.heading}>
-            <h4 className="text-sm font-bold">{col.heading}</h4>
+            <h4 className="text-sm font-bold">{t(col.headingKey)}</h4>
             <ul className="mt-3 space-y-2">
               {col.links.map((l) => (
                 <li key={l.label}>

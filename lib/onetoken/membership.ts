@@ -1,90 +1,11 @@
 import { prisma } from "@/lib/db/prisma";
+import { type Tier, tierConfig, tierForElements } from "./tiers";
 
-export type Tier = "BLUE" | "SILVER" | "GOLD" | "PLATINUM";
-
-export interface TierConfig {
-  key: Tier;
-  name: string;
-  minTripElements: number;
-  /** OneTokenCash earn rate on eligible spend (e.g. 0.02 = 2%). */
-  earnRate: number;
-  /** Member-price savings headline (%). */
-  savingsPct: number;
-  color: string;
-  perks: string[];
-}
-
-// Mirrors Expedia One Key's tier ladder (img7): Blue 0–4, Silver 5–14,
-// Gold 15–29, Platinum 30+ trip elements.
-export const TIERS: TierConfig[] = [
-  {
-    key: "BLUE",
-    name: "Blue",
-    minTripElements: 0,
-    earnRate: 0.02,
-    savingsPct: 10,
-    color: "#2563eb",
-    perks: ["Access to free price tracking for flights", "Earn 2% in OneTokenCash on eligible bookings"],
-  },
-  {
-    key: "SILVER",
-    name: "Silver",
-    minTripElements: 5,
-    earnRate: 0.02,
-    savingsPct: 15,
-    color: "#94a3b8",
-    perks: [
-      "Member prices on over 10,000 hotels worldwide",
-      "A perk when you stay at select VIP Access properties",
-      "Priority traveler support",
-    ],
-  },
-  {
-    key: "GOLD",
-    name: "Gold",
-    minTripElements: 15,
-    earnRate: 0.03,
-    savingsPct: 20,
-    color: "#d4a017",
-    perks: [
-      "Earn 3% in OneTokenCash on eligible bookings",
-      "Room upgrades when available at VIP Access properties",
-      "Price Drop Protection on select flight bookings",
-    ],
-  },
-  {
-    key: "PLATINUM",
-    name: "Platinum",
-    minTripElements: 30,
-    earnRate: 0.04,
-    savingsPct: 20,
-    color: "#475569",
-    perks: [
-      "Earn 4% in OneTokenCash on eligible bookings",
-      "Free breakfast at select VIP Access properties",
-      "Dedicated Platinum VIP support",
-    ],
-  },
-];
-
-export function tierForElements(tripElements: number): TierConfig {
-  let current = TIERS[0];
-  for (const t of TIERS) if (tripElements >= t.minTripElements) current = t;
-  return current;
-}
-
-export function tierConfig(tier: string): TierConfig {
-  return TIERS.find((t) => t.key === tier) ?? TIERS[0];
-}
-
-/** Next tier and how many more trip elements are needed (null at Platinum). */
-export function nextTier(tripElements: number): { tier: TierConfig; remaining: number } | null {
-  const current = tierForElements(tripElements);
-  const idx = TIERS.findIndex((t) => t.key === current.key);
-  const next = TIERS[idx + 1];
-  if (!next) return null;
-  return { tier: next, remaining: next.minTripElements - tripElements };
-}
+// Re-export the pure tier model so existing server-side imports from this module
+// keep working (client code should import from "./tiers" directly to avoid
+// pulling Prisma into the client bundle).
+export { TIERS, tierConfig, tierForElements, nextTier } from "./tiers";
+export type { Tier, TierConfig } from "./tiers";
 
 export interface MembershipView {
   tier: Tier;
@@ -118,22 +39,41 @@ export async function getOrCreateMembership(userId: string): Promise<MembershipV
   };
 }
 
+export interface AwardResult {
+  /** Points earned on this booking (cents). */
+  earned: number;
+  /** True when this booking created the membership (seamless auto-enroll). */
+  enrolled: boolean;
+  tripElements: number;
+  previousTier: Tier;
+  /** Tier after this booking. */
+  tier: Tier;
+  /** True when the tier moved up because of this booking. */
+  promoted: boolean;
+}
+
 /**
  * Award OneTokenCash + a trip element for a completed booking, recomputing the
- * tier. No-op-safe: creates the membership if the user joined implicitly. Returns
- * the points earned (cents).
+ * tier. Seamless enrolment: if the user is not yet a member, this enrolls them
+ * automatically so every booking counts — no separate "join" step required.
+ * Auto-promotes when the new trip-element count crosses a tier threshold.
  */
 export async function awardForBooking(args: {
   userId: string;
   amountCents: number;
   bookingRef: string;
   kind: "flight" | "stay" | "car";
-}): Promise<number> {
+}): Promise<AwardResult> {
   const { userId, amountCents, bookingRef, kind } = args;
-  const existing = await prisma.membership.findUnique({ where: { userId } });
-  // Only accrue for users who have joined OneToken.
-  if (!existing) return 0;
+  // Auto-enroll on first booking (upsert) so the program is frictionless.
+  const existing = await prisma.membership.upsert({
+    where: { userId },
+    create: { userId },
+    update: {},
+  });
+  const enrolled = existing.tripElements === 0 && existing.lifetimePoints === 0;
 
+  const previousTier = existing.tier as Tier;
   const rate = tierConfig(existing.tier).earnRate;
   const earned = Math.max(0, Math.round(amountCents * rate));
   const tripElements = existing.tripElements + 1;
@@ -159,7 +99,15 @@ export async function awardForBooking(args: {
       },
     }),
   ]);
-  return earned;
+
+  return {
+    earned,
+    enrolled,
+    tripElements,
+    previousTier,
+    tier: newTier,
+    promoted: newTier !== previousTier,
+  };
 }
 
 /**

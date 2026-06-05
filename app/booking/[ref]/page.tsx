@@ -7,13 +7,17 @@ import { loadDataset } from "@/lib/flights/dataset";
 import { buildSlip } from "@/lib/booking/confirmation";
 import type { Flight } from "@/lib/flights/types";
 import { ConfirmedTicket } from "@/components/booking/ConfirmedTicket";
+import { RewardCelebration } from "@/components/onetoken/RewardCelebration";
 
 export default async function BookingConfirmationPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ ref: string }>;
+  searchParams: Promise<{ earned?: string; promoted?: string }>;
 }) {
   const { ref } = await params;
+  const sp = await searchParams;
   const session = await auth();
   if (!session?.user) redirect(`/login?callbackUrl=/booking/${ref}`);
 
@@ -46,6 +50,9 @@ export default async function BookingConfirmationPage({
 
   return (
     <>
+      <div className="mx-auto max-w-[860px] px-4 pt-4 print:hidden">
+        <RewardCelebration earned={sp.earned ? Number(sp.earned) : undefined} promoted={sp.promoted ?? null} />
+      </div>
       <ConfirmedTicket slip={slip} total={booking.totalAmount} qrDataUrl={qrDataUrl} />
       <div className="mx-auto max-w-[860px] px-4 pb-10 text-center print:hidden">
         <Link

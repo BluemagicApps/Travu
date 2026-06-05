@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Car, Check, ChevronLeft, ShieldCheck, Lock } from "lucide-react";
 import type { Car as CarOffer } from "@/lib/cars/types";
@@ -12,6 +12,7 @@ import { BookingProgress } from "@/components/booking/BookingProgress";
 import { CarBookingSummary } from "./CarBookingSummary";
 import { Money } from "@/components/Money";
 import { AnimatedSubmitButton } from "@/components/ui/AnimatedSubmitButton";
+import { rewardQuery, type BookingReward } from "@/lib/onetoken/reward-params";
 
 const field =
   "w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-sm outline-none focus:border-sky-400";
@@ -57,6 +58,8 @@ export function CarBookingClient({ car }: { car: CarOffer }) {
   const [payment, setPayment] = useState<PaymentInput>({ ...emptyPayment });
   const [booking, setBooking] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Captured from the POST response so onDone can pass the reward to the slip.
+  const rewardRef = useRef<BookingReward | null>(null);
 
   const driverAge = driver.age ? Number(driver.age) : undefined;
   const price = computeCarPrice(car, plan, driverAge);
@@ -117,8 +120,9 @@ export function CarBookingClient({ car }: { car: CarOffer }) {
       throw new Error("auth");
     }
     if (!res.ok) throw new Error("Could not complete the reservation. Please try again.");
-    const { bookingRef } = await res.json();
-    return bookingRef;
+    const data = await res.json();
+    rewardRef.current = { earned: data.earned, promotedTier: data.promotedTier };
+    return data.bookingRef as string;
   }
 
   return (
@@ -128,7 +132,7 @@ export function CarBookingClient({ car }: { car: CarOffer }) {
           task={reserve}
           steps={CAR_STEPS}
           icon={Car}
-          onDone={(ref) => router.push(`/car-booking/${ref}`)}
+          onDone={(ref) => router.push(`/car-booking/${ref}${rewardQuery(rewardRef.current)}`)}
           onError={(err) => {
             setBooking(false);
             if (!(err instanceof Error) || err.message !== "auth") {

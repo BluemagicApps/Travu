@@ -119,15 +119,19 @@ export async function POST(req: Request) {
     },
   });
 
-  // Earn OneTokenCash on the amount paid (members only; no-op otherwise).
-  const earned = await awardForBooking({
+  // Earn OneTokenCash on the amount paid — seamlessly enrols the user if needed
+  // and auto-promotes their tier when they cross a threshold.
+  const award = await awardForBooking({
     userId: session.user.id,
     amountCents: total,
     bookingRef,
     kind: "flight",
   });
 
-  return NextResponse.json({ bookingRef, earned, redeemed }, { status: 201 });
+  return NextResponse.json(
+    { bookingRef, earned: award.earned, redeemed, promotedTier: award.promoted ? award.tier : null },
+    { status: 201 },
+  );
 }
 
 export async function GET() {

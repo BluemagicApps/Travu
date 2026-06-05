@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Lock } from "lucide-react";
 import type { Flight } from "@/lib/flights/types";
 import { Money } from "@/components/Money";
+import { rewardQuery } from "@/lib/onetoken/reward-params";
 
 export function BookingForm({ flight }: { flight: Flight }) {
   const router = useRouter();
@@ -44,8 +45,10 @@ export function BookingForm({ flight }: { flight: Flight }) {
       setLoading(false);
       return;
     }
-    const { bookingRef } = await res.json();
-    router.push(`/booking/${bookingRef}`);
+    const data = await res.json();
+    router.push(
+      `/booking/${data.bookingRef}${rewardQuery({ earned: data.earned, promotedTier: data.promotedTier })}`,
+    );
   }
 
   const field = "w-full rounded-xl border border-border bg-surface px-3 py-2.5 text-sm outline-none focus:border-sky-400";

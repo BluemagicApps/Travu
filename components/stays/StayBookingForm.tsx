@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Lock, ShieldCheck, BedDouble } from "lucide-react";
 import type { Stay } from "@/lib/stays/types";
@@ -9,6 +9,7 @@ import { computeStayPrice } from "@/lib/stays/pricing";
 import { Money } from "@/components/Money";
 import { AnimatedSubmitButton } from "@/components/ui/AnimatedSubmitButton";
 import { BookingProgress } from "@/components/booking/BookingProgress";
+import { rewardQuery, type BookingReward } from "@/lib/onetoken/reward-params";
 
 const STAY_STEPS = [
   "Reviewing your booking",
@@ -57,6 +58,8 @@ export function StayBookingForm({ stay, rooms, onPlanChange }: { stay: Stay; roo
   const [requests, setRequests] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [booking, setBooking] = useState(false);
+  // Captured from the POST response so onDone can pass the reward to the slip.
+  const rewardRef = useRef<BookingReward | null>(null);
 
   const price = computeStayPrice(stay, rooms, plan);
   const protectPrice = computeStayPrice(stay, rooms, "TRAVU_PROTECT");
@@ -107,8 +110,9 @@ export function StayBookingForm({ stay, rooms, onPlanChange }: { stay: Stay; roo
       throw new Error("auth"); // navigation already triggered; suppress the error toast
     }
     if (!res.ok) throw new Error("Could not complete the booking. Please try again.");
-    const { bookingRef } = await res.json();
-    return bookingRef;
+    const data = await res.json();
+    rewardRef.current = { earned: data.earned, promotedTier: data.promotedTier };
+    return data.bookingRef as string;
   }
 
   return (
@@ -118,7 +122,7 @@ export function StayBookingForm({ stay, rooms, onPlanChange }: { stay: Stay; roo
         task={reserve}
         steps={STAY_STEPS}
         icon={BedDouble}
-        onDone={(ref) => router.push(`/stay-booking/${ref}`)}
+        onDone={(ref) => router.push(`/stay-booking/${ref}${rewardQuery(rewardRef.current)}`)}
         onError={(err) => {
           setBooking(false);
           if (!(err instanceof Error) || err.message !== "auth") {

@@ -109,6 +109,26 @@ function OneTokenCard({
           <Money cents={membership.pointsBalance} />
         </div>
       </div>
+      {next && (
+        <div className="w-full">
+          <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface-2">
+            <div
+              className="h-full rounded-full"
+              style={{
+                width: `${Math.min(
+                  100,
+                  Math.round(
+                    ((membership.tripElements - cfg.minTripElements) /
+                      (next.tier.minTripElements - cfg.minTripElements)) *
+                      100,
+                  ),
+                )}%`,
+                backgroundImage: "linear-gradient(to right, var(--accent-from), var(--accent-to))",
+              }}
+            />
+          </div>
+        </div>
+      )}
     </Link>
   );
 }

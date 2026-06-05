@@ -9,11 +9,11 @@ const COLUMNS: { heading: string; links: FooterLink[] }[] = [
   {
     heading: "Company",
     links: [
-      { label: "About", href: "/" },
+      { label: "About", href: "/about" },
       { label: "OneToken rewards", href: "/onetoken" },
-      { label: "List your property", href: "/" },
-      { label: "Partnerships", href: "/" },
-      { label: "Newsroom", href: "/" },
+      { label: "List your property", href: "/list-your-property" },
+      { label: "Partnerships", href: "/partnerships" },
+      { label: "Newsroom", href: "/newsroom" },
     ],
   },
   {
@@ -21,7 +21,7 @@ const COLUMNS: { heading: string; links: FooterLink[] }[] = [
     links: [
       { label: "Search flights", href: "/" },
       { label: "Hotels & stays", href: "/stays" },
-      { label: "Vacation rentals", href: "/stays" },
+      { label: "Car rentals", href: "/cars" },
       { label: "Track a booking", href: "/track" },
       { label: "My trips", href: "/dashboard" },
     ],
@@ -29,21 +29,21 @@ const COLUMNS: { heading: string; links: FooterLink[] }[] = [
   {
     heading: "Policies",
     links: [
-      { label: "Privacy", href: "/" },
-      { label: "Cookies", href: "/" },
-      { label: "Terms of use", href: "/" },
-      { label: "Accessibility", href: "/" },
-      { label: "Your privacy choices", href: "/" },
+      { label: "Privacy", href: "/privacy" },
+      { label: "Cookies", href: "/cookies" },
+      { label: "Terms of use", href: "/terms" },
+      { label: "Accessibility", href: "/accessibility" },
+      { label: "Your privacy choices", href: "/privacy-choices" },
     ],
   },
   {
     heading: "Help",
     links: [
-      { label: "Support", href: "/" },
+      { label: "Support", href: "/support" },
       { label: "Cancel your booking", href: "/track" },
-      { label: "Refund basics", href: "/" },
+      { label: "Refund basics", href: "/refunds" },
+      { label: "Travel documents", href: "/travel-documents" },
       { label: "OneToken terms", href: "/onetoken" },
-      { label: "Travel documents", href: "/" },
     ],
   },
 ];

@@ -2,13 +2,10 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { prisma } from "@/lib/db/prisma";
 import { verifyPassword } from "./password";
+import { authConfig } from "./config";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  // Trust the deployment host (behind the VPS reverse proxy / Cloudflare tunnel).
-  trustHost: true,
-  // JWT sessions capped to 7 days; refreshed at most once a day.
-  session: { strategy: "jwt", maxAge: 60 * 60 * 24 * 7, updateAge: 60 * 60 * 24 },
-  pages: { signIn: "/login" },
+  ...authConfig,
   providers: [
     Credentials({
       credentials: { email: {}, password: {} },
@@ -23,14 +20,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const valid = await verifyPassword(password, user.passwordHash);
         if (!valid) return null;
 
-        return { id: user.id, email: user.email, name: user.name ?? null };
+        return { id: user.id, email: user.email, name: user.name ?? null, role: user.role };
       },
     }),
   ],
-  callbacks: {
-    session: ({ session, token }) => {
-      if (token.sub) session.user.id = token.sub;
-      return session;
-    },
-  },
 });

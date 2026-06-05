@@ -95,8 +95,17 @@ function AuthButtons() {
 
   if (session?.user) {
     const label = session.user.name || session.user.email || "Account";
+    const admin = session.user.role === "ADMIN";
     return (
       <div className="flex items-center gap-2">
+        {admin && (
+          <Link
+            href="/admin"
+            className="hidden text-sm font-semibold text-price transition hover:underline sm:block"
+          >
+            Admin
+          </Link>
+        )}
         <Link
           href="/dashboard"
           className="hidden max-w-[10rem] truncate text-sm font-medium text-muted transition hover:text-text sm:block"

@@ -13,11 +13,14 @@ model User {
   email        String    @unique
   passwordHash String
   name         String?
+  role         String    @default("USER") // USER | ADMIN
   createdAt    DateTime  @default(now())
   bookings     Booking[]
   stayBookings StayBooking[]
   carBookings  CarBooking[]
   membership   Membership?
+
+  @@index([role])
 }
 
 /// OneToken rewards membership — one per user. pointsBalance is OneTokenCash in
@@ -33,6 +36,8 @@ model Membership {
   createdAt      DateTime            @default(now())
   updatedAt      DateTime            @updatedAt
   transactions   PointsTransaction[]
+
+  @@index([tier])
 }
 
 model PointsTransaction {
@@ -92,6 +97,8 @@ model Booking {
   createdAt                DateTime    @default(now())
   passengers               Passenger[]
   payment                  Payment?
+
+  @@index([createdAt])
 }
 
 model Passenger {
@@ -155,6 +162,8 @@ model StayBooking {
   createdAt        DateTime     @default(now())
   guests           StayGuest[]
   payment          StayPayment?
+
+  @@index([createdAt])
 }
 
 model StayGuest {
@@ -216,6 +225,8 @@ model CarBooking {
   createdAt        DateTime     @default(now())
   renter           CarRenter?
   payment          CarPayment?
+
+  @@index([createdAt])
 }
 
 model CarRenter {

@@ -1,0 +1,854 @@
+{
+  "nav": {
+    "flights": "Penerbangan",
+    "stays": "Penginapan",
+    "cars": "Mobil",
+    "trackBooking": "Lacak pemesanan",
+    "signIn": "Masuk",
+    "signOut": "Keluar"
+  },
+  "footer": {
+    "company": "Perusahaan",
+    "explore": "Jelajahi",
+    "policies": "Kebijakan",
+    "help": "Bantuan"
+  },
+  "footerLinks": {
+    "about": "Tentang",
+    "oneTokenRewards": "Hadiah OneToken",
+    "listYourProperty": "Daftarkan properti Anda",
+    "partnerships": "Kemitraan",
+    "newsroom": "Ruang berita",
+    "searchFlights": "Cari penerbangan",
+    "hotelsAndStays": "Hotel & penginapan",
+    "carRentals": "Sewa mobil",
+    "trackABooking": "Lacak pemesanan",
+    "myTrips": "Perjalanan saya",
+    "privacy": "Privasi",
+    "cookies": "Cookie",
+    "termsOfUse": "Ketentuan penggunaan",
+    "accessibility": "Aksesibilitas",
+    "yourPrivacyChoices": "Pilihan privasi Anda",
+    "support": "Dukungan",
+    "cancelYourBooking": "Batalkan pemesanan Anda",
+    "refundBasics": "Dasar-dasar pengembalian dana",
+    "travelDocuments": "Dokumen perjalanan",
+    "oneTokenTerms": "Ketentuan OneToken"
+  },
+  "common": {
+    "language": "Bahasa"
+  },
+  "home": {
+    "eyebrow": "Perjalanan bertenaga AI, dirancang ulang",
+    "tagline": "Satu tempat untuk pergi ke mana saja.",
+    "subtitle": "Beri tahu Travu ke mana Anda ingin pergi, seperti Anda bercerita kepada teman. Penerbangan dan penginapan — kami yang mengurus pencarian, harga, dan pemesanannya, dari awal sampai akhir.",
+    "carsTagline": "Kendarai perjalanan Anda dengan cara Anda."
+  },
+  "homeSections": {
+    "bundleSave": {
+      "title": "Gabung & Hemat",
+      "desc": "Hemat saat Anda memesan seluruh perjalanan sekaligus, atau secara bertahap."
+    },
+    "oneStopShop": {
+      "title": "Belanja perjalanan satu pintu",
+      "desc": "Pesan penerbangan, hotel, dan lainnya — semua di satu tempat."
+    },
+    "oneTokenRewards": {
+      "title": "Hadiah OneToken",
+      "desc": "Buka penghematan instan dan kumpulkan OneTokenCash untuk perjalanan berikutnya."
+    },
+    "travelStyles": {
+      "heading": "Penginapan untuk setiap gaya perjalanan",
+      "subtitle": "Harga rata-rata berdasarkan bulan kalender saat ini",
+      "avgPerNight": "rata-rata per malam",
+      "style": {
+        "beach": "Pantai",
+        "culture": "Budaya",
+        "ski": "Ski",
+        "family": "Keluarga",
+        "wellness": "Kebugaran & Relaksasi"
+      }
+    },
+    "exploreWorld": {
+      "heading": "Jelajahi dunia perjalanan bersama Travu"
+    },
+    "stayLikeLocal": {
+      "heading": "Menginap seperti warga lokal di {city}",
+      "propertyType": {
+        "privateHomes": "Rumah liburan pribadi",
+        "apartments": "Apartemen & Kondominium",
+        "cabins": "Kabin",
+        "cottages": "Pondok",
+        "villas": "Vila"
+      }
+    },
+    "promo": {
+      "eyebrow": "Gabung & hemat",
+      "heading": "Bawa pulang kenangan, bukan sekadar koper",
+      "body": "Tambahkan penginapan ke penerbangan Anda dan buka penghematan paket di lebih dari 500.000 properti di seluruh dunia. Harga anggota berlaku.",
+      "cta": "Mulai merencanakan"
+    },
+    "flightDeals": {
+      "heading": "Penawaran penerbangan dari {city}",
+      "tagline": "Jelajahi penawaran penerbangan waktu nyata ke ratusan destinasi di seluruh dunia.",
+      "cta": "Jelajahi semua penawaran penerbangan"
+    }
+  },
+  "search": {
+    "flights": "Cari penerbangan",
+    "search": "Cari",
+    "aiDivider": "atau cukup beri tahu AI kami apa yang Anda butuhkan",
+    "askAi": "Tanya AI",
+    "aiPlaceholderStays": "Tanyakan dengan bahasa sehari-hari — mis. \"hotel bintang 5 di Roma untuk 3 malam dengan kolam renang\"",
+    "aiPlaceholderCars": "Tanyakan dengan bahasa sehari-hari — mis. \"SUV di Miami akhir pekan depan, otomatis\""
+  },
+  "auth": {
+    "loginTitle": "Selamat datang kembali",
+    "loginSubtitle": "Masuk untuk mengelola perjalanan Anda.",
+    "signupTitle": "Buat akun Anda",
+    "signupSubtitle": "Pesan penerbangan dan lacak perjalanan Anda dengan Travu.",
+    "name": "Nama",
+    "email": "Email",
+    "password": "Kata sandi",
+    "signIn": "Masuk",
+    "signingIn": "Sedang masuk…",
+    "createAccount": "Buat akun",
+    "creating": "Membuat…",
+    "newToTravu": "Baru di Travu?",
+    "createAccountLink": "Buat akun",
+    "alreadyHaveAccount": "Sudah punya akun?",
+    "invalidCredentials": "Email atau kata sandi tidak valid.",
+    "emailTaken": "Email tersebut sudah terdaftar.",
+    "invalidSignup": "Gunakan email yang valid dan kata sandi minimal 8 karakter."
+  },
+  "track": {
+    "heading": "Lacak pemesanan",
+    "intro": "Masukkan nomor referensi pemesanan Travu Anda (mis. <ref>TRV-AB12CD</ref>) untuk melihat status perjalanan Anda secara waktu nyata.",
+    "placeholder": "TRV-AB12CD",
+    "trackButton": "Lacak",
+    "invalidRef": "Masukkan referensi dalam format TRV-XXXXXX.",
+    "notFound": "Tidak ada pemesanan ditemukan untuk {ref}.",
+    "lookupError": "Tidak dapat mencari saat ini.",
+    "networkError": "Kesalahan jaringan — silakan coba lagi.",
+    "bookingReference": "Referensi pemesanan",
+    "status": "Status",
+    "direct": "Langsung",
+    "stops": "{count, plural, other {# transit}}",
+    "travellers": "Penumpang:",
+    "fare": "Tarif:",
+    "estimatedArrival": "Perkiraan tiba:",
+    "nextChangeAt": "Perubahan berikutnya pada",
+    "onDate": "pada {date}"
+  },
+  "dashboard": {
+    "heading": "Perjalanan Anda",
+    "signedInAs": "Masuk sebagai {email}",
+    "noBookings": "Belum ada pemesanan.",
+    "startSearch": "Mulai pencarian",
+    "joinOneToken": "<strong>Gabung OneToken</strong> — kumpulkan OneTokenCash di setiap perjalanan.",
+    "joinFree": "Gabung gratis",
+    "tripElements": "{count} elemen perjalanan",
+    "toTier": "{count} lagi menuju {tier}",
+    "topTier": "tingkat tertinggi",
+    "ref": "Ref",
+    "eTicket": "e-tiket",
+    "voucher": "voucher",
+    "nights": "{count, plural, other {# malam}}"
+  },
+  "onetoken": {
+    "badge": "Travu OneToken",
+    "heroTitle": "Program <gradient>hadiah perjalanan</gradient> gratis dari Travu",
+    "heroSubtitle": "Buka penghematan instan dengan Harga Anggota dan kumpulkan OneTokenCash untuk digunakan pada perjalanan berikutnya.",
+    "joinFree": "Gabung, gratis",
+    "joinEarn": "Gabung dan mulai mengumpulkan",
+    "joinForFree": "Gabung gratis",
+    "joining": "Sedang bergabung…",
+    "memberBadge": "Anda anggota OneToken",
+    "valueProps": {
+      "savings": {
+        "title": "Hemat di lebih dari 1,5 juta hotel, rumah, dan mobil",
+        "desc": "Hemat 10% atau lebih dengan Harga Anggota di ratusan ribu penginapan di seluruh dunia."
+      },
+      "earnUse": {
+        "title": "Kumpulkan dan gunakan hadiah di lebih banyak tempat",
+        "desc": "OneTokenCash adalah mata uang hadiah Anda — $1 dalam OneTokenCash bernilai $1 untuk digunakan pada penerbangan dan penginapan yang memenuhi syarat."
+      },
+      "perks": {
+        "title": "Dapatkan lebih banyak keuntungan anggota",
+        "desc": "Naik tingkat untuk mendapatkan peningkatan kamar, pelacakan harga gratis, dukungan prioritas, dan keuntungan VIP."
+      }
+    },
+    "tripElementsHeading": "Buka manfaat baru dengan mudah seiring kenaikan tingkat Anda",
+    "tripElementsSubtitle": "Dapatkan hadiah untuk setiap elemen perjalanan yang Anda pesan, membantu Anda naik tingkat lebih cepat — di atas OneTokenCash yang Anda kumpulkan.",
+    "tripElementsLabel": "Anda mendapatkan satu elemen perjalanan untuk setiap…",
+    "tripElement": {
+      "hotelRoomNight": "Malam kamar hotel",
+      "vacationRentalNight": "Malam sewa liburan",
+      "flightTicket": "Tiket penerbangan",
+      "carRentalDay": "Hari sewa mobil",
+      "cruiseCabinNight": "Malam kabin kapal pesiar",
+      "activityTicket": "Tiket aktivitas"
+    },
+    "tiersHeading": "Dapatkan lebih banyak manfaat seiring kenaikan tingkat",
+    "tierRange": {
+      "blue": "0–4 elemen perjalanan",
+      "silver": "5–14 elemen perjalanan",
+      "gold": "15–29 elemen perjalanan",
+      "platinum": "30+ elemen perjalanan"
+    },
+    "savings": "Penghematan",
+    "savingsDesc": "Hemat {pct}% atau lebih dengan Harga Anggota di 10.000+ hotel.",
+    "rewards": "Hadiah",
+    "rewardsDesc": "Kumpulkan {pct}% dalam OneTokenCash pada pemesanan yang memenuhi syarat.",
+    "perks": "Keuntungan",
+    "cashHeading": "OneTokenCash — mata uang hadiah yang memungkinkan Anda memilih di mana menggunakannya",
+    "cashSubtitle": "OneTokenCash milik Anda untuk digunakan di Travu saat memesan hotel, penerbangan, dan lainnya. $1 dalam OneTokenCash bernilai $1 untuk digunakan pada pemesanan yang memenuhi syarat, kapan saja sepanjang tahun — tanpa tanggal terlarang.",
+    "cashEarn": "Kumpulkan hingga 4% dalam OneTokenCash untuk setiap dolar yang dibelanjakan",
+    "cashEarnNote": "Anda juga mengumpulkan lebih banyak saat naik tingkat.",
+    "faqHeading": "Jelajahi lebih banyak tentang OneToken",
+    "faq": {
+      "join": {
+        "q": "Bagaimana cara bergabung dengan OneToken?",
+        "a": "Klik di sini untuk bergabung dengan OneToken — gratis dan mudah untuk memulai. Masuk atau buat akun Travu, lalu ketuk Gabung gratis di halaman ini."
+      },
+      "howItWorks": {
+        "q": "Bagaimana cara kerja program hadiah OneToken?",
+        "a": "OneToken adalah program hadiah kami di mana anggota menikmati Harga Anggota dan mengumpulkan OneTokenCash pada pemesanan yang memenuhi syarat. $1 dalam OneTokenCash setara dengan $1 untuk digunakan pada Perjalanan. Saat Anda memesan perjalanan, Anda mengumpulkan elemen perjalanan yang menaikkan tingkat Anda — Blue, Silver, Gold, dan Platinum."
+      },
+      "expire": {
+        "q": "Apakah OneTokenCash kedaluwarsa?",
+        "a": "OneTokenCash yang dikumpulkan dari pemesanan tidak akan kedaluwarsa jika Anda melakukan pemesanan yang memenuhi syarat setidaknya sekali dalam 18 bulan."
+      },
+      "flights": {
+        "q": "Bisakah saya menggunakan OneTokenCash untuk penerbangan?",
+        "a": "Ya. OneTokenCash dapat ditukarkan saat pembayaran pada pemesanan penerbangan dan penginapan yang memenuhi syarat, diterapkan sebagai diskon instan pada jumlah yang harus dibayar."
+      },
+      "tierStatus": {
+        "q": "Bagaimana cara mencapai status tingkat dengan OneToken?",
+        "a": "Anda mendapatkan satu elemen perjalanan untuk setiap malam kamar hotel, malam sewa liburan, tiket penerbangan, hari sewa mobil, malam kabin kapal pesiar, dan tiket aktivitas yang Anda pesan. Kumpulkan 5 untuk membuka Silver, 15 untuk Gold, dan 30 untuk Platinum."
+      },
+      "free": {
+        "q": "Apakah OneToken gratis?",
+        "a": "Ya — bergabung dengan OneToken sepenuhnya gratis."
+      }
+    },
+    "tierMember": "Anggota {tier}",
+    "tripElementsCount": "{count} elemen perjalanan",
+    "yourOneTokenCash": "OneTokenCash Anda",
+    "moreToReach": "{count, plural, other {# elemen perjalanan lagi untuk mencapai {tier}.}}"
+  },
+  "stays": {
+    "results": {
+      "noneFound": "Tidak ada penginapan ditemukan — coba tanggal lain atau kota terdekat.",
+      "noMatch": "Tidak ada penginapan yang cocok dengan filter Anda. Coba hapus beberapa.",
+      "yourDestination": "destinasi Anda",
+      "propertyNoun": "{count, plural, other {properti}}",
+      "sortBy": "Urutkan menurut",
+      "kindAllStays": "Semua penginapan",
+      "kindHotels": "Hotel",
+      "kindHomes": "Rumah",
+      "sortRecommended": "Direkomendasikan",
+      "sortPrice": "Harga (rendah ke tinggi)",
+      "sortRating": "Penilaian tamu",
+      "sortDistance": "Jarak"
+    },
+    "landing": {
+      "lastMinuteDeals": "Penawaran akhir pekan menit terakhir",
+      "everyTravelStyle": "Penginapan untuk setiap gaya perjalanan"
+    },
+    "card": {
+      "vipAccess": "Akses VIP",
+      "hotel": "Hotel",
+      "entireBy": "Seluruh {type} oleh {host}",
+      "sleeps": "Muat {count} orang",
+      "beds": "{count, plural, other {# tempat tidur}}",
+      "baths": "{count, plural, other {# kamar mandi}}",
+      "reviews": "{count} ulasan",
+      "freeCancellation": "Pembatalan gratis",
+      "nonRefundable": "Tidak dapat dikembalikan",
+      "payLater": "Pesan sekarang, bayar nanti",
+      "percentOff": "Diskon {pct}%",
+      "perNight": "/ malam",
+      "total": "total",
+      "totalInclTaxes": "Total termasuk pajak & biaya",
+      "totalInclTaxesInline": "total · termasuk pajak & biaya",
+      "viewDeal": "Lihat penawaran →"
+    },
+    "detail": {
+      "seeAllProperties": "Lihat semua properti",
+      "share": "Bagikan",
+      "save": "Simpan",
+      "datesAvailable": "Tanggal Anda tersedia",
+      "bedrooms": "{count, plural, other {# kamar tidur}}",
+      "bathrooms": "{count, plural, other {# kamar mandi}}",
+      "sqft": "{count} kaki persegi",
+      "exploreArea": "Jelajahi area sekitar",
+      "popularAmenities": "Fasilitas populer",
+      "aboutProperty": "Tentang properti ini",
+      "privateHost": "Tuan rumah pribadi (Vrbo)",
+      "propertyHost": "Tuan rumah properti",
+      "policies": "Kebijakan",
+      "afterTime": "Setelah {time}",
+      "beforeTime": "Sebelum {time}",
+      "cancellation": "Pembatalan",
+      "thingsToDo": "Hal populer untuk dilakukan di dekatnya",
+      "similarProperties": "Properti serupa",
+      "faq": "Pertanyaan yang sering diajukan",
+      "mapUnavailable": "Pratinjau peta tidak tersedia untuk properti ini.",
+      "viewLargerMap": "Lihat di peta yang lebih besar",
+      "morePhotos": "+{count} foto",
+      "nights": "{count, plural, other {# malam}}",
+      "nightsSleeps": "{nights, plural, other {# malam}} · muat {sleeps} orang",
+      "totalNights": "total · {count, plural, other {# malam}}",
+      "inclTaxes": "termasuk pajak & biaya",
+      "reserve": "Pesan",
+      "notChargedYet": "Anda belum akan ditagih"
+    },
+    "nav": {
+      "overview": "Ikhtisar",
+      "amenities": "Fasilitas",
+      "reviews": "Ulasan"
+    },
+    "reviews": {
+      "guestReviews": "Ulasan tamu",
+      "noReviews": "Belum ada ulasan — jadilah yang pertama mengulas properti ini setelah menginap.",
+      "cleanliness": "Kebersihan",
+      "staff": "Staf",
+      "amenities": "Fasilitas",
+      "condition": "Kondisi"
+    },
+    "promo": {
+      "exploreMore": "Jelajahi lebih banyak dengan {brand}",
+      "memberRates": "Tarif anggota dan penawaran eksklusif di properti {brand} tertentu."
+    },
+    "adRail": {
+      "discover": "Temukan",
+      "diveInto": "Selami pemandangan, kuliner, dan budaya {city} — pesan penginapan Anda dan mulai menjelajah.",
+      "memberPrices": "Harga anggota",
+      "signInToUnlock": "Masuk untuk membuka penghematan instan di penginapan tertentu."
+    },
+    "features": {
+      "bundleSave": "Gabung & Hemat",
+      "bundleSaveDesc": "Tambahkan penerbangan ke penginapan Anda dan hemat keduanya — pesan semua di satu tempat.",
+      "oneStop": "Belanja perjalanan satu pintu",
+      "oneStopDesc": "Hotel, rumah, penerbangan, dan lainnya — semua untuk perjalanan Anda, bersama.",
+      "memberRewards": "Harga & hadiah anggota",
+      "memberRewardsDesc": "Buka penghematan instan dan kumpulkan hadiah untuk dibelanjakan pada perjalanan berikutnya."
+    },
+    "filters": {
+      "filters": "Filter",
+      "searchByName": "Cari berdasarkan nama properti",
+      "searchByNamePlaceholder": "mis. Grand",
+      "totalPrice": "Harga total",
+      "popularFilters": "Filter populer",
+      "guestRating": "Penilaian tamu",
+      "ratingAny": "Apa saja",
+      "ratingWonderful": "Luar biasa 9+",
+      "ratingVeryGood": "Sangat baik 8+",
+      "ratingGood": "Baik 7+",
+      "starRating": "Peringkat bintang",
+      "stars": "{count} bintang",
+      "propertyType": "Tipe properti",
+      "typeAll": "Semua",
+      "typeHotelsResorts": "Hotel & resor",
+      "typeHomesApartments": "Rumah & apartemen",
+      "propertyAmenities": "Fasilitas properti",
+      "roomAmenities": "Fasilitas kamar",
+      "roomViews": "Pemandangan kamar",
+      "propertyBrand": "Merek properti",
+      "paymentType": "Tipe pembayaran",
+      "cancellationOptions": "Opsi pembatalan",
+      "travelerExperience": "Pengalaman wisatawan",
+      "mealPlans": "Paket makan",
+      "numberOfBedrooms": "Jumlah kamar tidur",
+      "moreOptions": "Opsi lainnya",
+      "onlyAvailable": "Hanya tampilkan properti yang tersedia",
+      "beachAccess": "Akses pantai",
+      "memberDeals": "Penawaran & diskon anggota",
+      "noneAvailable": "Tidak ada yang tersedia",
+      "seeLess": "Lihat lebih sedikit",
+      "seeMore": "Lihat lebih banyak ({count})",
+      "showProperties": "Tampilkan {count, plural, other {# properti}}",
+      "labels": {
+        "wifi": "WiFi gratis",
+        "ac": "Pendingin udara",
+        "pool": "Kolam renang",
+        "parking": "Parkir",
+        "gym": "Pusat kebugaran",
+        "spa": "Spa",
+        "bar": "Bar",
+        "breakfast": "Sarapan",
+        "pet_friendly": "Ramah hewan peliharaan",
+        "pay_later": "Pesan sekarang, bayar nanti",
+        "fully_refundable": "Dapat dikembalikan sepenuhnya",
+        "business": "Ramah bisnis",
+        "family": "Ramah keluarga",
+        "budget": "Hemat",
+        "adults_only": "Khusus dewasa",
+        "studio": "Studio",
+        "1": "1 kamar tidur",
+        "2": "2+ kamar tidur"
+      }
+    },
+    "booking": {
+      "completeBooking": "Selesaikan pemesanan Anda",
+      "whoCheckingIn": "Siapa yang akan check-in?",
+      "firstName": "Nama depan",
+      "lastName": "Nama belakang",
+      "emailAddress": "Alamat email",
+      "countryRegion": "Negara / wilayah",
+      "phoneNumber": "Nomor telepon",
+      "paymentDetails": "Detail pembayaran",
+      "secureTransaction": "Transaksi aman dan terjamin. Informasi pribadi Anda terlindungi.",
+      "simulatedNoCharge": "simulasi — tidak ada tagihan sungguhan",
+      "nameOnCard": "Nama pada kartu",
+      "cardNumber": "Nomor kartu",
+      "expiration": "Masa berlaku",
+      "expiryPlaceholder": "BB/TT",
+      "securityCode": "Kode keamanan",
+      "billingAddress": "Alamat penagihan",
+      "address": "Alamat",
+      "city": "Kota",
+      "stateProvince": "Negara bagian / provinsi",
+      "zipPostal": "Kode pos",
+      "protectYourStay": "Lindungi penginapan Anda",
+      "travuProtect": "Travu Protect",
+      "travuProtectDesc": "Perlindungan pembatalan, pertanggungan gangguan perjalanan, dan bantuan darurat 24/7 untuk penginapan ini.",
+      "noProtection": "Tanpa perlindungan — saya memahami bahwa saya mungkin bertanggung jawab atas biaya pembatalan.",
+      "cancellationPolicy": "Kebijakan pembatalan",
+      "cancellationRefundable": "Dapat dikembalikan sepenuhnya jika dibatalkan lebih dari 48 jam sebelum check-in. Setelah itu, malam pertama tidak dapat dikembalikan.",
+      "cancellationNonRefundable": "Tarif ini tidak dapat dikembalikan. Perubahan atau pembatalan tidak memenuhi syarat untuk pengembalian dana.",
+      "specialInstructions": "Instruksi check-in khusus",
+      "specialInstructionsPlaceholder": "Permintaan apa pun untuk tuan rumah (opsional)",
+      "termsNotice": "Dengan memilih Pesan sekarang, saya menyetujui Ketentuan Layanan dan Pernyataan Privasi Travu, dan mengonfirmasi bahwa ini adalah pemesanan simulasi untuk demonstrasi.",
+      "processing": "Memproses…",
+      "bookNow": "Pesan sekarang",
+      "encryptionNotice": "Enkripsi aman kami melindungi detail pribadi Anda di setiap langkah.",
+      "steps": {
+        "reviewing": "Meninjau pemesanan Anda",
+        "verifying": "Memverifikasi detail tamu",
+        "confirming": "Mengonfirmasi dengan properti",
+        "confirmed": "Pemesanan dikonfirmasi"
+      },
+      "errors": {
+        "invalidCard": "Masukkan nomor kartu yang valid.",
+        "bookingFailed": "Tidak dapat menyelesaikan pemesanan. Silakan coba lagi."
+      }
+    },
+    "summary": {
+      "checkIn": "Check-in",
+      "checkOut": "Check-out",
+      "room": "Kamar",
+      "rooms": "Kamar",
+      "nightsRooms": "{nights, plural, other {# malam}} × {rooms, plural, other {# kamar}}",
+      "taxes": "Pajak",
+      "serviceFee": "Biaya layanan",
+      "total": "Total",
+      "payToday": "Bayar hari ini"
+    },
+    "voucher": {
+      "bookingConfirmed": "Pemesanan dikonfirmasi",
+      "print": "Cetak",
+      "downloadPdf": "Unduh PDF",
+      "confirmationVoucher": "Voucher konfirmasi penginapan",
+      "confirmationNo": "No. konfirmasi",
+      "refundable": "Dapat dikembalikan",
+      "afterTime": "Setelah {time}",
+      "beforeTime": "Sebelum {time}",
+      "stay": "Penginapan",
+      "nightsRoomsValue": "{nights, plural, other {# malam}} · {rooms, plural, other {# kamar}}",
+      "guestsCount": "{count, plural, other {# tamu}}",
+      "leadGuest": "Tamu utama",
+      "guest": "Tamu",
+      "totalPaid": "Total dibayar",
+      "presentAtCheckIn": "Tunjukkan voucher ini saat check-in",
+      "viewAllTrips": "Lihat semua perjalanan saya"
+    },
+    "waiting": {
+      "completingBooking": "Menyelesaikan pemesanan Anda",
+      "pleaseWait": "Mohon tunggu sementara kami mengonfirmasi reservasi Anda dengan properti. Ini mungkin memakan waktu beberapa saat.",
+      "securingRoom": "Mengamankan kamar Anda…"
+    }
+  },
+  "cars": {
+    "landing": {
+      "rentInCity": "Sewa mobil di {city}",
+      "topDealsInCity": "Penawaran terbaik di {city}"
+    },
+    "results": {
+      "noneFound": "Tidak ada mobil ditemukan — coba tanggal lain atau lokasi terdekat.",
+      "noneMatchFilters": "Tidak ada mobil yang cocok dengan filter Anda. Coba hapus beberapa.",
+      "yourLocation": "lokasi Anda",
+      "carsIn": "Mobil di {location}",
+      "count": "{count, plural, other {# mobil}}",
+      "topResults": "(hasil teratas)",
+      "filters": "Filter",
+      "sort": "Urutkan",
+      "memberBanner": "Anggota mendapatkan OneTokenCash kembali di setiap penyewaan — masuk untuk membuka harga anggota."
+    },
+    "sort": {
+      "recommended": "Direkomendasikan",
+      "priceLowToHigh": "Harga (rendah ke tinggi)",
+      "ratingHighToLow": "Penilaian (tinggi ke rendah)"
+    },
+    "card": {
+      "percentOff": "Diskon {pct}%",
+      "deal": "Penawaran",
+      "previousPhoto": "Foto sebelumnya",
+      "nextPhoto": "Foto berikutnya",
+      "automatic": "Otomatis",
+      "manual": "Manual",
+      "auto": "Otomatis",
+      "seats": "{count} kursi",
+      "bags": "{count} tas",
+      "doors": "{count} pintu",
+      "aircon": "AC",
+      "mileageLabel": "Jarak tempuh {mileage}",
+      "freeCancellation": "Pembatalan gratis",
+      "nonRefundable": "Tidak dapat dikembalikan",
+      "unlimitedMileage": "Jarak tempuh tak terbatas",
+      "perDay": "/ hari",
+      "perDayVendor": "/ hari · {vendor}",
+      "totalForDays": "total · {days, plural, other {# hari}}",
+      "reserve": "Pesan →"
+    },
+    "filters": {
+      "close": "Tutup filter",
+      "showCount": "Tampilkan {count, plural, other {# mobil}}",
+      "noneAvailable": "Tidak ada yang tersedia",
+      "seeLess": "Lihat lebih sedikit",
+      "seeMore": "Lihat lebih banyak ({count})",
+      "searchByCarOrCompany": "Cari berdasarkan mobil atau perusahaan",
+      "searchPlaceholder": "mis. Sixt atau RAV4",
+      "totalPrice": "Harga total",
+      "popularFilters": "Filter populer",
+      "rating": "Penilaian",
+      "ratingAny": "Apa saja",
+      "ratingExceptional": "Istimewa 9+",
+      "ratingVeryGood": "Sangat baik 8+",
+      "ratingGood": "Baik 7+",
+      "carType": "Tipe mobil",
+      "capacity": "Kapasitas",
+      "rentalCompany": "Perusahaan penyewaan",
+      "transmission": "Transmisi",
+      "mileage": "Jarak tempuh",
+      "moreOptions": "Opsi lainnya",
+      "freeCancellationOnly": "Hanya pembatalan gratis",
+      "memberDeals": "Penawaran & diskon anggota",
+      "option": {
+        "automatic": "Otomatis",
+        "manual": "Manual",
+        "unlimitedMileage": "Jarak tempuh tak terbatas",
+        "limitedMileage": "Jarak tempuh terbatas",
+        "airConditioning": "Pendingin udara",
+        "freeCancellation": "Pembatalan gratis",
+        "seats4": "4 kursi",
+        "seats5": "5 kursi",
+        "seats7plus": "7+ kursi"
+      }
+    },
+    "steps": {
+      "review": "Tinjau",
+      "driver": "Pengemudi",
+      "payment": "Pembayaran"
+    },
+    "progress": {
+      "reviewing": "Meninjau reservasi Anda",
+      "verifyingDriver": "Memverifikasi detail pengemudi",
+      "confirmingCompany": "Mengonfirmasi dengan perusahaan penyewaan",
+      "confirmed": "Reservasi dikonfirmasi"
+    },
+    "booking": {
+      "back": "Kembali",
+      "reservationError": "Tidak dapat menyelesaikan reservasi. Silakan coba lagi.",
+      "reviewYourCar": "Tinjau mobil Anda",
+      "protectYourRental": "Lindungi penyewaan Anda",
+      "fullProtection": "Perlindungan penuh",
+      "fullProtectionDesc": "Pertanggungan kerusakan & pencurian tanpa kelebihan biaya ditambah bantuan darurat di jalan 24/7 untuk seluruh masa penyewaan Anda.",
+      "noProtection": "Tanpa perlindungan tambahan — saya akan mengandalkan pertanggungan dasar perusahaan penyewaan.",
+      "continueToDriver": "Lanjutkan ke detail pengemudi",
+      "driverDetails": "Detail pengemudi",
+      "continueToPayment": "Lanjutkan ke pembayaran",
+      "processing": "Memproses…",
+      "reserveNow": "Pesan sekarang",
+      "secureNote": "Detail Anda terlindungi dengan enkripsi aman."
+    },
+    "driver": {
+      "firstName": "Nama depan",
+      "lastName": "Nama belakang",
+      "age": "Usia pengemudi",
+      "licenseNo": "No. SIM",
+      "email": "Email",
+      "countryCode": "Kode negara",
+      "phone": "Nomor telepon",
+      "flightNo": "Nomor penerbangan (opsional)",
+      "flightNoPlaceholder": "mis. BA245 — membantu jika penerbangan Anda tertunda",
+      "youngDriverNote": "Biaya pengemudi muda berlaku untuk pengemudi di bawah 25 tahun — sudah termasuk dalam total Anda."
+    },
+    "summary": {
+      "pickUp": "Pengambilan",
+      "dropOff": "Pengembalian",
+      "transmission": "Transmisi",
+      "mileage": "Jarak tempuh",
+      "timesDays": "× {days, plural, other {# hari}}",
+      "taxes": "Pajak",
+      "bookingFee": "Biaya pemesanan",
+      "youngDriverFee": "Biaya pengemudi muda",
+      "total": "Total",
+      "payToday": "Bayar hari ini"
+    },
+    "confirmation": {
+      "title": "Reservasi dikonfirmasi",
+      "print": "Cetak",
+      "voucherSubtitle": "Voucher konfirmasi sewa mobil",
+      "confirmationNo": "No. konfirmasi",
+      "rental": "Penyewaan",
+      "driver": "Pengemudi",
+      "days": "{days, plural, other {# hari}}",
+      "daysRental": "{days, plural, other {sewa # hari}}",
+      "totalPaid": "Total dibayar",
+      "barcodeAlt": "Kode batang pemesanan {ref}",
+      "presentVoucher": "Tunjukkan voucher ini di meja penyewaan",
+      "viewAllTrips": "Lihat semua perjalanan saya"
+    }
+  },
+  "flights": {
+    "perTraveller": "per penumpang",
+    "stops": {
+      "nonstop": "tanpa transit",
+      "direct": "Langsung",
+      "directLower": "langsung",
+      "count": "{count, plural, other {# transit}}"
+    },
+    "results": {
+      "title": "Hasil pencarian",
+      "flightsFound": "{count} penerbangan ditemukan",
+      "departingFlights": "Penerbangan berangkat",
+      "returningFlights": "Penerbangan pulang",
+      "legLabel": "Segmen {index}: {origin} → {dest}",
+      "emptyState": "Belum ada penerbangan — pilih rute dan tanggal di atas untuk mencari.",
+      "noMatchLeg": "Tidak ada penerbangan yang cocok dengan filter Anda untuk segmen ini.",
+      "noMatchFilters": "Tidak ada penerbangan yang cocok dengan filter Anda — coba hapus beberapa.",
+      "searching": "Mencari tarif langsung dari berbagai maskapai…",
+      "showMore": "Tampilkan lebih banyak hasil",
+      "moreCount": "({count} lagi)"
+    },
+    "filters": {
+      "filterBy": "Filter menurut",
+      "stops": "Transit",
+      "any": "Apa saja",
+      "upToOneStop": "Hingga 1 transit",
+      "airlines": "Maskapai",
+      "from": "Dari"
+    },
+    "sort": {
+      "sortBy": "Urutkan menurut",
+      "recommended": "Direkomendasikan",
+      "cheapest": "Termurah",
+      "fastest": "Tercepat"
+    },
+    "card": {
+      "seatsLeft": "Hanya {count} tersisa dengan harga ini",
+      "select": "Pilih",
+      "flightDetails": "Detail penerbangan"
+    },
+    "detail": {
+      "backToResults": "← Kembali ke hasil",
+      "continueToBook": "Lanjutkan untuk memesan"
+    },
+    "fare": {
+      "selectFareTo": "Pilih tarif ke {dest}",
+      "close": "Tutup",
+      "operatedBy": "Penerbangan ini dioperasikan oleh {carrier}.",
+      "cabin": "Kabin: {cabin}",
+      "select": "Pilih"
+    },
+    "perks": {
+      "seatChoiceIncluded": "Pilihan kursi termasuk",
+      "seatChoiceFee": "Pilihan kursi dikenakan biaya",
+      "handBaggage": "Bagasi kabin termasuk ({kg} kg)",
+      "checkedBag": "{count} × bagasi terdaftar ({kg} kg masing-masing)",
+      "checkedBags": "{count, plural, other {# bagasi terdaftar}} ({kg} kg masing-masing)",
+      "checkedBagFee": "Bagasi terdaftar dikenakan biaya",
+      "refundable": "Dapat dikembalikan",
+      "nonRefundable": "Tidak dapat dikembalikan",
+      "freeChanges": "Perubahan gratis",
+      "changeFee": "Biaya perubahan berlaku",
+      "noChanges": "Perubahan tidak diizinkan"
+    },
+    "prediction": {
+      "title": "Prediksi harga AI",
+      "confidence": "Keyakinan {confidence}%"
+    },
+    "priceTracking": {
+      "title": "Pelacakan harga",
+      "currentLowest": "Harga terendah saat ini:"
+    },
+    "fareBreakdown": {
+      "title": "Rincian tarif",
+      "baseFare": "Tarif dasar",
+      "baseFareMultiple": "Tarif dasar × {count}",
+      "taxes": "Pajak",
+      "fees": "Biaya",
+      "total": "Total"
+    },
+    "segments": {
+      "layoverIn": "Transit di {iata}"
+    },
+    "steps": {
+      "reviewTrip": "Tinjau perjalanan",
+      "travellers": "Penumpang",
+      "payment": "Pembayaran",
+      "reviewAndBook": "Tinjau & pesan"
+    },
+    "sidebar": {
+      "businessFlight": "Penerbangan bisnis",
+      "oneWayFlight": "Penerbangan sekali jalan",
+      "priceSummary": "Ringkasan harga Anda",
+      "travellerAdult": "Penumpang {index} · Dewasa",
+      "taxesFees": "Pajak & biaya",
+      "nextCheckout": "Berikutnya: Pembayaran",
+      "nextPayment": "Berikutnya: Pembayaran",
+      "nextReview": "Berikutnya: Tinjau",
+      "buyNow": "Beli sekarang",
+      "next": "Berikutnya"
+    },
+    "progress": {
+      "reviewing": "Meninjau permohonan pemesanan",
+      "verifying": "Memverifikasi data permohonan",
+      "bookingTicket": "Memesan tiket pada API maskapai",
+      "approved": "Pemesanan disetujui",
+      "secureBooking": "Pemesanan aman {brand}",
+      "keepWindowOpen": "Mohon biarkan jendela ini tetap terbuka…"
+    },
+    "bookingForm": {
+      "travellerDetails": "Detail penumpang",
+      "firstName": "Nama depan",
+      "lastName": "Nama belakang",
+      "dateOfBirth": "Tanggal lahir",
+      "payment": "Pembayaran",
+      "simulatedCharge": "simulasi — tidak ada tagihan sungguhan",
+      "cardNumber": "Nomor kartu",
+      "expiry": "Masa berlaku",
+      "cvc": "CVC",
+      "invalidCard": "Masukkan nomor kartu yang valid.",
+      "bookingFailed": "Tidak dapat menyelesaikan pemesanan. Silakan coba lagi.",
+      "networkError": "Kesalahan jaringan — silakan coba lagi.",
+      "processing": "Memproses…",
+      "pay": "Bayar",
+      "andConfirm": "& konfirmasi"
+    },
+    "reviewTrip": {
+      "title": "Tinjau perjalanan Anda",
+      "route": "{origin} ke {dest}",
+      "changeFlight": "Ubah penerbangan",
+      "yourFare": "Tarif Anda: {fare}",
+      "seatsAndBags": "Kursi dan bagasi",
+      "seatsAndBagsNote": "Anda dapat memilih kursi dan menambahkan bagasi ke perjalanan ini setelah pemesanan dari dasbor Anda."
+    },
+    "travellers": {
+      "title": "Pemesanan aman — hanya butuh beberapa menit",
+      "nameMatchNote": "Nama penumpang harus sama persis dengan identitas berfoto resmi pemerintah.",
+      "required": "Wajib",
+      "travellerOf": "Penumpang {index} dari {total}",
+      "firstName": "Nama depan",
+      "middleName": "Nama tengah",
+      "surname": "Nama keluarga",
+      "passportCountry": "Negara paspor",
+      "passportNumber": "Nomor paspor",
+      "passportFormatError": "Format yang diharapkan seperti {example} untuk negara ini.",
+      "dateOfBirth": "Tanggal lahir",
+      "dobDay": "Tanggal lahir (hari)",
+      "dobMonth": "Tanggal lahir (bulan)",
+      "dobYear": "Tanggal lahir (tahun)",
+      "day": "Hari",
+      "month": "Bulan",
+      "year": "Tahun",
+      "contactDetails": "Detail kontak",
+      "contactNote": "Kami akan mengirimkan e-tiket dan pembaruan apa pun ke email ini.",
+      "emailAddress": "Alamat email",
+      "marketingOptIn": "Kirimi saya pembaruan perjalanan dan penawaran perjalanan.",
+      "countryCode": "Kode negara",
+      "phoneNumber": "Nomor telepon",
+      "phoneDigitsExact": "Nomor di negara ini terdiri dari {count} digit.",
+      "phoneDigitsRange": "Nomor di negara ini terdiri dari {min}–{max} digit."
+    },
+    "payment": {
+      "title": "Bagaimana Anda ingin membayar?",
+      "simulatedNote": "Pembayaran disimulasikan — tidak ada tagihan sungguhan.",
+      "nameOnCard": "Nama pada kartu",
+      "cardNumber": "Nomor kartu debit/kredit",
+      "cardNotAccepted": "Kartu ini tidak diterima di Travu. Silakan coba kartu lain.",
+      "expiryDate": "Tanggal masa berlaku",
+      "securityCode": "Kode keamanan",
+      "billingAddress": "Alamat penagihan",
+      "countryTerritory": "Negara / Teritori",
+      "billingAddress1": "Alamat penagihan 1",
+      "billingAddress2": "Alamat penagihan 2",
+      "postalCode": "Kode pos",
+      "city": "Kota",
+      "cardNotAcceptedTitle": "Kartu tidak diterima",
+      "cardNotAcceptedMessage": "Kartu ini tidak diterima di Travu, silakan coba kartu lain",
+      "tryAnotherCard": "Coba kartu lain"
+    },
+    "reviewBook": {
+      "title": "Tinjau dan pesan perjalanan Anda",
+      "numbered1": "Tinjau detail perjalanan Anda untuk memastikan tanggal dan waktunya benar.",
+      "numbered2": "Periksa ejaan Anda. Nama penumpang harus sama persis dengan identitas berfoto resmi pemerintah.",
+      "numbered3": "Tinjau ketentuan pemesanan Anda.",
+      "fareRule1": "Bawa bagasi kabin",
+      "fareRule2": "Bayar untuk membawa bagasi terdaftar",
+      "fareRule3": "Pembatalan tidak diizinkan",
+      "fareRule4": "Perubahan tidak diizinkan",
+      "fareRulesFor": "Aturan tarif untuk {origin} ke {dest}",
+      "acknowledgement": "Dengan mengklik tombol di bawah, saya mengakui bahwa saya telah meninjau Pernyataan Privasi dan Saran Perjalanan Pemerintah, serta telah meninjau dan menerima Aturan & Pembatasan dan Ketentuan Penggunaan.",
+      "yourTrip": "Perjalanan Anda",
+      "route": "Rute",
+      "date": "Tanggal",
+      "times": "Waktu",
+      "carrier": "Maskapai",
+      "fare": "Tarif",
+      "travellers": "Penumpang",
+      "contact": "Kontak",
+      "payment": "Pembayaran",
+      "cardEndingIn": "Kartu berakhiran {last4}",
+      "applyOneToken": "Gunakan OneTokenCash saya",
+      "oneTokenBalance": "Anda memiliki",
+      "inOneToken": "dalam OneTokenCash.",
+      "applying": "Menerapkan",
+      "toThisBooking": "ke pemesanan ini.",
+      "useToSave": "Gunakan untuk menghemat hingga",
+      "buyNow": "Beli sekarang",
+      "secureNote": "Transmisi dan penyimpanan terenkripsi yang aman.",
+      "buyMoreSaveTitle": "Beli Lebih Banyak & Hemat kapan saja!",
+      "buyMoreSaveBody": "Anda dapat menghemat perjalanan Anda saat memesan penerbangan sekarang dan menambahkan penginapan nanti."
+    },
+    "confirmation": {
+      "guest": "Tamu",
+      "viewAllTrips": "Lihat semua perjalanan saya",
+      "bookingConfirmed": "Pemesanan dikonfirmasi",
+      "slipIssued": "Slip konfirmasi telah diterbitkan untuk referensi",
+      "bookingConfirmationHeader": "Konfirmasi Pemesanan",
+      "itineraryNo": "No. itinerari",
+      "issued": "Diterbitkan {date}",
+      "travellers": "Penumpang",
+      "departure": "Keberangkatan",
+      "bookingReference": "Referensi pemesanan",
+      "flightDetails": "Detail penerbangan",
+      "departArrive": "Berangkat {departTime} · {departDate} — Tiba {arriveTime} · {arriveDate}",
+      "cabinClass": "Kelas {cabin}",
+      "paymentSummary": "Ringkasan pembayaran",
+      "airFare": "Tarif penerbangan",
+      "bookingFee": "Biaya pemesanan Travu",
+      "taxesFees": "Pajak & biaya",
+      "totalPaid": "Total dibayar",
+      "paidVia": "Dibayar melalui {label}",
+      "qrAlt": "QR untuk {ref}",
+      "presentSlip": "Tunjukkan slip ini dan paspor yang valid saat check-in",
+      "finePrint": "Slip konfirmasi ini adalah tanda terima simulasi yang dibuat oleh Travu hanya untuk tujuan demonstrasi dan tidak berlaku untuk perjalanan. Pengangkutan tunduk pada syarat kontrak dan tarif maskapai pengoperasi. Mohon tiba setidaknya 3 jam sebelum keberangkatan internasional. Detail kartu disimpan hanya sebagai ringkasan tersamar; nomor kartu lengkap, masa berlaku, dan kode keamanan tidak pernah disimpan. Referensi pemesanan Travu {ref}.",
+      "downloadPdf": "Unduh PDF",
+      "print": "Cetak",
+      "trackThisTrip": "Lacak perjalanan ini"
+    }
+  }
+}

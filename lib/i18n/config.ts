@@ -22,6 +22,7 @@ export const LOCALES: LocaleInfo[] = [
   { code: "ja", label: "日本語", dir: "ltr" },
   { code: "ar", label: "العربية", dir: "rtl" },
   { code: "hi", label: "हिन्दी", dir: "ltr" },
+  { code: "id", label: "Bahasa Indonesia", dir: "ltr" },
 ];
 
 export const DEFAULT_LOCALE = "en";

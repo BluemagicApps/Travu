@@ -31,6 +31,8 @@ const COUNTRY_TO_LOCALE: Record<string, string> = {
   IQ: "ar", LB: "ar", MA: "ar", DZ: "ar", TN: "ar", LY: "ar", SD: "ar", YE: "ar", SY: "ar",
   // Hindi
   IN: "hi",
+  // Indonesian
+  ID: "id",
 };
 
 export function languageForCountry(country?: string | null): string {

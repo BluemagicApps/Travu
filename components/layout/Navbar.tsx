@@ -44,7 +44,7 @@ export function Navbar() {
   return (
     <>
       <header className="glass sticky top-0 z-50">
-        <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+        <nav className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-5 sm:px-8">
           <Logo />
 
           <div className="hidden items-center gap-1 md:flex">
@@ -265,7 +265,7 @@ function NavItem({ tab, pathname, label }: { tab: Tab; pathname: string; label: 
       href={tab.href}
       className={cn(
         "flex items-center gap-1.5 rounded-full px-3 py-2 text-sm font-medium transition",
-        isActive ? "bg-surface-2 text-text" : "text-muted hover:text-text",
+        isActive ? "bg-surface-2 text-text" : "text-muted hover:bg-surface-2/60 hover:text-text",
       )}
     >
       <Icon className="h-4 w-4" />

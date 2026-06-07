@@ -17,7 +17,7 @@ const PROPS: {
 export function ValueProps() {
   const t = useTranslations("homeSections");
   return (
-    <section className="mx-auto max-w-6xl px-4 py-10">
+    <section className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
       <div className="grid gap-4 rounded-3xl border border-border bg-surface-2 p-6 sm:grid-cols-3">
         {PROPS.map((p) => {
           const Icon = p.icon;

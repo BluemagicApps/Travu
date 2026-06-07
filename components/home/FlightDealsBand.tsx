@@ -18,7 +18,7 @@ const PINS = [
 export function FlightDealsBand({ city }: { city: string }) {
   const t = useTranslations("homeSections");
   return (
-    <section className="mx-auto max-w-6xl px-4 py-10">
+    <section className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
       <h2 className="mb-4 text-2xl font-extrabold tracking-tight">
         {t("flightDeals.heading", { city })}
       </h2>

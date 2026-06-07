@@ -59,7 +59,7 @@ export function FlightCard({
         </div>
 
         <div className="text-center">
-          <div className="text-sm font-medium">
+          <div className="text-xs font-medium text-muted">
             {formatDuration(flight.durationMin)} ·{" "}
             {flight.stops === 0 ? t("stops.direct") : t("stops.count", { count: flight.stops })}
           </div>
@@ -71,8 +71,8 @@ export function FlightCard({
         </div>
 
         <div className="ml-auto text-right">
-          <div className="text-xl font-extrabold text-price"><Money cents={flight.fare.total} /></div>
-          <div className="text-[10px] text-muted">{t("perTraveller")}</div>
+          <div className="text-2xl font-extrabold tracking-[-0.02em] text-price"><Money cents={flight.fare.total} /></div>
+          <div className="text-xs text-muted">{t("perTraveller")}</div>
           {onSelect ? (
             <button
               type="button"

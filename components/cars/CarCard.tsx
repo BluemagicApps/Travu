@@ -53,7 +53,7 @@ export function CarCard({ car }: { car: Car }) {
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
               <p className="text-xs font-semibold text-price">{car.carClass}</p>
-              <h3 className="truncate font-semibold">{car.exampleModel}</h3>
+              <h3 className="truncate text-base font-semibold sm:text-lg">{car.exampleModel}</h3>
               <div className="mt-1.5 flex flex-wrap gap-3 text-[11px] text-muted">
                 <span className="flex items-center gap-1"><Cog className="h-3.5 w-3.5" /> {car.transmission === "automatic" ? t("card.automatic") : t("card.manual")}</span>
                 <span className="flex items-center gap-1"><Users className="h-3.5 w-3.5" /> {t("card.seats", { count: car.seats })}</span>
@@ -88,9 +88,9 @@ export function CarCard({ car }: { car: Car }) {
                   <Money cents={Math.round(car.originalPrice! / car.rentalDays)} />
                 </div>
               )}
-              <div className="text-lg font-extrabold text-price">
+              <div className="text-xl font-extrabold tracking-[-0.02em] text-price">
                 <Money cents={car.pricePerDay} />
-                <span className="ml-1 text-[10px] font-medium text-muted">{t("card.perDay")}</span>
+                <span className="ml-1 text-xs font-medium text-muted">{t("card.perDay")}</span>
               </div>
               <div className="text-[10px] text-muted">
                 <Money cents={car.totalPrice} /> {t("card.totalForDays", { days: car.rentalDays })}

@@ -16,7 +16,7 @@ export function HomeSearch({ airports }: { airports: AirportOption[] }) {
   const tSearch = useTranslations("search");
   return (
     <div>
-      <div className="mx-auto mb-4 flex w-fit gap-1 rounded-full border border-border bg-surface-2 p-1">
+      <div className="mx-auto mb-5 flex w-fit gap-1 rounded-full border border-border bg-surface-2/70 p-1 shadow-[var(--shadow-sm)] backdrop-blur">
         <TabBtn active={tab === "flights"} onClick={() => setTab("flights")} icon={Plane} label={tNav("flights")} />
         <TabBtn active={tab === "stays"} onClick={() => setTab("stays")} icon={BedDouble} label={tNav("stays")} />
       </div>
@@ -55,7 +55,7 @@ function TabBtn({
       onClick={onClick}
       className={cn(
         "flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition",
-        active ? "btn-accent shadow" : "text-muted hover:text-text",
+        active ? "btn-accent shadow" : "text-muted hover:bg-surface hover:text-text",
       )}
     >
       <Icon className="h-4 w-4" />

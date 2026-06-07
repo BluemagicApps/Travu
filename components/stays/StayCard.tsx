@@ -63,7 +63,7 @@ export function StayCard({ stay }: { stay: Stay }) {
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
               <Link href={`/stay/${encodeURIComponent(stay.id)}`} className="block">
-                <h3 className="truncate font-semibold hover:underline">{stay.name}</h3>
+                <h3 className="truncate text-base font-semibold hover:underline sm:text-lg">{stay.name}</h3>
               </Link>
               <p className="mt-0.5 text-xs text-muted">
                 {entire ? t("card.entireBy", { type: stay.propertyType ?? "", host: stay.hostType ?? "Vrbo" }) : t("card.hotel")}
@@ -110,9 +110,9 @@ export function StayCard({ stay }: { stay: Stay }) {
                   <Money cents={stay.originalPrice!} />
                 </div>
               )}
-              <div className="text-lg font-extrabold text-price">
+              <div className="text-xl font-extrabold tracking-[-0.02em] text-price">
                 <Money cents={stay.pricePerNight} />
-                <span className="ml-1 text-[10px] font-medium text-muted">{t("card.perNight")}</span>
+                <span className="ml-1 text-xs font-medium text-muted">{t("card.perNight")}</span>
               </div>
               <div className="text-[10px] text-muted">
                 <Money cents={stay.totalPrice} /> {t("card.total")}

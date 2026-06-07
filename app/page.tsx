@@ -25,18 +25,18 @@ export default async function Home() {
         style={{ backgroundImage: "linear-gradient(to right, var(--accent-from), var(--accent-to))" }}
       />
 
-      <section className="mx-auto max-w-4xl px-4 pt-20 pb-12 text-center">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted">
+      <section className="mx-auto max-w-4xl px-4 pt-24 pb-16 text-center sm:pt-28">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted shadow-[var(--shadow-sm)]">
           <Sparkles className="h-3.5 w-3.5" /> {t("eyebrow")}
         </span>
 
-        <h1 className="mt-6 text-4xl font-extrabold tracking-tight sm:text-6xl">
+        <h1 className="mt-7 text-5xl font-extrabold tracking-display sm:text-7xl">
           {t("tagline")}
         </h1>
 
-        <p className="mx-auto mt-4 max-w-xl text-lg text-muted">{t("subtitle")}</p>
+        <p className="mx-auto mt-5 max-w-xl text-lg text-muted sm:text-xl">{t("subtitle")}</p>
 
-        <div className="mx-auto mt-8 max-w-2xl">
+        <div className="mx-auto mt-10 max-w-2xl">
           <HomeSearch airports={airports} />
         </div>
       </section>

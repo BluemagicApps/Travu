@@ -18,7 +18,7 @@ function CardSkeleton() {
           <div className="h-4 w-12 rounded bg-surface-2" />
         </div>
         <div className="space-y-2 text-right">
-          <div className="ml-auto h-5 w-20 rounded bg-surface-2" />
+          <div className="ml-auto h-6 w-20 rounded bg-surface-2" />
           <div className="ml-auto h-2.5 w-12 rounded bg-surface-2" />
         </div>
       </div>

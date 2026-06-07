@@ -9,6 +9,7 @@ import { StayLikeALocal } from "@/components/home/StayLikeALocal";
 import { TravelStyles } from "@/components/home/TravelStyles";
 import { ExploreWorld } from "@/components/home/ExploreWorld";
 import { ValueProps } from "@/components/home/ValueProps";
+import { Reveal } from "@/components/layout/Reveal";
 
 export default async function Home() {
   const [airports, location, t] = await Promise.all([
@@ -41,12 +42,12 @@ export default async function Home() {
         </div>
       </section>
 
-      <FlightDealsBand city={city} />
-      <PromoBanner />
-      <ValueProps />
-      <StayLikeALocal city={city} />
-      <TravelStyles />
-      <ExploreWorld />
+      <Reveal><FlightDealsBand city={city} /></Reveal>
+      <Reveal><PromoBanner /></Reveal>
+      <Reveal><ValueProps /></Reveal>
+      <Reveal><StayLikeALocal city={city} /></Reveal>
+      <Reveal><TravelStyles /></Reveal>
+      <Reveal><ExploreWorld /></Reveal>
     </div>
   );
 }

@@ -76,7 +76,7 @@ export function TravelStyles() {
   const current = STYLES.find((s) => s.key === active) ?? STYLES[0];
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-10">
+    <section className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
       <h2 className="text-2xl font-extrabold tracking-tight">{t("travelStyles.heading")}</h2>
       <p className="mt-1 text-sm text-muted">{t("travelStyles.subtitle")}</p>
 

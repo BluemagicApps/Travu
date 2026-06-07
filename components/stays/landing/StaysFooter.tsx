@@ -54,7 +54,7 @@ export async function StaysFooter() {
   const tl = await getTranslations("footerLinks");
   return (
     <footer className="mt-8 border-t border-border bg-surface-2">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:py-20 sm:grid-cols-2 lg:grid-cols-4">
         {COLUMNS.map((col) => (
           <div key={col.headingKey}>
             <h4 className="text-sm font-bold">{t(col.headingKey)}</h4>

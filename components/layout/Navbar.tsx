@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
-import { Plane, BedDouble, Car, ChevronDown, LayoutDashboard, ShieldCheck, LogOut } from "lucide-react";
+import { Plane, BedDouble, Car, ChevronDown, LayoutDashboard, ShieldCheck, LogOut, Globe } from "lucide-react";
 import { useEffect, useRef, useState, type ComponentType } from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils/cn";
@@ -63,14 +63,15 @@ export function Navbar() {
             </Link>
             <OneTokenBadge />
 
-            <Divider />
-
-            {/* Preferences group: language · currency · theme */}
-            <div className="flex items-center gap-1.5">
+            {/* Preferences inline from md up; on smaller screens they collapse
+                into the compact <SettingsMenu> so the bar fits the viewport. */}
+            <span aria-hidden className="hidden h-6 w-px bg-border md:block" />
+            <div className="hidden items-center gap-1.5 md:flex">
               <LocaleSwitcher />
               <CurrencySwitcher />
               <ThemeToggle />
             </div>
+            <SettingsMenu />
 
             <Divider />
 
@@ -118,6 +119,62 @@ function AuthControls() {
     <Link href="/login" className="btn-accent rounded-full px-4 py-2 text-sm font-semibold">
       {t("signIn")}
     </Link>
+  );
+}
+
+/** Compact dropdown holding language · currency · theme on phones, where they
+ *  won't fit inline. Hidden from `md` up (the controls render inline there). */
+function SettingsMenu() {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Close on outside click or Escape (mirrors ProfileMenu).
+  useEffect(() => {
+    if (!open) return;
+    function onPointer(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("mousedown", onPointer);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointer);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div ref={ref} className="relative md:hidden">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-label="Language, currency and theme"
+        className={cn(
+          "grid h-9 w-9 place-items-center rounded-full border border-border text-muted transition hover:border-sky-400 hover:text-text",
+          open && "border-sky-400 text-text",
+        )}
+      >
+        <Globe className="h-4 w-4" />
+      </button>
+
+      <div
+        role="menu"
+        className={cn(
+          "absolute right-0 top-full z-50 mt-2 w-44 origin-top-right rounded-2xl border border-border bg-surface p-3 shadow-xl transition duration-150",
+          open ? "scale-100 opacity-100" : "pointer-events-none scale-95 opacity-0",
+        )}
+      >
+        <div className="flex flex-col items-start gap-2">
+          <LocaleSwitcher />
+          <CurrencySwitcher />
+          <ThemeToggle />
+        </div>
+      </div>
+    </div>
   );
 }
 
